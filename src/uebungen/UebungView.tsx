@@ -12,17 +12,22 @@ import { ScoreView } from '../ScoreView';
 const RUNDE = 10;
 
 interface Props {
-  typ: UebungTyp;
+  /** Eine Übung, 10 Aufgaben lang … */
+  typ?: UebungTyp;
+  /** … oder eine gemischte Runde (z. B. die tägliche Wiederholung): eine Aufgabe je Eintrag */
+  folge?: UebungTyp[];
+  titel?: string;
   onEnde: () => void;
   /** Wohin „zurück“ führt, z. B. „Lektion“ */
   zurueck?: string;
 }
 
-/** Eine Übungsrunde mit 10 Aufgaben, sofortiger Rückmeldung und Fortschritt. */
-export function UebungView({ typ, onEnde, zurueck = 'Lernpfad' }: Props) {
-  const info = UEBUNGEN.find((u) => u.typ === typ)!;
+/** Eine Übungsrunde mit sofortiger Rückmeldung und Fortschritt. */
+export function UebungView({ typ, folge, titel, onEnde, zurueck = 'Lernpfad' }: Props) {
+  const [plan] = useState<UebungTyp[]>(() => folge ?? Array<UebungTyp>(RUNDE).fill(typ!));
+  const runde = plan.length;
   const { oeffneLexikon } = useNavigation();
-  const [stufe, setStufe] = useState<Stufe | null>(null);
+  const [stufen, setStufen] = useState<Map<string, Stufe> | null>(null);
   const [nr, setNr] = useState(0);
   const [aufgabe, setAufgabe] = useState<Aufgabe | null>(null);
   const [antwort, setAntwort] = useState<string | null>(null);
@@ -33,25 +38,35 @@ export function UebungView({ typ, onEnde, zurueck = 'Lernpfad' }: Props) {
   const notenRef = useRef<HTMLDivElement>(null);
   const loesungRef = useRef<HTMLDivElement>(null);
 
-  // Schwierigkeit aus dem bisherigen Fortschritt
-  useEffect(() => {
-    modulSicherheit(info.modul)
-      .catch(() => 0)
-      .then((s) => setStufe(stufeFuer(s)));
-  }, [info.modul]);
+  const info = UEBUNGEN.find((u) => u.typ === plan[Math.min(nr, runde - 1)])!;
+  const stufe = stufen?.get(info.modul) ?? null;
+
+  // Schwierigkeit je Modul aus dem bisherigen Fortschritt
+  async function stufenLaden() {
+    const module = [...new Set(plan.map((t) => UEBUNGEN.find((u) => u.typ === t)!.modul))];
+    const werte = await Promise.all(module.map((m) => modulSicherheit(m).catch(() => 0)));
+    setStufen(new Map(module.map((m, i) => [m, stufeFuer(werte[i])])));
+  }
 
   useEffect(() => {
-    if (stufe === null) return;
-    neueAufgabe(stufe);
+    stufenLaden();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stufe]);
+  }, []);
 
-  function neueAufgabe(s: Stufe) {
-    const a = erzeugeAufgabe(typ, s);
+  useEffect(() => {
+    if (stufen === null) return;
+    neueAufgabe(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stufen]);
+
+  function neueAufgabe(i: number) {
+    const t = plan[i];
+    const u = UEBUNGEN.find((x) => x.typ === t)!;
+    const a = erzeugeAufgabe(t, stufen?.get(u.modul) ?? 1);
     setAufgabe(a);
     setAntwort(null);
     setGespielt(a.diktat ? [toMidi(a.diktat[0])] : []);
-    if (audioBereit && info.hoeren) setTimeout(() => abspielen(a), 300);
+    if (audioBereit && u.hoeren) setTimeout(() => abspielen(a), 300);
   }
 
   useEffect(() => {
@@ -84,7 +99,7 @@ export function UebungView({ typ, onEnde, zurueck = 'Lernpfad' }: Props) {
     setAntwort(wahl);
     if (richtig) setRichtigAnzahl((n) => n + 1);
     if (!info.hoeren && aufgabe.klang) abspielen().catch(() => {});
-    await ergebnisSpeichern(info.modul, typ, richtig).catch(() => {});
+    await ergebnisSpeichern(info.modul, info.typ, richtig).catch(() => {});
   }
 
   async function diktatPruefen() {
@@ -92,36 +107,39 @@ export function UebungView({ typ, onEnde, zurueck = 'Lernpfad' }: Props) {
     const ok = diktatRichtig(aufgabe.diktat, gespielt).every(Boolean);
     setAntwort(ok ? aufgabe.loesung : 'falsch');
     if (ok) setRichtigAnzahl((n) => n + 1);
-    await ergebnisSpeichern(info.modul, typ, ok).catch(() => {});
+    await ergebnisSpeichern(info.modul, info.typ, ok).catch(() => {});
   }
 
   function weiter() {
-    if (stufe === null) return;
+    if (stufen === null) return;
     setNr((n) => n + 1);
-    if (nr + 1 < RUNDE) neueAufgabe(stufe);
+    if (nr + 1 < runde) neueAufgabe(nr + 1);
   }
 
   if (stufe === null || !aufgabe) return <p className="meta">Übung wird vorbereitet …</p>;
 
-  if (nr >= RUNDE) {
+  if (nr >= runde) {
+    const quote = richtigAnzahl / runde;
     return (
       <section className="uebung">
-        <h2>{info.titel}</h2>
+        <h2>{titel ?? info.titel}</h2>
         <p className="ergebnis-gross">
-          {richtigAnzahl} von {RUNDE} richtig
+          {richtigAnzahl} von {runde} richtig
         </p>
-        <p>{richtigAnzahl >= 9 ? 'Sehr sicher!' : richtigAnzahl >= 7 ? 'Gut, noch eine Runde festigt es.' : 'Übung macht den Meister: gleich noch eine Runde.'}</p>
+        <p>{quote >= 0.9 ? 'Sehr sicher!' : quote >= 0.7 ? 'Gut, noch eine Runde festigt es.' : 'Übung macht den Meister: gleich noch eine Runde.'}</p>
         <div className="json-actions">
-          <button
-            onClick={() => {
-              setNr(0);
-              setRichtigAnzahl(0);
-              setStufe(null);
-              modulSicherheit(info.modul).then((s) => setStufe(stufeFuer(s)));
-            }}
-          >
-            Noch eine Runde
-          </button>
+          {!folge && (
+            <button
+              onClick={() => {
+                setNr(0);
+                setRichtigAnzahl(0);
+                setStufen(null);
+                stufenLaden();
+              }}
+            >
+              Noch eine Runde
+            </button>
+          )}
           <button className="secondary" onClick={onEnde}>
             Zurück zu{zurueck === 'Lektion' ? 'r' : 'm'} {zurueck}
           </button>
@@ -141,11 +159,11 @@ export function UebungView({ typ, onEnde, zurueck = 'Lernpfad' }: Props) {
           ← {zurueck}
         </button>
         <span className="meta">
-          {info.titel} · Aufgabe {nr + 1} von {RUNDE} · Schwierigkeit {stufe}
+          {titel ? `${titel}: ${info.titel}` : info.titel} · Aufgabe {nr + 1} von {runde} · Schwierigkeit {stufe}
         </span>
       </div>
       <div className="uebung-balken">
-        <div style={{ width: `${(nr / RUNDE) * 100}%` }} />
+        <div style={{ width: `${(nr / runde) * 100}%` }} />
       </div>
 
       <h2 className="frage">{aufgabe.frage}</h2>
@@ -216,7 +234,7 @@ export function UebungView({ typ, onEnde, zurueck = 'Lernpfad' }: Props) {
           <p>{aufgabe.erklaerung}</p>
           <div className="rueckmeldung-knoepfe">
             <button onClick={weiter} autoFocus>
-              {nr + 1 < RUNDE ? 'Weiter' : 'Ergebnis ansehen'}
+              {nr + 1 < runde ? 'Weiter' : 'Ergebnis ansehen'}
             </button>
             {aufgabe.begriff && eintrag(aufgabe.begriff) && (
               <button className="secondary" onClick={() => oeffneLexikon(aufgabe.begriff)}>

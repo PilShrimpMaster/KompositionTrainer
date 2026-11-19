@@ -85,6 +85,10 @@ export async function sicherungEinlesen(data: unknown): Promise<{ stuecke: numbe
   return { stuecke: fremd.stuecke.length, module: fremd.fortschritt.length };
 }
 
+export function alleErgebnisse() {
+  return db.ergebnisse.toArray();
+}
+
 export function alleFortschritte(): Promise<Fortschritt[]> {
   return db.fortschritt.toArray();
 }

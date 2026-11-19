@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Fortschritt, ModulStatus } from '../speicher/backup';
-import { alleFortschritte, dauerhaftSpeichern, sicherungEinlesen, sicherungErstellen } from '../speicher/db';
+import { alleErgebnisse, alleFortschritte, dauerhaftSpeichern, sicherungEinlesen, sicherungErstellen } from '../speicher/db';
 import { MODULE, STUFEN } from './module';
 import { UEBUNGEN, type UebungTyp } from '../uebungen/aufgaben';
 import { UebungView } from '../uebungen/UebungView';
@@ -8,6 +8,7 @@ import { istErledigt } from './erledigt';
 import { lektionFuer } from './lektionen';
 import { LektionView } from './LektionView';
 import { EinstufungView, letzteEinstufung } from './EinstufungView';
+import { allePlaene, faellige, schwaeche, tagesrunde, tagVon, type Plan } from '../uebungen/wiederholung';
 
 const anzahl = (n: number, eins: string, viele: string) => `${n} ${n === 1 ? eins : viele}`;
 
@@ -27,10 +28,13 @@ export function LernenView() {
   const [aktiv, setAktiv] = useState<UebungTyp | null>(null);
   const [lektion, setLektion] = useState<string | null>(null);
   const [einstufung, setEinstufung] = useState(false);
+  const [plaene, setPlaene] = useState<Plan[]>([]);
+  const [runde, setRunde] = useState<UebungTyp[] | null>(null);
 
   async function laden() {
     const liste = await alleFortschritte();
     setFortschritt(new Map(liste.map((f) => [f.modul, f])));
+    setPlaene(allePlaene(await alleErgebnisse()));
   }
 
   useEffect(() => {
@@ -60,6 +64,19 @@ export function LernenView() {
     } catch (e) {
       setMeldung(e instanceof SyntaxError ? 'Die Datei ist kein gültiges JSON.' : (e as Error).message);
     }
+  }
+
+  if (runde) {
+    return (
+      <UebungView
+        folge={runde}
+        titel="Wiederholung"
+        onEnde={() => {
+          setRunde(null);
+          laden().catch(() => {});
+        }}
+      />
+    );
   }
 
   if (aktiv) {
@@ -93,6 +110,7 @@ export function LernenView() {
 
   return (
     <div className="lernen">
+      <Wiederholung plaene={plaene} onStart={setRunde} />
       <div className="einstufung-hinweis">
         <div>
           <strong>Schon Vorkenntnisse?</strong>
@@ -202,5 +220,46 @@ export function LernenView() {
         {meldung && <p className="notice">{meldung}</p>}
       </section>
     </div>
+  );
+}
+
+const titelVon = (typ: UebungTyp) => UEBUNGEN.find((u) => u.typ === typ)?.titel ?? typ;
+
+/** Die tägliche Wiederholungsrunde mit den fälligen und den schwächsten Themen */
+function Wiederholung({ plaene, onStart }: { plaene: Plan[]; onStart: (r: UebungTyp[]) => void }) {
+  if (!plaene.length) return null;
+  const jetzt = faellige(plaene);
+  const schwach = [...plaene].sort((a, b) => schwaeche(b) - schwaeche(a)).filter((p) => p.quote < 0.85).slice(0, 3);
+  const naechste = [...plaene].sort((a, b) => a.faellig - b.faellig)[0];
+  const inTagen = naechste ? tagVon(naechste.faellig) - tagVon(Date.now()) : 0;
+  return (
+    <section className="wiederholung">
+      <div>
+        <strong>Wiederholung heute</strong>
+        {jetzt.length ? (
+          <p className="meta">
+            Fällig: {jetzt.map((p) => titelVon(p.typ)).join(', ')}. Etwa 15 Aufgaben, 10 bis 15 Minuten.
+          </p>
+        ) : (
+          <p className="meta">
+            Heute ist nichts fällig. Nächste Wiederholung {inTagen <= 1 ? 'morgen' : `in ${inTagen} Tagen`}.
+          </p>
+        )}
+        {schwach.length > 0 && (
+          <p className="meta">
+            Kommt öfter dran: {schwach.map((p) => `${titelVon(p.typ)} (${Math.round(p.quote * 100)} %)`).join(', ')}
+          </p>
+        )}
+      </div>
+      {jetzt.length > 0 ? (
+        <button onClick={() => onStart(tagesrunde(jetzt))}>Wiederholung starten</button>
+      ) : (
+        schwach.length > 0 && (
+          <button className="secondary" onClick={() => onStart(tagesrunde(schwach, 10))}>
+            Schwache Themen üben
+          </button>
+        )
+      )}
+    </section>
   );
 }
