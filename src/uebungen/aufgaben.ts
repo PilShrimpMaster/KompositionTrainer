@@ -1,6 +1,7 @@
 import { quarterLength } from '../model/duration';
 import { fromDiatonic, germanKeyName, germanName, germanNameWithOctave, toMidi, diatonicIndex } from '../model/pitch';
-import type { Clef, Duration, KeySignature, Pitch, Step } from '../model/types';
+import type { Clef, Duration, KeySignature, Pitch, Score, Step } from '../model/types';
+import { funktionAufgabe, kadenzAufgabe, satzfehlerAufgabe, umkehrungAufgabe } from './satzuebungen';
 import {
   DREIKLANG_ARTEN,
   dreiklang,
@@ -20,8 +21,10 @@ export interface Aufgabe {
   frage: string;
   /** Notenbild (optional) */
   noten?: { clef: Clef; key?: KeySignature; groups: Pitch[][] };
-  /** Klang (optional): Töne nacheinander oder gleichzeitig */
-  klang?: { art: 'nacheinander' | 'zusammen'; toene: Pitch[] };
+  /** Klang (optional): Töne nacheinander oder gleichzeitig; `folge` spielt mehrere Akkorde nacheinander */
+  klang?: { art: 'nacheinander' | 'zusammen'; toene: Pitch[]; folge?: Pitch[][] };
+  /** Mehrstimmiges Notenbild (z. B. zwei Akkorde im Chorsatz) */
+  satz?: Score;
   /** Antwortmöglichkeiten; leer bei Diktaten */
   optionen: string[];
   loesung: string;
@@ -42,7 +45,11 @@ export type UebungTyp =
   | 'dreiklang-hoeren'
   | 'tonart-vorzeichen'
   | 'paralleltonart'
-  | 'melodiediktat';
+  | 'melodiediktat'
+  | 'funktion-bestimmen'
+  | 'kadenz-hoeren'
+  | 'umkehrung-bestimmen'
+  | 'satzfehler-finden';
 
 export interface UebungInfo {
   typ: UebungTyp;
@@ -61,6 +68,10 @@ export const UEBUNGEN: UebungInfo[] = [
   { typ: 'paralleltonart', titel: 'Paralleltonarten', modul: 's1-quintenzirkel', hoeren: false },
   { typ: 'dreiklang-lesen', titel: 'Dreiklänge bestimmen', modul: 's1-dreiklaenge', hoeren: false },
   { typ: 'dreiklang-hoeren', titel: 'Dreiklänge hören', modul: 's1-dreiklaenge', hoeren: true },
+  { typ: 'funktion-bestimmen', titel: 'Funktionen bestimmen', modul: 's2-funktionen', hoeren: false },
+  { typ: 'satzfehler-finden', titel: 'Satzfehler finden', modul: 's2-satz', hoeren: false },
+  { typ: 'umkehrung-bestimmen', titel: 'Umkehrungen bestimmen', modul: 's2-umkehrungen', hoeren: false },
+  { typ: 'kadenz-hoeren', titel: 'Schlüsse hören', modul: 's2-nebenfunktionen', hoeren: true },
 ];
 
 /** Schwierigkeit 1–3, abhängig von der Sicherheit im Modul */
@@ -364,6 +375,14 @@ export function erzeugeAufgabe(typ: UebungTyp, stufe: Stufe, rng: Rng = Math.ran
       return paralleltonart(rng, stufe);
     case 'melodiediktat':
       return melodiediktat(rng, stufe);
+    case 'funktion-bestimmen':
+      return funktionAufgabe(rng, stufe);
+    case 'kadenz-hoeren':
+      return kadenzAufgabe(rng, stufe);
+    case 'umkehrung-bestimmen':
+      return umkehrungAufgabe(rng, stufe);
+    case 'satzfehler-finden':
+      return satzfehlerAufgabe(rng, stufe);
   }
 }
 

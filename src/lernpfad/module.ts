@@ -28,4 +28,12 @@ export const MODULE: Modul[] = [
   { id: 's1-tonleitern', stufe: 1, titel: 'Tonleitern und Tonarten', ziel: 'Dur und Moll, Vorzeichen' },
   { id: 's1-quintenzirkel', stufe: 1, titel: 'Quintenzirkel', ziel: 'Verwandte Tonarten finden' },
   { id: 's1-dreiklaenge', stufe: 1, titel: 'Dreiklänge', ziel: 'Dur, Moll, vermindert, übermäßig' },
+  { id: 's2-funktionen', stufe: 2, titel: 'Funktionen und Kadenz', ziel: 'Tonika, Subdominante, Dominante und ihr Zusammenspiel' },
+  { id: 's2-satz', stufe: 2, titel: 'Vierstimmiger Satz', ziel: 'Akkorde verbinden, ohne Parallelen und mit guter Stimmführung' },
+  { id: 's2-umkehrungen', stufe: 2, titel: 'Umkehrungen und Generalbass', ziel: 'Sextakkord, Quartsextakkord und bezifferten Bass aussetzen' },
+  { id: 's2-septakkorde', stufe: 2, titel: 'Septakkorde', ziel: 'Dominantseptakkord und Auflösung der Septime' },
+  { id: 's2-nebenfunktionen', stufe: 2, titel: 'Nebenfunktionen', ziel: 'Parallelklänge, Trugschluss, Doppel- und Zwischendominante' },
+  { id: 's2-modulation', stufe: 2, titel: 'Modulation', ziel: 'In verwandte Tonarten wechseln' },
+  { id: 's2-singbarkeit', stufe: 2, titel: 'Singbarkeit und Text', ziel: 'Gut singbare Stimmen und Text richtig unterlegen' },
+  { id: 's2-choralanalyse', stufe: 2, titel: 'Choräle analysieren', ziel: 'Funktionen und Stimmführung in Choralsätzen erkennen' },
 ];

@@ -1,21 +1,21 @@
 import { measureLength, quarterLength } from '../model/duration';
 import { diatonicIndex, germanName, keyAlter, toMidi } from '../model/pitch';
-import type { KeySignature, Pitch, Step } from '../model/types';
+import type { Pitch, Step } from '../model/types';
 import type { EditorDoc } from '../editor/rebar';
 import { rebar } from '../editor/rebar';
+import { rebarSatz } from '../editor/satzdoc';
+import type { Score } from '../model/types';
+import { analysiere, funktionPasst, funktionsfolge } from '../satz/analyse';
+import { pruefeSatz } from '../satz/regeln';
+import { parseTonart } from './kompakt';
+import { grundton } from '../model/tonart';
 import { dreiklangArt, intervall, INTERVALL_NAMEN } from '../uebungen/theorie';
 
 const STEPS: Step[] = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 const WEITE = ['None', 'Dezime', 'Undezime', 'Duodezime'];
 const spanne = (stufen: number) => (stufen <= 8 ? INTERVALL_NAMEN[Math.max(stufen, 1) - 1] : (WEITE[stufen - 9] ?? `Spanne von ${stufen} Stufen`));
 
-/** Grundton einer Tonart (ohne Oktave) */
-export function grundton(key: KeySignature): { step: Step; alter: number } {
-  const dur = (((key.fifths * 4) % 7) + 7) % 7;
-  const idx = key.mode === 'minor' ? (dur + 5) % 7 : dur;
-  const step = STEPS[idx];
-  return { step, alter: keyAlter(step, key.fifths) };
-}
+export { grundton };
 
 const gleicheKlasse = (p: Pitch, g: { step: Step; alter: number }) => p.step === g.step && (p.alter ?? 0) === g.alter;
 
@@ -37,8 +37,12 @@ export function pruefe(doc: EditorDoc, kriterien: string[]): Pruefpunkt[] {
   const g = grundton(doc.key);
   const takte = doc.events.length ? rebar(doc).score.voices[0].measures.length : 0;
 
+  let satzScore: Score | null | undefined;
+  const satz = () => (satzScore === undefined ? (satzScore = doc.satz ? rebarSatz(doc).score : null) : satzScore);
+
   return kriterien.map((k): Pruefpunkt => {
-    const [name, arg] = k.trim().split(/\s+/);
+    const [name, ...args] = k.trim().split(/\s+/);
+    const arg = args[0];
     const n = Number(arg);
     switch (name) {
       case 'takte':
@@ -115,8 +119,90 @@ export function pruefe(doc: EditorDoc, kriterien: string[]): Pruefpunkt[] {
         const ok = toene.filter((p) => toMidi(p) === max).length === 1;
         return { text: 'Der höchste Ton kommt nur einmal vor (Höhepunkt)', ok, hinweis: 'Ein einziger Gipfelton macht die Melodie zielgerichtet.' };
       }
+      case 'vierstimmig':
+      case 'fehlerfrei':
+      case 'funktionen':
+      case 'ganzschluss':
+      case 'enthaelt':
+      case 'endet-in':
+      case 'liedtext':
+        return satzKriterium(name, args, doc, satz());
       default:
         return { text: `Unbekanntes Kriterium „${k}“`, ok: false };
     }
   });
+}
+
+const OHNE_SATZ: Pruefpunkt = { text: 'Vierstimmiger Satz', ok: false, hinweis: 'Stelle unter „Stück einstellen“ die Besetzung „Chorsatz“ ein.' };
+const UMKEHRUNG: Record<string, number> = { Grundstellung: 0, Sextakkord: 1, Quartsextakkord: 2 };
+
+/** Kriterien für vierstimmige Sätze */
+function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Score | null): Pruefpunkt {
+  if (!score || !doc.satz) return OHNE_SATZ;
+  const stimmen = doc.satz.stimmen;
+  switch (name) {
+    case 'vierstimmig': {
+      const laengen = stimmen.map((st) => st.reduce((s, e) => s + quarterLength(e.duration), 0));
+      const leer = stimmen.map((st, i) => (st.some((e) => e.pitch) ? null : ['Sopran', 'Alt', 'Tenor', 'Bass'][i])).filter(Boolean);
+      const ok = leer.length === 0 && laengen.every((l) => Math.abs(l - laengen[0]) < 1e-9);
+      return {
+        text: 'Alle vier Stimmen sind gleich lang ausgeschrieben',
+        ok,
+        hinweis: leer.length ? `Noch leer: ${leer.join(', ')}.` : 'Die Stimmen sind unterschiedlich lang.',
+      };
+    }
+    case 'fehlerfrei': {
+      const fehler = pruefeSatz(score).filter((b) => b.art === 'fehler');
+      const erster = fehler[0];
+      return {
+        text: 'Keine Satzfehler (Parallelen, Umfang, Auflösung …)',
+        ok: fehler.length === 0,
+        hinweis: erster ? `${fehler.length} Fehler, z. B. Takt ${erster.takt + 1}: ${erster.text}` : undefined,
+      };
+    }
+    case 'funktionen': {
+      const ist = funktionsfolge(score);
+      const ok = ist.length === args.length && args.every((e, i) => funktionPasst(e, ist[i]));
+      return {
+        text: `Akkordfolge ${args.join(' – ').replace(/7/g, '⁷')}`,
+        ok,
+        hinweis: ist.length ? `Erkannt: ${ist.join(' – ')}.` : 'Noch keine vollständigen Akkorde.',
+      };
+    }
+    case 'ganzschluss': {
+      const a = analysiere(score);
+      const [d, t] = a.slice(-2).map((s) => s?.akkord);
+      const tonika = doc.key.mode === 'major' ? 'T' : 't';
+      const ok = !!d && !!t && funktionPasst('D', d.funktion) && (t.funktion === tonika || t.funktion === 'T') && t.umkehrung === 0;
+      return { text: 'Schluss mit Dominante und Tonika in Grundstellung (Ganzschluss)', ok, hinweis: 'Die letzten beiden Akkorde: D oder D⁷, dann die Tonika mit Grundton im Bass.' };
+    }
+    case 'enthaelt': {
+      const e = args[0];
+      const a = analysiere(score);
+      const ok = e in UMKEHRUNG ? a.some((s) => s.akkord.umkehrung === UMKEHRUNG[e] && !s.akkord.sept) : a.some((s) => funktionPasst(e, s.akkord.funktion));
+      return { text: `Enthält ${e in UMKEHRUNG ? 'einen ' + e : e.replace(/7/g, '⁷')}`, ok };
+    }
+    case 'endet-in': {
+      const ziel = parseTonart(args.join(' '));
+      const a = analysiere({ ...score, key: ziel });
+      const [d, t] = a.slice(-2).map((s) => s?.akkord);
+      const ok = !!d && !!t && funktionPasst('D', d.funktion) && ['T', 't'].includes(t.funktion) && t.umkehrung === 0;
+      return { text: 'Endet mit einer Kadenz in der neuen Tonart', ok, hinweis: 'Zum Schluss die Dominante der neuen Tonart (mit ihrem Leitton) und dann deren Tonika.' };
+    }
+    case 'liedtext': {
+      const silben = (doc.satz.text ?? '').split(/\s+/).filter(Boolean).length;
+      let anschlaege = 0;
+      let gebunden = false;
+      for (const e of stimmen[0]) {
+        if (e.pitch && !gebunden) anschlaege++;
+        gebunden = !!(e.pitch && e.tie);
+      }
+      return {
+        text: 'Zu jeder Sopran-Note gehört eine Silbe',
+        ok: anschlaege > 0 && silben === anschlaege,
+        hinweis: `${anschlaege} Noten, ${silben} Silben. Den Text trägst du unter „Stück einstellen“ ein.`,
+      };
+    }
+  }
+  return { text: name, ok: false };
 }
