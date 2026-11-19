@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import type { Fortschritt, ModulStatus } from '../speicher/backup';
 import { alleFortschritte, dauerhaftSpeichern, sicherungEinlesen, sicherungErstellen } from '../speicher/db';
 import { MODULE, STUFEN } from './module';
+import { UEBUNGEN, type UebungTyp } from '../uebungen/aufgaben';
+import { UebungView } from '../uebungen/UebungView';
 
 const anzahl = (n: number, eins: string, viele: string) => `${n} ${n === 1 ? eins : viele}`;
 
@@ -18,6 +20,7 @@ export function LernenView() {
   const [dauerhaft, setDauerhaft] = useState<boolean | null>(null);
   const [meldung, setMeldung] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const [aktiv, setAktiv] = useState<UebungTyp | null>(null);
 
   async function laden() {
     const liste = await alleFortschritte();
@@ -53,6 +56,18 @@ export function LernenView() {
     }
   }
 
+  if (aktiv) {
+    return (
+      <UebungView
+        typ={aktiv}
+        onEnde={() => {
+          setAktiv(null);
+          laden().catch(() => {});
+        }}
+      />
+    );
+  }
+
   return (
     <div className="lernen">
       {STUFEN.map((stufe) => {
@@ -71,9 +86,17 @@ export function LernenView() {
                   const sicherheit = Math.round((f?.sicherheit ?? 0) * 100);
                   return (
                     <li key={m.id} className={`modul status-${status}`}>
-                      <div>
+                      <div className="modul-text">
                         <strong>{m.titel}</strong>
                         <p className="meta">{m.ziel}</p>
+                        <div className="modul-uebungen">
+                          {UEBUNGEN.filter((u) => u.modul === m.id).map((u) => (
+                            <button key={u.typ} className="secondary small" onClick={() => setAktiv(u.typ)}>
+                              {u.hoeren ? '🎧 ' : '✎ '}
+                              {u.titel}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                       <div className="modul-fortschritt">
                         <div className="balken" role="progressbar" aria-valuenow={sicherheit} aria-valuemin={0} aria-valuemax={100}>
@@ -91,7 +114,10 @@ export function LernenView() {
           </section>
         );
       })}
-      <p className="meta">Lektionen und Übungen für Stufe 1 kommen als Nächstes; dann füllen sich die Balken.</p>
+      <p className="meta">
+        Jede Runde hat 10 Aufgaben. Die Balken zeigen, wie sicher du bei den letzten 20 Aufgaben warst; ab 15 Aufgaben mit
+        85 % gilt ein Modul als sicher. Je sicherer du wirst, desto schwieriger werden die Aufgaben.
+      </p>
 
       <section className="sicherung">
         <h2>Daten sichern</h2>

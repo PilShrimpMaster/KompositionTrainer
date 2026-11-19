@@ -98,3 +98,16 @@ export async function playNote(note: string, seconds = 0.6, velocity = 0.7): Pro
 export function audioReady(): boolean {
   return sampler !== null;
 }
+
+/** Mehrere Töne gleichzeitig (Akkord oder harmonisches Intervall) */
+export async function playChord(notes: string[], seconds = 1.5): Promise<void> {
+  const piano = await initAudio();
+  piano.triggerAttackRelease(notes, seconds, undefined, 0.7);
+}
+
+/** Töne nacheinander, z. B. ein melodisches Intervall oder ein Diktat */
+export async function playSequence(notes: string[], secondsEach = 0.7): Promise<void> {
+  const piano = await initAudio();
+  const now = Tone.now() + 0.05;
+  notes.forEach((n, i) => piano.triggerAttackRelease(n, secondsEach * 0.95, now + i * secondsEach, 0.7));
+}
