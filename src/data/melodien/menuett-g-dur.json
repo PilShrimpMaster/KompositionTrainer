@@ -1,0 +1,347 @@
+{
+  "format": "kt-score",
+  "version": 1,
+  "title": "Menuett G-Dur",
+  "composer": "Christian Petzold (früher J. S. Bach zugeschrieben)",
+  "tempo": 120,
+  "time": {
+    "beats": 3,
+    "beatType": 4
+  },
+  "key": {
+    "fifths": 1,
+    "mode": "major"
+  },
+  "voices": [
+    {
+      "id": "v1",
+      "name": "Oberstimme",
+      "clef": "treble",
+      "measures": [
+        {
+          "notes": [
+            {
+              "pitch": {
+                "step": "D",
+                "octave": 5
+              },
+              "duration": {
+                "type": "quarter"
+              }
+            },
+            {
+              "pitch": {
+                "step": "G",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "A",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "B",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "C",
+                "octave": 5
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "pitch": {
+                "step": "D",
+                "octave": 5
+              },
+              "duration": {
+                "type": "quarter"
+              }
+            },
+            {
+              "pitch": {
+                "step": "G",
+                "octave": 4
+              },
+              "duration": {
+                "type": "quarter"
+              }
+            },
+            {
+              "pitch": {
+                "step": "G",
+                "octave": 4
+              },
+              "duration": {
+                "type": "quarter"
+              }
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "pitch": {
+                "step": "E",
+                "octave": 5
+              },
+              "duration": {
+                "type": "quarter"
+              }
+            },
+            {
+              "pitch": {
+                "step": "C",
+                "octave": 5
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "D",
+                "octave": 5
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "E",
+                "octave": 5
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "F",
+                "octave": 5,
+                "alter": 1
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "pitch": {
+                "step": "G",
+                "octave": 5
+              },
+              "duration": {
+                "type": "quarter"
+              }
+            },
+            {
+              "pitch": {
+                "step": "G",
+                "octave": 4
+              },
+              "duration": {
+                "type": "quarter"
+              }
+            },
+            {
+              "pitch": {
+                "step": "G",
+                "octave": 4
+              },
+              "duration": {
+                "type": "quarter"
+              }
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "pitch": {
+                "step": "C",
+                "octave": 5
+              },
+              "duration": {
+                "type": "quarter"
+              }
+            },
+            {
+              "pitch": {
+                "step": "D",
+                "octave": 5
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "C",
+                "octave": 5
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "B",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "A",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "pitch": {
+                "step": "B",
+                "octave": 4
+              },
+              "duration": {
+                "type": "quarter"
+              }
+            },
+            {
+              "pitch": {
+                "step": "C",
+                "octave": 5
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "B",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "A",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "G",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "pitch": {
+                "step": "F",
+                "octave": 4,
+                "alter": 1
+              },
+              "duration": {
+                "type": "quarter"
+              }
+            },
+            {
+              "pitch": {
+                "step": "G",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "A",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "B",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            },
+            {
+              "pitch": {
+                "step": "G",
+                "octave": 4
+              },
+              "duration": {
+                "type": "eighth"
+              }
+            }
+          ]
+        },
+        {
+          "notes": [
+            {
+              "pitch": {
+                "step": "A",
+                "octave": 4
+              },
+              "duration": {
+                "type": "half",
+                "dots": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
