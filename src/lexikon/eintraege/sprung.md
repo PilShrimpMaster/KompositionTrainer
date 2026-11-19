@@ -3,7 +3,7 @@ id: sprung
 titel: Melodischer Sprung
 kategorie: Satztechnik
 kurz: Ein Intervall größer als eine Sekunde innerhalb einer Stimme. Im Chorsatz sind übermäßige Sprünge und Sprünge über eine Oktave verboten.
-synonyme: Sprung, Sprünge, übermäßige Sekunde, übermäßige Quarte, Septimsprung, Schritt, Stimmführung
+synonyme: Sprung, Sprünge, übermäßige Sekunde, Septimsprung, Schritt, Stimmführung
 siehe: intervall, tritonus, melodie, stimmumfang
 beispiel: F4 G#4 | C4 C5
 klang: nacheinander

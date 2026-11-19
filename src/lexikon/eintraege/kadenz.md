@@ -3,7 +3,7 @@ id: kadenz
 titel: Kadenz
 kategorie: Harmonik
 kurz: Eine Akkordfolge, die eine Tonart festigt und einen Abschnitt schließt; die Grundform ist Tonika – Subdominante – Dominante – Tonika.
-synonyme: Schluss, Ganzschluss, Halbschluss, Trugschluss, Plagalschluss, Schlusswendung
+synonyme: Schluss, Ganzschluss, Plagalschluss, Schlusswendung
 siehe: tonika, subdominante, dominante, leitton, periode
 ---
 

@@ -1,16 +1,33 @@
 import { describe, expect, it } from 'vitest';
+import { REGELN } from '../satz/regeln';
 import { UEBUNGEN, erzeugeAufgabe } from '../uebungen/aufgaben';
 import { EINTRAEGE, eintrag, normalisiere, sucheEintraege } from './lexikon';
 import { parseBeispiel, parseEintrag, parsePitch } from './parse';
 
 describe('Lexikon', () => {
   it('lädt alle Einträge mit eindeutigen Ids', () => {
-    expect(EINTRAEGE.length).toBeGreaterThanOrEqual(35);
+    expect(EINTRAEGE.length).toBeGreaterThanOrEqual(150);
     expect(new Set(EINTRAEGE.map((e) => e.id)).size).toBe(EINTRAEGE.length);
   });
 
   it('verweist nur auf vorhandene Einträge', () => {
     for (const e of EINTRAEGE) for (const s of e.siehe) expect(eintrag(s), `${e.id} → ${s}`).toBeDefined();
+  });
+
+  it('verlinkt jeden Begriff eindeutig auf genau einen Eintrag', () => {
+    const wer = new Map<string, string>();
+    for (const e of EINTRAEGE) {
+      for (const w of [e.titel, ...e.synonyme]) {
+        const k = w.toLowerCase();
+        const vorher = wer.get(k);
+        if (vorher && vorher !== e.id) expect.fail(`„${w}“ in ${vorher} und ${e.id}`);
+        wer.set(k, e.id);
+      }
+    }
+  });
+
+  it('hat für jede Regel der Satzprüfung einen Eintrag', () => {
+    for (const r of REGELN) expect(eintrag(r.begriff), `${r.id} → ${r.begriff}`).toBeDefined();
   });
 
   it('kennt alle Begriffe, auf die Übungen verweisen', () => {

@@ -3,7 +3,7 @@ id: stimmumfang
 titel: Stimmumfang
 kategorie: Satztechnik
 kurz: Der Tonraum, den eine Sängerin oder ein Sänger bequem singen kann. Im Chorsatz Sopran c′–a″, Alt g–d″, Tenor c–g′, Bass E–d′.
-synonyme: Ambitus, Tonumfang, Lage, Sopran, Alt, Tenor, Bass, SATB
+synonyme: Ambitus, Tonumfang, Sopran, Alt, Tenor, Bass, SATB
 siehe: stimmabstand, stimmkreuzung
 klang: nacheinander
 schluessel: bass
