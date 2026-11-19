@@ -7,6 +7,7 @@ import { UebungView } from '../uebungen/UebungView';
 import { istErledigt } from './erledigt';
 import { lektionFuer } from './lektionen';
 import { LektionView } from './LektionView';
+import { EinstufungView, letzteEinstufung } from './EinstufungView';
 
 const anzahl = (n: number, eins: string, viele: string) => `${n} ${n === 1 ? eins : viele}`;
 
@@ -25,6 +26,7 @@ export function LernenView() {
   const fileRef = useRef<HTMLInputElement>(null);
   const [aktiv, setAktiv] = useState<UebungTyp | null>(null);
   const [lektion, setLektion] = useState<string | null>(null);
+  const [einstufung, setEinstufung] = useState(false);
 
   async function laden() {
     const liste = await alleFortschritte();
@@ -73,6 +75,17 @@ export function LernenView() {
     );
   }
 
+  if (einstufung) {
+    return (
+      <EinstufungView
+        onEnde={() => {
+          setEinstufung(false);
+          laden().catch(() => {});
+        }}
+      />
+    );
+  }
+
   const offeneLektion = lektion ? lektionFuer(lektion) : undefined;
   if (offeneLektion) {
     return <LektionView lektion={offeneLektion} onUebung={setAktiv} onZurueck={() => setLektion(null)} />;
@@ -80,6 +93,18 @@ export function LernenView() {
 
   return (
     <div className="lernen">
+      <div className="einstufung-hinweis">
+        <div>
+          <strong>Schon Vorkenntnisse?</strong>
+          <p className="meta">
+            Der Einstufungstest erkennt, was du schon kannst, und überspringt es.
+            {letzteEinstufung() ? ` Zuletzt gemacht am ${letzteEinstufung()}.` : ''}
+          </p>
+        </div>
+        <button className="secondary" onClick={() => setEinstufung(true)}>
+          {letzteEinstufung() ? 'Test wiederholen' : 'Einstufungstest'}
+        </button>
+      </div>
       {STUFEN.map((stufe) => {
         const module = MODULE.filter((m) => m.stufe === stufe.nummer);
         return (
