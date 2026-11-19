@@ -4,6 +4,8 @@ import { Klavier } from '../editor/Klavier';
 import { germanName, spellMidi, toMidi, toToneName } from '../model/pitch';
 import { renderNotes } from '../render/renderNotes';
 import { diktatRichtig, erzeugeAufgabe, stufeFuer, UEBUNGEN, type Aufgabe, type Stufe, type UebungTyp } from './aufgaben';
+import { eintrag } from '../lexikon/lexikon';
+import { useNavigation } from '../navigation';
 import { ergebnisSpeichern, modulSicherheit } from './fortschritt';
 
 const RUNDE = 10;
@@ -16,6 +18,7 @@ interface Props {
 /** Eine Übungsrunde mit 10 Aufgaben, sofortiger Rückmeldung und Fortschritt. */
 export function UebungView({ typ, onEnde }: Props) {
   const info = UEBUNGEN.find((u) => u.typ === typ)!;
+  const { oeffneLexikon } = useNavigation();
   const [stufe, setStufe] = useState<Stufe | null>(null);
   const [nr, setNr] = useState(0);
   const [aufgabe, setAufgabe] = useState<Aufgabe | null>(null);
@@ -203,9 +206,16 @@ export function UebungView({ typ, onEnde }: Props) {
         <div className={`rueckmeldung ${richtig ? 'ok' : 'falsch'}`} role="status">
           <strong>{richtig ? 'Richtig!' : `Leider nicht. Richtig ist: ${aufgabe.loesung}`}</strong>
           <p>{aufgabe.erklaerung}</p>
-          <button onClick={weiter} autoFocus>
-            {nr + 1 < RUNDE ? 'Weiter' : 'Ergebnis ansehen'}
-          </button>
+          <div className="rueckmeldung-knoepfe">
+            <button onClick={weiter} autoFocus>
+              {nr + 1 < RUNDE ? 'Weiter' : 'Ergebnis ansehen'}
+            </button>
+            {aufgabe.begriff && eintrag(aufgabe.begriff) && (
+              <button className="sekundaer" onClick={() => oeffneLexikon(aufgabe.begriff)}>
+                Im Lexikon: {eintrag(aufgabe.begriff)!.titel}
+              </button>
+            )}
+          </div>
         </div>
       )}
     </section>

@@ -796,3 +796,111 @@ button.option.ist-aus:disabled {
     color: var(--ink);
   }
 }
+
+/* Lexikon */
+.lexikon {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.lexikon-suche {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  box-sizing: border-box;
+}
+.lexikon-kategorien {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 14px;
+}
+.lexikon-kategorien button.is-on {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.lexikon-liste {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.lexikon-liste button {
+  width: 100%;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 10px;
+  padding: 10px 12px;
+}
+.lexikon-kurz {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.lexikon-kat {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+.lexikon-definition {
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+.lexikon-beispiel {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 12px 0;
+  text-align: center;
+  overflow-x: auto;
+}
+.lexikon-beispiel .uebung-noten {
+  background: #fff;
+  border-radius: 6px;
+}
+.lexikon-text {
+  line-height: 1.6;
+}
+.lexikon-text table {
+  border-collapse: collapse;
+  margin: 10px 0;
+  display: block;
+  overflow-x: auto;
+}
+.lexikon-text th,
+.lexikon-text td {
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  text-align: left;
+}
+.lexikon-siehe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-top: 18px;
+}
+.lexikon-siehe h3 {
+  width: 100%;
+  margin: 0 0 4px;
+  font-size: 1rem;
+}
+.zurueck {
+  margin-bottom: 8px;
+}
+.rueckmeldung-knoepfe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+button.sekundaer {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
