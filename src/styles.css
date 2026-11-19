@@ -45,6 +45,27 @@ body {
   font-weight: 650;
 }
 
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.tabs button {
+  background: transparent;
+  color: var(--accent-ink);
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.tabs button.is-on {
+  background: rgb(255 255 255 / 0.2);
+  opacity: 1;
+}
+
 .badge {
   font-size: 0.8rem;
   padding: 3px 10px;
@@ -224,6 +245,281 @@ footer {
   text-align: center;
   font-size: 0.8rem;
   color: var(--muted);
+}
+
+/* ---------- Editor ---------- */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--bg);
+  padding: 8px 0;
+}
+
+.tool-group {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+}
+
+button.tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: 56px;
+  min-height: 56px;
+  padding: 4px 6px;
+  background: transparent;
+  color: #1f1b2e;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+button.tool.is-on {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+button.tool .glyph {
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+  font-family: 'Bravura Text', 'Noto Music', 'Segoe UI Symbol', 'Apple Symbols', serif;
+}
+
+button.tool .tool-label {
+  font-size: 0.7rem;
+}
+
+button.small {
+  min-height: 36px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+button.danger {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.editor-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.meta-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  padding: 12px;
+  margin: 12px;
+  border-radius: 10px;
+  background: #f4f1ea;
+}
+
+.meta-panel select,
+.meta-panel input[type='text'] {
+  min-width: 160px;
+  min-height: 40px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #1f1b2e;
+  font: inherit;
+}
+
+.meta-panel .field span {
+  color: #6b6580;
+}
+
+.editor-score {
+  position: relative;
+  width: 100%;
+  min-height: 160px;
+  cursor: crosshair;
+  touch-action: pan-x pan-y pinch-zoom;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.editor-score.finger-writes {
+  touch-action: none;
+}
+
+.editor-score svg {
+  display: block;
+}
+
+.score-canvas .is-selected,
+.score-canvas .is-selected * {
+  fill: #1c64f2;
+  stroke: #1c64f2;
+}
+
+.score-canvas .is-playing,
+.score-canvas .is-playing * {
+  fill: var(--highlight);
+  stroke: var(--highlight);
+}
+
+.hover-line {
+  position: absolute;
+  height: 0;
+  border-top: 2px solid rgb(28 100 242 / 0.35);
+  pointer-events: none;
+}
+
+.hover-line span {
+  position: absolute;
+  right: 4px;
+  top: -24px;
+  padding: 1px 8px;
+  border-radius: 6px;
+  background: #1c64f2;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status {
+  margin: 4px 12px 8px;
+  color: #6b6580;
+  font-size: 0.9rem;
+  min-height: 1.3em;
+}
+
+.notice {
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #fff4e5;
+  color: #8a4b00;
+}
+
+.editor-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 24px;
+  margin: 8px 0;
+}
+
+table.help {
+  border-collapse: collapse;
+  margin: 4px 0 12px;
+  font-size: 0.9rem;
+}
+
+table.help th {
+  text-align: left;
+  padding: 4px 16px 4px 0;
+  white-space: nowrap;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-weight: 600;
+}
+
+table.help td {
+  padding: 4px 0;
+  color: var(--muted);
+}
+
+.file-actions {
+  margin-top: 16px;
+}
+
+/* ---------- Bildschirmklavier ---------- */
+
+.klavier {
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 14px;
+  background: #2b2440;
+}
+
+.klavier-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: #ece9f5;
+  font-size: 0.9rem;
+}
+
+.klavier-bar button.secondary {
+  color: #ece9f5;
+  border-color: #6f6690;
+}
+
+.klavier-keys {
+  display: grid;
+  grid-template-columns: repeat(var(--whites), 1fr);
+  height: 170px;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.klavier-slot {
+  position: relative;
+}
+
+button.taste {
+  position: absolute;
+  padding: 0 0 8px;
+  border-radius: 0 0 6px 6px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-weight: 600;
+  min-height: 0;
+  touch-action: none;
+}
+
+button.taste.weiss {
+  inset: 0 1px 0 1px;
+  background: #fbfaf7;
+  color: #4a4560;
+  font-size: 0.8rem;
+}
+
+button.taste.schwarz {
+  z-index: 2;
+  top: 0;
+  left: 68%;
+  width: 64%;
+  height: 60%;
+  background: #1b1726;
+  color: #c9c3dc;
+  font-size: 0.65rem;
+}
+
+button.taste.is-down,
+button.taste:active {
+  background: #f2a65a;
+  color: #1f1b2e;
+}
+
+@media (max-width: 700px) {
+  button.tool {
+    min-width: 46px;
+  }
+  button.tool .tool-label {
+    display: none;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

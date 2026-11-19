@@ -87,3 +87,14 @@ export async function play(score: Score, tempo: number, cb: PlaybackCallbacks): 
   transport.start('+0.1');
   return stop;
 }
+
+/** Einzelnen Ton sofort anspielen, z. B. beim Setzen einer Note */
+export async function playNote(note: string, seconds = 0.6): Promise<void> {
+  const piano = await initAudio();
+  piano.triggerAttackRelease(note, seconds);
+}
+
+/** Klavier bereits geladen? Dann klingt die erste Note ohne Verzögerung. */
+export function audioReady(): boolean {
+  return sampler !== null;
+}
