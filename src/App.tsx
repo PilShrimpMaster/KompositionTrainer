@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import { EditorView } from './editor/EditorView';
 import { LernenView } from './lernpfad/LernenView';
 import { LexikonView } from './lexikon/LexikonView';
+import type { Schreibaufgabe } from './lernpfad/lektion';
+import { alleAufgaben } from './lernpfad/lektionen';
 import { NavigationContext, type Navigation } from './navigation';
 import { PlayerView } from './PlayerView';
 
@@ -9,6 +11,16 @@ type Tab = 'lernen' | 'lexikon' | 'schreiben' | 'hoeren';
 const TABS: Tab[] = ['lernen', 'lexikon', 'schreiben', 'hoeren'];
 const TAB_NAMEN: Record<Tab, string> = { lernen: 'Lernen', lexikon: 'Lexikon', schreiben: 'Schreiben', hoeren: 'Hören' };
 const TAB_KEY = 'kt-tab';
+const AUFGABE_KEY = 'kt-editor-aufgabe';
+
+function gemerkteAufgabe(): Schreibaufgabe | null {
+  try {
+    const id = localStorage.getItem(AUFGABE_KEY);
+    return alleAufgaben().find((a) => a.id === id) ?? null;
+  } catch {
+    return null;
+  }
+}
 
 function initialTab(): Tab {
   try {
@@ -23,6 +35,17 @@ function initialTab(): Tab {
 export function App() {
   const [tab, setTab] = useState<Tab>(initialTab);
   const [lexikonId, setLexikonId] = useState<string | null>(null);
+  const [aufgabe, setAufgabeState] = useState<Schreibaufgabe | null>(gemerkteAufgabe);
+
+  function setAufgabe(a: Schreibaufgabe | null) {
+    setAufgabeState(a);
+    try {
+      if (a) localStorage.setItem(AUFGABE_KEY, a.id);
+      else localStorage.removeItem(AUFGABE_KEY);
+    } catch {
+      /* ignorieren */
+    }
+  }
   // Übungsrunde bleibt erhalten, wenn man kurz ins Lexikon schaut
   const [lernenBesucht, setLernenBesucht] = useState(tab === 'lernen');
 
@@ -47,6 +70,11 @@ export function App() {
         setLexikonId(id ?? null);
         setTab('lexikon');
         merken('lexikon');
+      },
+      schreibeAufgabe: (a) => {
+        setAufgabe(a);
+        setTab('schreiben');
+        merken('schreiben');
       },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,7 +102,7 @@ export function App() {
             </div>
           )}
           {tab === 'lexikon' && <LexikonView id={lexikonId} onOeffne={setLexikonId} />}
-          {tab === 'schreiben' && <EditorView />}
+          {tab === 'schreiben' && <EditorView aufgabe={aufgabe} onAufgabeSchliessen={() => setAufgabe(null)} />}
           {tab === 'hoeren' && <PlayerView />}
         </main>
       </NavigationContext.Provider>
