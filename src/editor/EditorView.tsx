@@ -8,6 +8,8 @@ import { Klavier } from './Klavier';
 import type { Schreibaufgabe } from '../lernpfad/lektion';
 import { AufgabePanel } from './AufgabePanel';
 import { docFromScore, rebar, type EditorDoc } from './rebar';
+import { alsSatz, rebarSatz, STIMMEN, type SatzRebar } from './satzdoc';
+import { markierungenFuer, PruefPanel, usePruefung } from '../satz/PruefPanel';
 import { SHORTCUT_HELP, shortcutFor } from './shortcuts';
 import { editorReducer, emptyDoc, initialState, type EditorAction } from './state';
 import { spellMidi } from '../model/pitch';
@@ -19,6 +21,9 @@ import { stueckSpeichern } from '../speicher/db';
 const STORAGE_KEY = 'kt-editor-entwurf-v1';
 const STUECK_KEY = 'kt-editor-stueck-id';
 const MITSPIELEN_KEY = 'kt-midi-mitspielen';
+const PRUEFEN_KEY = 'kt-editor-pruefen';
+/** Unterste Taste des Bildschirmklaviers je Stimme */
+const KLAVIER_TIEF = [60, 60, 48, 36];
 
 function lesen(key: string): string | null {
   try {
@@ -109,6 +114,13 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   }
 
   const midi = useMidi((notes) => {
+    if (doc.satz && notes.length > 1) {
+      const pitches = notes.map((n) => spellMidi(n.midi, doc.key.fifths));
+      if (mitspielen) notes.forEach((n) => playNote(toToneName(spellMidi(n.midi, doc.key.fifths)), 0.5, n.velocity / 127).catch(() => {}));
+      dispatch({ type: 'insertChord', pitches });
+      if (notes.length !== 4) setNotice(`Akkord mit ${notes.length} Tönen von oben auf die Stimmen verteilt. Für alle vier Stimmen spiel vier Töne gleichzeitig.`);
+      return;
+    }
     const top = notes[notes.length - 1];
     const pitch = spellMidi(top.midi, doc.key.fifths);
     const event = { pitch, duration: inputDuration(), velocity: top.velocity };
@@ -121,7 +133,26 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
     }
   });
 
-  const bar = useMemo(() => rebar(doc), [doc]);
+  const [stumm, setStumm] = useState<boolean[]>([false, false, false, false]);
+  const [pruefen, setPruefenState] = useState(() => lesen(PRUEFEN_KEY) === 'ja');
+  const [auswahl, setAuswahl] = useState<number | null>(null);
+  function setPruefen(v: boolean) {
+    setPruefenState(v);
+    setAuswahl(null);
+    schreiben(PRUEFEN_KEY, v ? 'ja' : 'nein');
+  }
+  const bar = useMemo(() => (doc.satz ? rebarSatz(doc) : rebar(doc)), [doc]);
+  const stimmeVon = doc.satz ? (bar as SatzRebar).stimmeVon : null;
+  const aktiv = doc.satz?.aktiv ?? 0;
+  const pruefung = usePruefung(bar.score);
+  const markierungen = useMemo(
+    () => (doc.satz && pruefen ? markierungenFuer(pruefung.befunde, auswahl) : undefined),
+    [doc.satz, pruefen, pruefung.befunde, auswahl],
+  );
+  useEffect(() => setAuswahl(null), [doc]);
+  useEffect(() => {
+    if (doc.satz) setPianoLow(KLAVIER_TIEF[aktiv]);
+  }, [aktiv, doc.satz]);
   const selectedIds = selected === null ? [] : (bar.partsOf.get(selected) ?? []);
   const selectedEvent = selected === null ? null : doc.events[selected];
 
@@ -169,7 +200,8 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
     try {
       await initAudio();
       setPlaying(true);
-      stopRef.current = await play(bar.score, doc.tempo, {
+      const klingend = doc.satz && stumm.some(Boolean) ? rebarSatz(doc, stumm).score : bar.score;
+      stopRef.current = await play(klingend, doc.tempo, {
         onEvent: setActiveId,
         onEnd: () => {
           setPlaying(false);
@@ -191,6 +223,11 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
       const t = e.target as HTMLElement;
       if (t.closest('input, textarea, select, [contenteditable]')) return;
       const { state: s, togglePlay: tp, act: a } = kbdRef.current;
+      if (e.key === 'Tab' && s.doc.satz && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        a({ type: 'setAktiv', stimme: (s.doc.satz.aktiv + (e.shiftKey ? 3 : 1)) % 4 });
+        return;
+      }
       const ref =
         (s.selected !== null ? s.doc.events[s.selected]?.pitch : null) ??
         [...s.doc.events].reverse().find((ev) => ev.pitch)?.pitch ??
@@ -245,6 +282,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   }
 
   const status = (() => {
+    if (doc.events.length === 0 && doc.satz) return `${STIMMEN[aktiv].name}: noch leer. Tippe ins ${aktiv < 2 ? 'obere' : 'untere'} System, spiel auf dem Klavier oder wechsle die Stimme mit Tab.`;
     if (doc.events.length === 0) return 'Tippe mit dem Apple Pencil (oder der Maus) ins Notensystem, spiel auf dem Klavier oder tippe Buchstaben wie c, d, e.';
     const parts: string[] = [];
     if (selectedEvent) {
@@ -254,6 +292,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           : `Ausgewählt: Pause (Note ${selected! + 1})`,
       );
     }
+    if (doc.satz) parts.unshift(STIMMEN[aktiv].name);
     if (bar.missing > 0) parts.push(`Im letzten Takt fehlt noch ${fmtQuarters(bar.missing)}.`);
     else parts.push(`${bar.score.voices[0].measures.length} volle Takte.`);
     return parts.join(' · ');
@@ -366,7 +405,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
             <h2>{doc.title}</h2>
             <p className="meta">
               {germanKeyName(doc.key)} · {doc.time.beats}/{doc.time.beatType}-Takt ·{' '}
-              {doc.clef === 'treble' ? 'Violinschlüssel' : 'Bassschlüssel'} · {doc.tempo} ♩/min
+              {doc.satz ? 'Chorsatz SATB' : doc.clef === 'treble' ? 'Violinschlüssel' : 'Bassschlüssel'} · {doc.tempo} ♩/min
             </p>
           </div>
           <button className="secondary small" onClick={() => setShowMeta((s) => !s)} aria-expanded={showMeta}>
@@ -374,7 +413,41 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           </button>
         </div>
 
-        {showMeta && <MetaPanel doc={doc} onChange={(meta) => act({ type: 'setMeta', meta })} />}
+        {showMeta && (
+          <MetaPanel
+            doc={doc}
+            onChange={(meta) => act({ type: 'setMeta', meta })}
+            onSatz={(an) => act({ type: 'setSatz', an })}
+            onText={(text) => act({ type: 'setText', text })}
+          />
+        )}
+
+        {doc.satz && (
+          <div className="stimmen-wahl" role="group" aria-label="Stimme">
+            {STIMMEN.map((st, i) => (
+              <div key={st.id} className={`stimme stimme-${i} ${i === aktiv ? 'is-on' : ''}`}>
+                <button onClick={() => act({ type: 'setAktiv', stimme: i })} aria-pressed={i === aktiv} title="Stimme bearbeiten (Tab wechselt)">
+                  {st.name}
+                  <span className="stimme-anzahl">{doc.satz!.stimmen[i].filter((e) => e.pitch).length}</span>
+                </button>
+                <button
+                  className={`stumm ${stumm[i] ? 'is-on' : ''}`}
+                  onClick={() => setStumm((m) => m.map((v, j) => (j === i ? !v : v)))}
+                  aria-pressed={stumm[i]}
+                  title={stumm[i] ? `${st.name} wieder hören` : `${st.name} stumm schalten`}
+                >
+                  {stumm[i] ? '🔇' : '🔈'}
+                </button>
+              </div>
+            ))}
+            <button
+              className="link small"
+              onClick={() => setStumm((m) => (m.every((v, j) => v === (j !== aktiv)) ? [false, false, false, false] : STIMMEN.map((_, j) => j !== aktiv)))}
+            >
+              {stumm.every((v, j) => v === (j !== aktiv)) ? 'Alle hören' : `Nur ${STIMMEN[aktiv].name} hören`}
+            </button>
+          </div>
+        )}
 
         <EditorScore
           score={bar.score}
@@ -384,8 +457,25 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           fingerWrites={fingerWrites}
           sourceOf={bar.sourceOf}
           eventCount={doc.events.length}
-          onInsert={(pitch, at) => act({ type: 'insert', event: { pitch, duration: inputDuration() }, at }, pitch)}
-          onSelect={(id) => act({ type: 'select', index: id === null ? null : (bar.sourceOf.get(id) ?? null) })}
+          markierungen={markierungen}
+          onInsert={(pitch, at, voices) => {
+            if (doc.satz && !voices.includes(aktiv)) {
+              // Tipp ins andere System: passende Stimme dort wählen (Sopran↔Tenor, Alt↔Bass)
+              act({ type: 'setAktiv', stimme: voices[Math.min(aktiv % 2, voices.length - 1)] });
+              act({ type: 'insert', event: { pitch, duration: inputDuration() } }, pitch);
+              return;
+            }
+            act({ type: 'insert', event: { pitch, duration: inputDuration() }, at }, pitch);
+          }}
+          onSelect={(id) => {
+            const andere = id ? stimmeVon?.get(id) : undefined;
+            if (andere && andere[0] !== aktiv) {
+              act({ type: 'setAktiv', stimme: andere[0] });
+              act({ type: 'select', index: andere[1] });
+              return;
+            }
+            act({ type: 'select', index: id === null ? null : (bar.sourceOf.get(id) ?? null) });
+          }}
           onDragPitch={(id, pitch) => {
             const idx = bar.sourceOf.get(id);
             if (idx !== undefined) act({ type: 'setPitch', index: idx, pitch }, pitch);
@@ -395,6 +485,27 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           {status}
         </p>
       </div>
+
+      {doc.satz && (
+        <div className="pruefung">
+          <button className={pruefen ? 'secondary' : ''} onClick={() => setPruefen(!pruefen)}>
+            {pruefen ? 'Prüfung ausblenden' : 'Satz prüfen'}
+          </button>
+          {pruefen && (
+            <PruefPanel
+              befunde={pruefung.befunde}
+              auswahl={auswahl}
+              onAuswahl={setAuswahl}
+              hinweise={pruefung.hinweise}
+              onHinweise={(v) => {
+                setAuswahl(null);
+                pruefung.setHinweise(v);
+              }}
+            />
+          )}
+          {pruefen && <p className="meta">Die Prüfung läuft mit, während du schreibst.</p>}
+        </div>
+      )}
 
       {notice && (
         <p className="notice" role="status" onClick={() => setNotice(null)}>
@@ -460,7 +571,8 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
         onOpen={(d) => act({ type: 'load', doc: d })}
         onNew={() => {
           setStueckId(null);
-          act({ type: 'load', doc: { ...emptyDoc(), key: doc.key, time: doc.time, clef: doc.clef } });
+          const leer = { ...emptyDoc(), key: doc.key, time: doc.time, clef: doc.clef };
+          act({ type: 'load', doc: doc.satz ? { ...alsSatz({ ...leer, clef: 'treble' }, true), title: 'Mein Chorsatz' } : leer });
         }}
       />
 
@@ -495,7 +607,17 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   );
 }
 
-function MetaPanel({ doc, onChange }: { doc: EditorDoc; onChange: (m: Partial<Omit<EditorDoc, 'events'>>) => void }) {
+function MetaPanel({
+  doc,
+  onChange,
+  onSatz,
+  onText,
+}: {
+  doc: EditorDoc;
+  onChange: (m: Partial<Omit<EditorDoc, 'events'>>) => void;
+  onSatz: (an: boolean) => void;
+  onText: (text: string) => void;
+}) {
   const keys = [];
   for (let f = -7; f <= 7; f++) keys.push(f);
   return (
@@ -540,12 +662,27 @@ function MetaPanel({ doc, onChange }: { doc: EditorDoc; onChange: (m: Partial<Om
         </select>
       </label>
       <label className="field">
-        <span>Schlüssel</span>
-        <select value={doc.clef} onChange={(e) => onChange({ clef: e.target.value as 'treble' | 'bass' })}>
-          <option value="treble">Violinschlüssel</option>
-          <option value="bass">Bassschlüssel</option>
+        <span>Besetzung</span>
+        <select value={doc.satz ? 'satz' : 'melodie'} onChange={(e) => onSatz(e.target.value === 'satz')}>
+          <option value="melodie">Melodie (einstimmig)</option>
+          <option value="satz">Chorsatz: Sopran, Alt, Tenor, Bass</option>
         </select>
       </label>
+      {!doc.satz && (
+        <label className="field">
+          <span>Schlüssel</span>
+          <select value={doc.clef} onChange={(e) => onChange({ clef: e.target.value as 'treble' | 'bass' })}>
+            <option value="treble">Violinschlüssel</option>
+            <option value="bass">Bassschlüssel</option>
+          </select>
+        </label>
+      )}
+      {doc.satz && (
+        <label className="field liedtext">
+          <span>Liedtext (Silben mit Leerzeichen trennen: „Lo- be den Her- ren“)</span>
+          <input type="text" value={doc.satz.text ?? ''} onChange={(e) => onText(e.target.value)} />
+        </label>
+      )}
       <label className="field">
         <span>Tempo: {doc.tempo} ♩/min</span>
         <input

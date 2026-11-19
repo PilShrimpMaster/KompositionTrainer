@@ -1,0 +1,132 @@
+import { measureLength } from '../model/duration';
+import type { NoteEvent, Pitch, Score } from '../model/types';
+import { SATB } from '../satz/kurzform';
+import { decompose, rebar, type EditorDoc } from './rebar';
+
+/** Zusatzdaten eines vierstimmigen Satzes im Editor */
+export interface Satzdaten {
+  /** Noten je Stimme: Sopran, Alt, Tenor, Bass */
+  stimmen: NoteEvent[][];
+  /** Stimme, die gerade bearbeitet wird; ihre Noten stehen auch in doc.events */
+  aktiv: number;
+  /** Liedtext unter dem Sopran, Silben durch Leerzeichen getrennt */
+  text?: string;
+}
+
+export const STIMMEN = SATB;
+
+/** Schreibt die Noten der aktiven Stimme (doc.events) zurück in die Satzdaten */
+export function synchron(doc: EditorDoc): EditorDoc {
+  const s = doc.satz;
+  if (!s || s.stimmen[s.aktiv] === doc.events) return doc;
+  const stimmen = s.stimmen.slice();
+  stimmen[s.aktiv] = doc.events;
+  return { ...doc, satz: { ...s, stimmen } };
+}
+
+/** Wechselt die bearbeitete Stimme */
+export function aktiviere(doc: EditorDoc, aktiv: number): EditorDoc {
+  const d = synchron(doc);
+  if (!d.satz || aktiv < 0 || aktiv >= d.satz.stimmen.length) return d;
+  return { ...d, satz: { ...d.satz, aktiv }, events: d.satz.stimmen[aktiv], clef: STIMMEN[aktiv].clef };
+}
+
+/** Macht aus einer Melodie einen vierstimmigen Satz (die Melodie wird Sopran) oder umgekehrt */
+export function alsSatz(doc: EditorDoc, an: boolean): EditorDoc {
+  if (an && !doc.satz) {
+    const sopran = doc.clef === 'treble' ? doc.events : [];
+    const stimmen = [sopran, [], [], []];
+    const title = doc.title === 'Meine Melodie' ? 'Mein Chorsatz' : doc.title;
+    return { ...doc, title, clef: 'treble', events: sopran, satz: { stimmen, aktiv: 0 } };
+  }
+  if (!an && doc.satz) {
+    const d = synchron(doc);
+    const { satz, ...rest } = d;
+    return { ...rest, clef: 'treble', events: satz!.stimmen[0] };
+  }
+  return doc;
+}
+
+/** Fügt einen Akkord (höchster Ton zuerst) am Ende der Stimmen an: Sopran, Alt, Tenor, Bass */
+export function akkordAnfuegen(doc: EditorDoc, toene: Pitch[], dauer: NoteEvent['duration']): EditorDoc {
+  const d = synchron(doc);
+  if (!d.satz) return d;
+  const sortiert = [...toene].sort((a, b) => toMidiLocal(b) - toMidiLocal(a)).slice(0, 4);
+  const stimmen = d.satz.stimmen.map((st, i) => (sortiert[i] ? [...st, { pitch: sortiert[i], duration: { ...dauer } }] : st));
+  return { ...d, satz: { ...d.satz, stimmen }, events: stimmen[d.satz.aktiv] };
+}
+
+const SEMI: Record<Pitch['step'], number> = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+const toMidiLocal = (p: Pitch) => (p.octave + 1) * 12 + SEMI[p.step] + (p.alter ?? 0);
+
+export interface SatzRebar {
+  score: Score;
+  /** Kennung → Index in der aktiven Stimme */
+  sourceOf: Map<string, number>;
+  partsOf: Map<number, string[]>;
+  /** Kennung → [Stimme, Index] für alle Stimmen */
+  stimmeVon: Map<string, [number, number]>;
+  missing: number;
+}
+
+/** Wie rebar(), aber für alle vier Stimmen; kürzere Stimmen werden mit Pausen aufgefüllt */
+export function rebarSatz(doc: EditorDoc, stumm: boolean[] = []): SatzRebar {
+  const d = synchron(doc);
+  const satz = d.satz!;
+  const teile = satz.stimmen.map((events, i) => rebar({ ...d, clef: STIMMEN[i].clef, events: mitText(events, i === 0 ? satz.text : undefined) }));
+  const takte = Math.max(1, ...teile.map((t, i) => (satz.stimmen[i].length ? t.score.voices[0].measures.length : 0)));
+  const voll = measureLength(d.time);
+  const stimmeVon = new Map<string, [number, number]>();
+  const sourceOf = new Map<string, number>();
+  const partsOf = new Map<number, string[]>();
+
+  const voices = teile.map((t, i) => {
+    const measures = t.score.voices[0].measures.map((m) => ({ notes: stumm[i] ? m.notes.map((n) => ({ duration: n.duration })) : m.notes }));
+    if (satz.stimmen[i].length === 0) measures.length = 0;
+    while (measures.length < takte) measures.push({ notes: decompose(voll).map((dd) => ({ duration: dd })) });
+    t.sourceOf.forEach((idx, id) => {
+      const neu = `${i}${id.slice(id.indexOf('-'))}`;
+      stimmeVon.set(neu, [i, idx]);
+      if (i === satz.aktiv) sourceOf.set(neu, idx);
+    });
+    if (i === satz.aktiv) t.partsOf.forEach((ids, idx) => partsOf.set(idx, ids.map((id) => `${i}${id.slice(id.indexOf('-'))}`)));
+    const info = STIMMEN[i];
+    return { id: info.id, name: info.name, clef: info.clef, staff: info.staff, stem: info.stem, measures };
+  });
+
+  return {
+    score: { format: 'kt-score', version: 1, title: d.title, tempo: d.tempo, time: d.time, key: d.key, voices },
+    sourceOf,
+    partsOf,
+    stimmeVon,
+    missing: teile[satz.aktiv].missing,
+  };
+}
+
+/** Verteilt den Liedtext auf die Noten des Soprans (übergebundene Noten bekommen keine neue Silbe) */
+function mitText(events: NoteEvent[], text: string | undefined): NoteEvent[] {
+  if (!text?.trim()) return events;
+  const silben = text.split(/\s+/).filter(Boolean);
+  let s = 0;
+  let gebunden = false;
+  return events.map((ev) => {
+    const neu = { ...ev };
+    delete neu.lyric;
+    if (ev.pitch && !gebunden && s < silben.length) neu.lyric = silben[s++];
+    gebunden = !!ev.tie;
+    return neu;
+  });
+}
+
+/** Liest einen vierstimmigen Satz aus einer Partitur (sonst null) */
+export function satzAusScore(score: Score): Satzdaten | null {
+  if (score.voices.length !== 4) return null;
+  const stimmen = score.voices.map((v) => {
+    const events = v.measures.flatMap((m) => m.notes.map((n) => structuredClone(n)));
+    while (events.length && !events[events.length - 1].pitch) events.pop();
+    events.forEach((e) => delete e.lyric);
+    return events;
+  });
+  const silben = score.voices[0].measures.flatMap((m) => m.notes.map((n) => n.lyric).filter(Boolean));
+  return { stimmen, aktiv: 0, ...(silben.length ? { text: silben.join(' ') } : {}) };
+}

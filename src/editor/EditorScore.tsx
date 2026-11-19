@@ -11,8 +11,8 @@ interface Props {
   activeId: string | null;
   /** Mit dem Finger schreiben (sonst nur Stift und Maus) */
   fingerWrites: boolean;
-  /** Neue Note an Position `at` (Index in der Notenfolge) setzen */
-  onInsert: (pitch: Pitch, at: number) => void;
+  /** Neue Note an Position `at` (Index in der Notenfolge) setzen; `voices` = Stimmen des angetippten Systems */
+  onInsert: (pitch: Pitch, at: number, voices: number[]) => void;
   /** Note antippen: auswählen */
   onSelect: (displayId: string | null) => void;
   /** Ausgewählte Note per Ziehen auf eine neue Tonhöhe setzen */
@@ -20,6 +20,8 @@ interface Props {
   /** Anzeige-Kennung → Index in der Notenfolge */
   sourceOf: Map<string, number>;
   eventCount: number;
+  /** Zusätzliche CSS-Klassen je Note, z. B. Fehler der Prüf-Engine */
+  markierungen?: Map<string, string>;
 }
 
 interface Hover {
@@ -70,6 +72,13 @@ export function EditorScore(props: Props) {
     });
   }, [selectedIds, activeId, renderTick]);
 
+  useLayoutEffect(() => {
+    const els = layoutRef.current?.elements;
+    if (!els) return;
+    els.forEach((el) => el.classList.remove('is-fehler', 'is-hinweis', 'is-auswahl'));
+    props.markierungen?.forEach((cls, id) => els.get(id)?.classList.add(...cls.split(' ')));
+  }, [props.markierungen, renderTick]);
+
   // Safari scrollt sonst auch beim Schreiben mit dem Apple Pencil
   useEffect(() => {
     const host = hostRef.current;
@@ -107,11 +116,14 @@ export function EditorScore(props: Props) {
   function noteAt(x: number, y: number) {
     const st = staveAt(x, y);
     if (!st) return null;
-    const notes = (layoutRef.current?.notes ?? []).filter((n) => n.measure === st.measure);
+    const notes = (layoutRef.current?.notes ?? []).filter((n) => n.measure === st.measure && st.voices.includes(n.voice));
+    // Teilen sich Stimmen ein System, entscheidet bei gleicher Position die Höhe
+    const abstand = (n: (typeof notes)[number]) => Math.abs(n.x - x) + (st.voices.length > 1 ? Math.abs(n.y - y) * 0.6 : 0);
     let best: (typeof notes)[number] | null = null;
     for (const n of notes) {
-      const dx = Math.abs(n.x - x);
-      if (dx <= HIT_RADIUS && (!best || dx < Math.abs(best.x - x))) best = n;
+      if (Math.abs(n.x - x) > HIT_RADIUS) continue;
+      if (st.voices.length > 1 && Math.abs(n.y - y) > st.spacing * 3) continue;
+      if (!best || abstand(n) < abstand(best)) best = n;
     }
     return best;
   }
@@ -167,7 +179,7 @@ export function EditorScore(props: Props) {
       return;
     }
     e.preventDefault();
-    propsRef.current.onInsert(pitchAtY(y, st, score.key.fifths), insertIndexAt(x, st));
+    propsRef.current.onInsert(pitchAtY(y, st, score.key.fifths), insertIndexAt(x, st), st.voices);
   }
 
   function onPointerMove(e: React.PointerEvent) {
@@ -188,7 +200,7 @@ export function EditorScore(props: Props) {
     const { x, y } = localPoint(e);
     const note = layoutRef.current?.notes.find((n) => n.id === drag.id);
     const st = note
-      ? layoutRef.current?.staves.find((s) => s.measure === note.measure && s.voice === note.voice)
+      ? layoutRef.current?.staves.find((s) => s.measure === note.measure && s.voices.includes(note.voice))
       : staveAt(x, y);
     if (st) propsRef.current.onDragPitch(drag.id, pitchAtY(y, st, score.key.fifths));
     setHover(null);

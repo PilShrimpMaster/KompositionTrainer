@@ -1117,3 +1117,59 @@ a.lexikon-link:hover {
   display: block;
   width: 100%;
 }
+
+/* Chorsatz im Editor */
+.stimmen-wahl {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+.stimme {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.stimme button {
+  border: none;
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 8px 12px;
+}
+.stimme.is-on button:first-child {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.stimme button.stumm {
+  border-left: 1px solid var(--border);
+  padding: 8px 10px;
+}
+.stimme button.stumm.is-on {
+  background: #f3e3e3;
+}
+.stimme-anzahl {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-left: 6px;
+}
+.meta-panel .liedtext {
+  grid-column: 1 / -1;
+}
+.score-canvas .is-hinweis,
+.score-canvas .is-hinweis * {
+  fill: #c76a00;
+  stroke: #c76a00;
+}
+.score-canvas .is-fehler,
+.score-canvas .is-fehler * {
+  fill: #d1242f;
+  stroke: #d1242f;
+}
+.score-canvas .is-auswahl,
+.score-canvas .is-auswahl * {
+  fill: #0a58ca;
+  stroke: #0a58ca;
+}
