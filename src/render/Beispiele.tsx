@@ -3,6 +3,7 @@ import { initAudio, play, playChord, playSequence } from '../audio/player';
 import { toToneName } from '../model/pitch';
 import type { Clef, KeySignature, Pitch, Score } from '../model/types';
 import { ScoreView } from '../ScoreView';
+import { analysiere, funktionMitBass } from '../satz/analyse';
 import { renderNotes } from './renderNotes';
 
 interface AkkordProps {
@@ -36,7 +37,7 @@ export function AkkordBeispiel({ gruppen, klang, schluessel, tonart }: AkkordPro
 }
 
 /** Ein kleines Notenbeispiel mit Takten, zum Mitlesen beim Abspielen */
-export function NotenBeispiel({ score }: { score: Score }) {
+export function NotenBeispiel({ score, analyse = false }: { score: Score; analyse?: boolean }) {
   const [aktiv, setAktiv] = useState<string | null>(null);
   const [laeuft, setLaeuft] = useState(false);
   const stopRef = useRef<(() => void) | null>(null);
@@ -63,7 +64,37 @@ export function NotenBeispiel({ score }: { score: Score }) {
     <div className="beispiel beispiel-noten">
       {score.title && <p className="beispiel-titel">{score.title}</p>}
       <ScoreView score={score} showNoteNames={false} activeId={aktiv} />
+      {analyse && <AkkordAnalyse score={score} />}
       <button onClick={umschalten}>{laeuft ? '■ Stopp' : '▶ Anhören'}</button>
+    </div>
+  );
+}
+
+/** Die erkannten Akkorde eines Satzes, Takt für Takt, mit Funktion */
+export function AkkordAnalyse({ score }: { score: Score }) {
+  const [offen, setOffen] = useState(false);
+  const stellen = analysiere(score);
+  const takte = new Map<number, typeof stellen>();
+  for (const s of stellen) takte.set(s.takt, [...(takte.get(s.takt) ?? []), s]);
+  return (
+    <div className="akkord-analyse">
+      <button className="secondary small" onClick={() => setOffen(!offen)}>
+        {offen ? 'Analyse ausblenden' : 'Analyse zeigen'}
+      </button>
+      {offen && (
+        <ol>
+          {[...takte].map(([takt, st]) => (
+            <li key={takt}>
+              <span className="meta">Takt {takt + 1}:</span>{' '}
+              {st.map((s, i) => (
+                <span key={i} className="akkord-analyse-akkord" title={s.akkord.name}>
+                  {s.akkord.name} <strong>{funktionMitBass(s.akkord)}</strong>
+                </span>
+              ))}
+            </li>
+          ))}
+        </ol>
+      )}
     </div>
   );
 }

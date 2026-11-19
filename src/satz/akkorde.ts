@@ -1,6 +1,6 @@
 import { diatonicIndex, germanName, toMidi } from '../model/pitch';
 import type { KeySignature, Pitch, Step } from '../model/types';
-import { grundton } from '../lernpfad/pruefung';
+import { grundton } from '../model/tonart';
 
 const STEPS: Step[] = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 
@@ -116,6 +116,7 @@ function funktion(stufe: number, art: Akkordart | null, sept: Septart | null, ke
     return roem;
   }
   if (stufe === 1 && moll) return 't';
+  if (stufe === 1 && dur) return 'T'; // pikardische Terz
   if (stufe === 3 && dur) return 'tP';
   if (stufe === 4 && moll) return 's' + s7;
   if (stufe === 4 && dur) return 'S';

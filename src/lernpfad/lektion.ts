@@ -1,7 +1,8 @@
 import { leseFelder, liste, parseBeispiel, trenneKopf } from '../lexikon/parse';
-import type { Clef, KeySignature, Pitch, Score, TimeSignature } from '../model/types';
+import type { Clef, KeySignature, NoteEvent, Pitch, Score, TimeSignature } from '../model/types';
+import { satz } from '../satz/kurzform';
 import type { UebungTyp } from '../uebungen/aufgaben';
-import { parseNotenbeispiel, parseSchluessel, parseTakt, parseTonart } from './kompakt';
+import { parseNotenbeispiel, parseNotenfolge, parseSchluessel, parseTakt, parseTonart } from './kompakt';
 
 /** Eine Schreibaufgabe, die im Editor bearbeitet und geprüft wird */
 export interface Schreibaufgabe {
@@ -13,11 +14,28 @@ export interface Schreibaufgabe {
   schluessel?: Clef;
   /** Kriterien für die automatische Prüfung, siehe pruefe() */
   pruefung: string[];
+  /** Vierstimmiger Satz: vorgegebene Noten je Stimme (Sopran, Alt, Tenor, Bass), leere Stimmen schreibt man selbst */
+  vorgabe?: NoteEvent[][];
+  /** Liedtext unter dem Sopran */
+  liedtext?: string;
+}
+
+const STIMM_FELDER = ['sopran', 'alt', 'tenor', 'bass'] as const;
+
+/** Satz-Block: Kopfzeilen und je eine Zeile „S: …“, „A: …“, „T: …“, „B: …“ */
+function parseSatzBlock(inhalt: string): { score: Score; analyse: boolean } {
+  const f = leseFelder(inhalt);
+  const stimmen = (['S', 'A', 'T', 'B'] as const).map((k) => {
+    if (!f[k]) throw new Error(`Satz braucht die Stimme ${k}`);
+    return f[k];
+  }) as [string, string, string, string];
+  const score = satz({ titel: f.titel ?? '', tonart: f.tonart ?? '0', takt: f.takt, tempo: f.tempo ? Number(f.tempo) : undefined, stimmen, text: f.text });
+  return { score, analyse: f.analyse === 'ja' };
 }
 
 export type Baustein =
   | { art: 'text'; markdown: string }
-  | { art: 'noten'; score: Score }
+  | { art: 'noten'; score: Score; analyse?: boolean }
   | { art: 'akkorde'; gruppen: Pitch[][]; klang: 'nacheinander' | 'zusammen'; schluessel: Clef; tonart?: KeySignature }
   | { art: 'uebungen'; typen: UebungTyp[] }
   | { art: 'aufgabe'; aufgabe: Schreibaufgabe };
@@ -34,7 +52,7 @@ export interface Lektion {
   schritte: Schritt[];
 }
 
-const FENCE = /```(noten|akkorde|uebungen|aufgabe)[^\n]*\n([\s\S]*?)```/g;
+const FENCE = /```(noten|satz|akkorde|uebungen|aufgabe)[^\n]*\n([\s\S]*?)```/g;
 
 function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: string): Baustein[] {
   const out: Baustein[] = [];
@@ -48,6 +66,9 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
       switch (m[1]) {
         case 'noten':
           out.push({ art: 'noten', score: parseNotenbeispiel(inhalt) });
+          break;
+        case 'satz':
+          out.push({ art: 'noten', ...parseSatzBlock(inhalt) });
           break;
         case 'akkorde': {
           const zeilen = inhalt.split('\n').map((z) => z.trim()).filter(Boolean);
@@ -78,6 +99,9 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
               takt: f.takt ? parseTakt(f.takt) : undefined,
               schluessel: f.schluessel ? parseSchluessel(f.schluessel) : undefined,
               pruefung: liste(f.pruefung),
+              ...(f.satz === 'ja'
+                ? { vorgabe: STIMM_FELDER.map((k) => (f[k] ? parseNotenfolge(f[k]) : [])), liedtext: f.liedtext || undefined }
+                : {}),
             },
           });
           break;

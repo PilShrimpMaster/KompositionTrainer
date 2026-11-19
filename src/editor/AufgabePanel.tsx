@@ -38,7 +38,7 @@ export function AufgabePanel({ aufgabe, doc, onBeginnen, onSchliessen }: Props) 
           <button onClick={onBeginnen}>Neu beginnen mit den Vorgaben</button>
         )}
         {aufgabe.pruefung.length > 0 && (
-          <button className={begonnen ? '' : 'secondary'} onClick={() => setGeprueft(true)} disabled={doc.events.length === 0}>
+          <button className={begonnen ? '' : 'secondary'} onClick={() => setGeprueft(true)} disabled={doc.events.length === 0 && !doc.satz?.stimmen.some((s) => s.length)}>
             Lösung prüfen
           </button>
         )}

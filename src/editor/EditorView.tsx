@@ -300,10 +300,16 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
 
   function aufgabeBeginnen(a: Schreibaufgabe) {
     setStueckId(null);
-    act({
-      type: 'load',
-      doc: { ...emptyDoc(), title: a.titel, key: a.tonart ?? doc.key, time: a.takt ?? doc.time, clef: a.schluessel ?? doc.clef },
-    });
+    const basis = { ...emptyDoc(), title: a.titel, key: a.tonart ?? doc.key, time: a.takt ?? doc.time, clef: a.schluessel ?? doc.clef };
+    if (a.vorgabe) {
+      // Vierstimmiger Satz: Vorgaben übernehmen, die erste leere Stimme wird bearbeitet
+      const stimmen = a.vorgabe.map((st) => structuredClone(st));
+      const aktiv = Math.max(0, stimmen.findIndex((st) => st.length === 0));
+      act({ type: 'load', doc: { ...basis, clef: STIMMEN[aktiv].clef, events: stimmen[aktiv], satz: { stimmen, aktiv, text: a.liedtext } } });
+      setPianoLow(STIMMEN[aktiv].clef === 'bass' ? 48 : 60);
+      return;
+    }
+    act({ type: 'load', doc: basis });
     if (a.schluessel) setPianoLow(a.schluessel === 'bass' ? 48 : 60);
   }
 

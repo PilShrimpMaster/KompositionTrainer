@@ -7,6 +7,7 @@ import { diktatRichtig, erzeugeAufgabe, stufeFuer, UEBUNGEN, type Aufgabe, type 
 import { eintrag } from '../lexikon/lexikon';
 import { useNavigation } from '../navigation';
 import { ergebnisSpeichern, modulSicherheit } from './fortschritt';
+import { ScoreView } from '../ScoreView';
 
 const RUNDE = 10;
 
@@ -69,6 +70,10 @@ export function UebungView({ typ, onEnde, zurueck = 'Lernpfad' }: Props) {
     await initAudio();
     setAudioBereit(true);
     const namen = a.klang.toene.map(toToneName);
+    if (a.klang.folge) {
+      a.klang.folge.forEach((akk, i) => setTimeout(() => playChord(akk.map(toToneName), 1.1), i * 1100));
+      return;
+    }
     if (a.klang.art === 'zusammen') await playChord(namen);
     else await playSequence(namen, a.typ === 'melodiediktat' ? 0.6 : 0.8);
   }
@@ -145,6 +150,7 @@ export function UebungView({ typ, onEnde, zurueck = 'Lernpfad' }: Props) {
 
       <h2 className="frage">{aufgabe.frage}</h2>
       <div ref={notenRef} className="uebung-noten" />
+      {aufgabe.satz && <ScoreView score={aufgabe.satz} showNoteNames={false} activeId={null} />}
       {info.hoeren && (
         <button className="secondary" onClick={() => abspielen()}>
           {audioBereit ? '🔁 Nochmal anhören' : '▶ Anhören'}

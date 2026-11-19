@@ -41,6 +41,26 @@ Prüfkriterien (kommagetrennt, siehe [`pruefung.ts`](../src/lernpfad/pruefung.ts
 
 Das Abschlussprojekt einer Stufe hat das Modul `sN-abschluss`.
 
+### Vierstimmige Sätze
+
+Ein `satz`-Block zeigt einen Chorsatz (Sopran und Alt oben, Tenor und Bass unten). `analyse: ja` blendet auf Wunsch die erkannten Akkorde mit Funktion ein, `text:` legt Silben unter den Sopran:
+
+````markdown
+```satz
+titel: Kadenz in C-Dur
+tonart: 0
+analyse: ja
+S: G4:4 A4 G4 G4
+A: E4:4 F4 D4 E4
+T: C4:4 C4 B3 C4
+B: C3:4 F3 G3 C3
+```
+````
+
+Eine Satzaufgabe hat `satz: ja` und optional Vorgaben je Stimme (`sopran:`, `alt:`, `tenor:`, `bass:`) sowie `liedtext:`. Leere Stimmen schreibt man selbst. Zusätzliche Prüfkriterien: `vierstimmig`, `fehlerfrei` (keine Fehler der Satzprüfung), `funktionen T S D7 T` (Folge der Funktionen; `D` passt auch auf `D⁷`), `ganzschluss`, `enthaelt Tp` (oder `Sextakkord`, `Quartsextakkord`), `endet-in 1` (Kadenz in der Tonart mit dieser Vorzeichenzahl), `liedtext` (eine Silbe pro Sopran-Note).
+
+Beispiele in Lektionen müssen fehlerfrei sein, es sei denn, ihr Titel beginnt mit „Mit Fehler“. Jede Satzaufgabe braucht eine Musterlösung in [`stufe2.test.ts`](../src/lernpfad/stufe2.test.ts); beides prüfen die Tests.
+
 ## Lexikon
 
 Einträge liegen in [`src/lexikon/eintraege/`](../src/lexikon/eintraege). Kopfzeilen: `id`, `titel`, `kategorie`, `kurz` (ein, zwei Sätze), optional `synonyme` und `siehe` (kommagetrennt), `beispiel` (Töne wie bei `akkorde`), `klang` (`nacheinander` oder `zusammen`), `schluessel`, `tonart`. Die Tests prüfen, dass alle Verweise auf vorhandene Einträge zeigen.

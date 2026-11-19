@@ -1173,3 +1173,8 @@ a.lexikon-link:hover {
   fill: #0a58ca;
   stroke: #0a58ca;
 }
+
+.akkord-analyse { margin: 0.5rem 0; }
+.akkord-analyse ol { list-style: none; padding: 0; margin: 0.5rem 0 0; display: grid; gap: 0.25rem; }
+.akkord-analyse-akkord { display: inline-block; margin-right: 0.9rem; }
+.akkord-analyse-akkord strong { color: var(--accent); margin-left: 0.2rem; }
