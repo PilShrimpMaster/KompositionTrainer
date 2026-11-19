@@ -52,6 +52,7 @@ Alle Teile der App arbeiten auf demselben JSON-Format: die Notenanzeige, die Wie
 | `duration.type` | `whole`, `half`, `quarter`, `eighth`, `16th` |
 | `duration.dots` | Punktierungen, 0 bis 2 |
 | `tie` | `true` = Haltebogen zur nächsten Note |
+| `velocity` | Anschlagstärke 1–127, z. B. vom MIDI-Keyboard (optional) |
 
 Eine Note ohne `pitch` ist eine Pause. Der erste Takt darf kürzer sein (Auftakt), alle anderen müssen genau voll sein.
 

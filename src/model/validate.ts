@@ -72,6 +72,9 @@ export function validateScore(data: unknown): ValidationResult {
             return;
           }
           sum += quarterLength({ type: n.duration.type as never, dots });
+          if (n.velocity !== undefined && (typeof n.velocity !== 'number' || n.velocity < 1 || n.velocity > 127)) {
+            errors.push(`${at}: „velocity“ muss zwischen 1 und 127 liegen.`);
+          }
           if (n.pitch !== undefined) {
             const p = n.pitch;
             if (

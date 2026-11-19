@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { EditorView } from './editor/EditorView';
+import { LernenView } from './lernpfad/LernenView';
 import { PlayerView } from './PlayerView';
 
-type Tab = 'schreiben' | 'hoeren';
+type Tab = 'lernen' | 'schreiben' | 'hoeren';
 const TAB_KEY = 'kt-tab';
 
 function initialTab(): Tab {
   try {
     const t = localStorage.getItem(TAB_KEY);
-    if (t === 'schreiben' || t === 'hoeren') return t;
+    if (t === 'lernen' || t === 'schreiben' || t === 'hoeren') return t;
   } catch {
     /* ignorieren */
   }
@@ -32,6 +33,9 @@ export function App() {
       <header className="topbar">
         <h1>KompositionsTrainer</h1>
         <nav className="tabs" aria-label="Bereiche">
+          <button className={tab === 'lernen' ? 'is-on' : ''} onClick={() => choose('lernen')} aria-current={tab === 'lernen'}>
+            Lernen
+          </button>
           <button className={tab === 'schreiben' ? 'is-on' : ''} onClick={() => choose('schreiben')} aria-current={tab === 'schreiben'}>
             Schreiben
           </button>
@@ -41,7 +45,7 @@ export function App() {
         </nav>
       </header>
 
-      <main>{tab === 'schreiben' ? <EditorView /> : <PlayerView />}</main>
+      <main>{tab === 'lernen' ? <LernenView /> : tab === 'schreiben' ? <EditorView /> : <PlayerView />}</main>
 
       <footer>
         Klavierklang: Salamander Grand Piano von Alexander Holm (CC BY 3.0). Version {__APP_VERSION__}

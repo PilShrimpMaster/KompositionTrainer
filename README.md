@@ -11,7 +11,11 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 - Werkzeugleiste für Notenwerte, Punktierung, Vorzeichen, Haltebogen, Pausen, Löschen, Rückgängig und Wiederholen
 - Bildschirmklavier mit deutschen Tastennamen, Tastenkürzel am Desktop (c d e f g a h, b = B, Ziffern 2–6 für Notenwerte)
 - Taktstriche entstehen automatisch, über den Taktstrich reichende Noten werden gebunden
-- Tonart, Taktart, Schlüssel und Tempo einstellbar; Entwurf wird im Browser gesichert, Export und Import als JSON
+- Tonart, Taktart, Schlüssel und Tempo einstellbar; Export und Import als JSON
+- MIDI-Keyboard über Web MIDI (Chrome am PC): wird automatisch erkannt, nimmt Tonhöhe und Anschlagstärke auf, erkennt Akkorde
+- „Meine Stücke“: Stücke werden in der lokalen Datenbank (IndexedDB) gespeichert und automatisch aktualisiert
+
+**Lernen:** Lernpfad mit Fortschritt je Modul; Sicherung aller Daten als Datei, um sie zwischen iPad und PC abzugleichen
 
 ## M0 Fundament
 

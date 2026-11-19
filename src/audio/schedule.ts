@@ -12,6 +12,8 @@ export interface ScheduledEvent {
   length: number;
   /** Tonname für Tone.js; fehlt bei Pausen */
   note?: string;
+  /** Lautstärke 0–1 */
+  velocity?: number;
 }
 
 /**
@@ -38,6 +40,7 @@ export function buildSchedule(score: Score): { events: ScheduledEvent[]; total: 
             events.push({ id, start: t, length: 0 });
           } else {
             const e: ScheduledEvent = { id, start: t, length: len, note };
+            if (ev.velocity) e.velocity = ev.velocity / 127;
             events.push(e);
             tieFrom = e;
           }

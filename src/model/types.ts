@@ -32,6 +32,8 @@ export interface NoteEvent {
   duration: Duration;
   /** Bindebogen zur nächsten Note gleicher Tonhöhe */
   tie?: boolean;
+  /** Anschlagstärke 1–127 (z. B. vom MIDI-Keyboard); fehlt sie, gilt mittlere Lautstärke */
+  velocity?: number;
 }
 
 export interface Measure {

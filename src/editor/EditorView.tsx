@@ -9,8 +9,31 @@ import { docFromScore, rebar, type EditorDoc } from './rebar';
 import { SHORTCUT_HELP, shortcutFor } from './shortcuts';
 import { editorReducer, emptyDoc, initialState, type EditorAction } from './state';
 import { spellMidi } from '../model/pitch';
+import { MidiPanel } from '../midi/MidiPanel';
+import { useMidi } from '../midi/useMidi';
+import { StueckePanel } from '../speicher/StueckePanel';
+import { stueckSpeichern } from '../speicher/db';
 
 const STORAGE_KEY = 'kt-editor-entwurf-v1';
+const STUECK_KEY = 'kt-editor-stueck-id';
+const MITSPIELEN_KEY = 'kt-midi-mitspielen';
+
+function lesen(key: string): string | null {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function schreiben(key: string, value: string | null) {
+  try {
+    if (value === null) localStorage.removeItem(key);
+    else localStorage.setItem(key, value);
+  } catch {
+    /* ignorieren */
+  }
+}
 
 const DURATIONS: { type: DurationType; label: string; glyph: string; key: string }[] = [
   { type: 'whole', label: 'Ganze', glyph: '𝅝', key: '6' },
@@ -65,6 +88,31 @@ export function EditorView() {
   const [notice, setNotice] = useState<string | null>(null);
   const stopRef = useRef<(() => void) | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const [stueckId, setStueckIdState] = useState<string | null>(() => lesen(STUECK_KEY));
+  const [saveVersion, setSaveVersion] = useState(0);
+  const [mitspielen, setMitspielenState] = useState(() => lesen(MITSPIELEN_KEY) !== 'nein');
+
+  function setStueckId(id: string | null) {
+    setStueckIdState(id);
+    schreiben(STUECK_KEY, id);
+  }
+  function setMitspielen(v: boolean) {
+    setMitspielenState(v);
+    schreiben(MITSPIELEN_KEY, v ? 'ja' : 'nein');
+  }
+
+  const midi = useMidi((notes) => {
+    const top = notes[notes.length - 1];
+    const pitch = spellMidi(top.midi, doc.key.fifths);
+    const event = { pitch, duration: inputDuration(), velocity: top.velocity };
+    if (mitspielen) notes.forEach((n) => playNote(toToneName(spellMidi(n.midi, doc.key.fifths)), 0.5, n.velocity / 127).catch(() => {}));
+    dispatch({ type: 'insert', event });
+    if (notes.length > 1) {
+      setNotice(
+        `Akkord erkannt: ${notes.map((n) => germanName(spellMidi(n.midi, doc.key.fifths))).join('–')}. Im einstimmigen Editor wird nur der oberste Ton übernommen.`,
+      );
+    }
+  });
 
   const bar = useMemo(() => rebar(doc), [doc]);
   const selectedIds = selected === null ? [] : (bar.partsOf.get(selected) ?? []);
@@ -80,6 +128,17 @@ export function EditorView() {
   }, [doc]);
 
   useEffect(() => () => stopRef.current?.(), []);
+
+  // Gespeicherte Stücke automatisch aktualisieren (kurz nach der letzten Änderung)
+  useEffect(() => {
+    if (!stueckId) return;
+    const t = setTimeout(() => {
+      stueckSpeichern(doc, stueckId)
+        .then(() => setSaveVersion((v) => v + 1))
+        .catch(() => setNotice('Automatisches Speichern hat nicht geklappt.'));
+    }, 800);
+    return () => clearTimeout(t);
+  }, [doc, stueckId]);
 
   /** Aktion ausführen und gesetzte oder geänderte Note kurz anspielen */
   function act(action: EditorAction, sound?: Pitch) {
@@ -170,6 +229,7 @@ export function EditorView() {
         setNotice(`Datei nicht übernommen: ${result.errors[0]}`);
         return;
       }
+      setStueckId(null); // geöffnete Datei überschreibt kein gespeichertes Stück
       act({ type: 'load', doc: docFromScore(result.score) });
       setNotice(`„${result.score.title}“ geöffnet.`);
     } catch {
@@ -335,6 +395,14 @@ export function EditorView() {
         </button>
       </div>
 
+      <MidiPanel
+        status={midi.status}
+        devices={midi.devices}
+        connect={midi.connect}
+        mitspielen={mitspielen}
+        setMitspielen={setMitspielen}
+      />
+
       {showHelp && (
         <table className="help">
           <tbody>
@@ -353,11 +421,23 @@ export function EditorView() {
           lowest={pianoLow}
           octaves={2}
           fifths={doc.key.fifths}
-          active={pianoDown}
+          active={[...pianoDown, ...midi.held]}
           onKey={onPianoKey}
           onShift={(d) => setPianoLow((l) => Math.max(24, Math.min(84, l + d)))}
         />
       )}
+
+      <StueckePanel
+        doc={doc}
+        stueckId={stueckId}
+        setStueckId={setStueckId}
+        version={saveVersion}
+        onOpen={(d) => act({ type: 'load', doc: d })}
+        onNew={() => {
+          setStueckId(null);
+          act({ type: 'load', doc: { ...emptyDoc(), key: doc.key, time: doc.time, clef: doc.clef } });
+        }}
+      />
 
       <div className="json-actions file-actions">
         <button className="secondary" onClick={exportJson} disabled={doc.events.length === 0}>

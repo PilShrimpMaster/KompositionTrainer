@@ -513,6 +513,128 @@ button.taste:active {
   color: #1f1b2e;
 }
 
+/* ---------- MIDI, Stücke, Lernpfad ---------- */
+
+.midi-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  margin: 4px 0 8px;
+}
+
+.midi-info {
+  margin: 4px 0 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.stuecke,
+.stufe,
+.sicherung {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  color: #1f1b2e;
+}
+
+.stuecke h3,
+.stufe h2,
+.sicherung h2 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+
+.stuecke .meta,
+.stufe .meta,
+.sicherung .meta {
+  color: #6b6580;
+}
+
+.stuecke-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stueck-liste,
+.modul-liste {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.stueck-liste li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  padding: 8px 0;
+  border-top: 1px solid #eee8dc;
+}
+
+.stueck-liste li.is-current .stueck-titel {
+  text-decoration: underline;
+}
+
+.stueck-titel {
+  font-weight: 600;
+  min-height: 36px;
+  flex: 1 1 200px;
+  text-align: left;
+}
+
+.loeschen-frage {
+  color: var(--error);
+  font-size: 0.9rem;
+}
+
+.stufe.is-later {
+  opacity: 0.65;
+}
+
+.modul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 10px 0;
+  border-top: 1px solid #eee8dc;
+}
+
+.modul .meta {
+  margin: 2px 0 0;
+}
+
+.modul-fortschritt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.balken {
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: #eee8dc;
+  overflow: hidden;
+}
+
+.balken > div {
+  height: 100%;
+  background: #2f9e44;
+}
+
+.lernen > .meta {
+  margin-top: 12px;
+}
+
 @media (max-width: 700px) {
   button.tool {
     min-width: 46px;
