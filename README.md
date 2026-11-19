@@ -4,13 +4,15 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **App öffnen:** https://pilshrimpmaster.github.io/KompositionTrainer/
 
-## Stand: M2 Vierstimmiger Satz (in Arbeit)
+## Stand: M2 Vierstimmiger Satz
 
 **Satz prüfen (M2):** Notenanzeige für vier Stimmen auf zwei Systemen mit Liedtext und Fermaten; die Prüf-Engine findet Quint- und Oktavparallelen (auch in Gegenbewegung und verdeckt zwischen den Außenstimmen), Fehler im Stimmumfang, zu große Abstände, Stimmkreuzungen und -überschreitungen. Dazu erkennt sie jeden Akkord mit Stufe, Umkehrung und Funktion (T, S, D, Tp …) und prüft Verdopplungen (kein verdoppelter Leitton), die Auflösung von Leitton und Septime sowie melodische Sprünge (keine übermäßigen Intervalle, nichts über die Oktave). Fehler werden rot, Stilhinweise orange im Notenbild markiert, jeweils mit Erklärung und Lexikon-Eintrag. Zum Ausprobieren unter **Hören** den Choralsatz oder den Übungssatz mit Fehlern wählen.
 
 **Stufe 2 (M2):** acht Lektionen zu Funktionen und Kadenz, vierstimmigem Satz, Umkehrungen und Generalbass, Septakkorden, Nebenfunktionen, Modulation, Singbarkeit mit Textunterlegung und Choralanalyse, dazu das Abschlussprojekt „Choralsatz im Stil Bachs“. Satzaufgaben öffnen den Editor mit vorgegebenen Stimmen (Ergänzen, Aussetzen) und prüfen Funktionen, Kadenzen und Satzfehler. Neue Übungen: Funktionen bestimmen, Satzfehler finden, Umkehrungen bestimmen, Schlüsse hören. Beispiele in Lektionen zeigen auf Wunsch ihre Akkordanalyse.
 
 **Chorsatz schreiben (M2):** Unter „Stück einstellen“ die Besetzung „Chorsatz“ wählen. Stimmen über die Knöpfe oder mit Tab wechseln; ein Tipp ins andere System wechselt automatisch die Stimme. Am MIDI-Keyboard verteilt ein Akkord mit vier Tönen sich von oben nach unten auf Sopran, Alt, Tenor und Bass. Einzelne Stimmen lassen sich stumm schalten, Liedtext erscheint unter dem Sopran, und „Satz prüfen“ markiert Fehler live beim Schreiben.
+
+**Erklär mir das (M2, KI):** Neben jedem Befund der Satzprüfung und unter jeder Übungsaufgabe fragt „✨ Erklär mir das“ Claude (Anthropic API, Modell Claude Opus 5.5). Claude erklärt, warum es die Regel gibt, und schlägt zwei bis drei Korrekturen vor, die als Noten erscheinen und sich anhören lassen; die eigene Prüf-Engine kontrolliert jeden Vorschlag noch einmal. Dafür braucht man einen eigenen API-Schlüssel aus der [Anthropic Console](https://console.anthropic.com/settings/keys). Er wird unter „KI-Einstellungen“ (unten auf der Seite oder beim ersten Klick) eingegeben, **nur im Browser (localStorage) gespeichert** und nur an api.anthropic.com geschickt, nie ins Repository. Ein Zähler zeigt Anfragen und geschätzte Kosten im laufenden Monat; ein monatliches Ausgabenlimit stellt man in der Console unter „Limits“ ein.
 
 ## M1 Grundlagen
 

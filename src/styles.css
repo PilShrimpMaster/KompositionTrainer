@@ -1192,3 +1192,53 @@ a.lexikon-link:hover {
   border-radius: 12px;
 }
 .wiederholung p { margin: 0.25rem 0 0; }
+
+/* KI „Erklär mir das“ */
+.ki-knopf {
+  margin-top: 0.5rem;
+}
+.befund .ki-knopf {
+  margin-top: 0.25rem;
+}
+.ki-erklaerung {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  text-align: left;
+}
+.ki-text {
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+.ki-vorschlag {
+  margin-top: 0.75rem;
+}
+.ki-einstellungen p {
+  margin: 0.4rem 0;
+}
+.ki-schluessel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+.ki-schluessel input {
+  flex: 1 1 14rem;
+  min-width: 0;
+  padding: 0.5rem;
+  font: inherit;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.ki-fuss {
+  max-width: 40rem;
+  margin: 0 auto 0.75rem;
+  text-align: left;
+}
+.ki-fuss summary {
+  cursor: pointer;
+}
