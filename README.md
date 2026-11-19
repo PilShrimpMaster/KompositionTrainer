@@ -25,6 +25,8 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 - Abschlussprojekt: achttaktige Melodie in Dur mit klarem Schluss
 - Fachbegriffe sind automatisch ins Lexikon verlinkt; wie man Lektionen schreibt, steht in [docs/lektionen.md](docs/lektionen.md)
 
+**Einstufungstest:** 30 Fragen (Lesen und Hören) zu den sechs Modulen der Stufe 1; wer in einem Modul 4 von 5 schafft, überspringt es. Jederzeit wiederholbar.
+
 **Lexikon:** 35 Begriffe der Stufe 1 von Notensystem bis Periode, mit Notenbeispiel zum Anhören und Querverweisen
 - Fehlertolerante Suche (auch Synonyme, Tippfehler und Wortformen wie „neapolitanisch“), Filter nach Kategorie
 - Aus jeder Übungsrückmeldung direkt zum passenden Eintrag; neue Einträge sind Markdown-Dateien in `src/lexikon/eintraege/`
