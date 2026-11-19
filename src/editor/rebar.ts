@@ -94,6 +94,7 @@ export function rebar(doc: EditorDoc): RebarResult {
         const part: NoteEvent = { duration: d };
         if (ev.pitch) {
           part.pitch = ev.pitch;
+          if (ev.velocity) part.velocity = ev.velocity;
           if (!isLastPart || ev.tie) part.tie = true;
         }
         place(part, src);

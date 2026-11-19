@@ -66,7 +66,7 @@ export async function play(score: Score, tempo: number, cb: PlaybackCallbacks): 
   for (const e of events) {
     transport.schedule((time) => {
       if (e.note && e.length > 0) {
-        piano.triggerAttackRelease(e.note, e.length * secPerQuarter * 0.95, time);
+        piano.triggerAttackRelease(e.note, e.length * secPerQuarter * 0.95, time, e.velocity ?? 0.7);
       }
       draw.schedule(() => cb.onEvent(e.id), time);
     }, e.start * secPerQuarter);
@@ -89,9 +89,9 @@ export async function play(score: Score, tempo: number, cb: PlaybackCallbacks): 
 }
 
 /** Einzelnen Ton sofort anspielen, z. B. beim Setzen einer Note */
-export async function playNote(note: string, seconds = 0.6): Promise<void> {
+export async function playNote(note: string, seconds = 0.6, velocity = 0.7): Promise<void> {
   const piano = await initAudio();
-  piano.triggerAttackRelease(note, seconds);
+  piano.triggerAttackRelease(note, seconds, undefined, velocity);
 }
 
 /** Klavier bereits geladen? Dann klingt die erste Note ohne Verzögerung. */
