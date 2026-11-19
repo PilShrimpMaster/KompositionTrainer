@@ -1,0 +1,36 @@
+{
+  "name": "kompositionstrainer",
+  "version": "0.1.0",
+  "description": "Web-App zum Erlernen des Komponierens klassischer Musik",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pilshrimpmaster/kompositiontrainer.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/pilshrimpmaster/kompositiontrainer#readme",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tone": "^15.1.22",
+    "vexflow": "^4.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.7.0",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.6",
+    "vite-plugin-pwa": "^1.3.0",
+    "vitest": "^3.2.7"
+  },
+  "private": true,
+  "type": "module"
+}
