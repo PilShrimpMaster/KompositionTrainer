@@ -20,6 +20,10 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 - Gehörübungen: Intervalle (mit Liedanfängen als Hörhilfe), Dreiklangsarten, Melodiediktat auf dem Bildschirmklavier
 - Aufgaben werden zufällig erzeugt und schwerer, je sicherer man im Modul ist; jede Antwort wird erklärt
 
+**Lexikon:** 35 Begriffe der Stufe 1 von Notensystem bis Periode, mit Notenbeispiel zum Anhören und Querverweisen
+- Fehlertolerante Suche (auch Synonyme, Tippfehler und Wortformen wie „neapolitanisch“), Filter nach Kategorie
+- Aus jeder Übungsrückmeldung direkt zum passenden Eintrag; neue Einträge sind Markdown-Dateien in `src/lexikon/eintraege/`
+
 ## M0 Fundament
 
 - Eigenes JSON-Notenmodell ([Beschreibung](docs/notenmodell.md))
