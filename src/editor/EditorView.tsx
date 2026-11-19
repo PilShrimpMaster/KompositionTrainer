@@ -5,6 +5,8 @@ import type { DurationType, Pitch } from '../model/types';
 import { validateScore } from '../model/validate';
 import { EditorScore } from './EditorScore';
 import { Klavier } from './Klavier';
+import type { Schreibaufgabe } from '../lernpfad/lektion';
+import { AufgabePanel } from './AufgabePanel';
 import { docFromScore, rebar, type EditorDoc } from './rebar';
 import { SHORTCUT_HELP, shortcutFor } from './shortcuts';
 import { editorReducer, emptyDoc, initialState, type EditorAction } from './state';
@@ -73,7 +75,12 @@ function fmtQuarters(q: number) {
   return `${q.toLocaleString('de-DE')} Viertel`;
 }
 
-export function EditorView() {
+interface Props {
+  aufgabe?: Schreibaufgabe | null;
+  onAufgabeSchliessen?: () => void;
+}
+
+export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   const [state, dispatch] = useReducer(editorReducer, undefined, () => initialState(loadDraft()));
   const { doc, selected } = state;
   const [showNames, setShowNames] = useState(true);
@@ -252,8 +259,26 @@ export function EditorView() {
     return parts.join(' · ');
   })();
 
+  function aufgabeBeginnen(a: Schreibaufgabe) {
+    setStueckId(null);
+    act({
+      type: 'load',
+      doc: { ...emptyDoc(), title: a.titel, key: a.tonart ?? doc.key, time: a.takt ?? doc.time, clef: a.schluessel ?? doc.clef },
+    });
+    if (a.schluessel) setPianoLow(a.schluessel === 'bass' ? 48 : 60);
+  }
+
+  // Ist der Editor leer, gleich mit den Vorgaben der Aufgabe beginnen
+  useEffect(() => {
+    if (aufgabe && doc.events.length === 0 && doc.title !== aufgabe.titel) aufgabeBeginnen(aufgabe);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [aufgabe]);
+
   return (
     <div className="editor">
+      {aufgabe && (
+        <AufgabePanel aufgabe={aufgabe} doc={doc} onBeginnen={() => aufgabeBeginnen(aufgabe)} onSchliessen={() => onAufgabeSchliessen?.()} />
+      )}
       <div className="toolbar" role="toolbar" aria-label="Werkzeuge">
         <div className="tool-group" aria-label="Notenwert">
           {DURATIONS.map((d) => {

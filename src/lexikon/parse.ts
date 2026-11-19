@@ -38,23 +38,34 @@ export function parseBeispiel(s: string): Pitch[][] {
     .map((g) => g.split(/\s+/).map(parsePitch));
 }
 
-function liste(s: string | undefined): string[] {
+export function liste(s: string | undefined): string[] {
   return (s ?? '')
     .split(',')
     .map((x) => x.trim())
     .filter(Boolean);
 }
 
-/** Zerlegt eine Markdown-Datei mit Kopfzeilen zwischen „---“ */
-export function parseEintrag(quelle: string, datei = '?'): Eintrag {
-  const m = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(quelle);
-  if (!m) throw new Error(`${datei}: Kopfzeilen fehlen`);
-  const kopf: Record<string, string> = {};
-  for (const zeile of m[1].split(/\r?\n/)) {
+/** Liest „schlüssel: wert“-Zeilen */
+export function leseFelder(text: string): Record<string, string> {
+  const felder: Record<string, string> = {};
+  for (const zeile of text.split(/\r?\n/)) {
     const i = zeile.indexOf(':');
     if (i < 0) continue;
-    kopf[zeile.slice(0, i).trim()] = zeile.slice(i + 1).trim();
+    felder[zeile.slice(0, i).trim()] = zeile.slice(i + 1).trim();
   }
+  return felder;
+}
+
+/** Trennt die Kopfzeilen zwischen „---“ vom Markdown-Text */
+export function trenneKopf(quelle: string, datei = '?'): { kopf: Record<string, string>; text: string } {
+  const m = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(quelle);
+  if (!m) throw new Error(`${datei}: Kopfzeilen fehlen`);
+  return { kopf: leseFelder(m[1]), text: m[2].trim() };
+}
+
+/** Zerlegt eine Lexikon-Datei */
+export function parseEintrag(quelle: string, datei = '?'): Eintrag {
+  const { kopf, text } = trenneKopf(quelle, datei);
   for (const k of ['id', 'titel', 'kategorie', 'kurz']) {
     if (!kopf[k]) throw new Error(`${datei}: Feld „${k}“ fehlt`);
   }
@@ -76,6 +87,6 @@ export function parseEintrag(quelle: string, datei = '?'): Eintrag {
     klang: kopf.klang === 'zusammen' ? 'zusammen' : 'nacheinander',
     schluessel: kopf.schluessel === 'bass' ? 'bass' : 'treble',
     tonart,
-    text: m[2].trim(),
+    text,
   };
 }

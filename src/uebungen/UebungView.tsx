@@ -13,10 +13,12 @@ const RUNDE = 10;
 interface Props {
   typ: UebungTyp;
   onEnde: () => void;
+  /** Wohin „zurück“ führt, z. B. „Lektion“ */
+  zurueck?: string;
 }
 
 /** Eine Übungsrunde mit 10 Aufgaben, sofortiger Rückmeldung und Fortschritt. */
-export function UebungView({ typ, onEnde }: Props) {
+export function UebungView({ typ, onEnde, zurueck = 'Lernpfad' }: Props) {
   const info = UEBUNGEN.find((u) => u.typ === typ)!;
   const { oeffneLexikon } = useNavigation();
   const [stufe, setStufe] = useState<Stufe | null>(null);
@@ -116,7 +118,7 @@ export function UebungView({ typ, onEnde }: Props) {
             Noch eine Runde
           </button>
           <button className="secondary" onClick={onEnde}>
-            Zurück zum Lernpfad
+            Zurück zu{zurueck === 'Lektion' ? 'r' : 'm'} {zurueck}
           </button>
         </div>
       </section>
@@ -131,7 +133,7 @@ export function UebungView({ typ, onEnde }: Props) {
     <section className="uebung">
       <div className="uebung-kopf">
         <button className="link" onClick={onEnde}>
-          ← Lernpfad
+          ← {zurueck}
         </button>
         <span className="meta">
           {info.titel} · Aufgabe {nr + 1} von {RUNDE} · Schwierigkeit {stufe}
@@ -211,7 +213,7 @@ export function UebungView({ typ, onEnde }: Props) {
               {nr + 1 < RUNDE ? 'Weiter' : 'Ergebnis ansehen'}
             </button>
             {aufgabe.begriff && eintrag(aufgabe.begriff) && (
-              <button className="sekundaer" onClick={() => oeffneLexikon(aufgabe.begriff)}>
+              <button className="secondary" onClick={() => oeffneLexikon(aufgabe.begriff)}>
                 Im Lexikon: {eintrag(aufgabe.begriff)!.titel}
               </button>
             )}

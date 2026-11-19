@@ -4,6 +4,9 @@ import { alleFortschritte, dauerhaftSpeichern, sicherungEinlesen, sicherungErste
 import { MODULE, STUFEN } from './module';
 import { UEBUNGEN, type UebungTyp } from '../uebungen/aufgaben';
 import { UebungView } from '../uebungen/UebungView';
+import { istErledigt } from './erledigt';
+import { lektionFuer } from './lektionen';
+import { LektionView } from './LektionView';
 
 const anzahl = (n: number, eins: string, viele: string) => `${n} ${n === 1 ? eins : viele}`;
 
@@ -21,6 +24,7 @@ export function LernenView() {
   const [meldung, setMeldung] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const [aktiv, setAktiv] = useState<UebungTyp | null>(null);
+  const [lektion, setLektion] = useState<string | null>(null);
 
   async function laden() {
     const liste = await alleFortschritte();
@@ -60,12 +64,18 @@ export function LernenView() {
     return (
       <UebungView
         typ={aktiv}
+        zurueck={lektion ? 'Lektion' : 'Lernpfad'}
         onEnde={() => {
           setAktiv(null);
           laden().catch(() => {});
         }}
       />
     );
+  }
+
+  const offeneLektion = lektion ? lektionFuer(lektion) : undefined;
+  if (offeneLektion) {
+    return <LektionView lektion={offeneLektion} onUebung={setAktiv} onZurueck={() => setLektion(null)} />;
   }
 
   return (
@@ -77,7 +87,17 @@ export function LernenView() {
             <h2>
               Stufe {stufe.nummer}: {stufe.titel}
             </h2>
-            <p className="meta">Abschlussprojekt: {stufe.abschluss}</p>
+            <p className="meta">
+              Abschlussprojekt: {stufe.abschluss}
+              {lektionFuer(`s${stufe.nummer}-abschluss`) && (
+                <>
+                  {' '}
+                  <button className="secondary small" onClick={() => setLektion(`s${stufe.nummer}-abschluss`)}>
+                    Zum Abschlussprojekt{istErledigt(`lektion:s${stufe.nummer}-abschluss`) ? ' ✓' : ''}
+                  </button>
+                </>
+              )}
+            </p>
             {module.length > 0 ? (
               <ul className="modul-liste">
                 {module.map((m) => {
@@ -90,6 +110,11 @@ export function LernenView() {
                         <strong>{m.titel}</strong>
                         <p className="meta">{m.ziel}</p>
                         <div className="modul-uebungen">
+                          {lektionFuer(m.id) && (
+                            <button className="small" onClick={() => setLektion(m.id)}>
+                              📖 Lektion{istErledigt(`lektion:${m.id}`) ? ' ✓' : ''}
+                            </button>
+                          )}
                           {UEBUNGEN.filter((u) => u.modul === m.id).map((u) => (
                             <button key={u.typ} className="secondary small" onClick={() => setAktiv(u.typ)}>
                               {u.hoeren ? '🎧 ' : '✎ '}
