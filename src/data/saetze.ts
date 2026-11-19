@@ -9,7 +9,7 @@ export const CHORALSATZ = satz({
   tempo: 66,
   stimmen: [
     'B4:4 A4 G4 A4 | B4 B4 A4:2^ | B4:4 C5 D5 C5 | B4 A4 G4:2^',
-    'G4:4 F#4 E4 F#4 | G4 G4 F#4:2 | G4:4 G4 G4 A4 | G4 F#4 D4:2',
+    'G4:4 F#4 G4 F#4 | G4 F#4 F#4:2 | G4:4 G4 G4 A4 | G4 F#4 G4:2',
     'D4:4 D4 B3 D4 | D4 D4 D4:2 | D4:4 E4 D4 E4 | D4 D4 B3:2',
     'G3:4 D3 E3 D3 | G3 B2 D3:2 | G3:4 C3 B2 A2 | D3 D3 G2:2',
   ],

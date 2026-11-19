@@ -1,6 +1,8 @@
 import { diatonicIndex, germanNameWithOctave, toMidi } from '../model/pitch';
 import type { Pitch, Score } from '../model/types';
 import { klaenge, type Klang } from './klaenge';
+import { erkenneAkkord, istLeitton, type Akkord } from './akkorde';
+import { intervall, intervallName } from '../uebungen/theorie';
 
 export type BefundArt = 'fehler' | 'hinweis';
 
@@ -30,6 +32,8 @@ export interface Kontext {
   score: Score;
   klaenge: Klang[];
   namen: string[];
+  /** Erkannter Akkord je Zusammenklang */
+  akkorde: (Akkord | null)[];
 }
 
 const halbtoene = (a: Pitch, b: Pitch) => toMidi(a) - toMidi(b);
@@ -224,7 +228,142 @@ const kreuzung: Regel = {
   },
 };
 
-export const REGELN: Regel[] = [parallelen, verdeckte, umfang, abstand, kreuzung];
+const vollstaendig = (k: Klang) => k.toene.every(Boolean) && k.neu.some(Boolean);
+
+const verdopplung: Regel = {
+  id: 'verdopplung',
+  titel: 'Verdopplung',
+  begriff: 'verdopplung',
+  pruefe(ctx) {
+    const out: Befund[] = [];
+    const key = ctx.score.key;
+    ctx.klaenge.forEach((k, i) => {
+      if (!vollstaendig(k)) return;
+      const lt = k.toene.map((p, v) => (p && istLeitton(p, key) ? v : -1)).filter((v) => v >= 0);
+      if (lt.length > 1) {
+        out.push({
+          regel: 'verdopplung',
+          art: 'fehler',
+          text: `Leitton verdoppelt (${lt.map((v) => ctx.namen[v]).join(' und ')}): Beide Stimmen wollen aufwärts zum Grundton und laufen dann in Oktaven.`,
+          ids: ids(...lt.map((v) => k.ids[v])),
+          takt: k.takt + 1,
+        });
+        return;
+      }
+      const a = ctx.akkorde[i];
+      if (!a || a.art !== 'Dur' || a.sept) return;
+      const terzen = a.rollen.map((r, v) => (r === 3 ? v : -1)).filter((v) => v >= 0);
+      if (terzen.length < 2) return;
+      const vorher = ctx.akkorde[i - 1];
+      if (a.stufe === 6 && vorher?.stufe === 5) return; // Trugschluss: Terzverdopplung üblich
+      out.push({
+        regel: 'verdopplung',
+        art: 'hinweis',
+        text: `Terz verdoppelt in ${a.name}: Im Durdreiklang klingt das dick. Verdopple lieber den Grundton.`,
+        ids: ids(...terzen.map((v) => k.ids[v])),
+        takt: k.takt + 1,
+      });
+    });
+    return out;
+  },
+};
+
+const leittonAufloesung: Regel = {
+  id: 'leitton',
+  titel: 'Auflösung des Leittons',
+  begriff: 'leitton',
+  pruefe(ctx) {
+    const out: Befund[] = [];
+    const key = ctx.score.key;
+    const n = ctx.namen.length;
+    ctx.klaenge.forEach((b, i) => {
+      const a = ctx.klaenge[i - 1];
+      const aa = ctx.akkorde[i - 1];
+      const ba = ctx.akkorde[i];
+      if (!a || !aa || !ba) return;
+      const dominantisch = aa.stufe === 5 || (aa.stufe === 7 && aa.art === 'vermindert');
+      if (!dominantisch || (ba.stufe !== 1 && ba.stufe !== 6)) return;
+      a.toene.forEach((p, v) => {
+        const q = b.toene[v];
+        if (!p || !q || !istLeitton(p, key) || toMidi(p) === toMidi(q)) return;
+        if (stufen(q, p) === 1 && halbtoene(q, p) === 1) return; // sauber aufgelöst
+        const aussen = v === 0 || v === n - 1;
+        out.push({
+          regel: 'leitton',
+          art: aussen ? 'fehler' : 'hinweis',
+          text: aussen
+            ? `Der Leitton im ${ctx.namen[v]} löst sich nicht aufwärts zum Grundton auf. In einer Außenstimme hört man das deutlich.`
+            : `Der Leitton im ${ctx.namen[v]} geht nicht zum Grundton (freier Leitton). In Mittelstimmen ist das erlaubt, wenn der Klang dadurch vollständig wird.`,
+          ids: ids(a.ids[v], b.ids[v]),
+          takt: b.takt + 1,
+        });
+      });
+    });
+    return out;
+  },
+};
+
+const septime: Regel = {
+  id: 'septime',
+  titel: 'Auflösung der Septime',
+  begriff: 'septakkord',
+  pruefe(ctx) {
+    const out: Befund[] = [];
+    ctx.klaenge.forEach((b, i) => {
+      const a = ctx.klaenge[i - 1];
+      const aa = ctx.akkorde[i - 1];
+      if (!a || !aa?.sept) return;
+      aa.rollen.forEach((r, v) => {
+        const p = a.toene[v];
+        const q = b.toene[v];
+        if (r !== 7 || !p || !q || toMidi(p) === toMidi(q)) return;
+        if (stufen(q, p) === -1) return; // Sekunde abwärts: richtig
+        out.push({
+          regel: 'septime',
+          art: 'fehler',
+          text: `Die Septime von ${aa.name} im ${ctx.namen[v]} sollte sich einen Schritt abwärts auflösen, hier geht sie ${halbtoene(q, p) > 0 ? 'aufwärts' : 'im Sprung abwärts'}.`,
+          ids: ids(a.ids[v], b.ids[v]),
+          takt: b.takt + 1,
+        });
+      });
+    });
+    return out;
+  },
+};
+
+const spruenge: Regel = {
+  id: 'spruenge',
+  titel: 'Melodische Sprünge',
+  begriff: 'sprung',
+  pruefe(ctx) {
+    const out: Befund[] = [];
+    ctx.namen.forEach((name, v) => {
+      let vorher: { p: Pitch; id: string | null } | null = null;
+      for (const k of ctx.klaenge) {
+        const p = k.toene[v];
+        if (!k.neu[v]) continue;
+        if (!p) {
+          vorher = null;
+          continue;
+        }
+        if (vorher && toMidi(vorher.p) !== toMidi(p)) {
+          const iv = intervall(vorher.p, p);
+          const weit = Math.abs(halbtoene(p, vorher.p));
+          let befund: { art: BefundArt; text: string } | null = null;
+          if (weit > 12) befund = { art: 'fehler', text: `Sprung größer als eine Oktave im ${name}. Das ist schwer zu singen.` };
+          else if (iv.qualitaet.includes('übermäßig') && iv.nummer !== 8)
+            befund = { art: 'fehler', text: `${intervallName(iv)[0].toUpperCase()}${intervallName(iv).slice(1)} im ${name}: Übermäßige Schritte sind schwer zu treffen und klingen fremd.` };
+          else if (iv.nummer === 7) befund = { art: 'hinweis', text: `Septimsprung im ${name}: Das ist schwer zu singen, besser vermeiden.` };
+          if (befund) out.push({ regel: 'spruenge', ...befund, ids: ids(vorher.id, k.ids[v]), takt: k.takt + 1 });
+        }
+        vorher = { p, id: k.ids[v] };
+      }
+    });
+    return out;
+  },
+};
+
+export const REGELN: Regel[] = [parallelen, verdeckte, umfang, abstand, kreuzung, verdopplung, leittonAufloesung, septime, spruenge];
 
 export interface PruefOptionen {
   /** Stilhinweise mitprüfen (ab Stufe 6 abschaltbar) */
@@ -233,7 +372,8 @@ export interface PruefOptionen {
 
 /** Prüft einen mehrstimmigen Satz; Stimmen von oben nach unten (Sopran zuerst) */
 export function pruefeSatz(score: Score, opts: PruefOptionen = {}): Befund[] {
-  const ctx: Kontext = { score, klaenge: klaenge(score), namen: score.voices.map((v) => v.name) };
+  const k = klaenge(score);
+  const ctx: Kontext = { score, klaenge: k, namen: score.voices.map((v) => v.name), akkorde: k.map((x) => erkenneAkkord(x.toene, score.key)) };
   const alle = REGELN.flatMap((r) => r.pruefe(ctx));
   const gesehen = new Set<string>();
   return alle
