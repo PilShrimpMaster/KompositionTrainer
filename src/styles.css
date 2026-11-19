@@ -635,6 +635,136 @@ button.taste:active {
   margin-top: 12px;
 }
 
+/* ---------- Übungen ---------- */
+
+.modul-text {
+  flex: 1 1 320px;
+}
+
+.modul-uebungen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.uebung {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  color: #1f1b2e;
+}
+
+.uebung .meta {
+  color: #6b6580;
+}
+
+.uebung-kopf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.uebung-balken {
+  height: 6px;
+  border-radius: 999px;
+  background: #eee8dc;
+  overflow: hidden;
+  margin: 8px 0 16px;
+}
+
+.uebung-balken > div {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.frage {
+  font-size: 1.25rem;
+  margin: 8px 0 12px;
+}
+
+.uebung-noten svg {
+  display: block;
+  margin: 0 auto 12px;
+}
+
+.optionen {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+button.option {
+  min-height: 56px;
+  font-size: 1.05rem;
+  background: #f4f1ea;
+  color: #1f1b2e;
+  border: 2px solid transparent;
+}
+
+button.option.ist-richtig {
+  background: #d3f9d8;
+  border-color: #2f9e44;
+}
+
+button.option.ist-falsch {
+  background: #ffe3e3;
+  border-color: #e03131;
+}
+
+button.option.ist-aus {
+  opacity: 0.5;
+}
+
+button.option:disabled {
+  opacity: 1;
+}
+
+button.option.ist-aus:disabled {
+  opacity: 0.5;
+}
+
+.rueckmeldung {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 10px;
+}
+
+.rueckmeldung.ok {
+  background: #ebfbee;
+}
+
+.rueckmeldung.falsch {
+  background: #fff5f5;
+}
+
+.rueckmeldung p {
+  margin: 6px 0 12px;
+}
+
+.diktat .ok {
+  color: #2f9e44;
+  font-weight: 600;
+}
+
+.diktat .falsch {
+  color: #e03131;
+  font-weight: 600;
+}
+
+.ergebnis-gross {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 12px 0;
+}
+
 @media (max-width: 700px) {
   button.tool {
     min-width: 46px;
