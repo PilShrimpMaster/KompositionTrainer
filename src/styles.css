@@ -1049,3 +1049,71 @@ a.lexikon-link:hover {
     color: #4ac26b;
   }
 }
+
+/* Prüf-Engine */
+.score-host .is-hinweis,
+.score-host .is-hinweis * {
+  fill: #c76a00;
+  stroke: #c76a00;
+}
+.score-host .is-fehler,
+.score-host .is-fehler * {
+  fill: #d1242f;
+  stroke: #d1242f;
+}
+.score-host .is-auswahl,
+.score-host .is-auswahl * {
+  fill: #0a58ca;
+  stroke: #0a58ca;
+}
+.pruefung {
+  margin: 12px 0;
+}
+.pruef-panel {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.pruef-kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.befunde {
+  margin: 10px 0 4px;
+  padding-left: 1.6em;
+}
+.befund {
+  margin: 6px 0;
+}
+.befund-text {
+  background: none;
+  border: none;
+  color: var(--ink);
+  text-align: left;
+  padding: 2px 0;
+  font: inherit;
+  cursor: pointer;
+}
+.befund.is-on .befund-text {
+  text-decoration: underline;
+  text-decoration-color: #0a58ca;
+}
+.befund-art {
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 1px 6px;
+  border-radius: 6px;
+  color: #fff;
+  background: #d1242f;
+}
+.befund.hinweis .befund-art {
+  background: #c76a00;
+}
+.befund-text {
+  display: block;
+  width: 100%;
+}

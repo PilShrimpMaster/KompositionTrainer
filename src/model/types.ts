@@ -34,6 +34,10 @@ export interface NoteEvent {
   tie?: boolean;
   /** Anschlagstärke 1–127 (z. B. vom MIDI-Keyboard); fehlt sie, gilt mittlere Lautstärke */
   velocity?: number;
+  /** Silbe des Liedtexts unter dieser Note (Chorsatz) */
+  lyric?: string;
+  /** Fermate über der Note (Ende einer Choralzeile) */
+  fermata?: boolean;
 }
 
 export interface Measure {
@@ -57,6 +61,13 @@ export interface Voice {
   id: string;
   name: string;
   clef: Clef;
+  /**
+   * Nummer des Notensystems (0 = oberstes). Stimmen mit derselben Nummer stehen
+   * gemeinsam auf einem System, z. B. Sopran und Alt. Fehlt sie, hat jede Stimme ihr eigenes.
+   */
+  staff?: number;
+  /** Halsrichtung, wenn sich zwei Stimmen ein System teilen */
+  stem?: 'up' | 'down';
   measures: Measure[];
 }
 

@@ -96,6 +96,9 @@ export function rebar(doc: EditorDoc): RebarResult {
           part.pitch = ev.pitch;
           if (ev.velocity) part.velocity = ev.velocity;
           if (!isLastPart || ev.tie) part.tie = true;
+          // Silbe an den Anfang, Fermate ans Ende einer übergebundenen Note
+          if (ev.lyric && first && i === 0) part.lyric = ev.lyric;
+          if (ev.fermata && isLastPart) part.fermata = true;
         }
         place(part, src);
       });

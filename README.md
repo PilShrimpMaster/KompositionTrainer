@@ -4,7 +4,11 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **App öffnen:** https://pilshrimpmaster.github.io/KompositionTrainer/
 
-## Stand: M1 Grundlagen (in Arbeit)
+## Stand: M2 Vierstimmiger Satz (in Arbeit)
+
+**Satz prüfen (M2):** Notenanzeige für vier Stimmen auf zwei Systemen mit Liedtext und Fermaten; die Prüf-Engine findet Quint- und Oktavparallelen (auch in Gegenbewegung und verdeckt zwischen den Außenstimmen), Fehler im Stimmumfang, zu große Abstände, Stimmkreuzungen und -überschreitungen. Fehler werden rot, Stilhinweise orange im Notenbild markiert, jeweils mit Erklärung und Lexikon-Eintrag. Zum Ausprobieren unter **Hören** den Choralsatz oder den Übungssatz mit Fehlern wählen.
+
+## M1 Grundlagen
 
 **Schreiben:** einstimmiger Noteneditor
 - Noten mit dem Apple Pencil (oder der Maus) ins System setzen und zum Ändern der Tonhöhe ziehen; mit dem Finger wird gescrollt, außer „Mit dem Finger schreiben“ ist eingeschaltet

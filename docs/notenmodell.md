@@ -53,8 +53,16 @@ Alle Teile der App arbeiten auf demselben JSON-Format: die Notenanzeige, die Wie
 | `duration.dots` | Punktierungen, 0 bis 2 |
 | `tie` | `true` = Haltebogen zur nächsten Note |
 | `velocity` | Anschlagstärke 1–127, z. B. vom MIDI-Keyboard (optional) |
+| `lyric` | Silbe des Liedtexts unter der Note (optional) |
+| `fermata` | `true` = Fermate über der Note (optional) |
+| `voices[].staff` | Nummer des Notensystems; Stimmen mit gleicher Nummer teilen sich ein System (optional) |
+| `voices[].stem` | `"up"` oder `"down"`: Halsrichtung auf einem geteilten System (optional) |
 
-Eine Note ohne `pitch` ist eine Pause. Der erste Takt darf kürzer sein (Auftakt), alle anderen müssen genau voll sein.
+Eine Note ohne `pitch` ist eine Pause. Der erste Takt darf kürzer sein (Auftakt); dann darf auch der letzte Takt kürzer sein. Alle anderen müssen genau voll sein.
+
+## Vierstimmiger Satz
+
+Ein Chorsatz hat vier Stimmen in der Reihenfolge Sopran, Alt, Tenor, Bass. Sopran und Alt stehen mit `"staff": 0` gemeinsam im Violinschlüssel, Tenor und Bass mit `"staff": 1` im Bassschlüssel. Die Prüf-Engine ([`src/satz/regeln.ts`](../src/satz/regeln.ts)) erwartet die Stimmen von oben nach unten.
 
 ## Warum „B“ für H?
 

@@ -5,6 +5,7 @@ import { germanKeyName } from './model/pitch';
 import type { Score } from './model/types';
 import { validateScore } from './model/validate';
 import { ScoreView } from './ScoreView';
+import { markierungenFuer, PruefPanel, usePruefung } from './satz/PruefPanel';
 
 type AudioState = 'aus' | 'lädt' | 'bereit' | 'fehler';
 
@@ -20,6 +21,13 @@ export function PlayerView() {
   const [jsonText, setJsonText] = useState(() => JSON.stringify(BEISPIELE[0].score, null, 2));
   const [jsonErrors, setJsonErrors] = useState<string[]>([]);
   const stopRef = useRef<(() => void) | null>(null);
+  const [geprueft, setGeprueft] = useState(false);
+  const [auswahl, setAuswahl] = useState<number | null>(null);
+  const pruefung = usePruefung(score);
+  const markierungen = useMemo(
+    () => (geprueft ? markierungenFuer(pruefung.befunde, auswahl) : undefined),
+    [geprueft, pruefung.befunde, auswahl],
+  );
   const fileRef = useRef<HTMLInputElement>(null);
 
   const info = useMemo(
@@ -36,6 +44,8 @@ export function PlayerView() {
     setTempo(s.tempo);
     setJsonText(JSON.stringify(s, null, 2));
     setJsonErrors([]);
+    setGeprueft(false);
+    setAuswahl(null);
   }
 
   async function handlePlay() {
@@ -88,7 +98,7 @@ export function PlayerView() {
       <div className="player">
         <section className="controls" aria-label="Steuerung">
           <label className="field">
-            <span>Melodie</span>
+            <span>Stück</span>
             <select
               value={beispielId}
               onChange={(e) => {
@@ -139,8 +149,27 @@ export function PlayerView() {
             {score.composer && <p className="composer">{score.composer}</p>}
             <p className="meta">{info}</p>
           </div>
-          <ScoreView score={score} showNoteNames={showNames} activeId={activeId} />
+          <ScoreView score={score} showNoteNames={showNames} activeId={activeId} markierungen={markierungen} />
         </section>
+
+        {score.voices.length > 1 && (
+          <section className="pruefung">
+            {!geprueft ? (
+              <button onClick={() => setGeprueft(true)}>Satz prüfen</button>
+            ) : (
+              <PruefPanel
+                befunde={pruefung.befunde}
+                auswahl={auswahl}
+                onAuswahl={setAuswahl}
+                hinweise={pruefung.hinweise}
+                onHinweise={(v) => {
+                  setAuswahl(null);
+                  pruefung.setHinweise(v);
+                }}
+              />
+            )}
+          </section>
+        )}
 
         <section className="json">
           <button className="link" onClick={() => setJsonOpen((o) => !o)} aria-expanded={jsonOpen}>
