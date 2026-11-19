@@ -21,6 +21,37 @@ export interface RenderOptions {
   showNoteNames: boolean;
 }
 
+/** Lage eines gezeichneten Takts, für die Eingabe per Stift oder Finger */
+export interface StaveLayout {
+  voice: number;
+  measure: number;
+  x: number;
+  width: number;
+  /** y der obersten Notenlinie */
+  topLineY: number;
+  /** Abstand zweier Notenlinien */
+  spacing: number;
+  /** x, ab dem Noten beginnen (nach Schlüssel und Vorzeichen) */
+  noteStartX: number;
+  clef: 'treble' | 'bass';
+}
+
+export interface NoteLayout {
+  id: string;
+  voice: number;
+  measure: number;
+  index: number;
+  /** Mitte des Notenkopfs */
+  x: number;
+  y: number;
+}
+
+export interface RenderResult {
+  elements: Map<string, SVGElement>;
+  staves: StaveLayout[];
+  notes: NoteLayout[];
+  height: number;
+}
 
 const STAVE_HEIGHT = 110;
 const SYSTEM_GAP = 30;
@@ -36,11 +67,13 @@ export function renderScore(
   container: HTMLElement,
   score: Score,
   opts: RenderOptions,
-): Map<string, SVGElement> {
+): RenderResult {
   container.innerHTML = '';
   const elements = new Map<string, SVGElement>();
+  const staves: StaveLayout[] = [];
+  const noteLayouts: NoteLayout[] = [];
 
-  const measureCount = Math.max(...score.voices.map((v) => v.measures.length));
+  const measureCount = Math.max(1, ...score.voices.map((v) => v.measures.length));
   const usable = Math.max(opts.width - 2 * MARGIN, 300);
   const firstExtra = 90; // Platz für Schlüssel, Vorzeichen und Taktart
   const perRow = Math.max(1, Math.floor((usable - firstExtra) / MIN_MEASURE_WIDTH));
@@ -80,10 +113,20 @@ export function renderScore(
         }
         if (mi === measureCount - 1) stave.setEndBarType(Barline.type.END);
         stave.setContext(ctx).draw();
+        staves.push({
+          voice: vi,
+          measure: mi,
+          x: stave.getX(),
+          width,
+          topLineY: stave.getYForLine(0),
+          spacing: stave.getSpacingBetweenLines(),
+          noteStartX: stave.getNoteStartX(),
+          clef: voice.clef,
+        });
         x += width;
 
         const measure = voice.measures[mi];
-        if (!measure) continue;
+        if (!measure || measure.notes.length === 0) continue;
 
         const notes = measure.notes.map((ev) => {
           const rest = !ev.pitch;
@@ -146,8 +189,17 @@ export function renderScore(
           }
           pendingTie[vi] = ev.tie && ev.pitch ? note : null;
 
+          const id = eventId(vi, mi, ni);
           const el = note.getSVGElement();
-          if (el) elements.set(eventId(vi, mi, ni), el);
+          if (el) elements.set(id, el);
+          noteLayouts.push({
+            id,
+            voice: vi,
+            measure: mi,
+            index: ni,
+            x: (note.getNoteHeadBeginX() + note.getNoteHeadEndX()) / 2,
+            y: note.getYs()[0],
+          });
         });
       }
     });
@@ -158,7 +210,7 @@ export function renderScore(
     svg.setAttribute('role', 'img');
     svg.setAttribute('aria-label', `Noten: ${score.title}`);
   }
-  return elements;
+  return { elements, staves, notes: noteLayouts, height };
 }
 
 /** Balkengruppen: im 6/8-, 9/8- und 12/8-Takt je punktierte Viertel, sonst je Viertel */

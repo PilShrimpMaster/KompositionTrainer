@@ -30,7 +30,7 @@ export function ScoreView({ score, showNoteNames, activeId }: Props) {
     const host = hostRef.current;
     if (!host || width === 0) return;
     try {
-      elementsRef.current = renderScore(host, score, { width, showNoteNames });
+      elementsRef.current = renderScore(host, score, { width, showNoteNames }).elements;
       setError(null);
     } catch (e) {
       host.innerHTML = '';

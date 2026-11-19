@@ -1,0 +1,456 @@
+import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { initAudio, play, playNote } from '../audio/player';
+import { germanKeyName, germanName, toToneName } from '../model/pitch';
+import type { DurationType, Pitch } from '../model/types';
+import { validateScore } from '../model/validate';
+import { EditorScore } from './EditorScore';
+import { Klavier } from './Klavier';
+import { docFromScore, rebar, type EditorDoc } from './rebar';
+import { SHORTCUT_HELP, shortcutFor } from './shortcuts';
+import { editorReducer, emptyDoc, initialState, type EditorAction } from './state';
+import { spellMidi } from '../model/pitch';
+
+const STORAGE_KEY = 'kt-editor-entwurf-v1';
+
+const DURATIONS: { type: DurationType; label: string; glyph: string; key: string }[] = [
+  { type: 'whole', label: 'Ganze', glyph: '𝅝', key: '6' },
+  { type: 'half', label: 'Halbe', glyph: '𝅗𝅥', key: '5' },
+  { type: 'quarter', label: 'Viertel', glyph: '♩', key: '4' },
+  { type: 'eighth', label: 'Achtel', glyph: '♪', key: '3' },
+  { type: '16th', label: 'Sechzehntel', glyph: '𝅘𝅥𝅯', key: '2' },
+];
+
+const TIMES = ['2/4', '3/4', '4/4', '2/2', '3/8', '6/8', '9/8', '12/8'];
+
+function loadDraft(): EditorDoc {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const doc = JSON.parse(raw) as EditorDoc;
+      if (Array.isArray(doc.events) && doc.time && doc.key) return doc;
+    }
+  } catch {
+    /* kein Speicher verfügbar, z. B. im privaten Modus */
+  }
+  return emptyDoc();
+}
+
+function fmtQuarters(q: number) {
+  const names: [number, string][] = [
+    [4, 'eine Ganze'],
+    [3, 'eine punktierte Halbe'],
+    [2, 'eine Halbe'],
+    [1.5, 'eine punktierte Viertel'],
+    [1, 'eine Viertel'],
+    [0.5, 'eine Achtel'],
+    [0.25, 'eine Sechzehntel'],
+  ];
+  const exact = names.find(([v]) => Math.abs(v - q) < 1e-9);
+  if (exact) return exact[1];
+  return `${q.toLocaleString('de-DE')} Viertel`;
+}
+
+export function EditorView() {
+  const [state, dispatch] = useReducer(editorReducer, undefined, () => initialState(loadDraft()));
+  const { doc, selected } = state;
+  const [showNames, setShowNames] = useState(true);
+  const [fingerWrites, setFingerWrites] = useState(false);
+  const [showPiano, setShowPiano] = useState(true);
+  const [pianoLow, setPianoLow] = useState(doc.clef === 'bass' ? 48 : 60);
+  const [pianoDown, setPianoDown] = useState<number[]>([]);
+  const [showHelp, setShowHelp] = useState(false);
+  const [showMeta, setShowMeta] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const stopRef = useRef<(() => void) | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const bar = useMemo(() => rebar(doc), [doc]);
+  const selectedIds = selected === null ? [] : (bar.partsOf.get(selected) ?? []);
+  const selectedEvent = selected === null ? null : doc.events[selected];
+
+  // Entwurf automatisch im Browser sichern
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(doc));
+    } catch {
+      /* ignorieren */
+    }
+  }, [doc]);
+
+  useEffect(() => () => stopRef.current?.(), []);
+
+  /** Aktion ausführen und gesetzte oder geänderte Note kurz anspielen */
+  function act(action: EditorAction, sound?: Pitch) {
+    dispatch(action);
+    if (sound) playNote(toToneName(sound), 0.5).catch(() => setNotice('Ton konnte nicht gestartet werden.'));
+  }
+
+  function inputDuration() {
+    return state.inputDots ? { type: state.inputDuration, dots: state.inputDots } : { type: state.inputDuration };
+  }
+
+  async function togglePlay() {
+    if (playing) {
+      stopRef.current?.();
+      return;
+    }
+    if (doc.events.length === 0) {
+      setNotice('Noch keine Noten zum Abspielen.');
+      return;
+    }
+    try {
+      await initAudio();
+      setPlaying(true);
+      stopRef.current = await play(bar.score, doc.tempo, {
+        onEvent: setActiveId,
+        onEnd: () => {
+          setPlaying(false);
+          setActiveId(null);
+          stopRef.current = null;
+        },
+      });
+    } catch {
+      setPlaying(false);
+      setNotice('Der Klang konnte nicht gestartet werden.');
+    }
+  }
+
+  // Tastenkürzel
+  const kbdRef = useRef({ state, togglePlay, act });
+  kbdRef.current = { state, togglePlay, act };
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.closest('input, textarea, select, [contenteditable]')) return;
+      const { state: s, togglePlay: tp, act: a } = kbdRef.current;
+      const ref =
+        (s.selected !== null ? s.doc.events[s.selected]?.pitch : null) ??
+        [...s.doc.events].reverse().find((ev) => ev.pitch)?.pitch ??
+        null;
+      const res = shortcutFor(e, {
+        refPitch: ref,
+        fifths: s.doc.key.fifths,
+        clef: s.doc.clef,
+        inputDuration: s.inputDuration,
+        inputDots: s.inputDots,
+      });
+      if (!res) return;
+      e.preventDefault();
+      if (res.type === 'play') return void tp();
+      const sound = res.type === 'insert' ? res.event.pitch : undefined;
+      a(res, sound);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  function onPianoKey(midi: number) {
+    const pitch = spellMidi(midi, doc.key.fifths);
+    setPianoDown([midi]);
+    setTimeout(() => setPianoDown((d) => d.filter((m) => m !== midi)), 250);
+    act({ type: 'insert', event: { pitch, duration: inputDuration() } }, pitch);
+  }
+
+  function exportJson() {
+    const blob = new Blob([JSON.stringify(bar.score, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${doc.title.replace(/[^\p{L}\p{N}_-]+/gu, '_') || 'melodie'}.json`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function importJson(file: File) {
+    try {
+      const result = validateScore(JSON.parse(await file.text()));
+      if (!result.score) {
+        setNotice(`Datei nicht übernommen: ${result.errors[0]}`);
+        return;
+      }
+      act({ type: 'load', doc: docFromScore(result.score) });
+      setNotice(`„${result.score.title}“ geöffnet.`);
+    } catch {
+      setNotice('Die Datei ist kein gültiges JSON.');
+    }
+  }
+
+  const status = (() => {
+    if (doc.events.length === 0) return 'Tippe mit dem Apple Pencil (oder der Maus) ins Notensystem, spiel auf dem Klavier oder tippe Buchstaben wie c, d, e.';
+    const parts: string[] = [];
+    if (selectedEvent) {
+      parts.push(
+        selectedEvent.pitch
+          ? `Ausgewählt: ${germanName(selectedEvent.pitch)} (Note ${selected! + 1})`
+          : `Ausgewählt: Pause (Note ${selected! + 1})`,
+      );
+    }
+    if (bar.missing > 0) parts.push(`Im letzten Takt fehlt noch ${fmtQuarters(bar.missing)}.`);
+    else parts.push(`${bar.score.voices[0].measures.length} volle Takte.`);
+    return parts.join(' · ');
+  })();
+
+  return (
+    <div className="editor">
+      <div className="toolbar" role="toolbar" aria-label="Werkzeuge">
+        <div className="tool-group" aria-label="Notenwert">
+          {DURATIONS.map((d) => {
+            const current = selectedEvent ? selectedEvent.duration.type : state.inputDuration;
+            return (
+              <button
+                key={d.type}
+                className={`tool ${current === d.type ? 'is-on' : ''}`}
+                onClick={() => act({ type: 'setDuration', duration: d.type })}
+                title={`${d.label} (${d.key})`}
+                aria-pressed={current === d.type}
+              >
+                <span className="glyph">{d.glyph}</span>
+                <span className="tool-label">{d.label}</span>
+              </button>
+            );
+          })}
+          <button
+            className={`tool ${(selectedEvent ? selectedEvent.duration.dots : state.inputDots) ? 'is-on' : ''}`}
+            onClick={() => act({ type: 'toggleDot' })}
+            title="Punktierung (.)"
+          >
+            <span className="glyph">•</span>
+            <span className="tool-label">Punkt</span>
+          </button>
+        </div>
+
+        <div className="tool-group" aria-label="Vorzeichen und Pausen">
+          <button className="tool" onClick={() => act({ type: 'alter', delta: 1 })} disabled={!selectedEvent?.pitch} title="Erhöhen (+)">
+            <span className="glyph">♯</span>
+            <span className="tool-label">Kreuz</span>
+          </button>
+          <button className="tool" onClick={() => act({ type: 'alter', delta: -1 })} disabled={!selectedEvent?.pitch} title="Erniedrigen (-)">
+            <span className="glyph">♭</span>
+            <span className="tool-label">b</span>
+          </button>
+          <button className="tool" onClick={() => act({ type: 'natural' })} disabled={!selectedEvent?.pitch?.alter} title="Auflösen (N)">
+            <span className="glyph">♮</span>
+            <span className="tool-label">Auflösen</span>
+          </button>
+          <button
+            className={`tool ${selectedEvent?.tie ? 'is-on' : ''}`}
+            onClick={() => act({ type: 'toggleTie' })}
+            disabled={!selectedEvent?.pitch}
+            title="Haltebogen (T)"
+          >
+            <span className="glyph">‿</span>
+            <span className="tool-label">Bogen</span>
+          </button>
+          <button
+            className="tool"
+            onClick={() =>
+              selectedEvent?.pitch ? act({ type: 'toRest' }) : act({ type: 'insert', event: { duration: inputDuration() } })
+            }
+            title="Pause (0)"
+          >
+            <span className="glyph">𝄽</span>
+            <span className="tool-label">Pause</span>
+          </button>
+        </div>
+
+        <div className="tool-group" aria-label="Bearbeiten">
+          <button className="tool" onClick={() => act({ type: 'delete' })} disabled={doc.events.length === 0} title="Löschen (Entf)">
+            <span className="glyph">⌫</span>
+            <span className="tool-label">Löschen</span>
+          </button>
+          <button className="tool" onClick={() => act({ type: 'undo' })} disabled={!state.past.length} title="Rückgängig (Strg+Z)">
+            <span className="glyph">↶</span>
+            <span className="tool-label">Zurück</span>
+          </button>
+          <button className="tool" onClick={() => act({ type: 'redo' })} disabled={!state.future.length} title="Wiederholen (Strg+Y)">
+            <span className="glyph">↷</span>
+            <span className="tool-label">Vor</span>
+          </button>
+        </div>
+
+        <button className={`play ${playing ? 'is-on' : ''}`} onClick={togglePlay}>
+          {playing ? '■ Stopp' : '▶ Abspielen'}
+        </button>
+      </div>
+
+      <div className="editor-sheet sheet">
+        <div className="sheet-head editor-head">
+          <div>
+            <h2>{doc.title}</h2>
+            <p className="meta">
+              {germanKeyName(doc.key)} · {doc.time.beats}/{doc.time.beatType}-Takt ·{' '}
+              {doc.clef === 'treble' ? 'Violinschlüssel' : 'Bassschlüssel'} · {doc.tempo} ♩/min
+            </p>
+          </div>
+          <button className="secondary small" onClick={() => setShowMeta((s) => !s)} aria-expanded={showMeta}>
+            Stück einstellen
+          </button>
+        </div>
+
+        {showMeta && <MetaPanel doc={doc} onChange={(meta) => act({ type: 'setMeta', meta })} />}
+
+        <EditorScore
+          score={bar.score}
+          showNoteNames={showNames}
+          selectedIds={selectedIds}
+          activeId={activeId}
+          fingerWrites={fingerWrites}
+          sourceOf={bar.sourceOf}
+          eventCount={doc.events.length}
+          onInsert={(pitch, at) => act({ type: 'insert', event: { pitch, duration: inputDuration() }, at }, pitch)}
+          onSelect={(id) => act({ type: 'select', index: id === null ? null : (bar.sourceOf.get(id) ?? null) })}
+          onDragPitch={(id, pitch) => {
+            const idx = bar.sourceOf.get(id);
+            if (idx !== undefined) act({ type: 'setPitch', index: idx, pitch }, pitch);
+          }}
+        />
+        <p className="status" aria-live="polite">
+          {status}
+        </p>
+      </div>
+
+      {notice && (
+        <p className="notice" role="status" onClick={() => setNotice(null)}>
+          {notice}
+        </p>
+      )}
+
+      <div className="editor-options">
+        <label className="check">
+          <input type="checkbox" checked={showNames} onChange={(e) => setShowNames(e.target.checked)} />
+          <span>Notennamen</span>
+        </label>
+        <label className="check">
+          <input type="checkbox" checked={fingerWrites} onChange={(e) => setFingerWrites(e.target.checked)} />
+          <span>Mit dem Finger schreiben</span>
+        </label>
+        <label className="check">
+          <input type="checkbox" checked={showPiano} onChange={(e) => setShowPiano(e.target.checked)} />
+          <span>Bildschirmklavier</span>
+        </label>
+        <button className="link" onClick={() => setShowHelp((h) => !h)} aria-expanded={showHelp}>
+          {showHelp ? '▾' : '▸'} Tastenkürzel
+        </button>
+      </div>
+
+      {showHelp && (
+        <table className="help">
+          <tbody>
+            {SHORTCUT_HELP.map(([k, v]) => (
+              <tr key={k}>
+                <th>{k}</th>
+                <td>{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      {showPiano && (
+        <Klavier
+          lowest={pianoLow}
+          octaves={2}
+          fifths={doc.key.fifths}
+          active={pianoDown}
+          onKey={onPianoKey}
+          onShift={(d) => setPianoLow((l) => Math.max(24, Math.min(84, l + d)))}
+        />
+      )}
+
+      <div className="json-actions file-actions">
+        <button className="secondary" onClick={exportJson} disabled={doc.events.length === 0}>
+          Als JSON speichern
+        </button>
+        <button className="secondary" onClick={() => fileRef.current?.click()}>
+          JSON-Datei öffnen …
+        </button>
+        <button
+          className="secondary danger"
+          onClick={() => act({ type: 'clear' })}
+          disabled={doc.events.length === 0}
+          title="Lässt sich mit „Zurück“ rückgängig machen"
+        >
+          Alles löschen
+        </button>
+        <input
+          ref={fileRef}
+          type="file"
+          accept="application/json,.json"
+          hidden
+          onChange={(e) => {
+            const f = e.target.files?.[0];
+            if (f) importJson(f);
+            e.target.value = '';
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function MetaPanel({ doc, onChange }: { doc: EditorDoc; onChange: (m: Partial<Omit<EditorDoc, 'events'>>) => void }) {
+  const keys = [];
+  for (let f = -7; f <= 7; f++) keys.push(f);
+  return (
+    <div className="meta-panel">
+      <label className="field">
+        <span>Titel</span>
+        <input type="text" value={doc.title} onChange={(e) => onChange({ title: e.target.value })} />
+      </label>
+      <label className="field">
+        <span>Taktart</span>
+        <select
+          value={`${doc.time.beats}/${doc.time.beatType}`}
+          onChange={(e) => {
+            const [beats, beatType] = e.target.value.split('/').map(Number);
+            onChange({ time: { beats, beatType } });
+          }}
+        >
+          {TIMES.map((t) => (
+            <option key={t}>{t}</option>
+          ))}
+        </select>
+      </label>
+      <label className="field">
+        <span>Tonart</span>
+        <select
+          value={`${doc.key.fifths}:${doc.key.mode}`}
+          onChange={(e) => {
+            const [f, mode] = e.target.value.split(':');
+            onChange({ key: { fifths: Number(f), mode: mode as 'major' | 'minor' } });
+          }}
+        >
+          {keys.map((f) => (
+            <option key={`${f}:major`} value={`${f}:major`}>
+              {germanKeyName({ fifths: f, mode: 'major' })}
+            </option>
+          ))}
+          {keys.map((f) => (
+            <option key={`${f}:minor`} value={`${f}:minor`}>
+              {germanKeyName({ fifths: f, mode: 'minor' })}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label className="field">
+        <span>Schlüssel</span>
+        <select value={doc.clef} onChange={(e) => onChange({ clef: e.target.value as 'treble' | 'bass' })}>
+          <option value="treble">Violinschlüssel</option>
+          <option value="bass">Bassschlüssel</option>
+        </select>
+      </label>
+      <label className="field">
+        <span>Tempo: {doc.tempo} ♩/min</span>
+        <input
+          type="range"
+          min={40}
+          max={200}
+          value={doc.tempo}
+          onChange={(e) => onChange({ tempo: Number(e.target.value) })}
+        />
+      </label>
+    </div>
+  );
+}
