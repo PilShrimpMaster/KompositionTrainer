@@ -23,6 +23,8 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 - MIDI-Keyboard über Web MIDI (Chrome am PC): wird automatisch erkannt, nimmt Tonhöhe und Anschlagstärke auf, erkennt Akkorde
 - „Meine Stücke“: Stücke werden in der lokalen Datenbank (IndexedDB) gespeichert und automatisch aktualisiert
 
+**Wiederholung (M2):** Ein Planer nach dem SM-2-Verfahren berechnet aus den Übungsergebnissen für jeden Übungstyp, wann er wieder dran ist. Unter **Lernen** startet die tägliche Wiederholung mit etwa 15 gemischten Aufgaben; schwache Themen bekommen mehr Aufgaben und kommen schon am nächsten Tag wieder.
+
 **Lernen:** Lernpfad mit Fortschritt je Modul; Sicherung aller Daten als Datei, um sie zwischen iPad und PC abzugleichen
 - Übungen der Stufe 1 in Runden zu 10 Aufgaben: Noten lesen, Notenwerte, Intervalle bestimmen, Tonarten an den Vorzeichen, Paralleltonarten, Dreiklänge bestimmen
 - Gehörübungen: Intervalle (mit Liedanfängen als Hörhilfe), Dreiklangsarten, Melodiediktat auf dem Bildschirmklavier
