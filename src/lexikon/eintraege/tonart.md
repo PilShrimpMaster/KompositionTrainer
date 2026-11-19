@@ -3,7 +3,7 @@ id: tonart
 titel: Tonart
 kategorie: Tonarten
 kurz: Grundton und Tongeschlecht (Dur oder Moll) eines Stücks, z. B. D-Dur; die Vorzeichen am Zeilenanfang zeigen sie an.
-synonyme: Tonalität, Tongeschlecht, Dur, Moll
+synonyme: Tonalität, Tongeschlecht
 siehe: vorzeichen, quintenzirkel, paralleltonart, durtonleiter, molltonleiter
 ---
 

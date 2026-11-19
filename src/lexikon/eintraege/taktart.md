@@ -3,7 +3,7 @@ id: taktart
 titel: Taktart
 kategorie: Rhythmus
 kurz: Der Bruch am Anfang des Stücks: oben die Anzahl der Schläge, unten ihr Notenwert. 3/4 heißt drei Viertel pro Takt.
-synonyme: Metrum, Takt, Viervierteltakt, Dreivierteltakt, alla breve
+synonyme: Metrum, Viervierteltakt, Dreivierteltakt, alla breve
 siehe: takt, auftakt, notenwert
 ---
 

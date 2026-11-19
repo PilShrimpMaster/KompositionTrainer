@@ -3,7 +3,7 @@ id: stimmabstand
 titel: Stimmabstand
 kategorie: Satztechnik
 kurz: Zwischen Sopran und Alt sowie zwischen Alt und Tenor liegt höchstens eine Oktave. Zwischen Tenor und Bass darf es mehr sein.
-synonyme: Abstand, enge Lage, weite Lage, Lage
+synonyme: Abstand
 siehe: stimmumfang, stimmkreuzung
 beispiel: C3 E4 G4 C5 | C3 G3 E4 C5
 klang: zusammen

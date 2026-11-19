@@ -3,7 +3,7 @@ id: melodie
 titel: Melodie
 kategorie: Melodik
 kurz: Eine Folge von Tönen, die als zusammenhängende musikalische Gestalt wahrgenommen wird; sie verbindet Tonhöhe und Rhythmus.
-synonyme: Melodik, Tonfolge, Weise, Phrase, Motiv
+synonyme: Melodik, Tonfolge, Weise
 siehe: periode, kadenz, auftakt, intervall
 ---
 

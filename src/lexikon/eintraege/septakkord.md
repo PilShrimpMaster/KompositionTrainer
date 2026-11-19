@@ -3,7 +3,7 @@ id: septakkord
 titel: Septakkord
 kategorie: Harmonik
 kurz: Ein Dreiklang mit einer zusätzlichen Terz darüber, der Septime. Am wichtigsten ist der Dominantseptakkord, etwa G–H–D–F in C-Dur.
-synonyme: Dominantseptakkord, Septime, D7, Vierklang, verminderter Septakkord, halbverminderter Septakkord, großer Septakkord
+synonyme: Vierklang, halbverminderter Septakkord, großer Septakkord
 siehe: dominante, leitton, tritonus, dreiklang
 beispiel: G3 B3 D4 F4 | C4 E4 G4 C5
 klang: zusammen

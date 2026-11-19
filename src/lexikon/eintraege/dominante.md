@@ -3,7 +3,7 @@ id: dominante
 titel: Dominante
 kategorie: Harmonik
 kurz: Der Dreiklang auf der V. Stufe (in C-Dur G–H–D); er enthält den Leitton und drängt zur Tonika. Abkürzung: D.
-synonyme: D, V. Stufe, Dominantseptakkord, D7
+synonyme: D, V. Stufe
 siehe: tonika, subdominante, kadenz, leitton, tritonus
 beispiel: G3 B3 D4 | C4 E4 G4
 klang: zusammen
