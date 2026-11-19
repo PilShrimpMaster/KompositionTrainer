@@ -1,8 +1,13 @@
 import { measureLength, quarterLength } from '../model/duration';
 import { eventId } from '../model/ids';
 import type { Clef, Duration, KeySignature, NoteEvent, Score, TimeSignature } from '../model/types';
+import { satzAusScore, type Satzdaten } from './satzdoc';
 
-/** Ein einstimmiges Stück, wie der Editor es bearbeitet: eine fortlaufende Folge von Noten. */
+/**
+ * Ein Stück, wie der Editor es bearbeitet: eine fortlaufende Folge von Noten.
+ * Bei einem vierstimmigen Satz stehen alle Stimmen in `satz`, `events` und `clef`
+ * gehören dann zur gerade bearbeiteten Stimme.
+ */
 export interface EditorDoc {
   title: string;
   tempo: number;
@@ -10,6 +15,7 @@ export interface EditorDoc {
   key: KeySignature;
   clef: Clef;
   events: NoteEvent[];
+  satz?: Satzdaten;
 }
 
 export interface RebarResult {
@@ -130,6 +136,10 @@ export function rebar(doc: EditorDoc): RebarResult {
  * Übergebundene Teilnoten bleiben getrennte Noten mit Haltebogen.
  */
 export function docFromScore(score: Score): EditorDoc {
+  const satz = satzAusScore(score);
+  if (satz) {
+    return { title: score.title, tempo: score.tempo, time: score.time, key: score.key, clef: 'treble', events: satz.stimmen[0], satz };
+  }
   const voice = score.voices[0];
   const events = voice ? voice.measures.flatMap((m) => m.notes.map((n) => structuredClone(n))) : [];
   // Pausen am Ende füllt der Editor selbst wieder auf

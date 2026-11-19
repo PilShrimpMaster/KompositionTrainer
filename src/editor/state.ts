@@ -1,6 +1,7 @@
 import { moveDiatonic } from '../model/pitch';
 import type { DurationType, NoteEvent, Pitch } from '../model/types';
 import type { EditorDoc } from './rebar';
+import { aktiviere, akkordAnfuegen, alsSatz, synchron } from './satzdoc';
 
 export interface EditorState {
   doc: EditorDoc;
@@ -30,7 +31,14 @@ export type EditorAction =
   | { type: 'setMeta'; meta: Partial<Omit<EditorDoc, 'events'>> }
   | { type: 'load'; doc: EditorDoc }
   | { type: 'undo' }
-  | { type: 'redo' };
+  | { type: 'redo' }
+  /** Vierstimmiger Satz: bearbeitete Stimme wechseln */
+  | { type: 'setAktiv'; stimme: number }
+  /** Vierstimmiger Satz: Akkord auf die Stimmen verteilen (z. B. vom MIDI-Keyboard) */
+  | { type: 'insertChord'; pitches: Pitch[] }
+  /** Zwischen Melodie und vierstimmigem Satz umschalten */
+  | { type: 'setSatz'; an: boolean }
+  | { type: 'setText'; text: string };
 
 const HISTORY_LIMIT = 200;
 
@@ -69,6 +77,27 @@ function updateEvent(state: EditorState, index: number, fn: (ev: NoteEvent) => N
 }
 
 export function editorReducer(state: EditorState, action: EditorAction): EditorState {
+  switch (action.type) {
+    case 'setAktiv':
+      if (!state.doc.satz || state.doc.satz.aktiv === action.stimme) return state;
+      return { ...state, doc: aktiviere(state.doc, action.stimme), selected: null };
+    case 'insertChord': {
+      if (!state.doc.satz) return state;
+      const dur = state.inputDots ? { type: state.inputDuration, dots: state.inputDots } : { type: state.inputDuration };
+      return commit(state, akkordAnfuegen(state.doc, action.pitches, dur), null);
+    }
+    case 'setSatz':
+      if (!!state.doc.satz === action.an) return state;
+      return commit(state, alsSatz(state.doc, action.an), null);
+    case 'setText':
+      if (!state.doc.satz) return state;
+      return commit(state, { ...state.doc, satz: { ...synchron(state.doc).satz!, text: action.text } });
+  }
+  const next = einstimmig(state, action);
+  return next.doc !== state.doc && next.doc.satz ? { ...next, doc: synchron(next.doc) } : next;
+}
+
+function einstimmig(state: EditorState, action: EditorAction): EditorState {
   const { doc, selected } = state;
   switch (action.type) {
     case 'insert': {
@@ -168,6 +197,8 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
         future: state.future.slice(1),
       };
     }
+    default:
+      return state;
   }
 }
 

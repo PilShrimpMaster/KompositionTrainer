@@ -71,7 +71,9 @@ export function PruefPanel({ befunde, auswahl, onAuswahl, hinweise, onHinweise }
             return (
               <li key={i} className={`befund ${b.art} ${auswahl === i ? 'is-on' : ''}`}>
                 <button className="befund-text" onClick={() => onAuswahl(auswahl === i ? null : i)} aria-pressed={auswahl === i}>
-                  <span className="befund-art">{b.art === 'fehler' ? 'Fehler' : 'Hinweis'}</span> Takt {b.takt}: {b.text}
+                  <span className="befund-art">{b.art === 'fehler' ? 'Fehler' : 'Hinweis'}</span>{' '}
+                  {b.bisTakt && b.bisTakt !== b.takt ? `Takt ${b.takt}–${b.bisTakt}` : `Takt ${b.takt}`}
+                  {b.anzahl ? ` (${b.anzahl}×)` : ''}: {b.text}
                 </button>
                 {e && (
                   <button className="link small" onClick={() => oeffneLexikon(e.id)}>

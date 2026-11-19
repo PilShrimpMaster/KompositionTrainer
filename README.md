@@ -8,6 +8,8 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **Satz prüfen (M2):** Notenanzeige für vier Stimmen auf zwei Systemen mit Liedtext und Fermaten; die Prüf-Engine findet Quint- und Oktavparallelen (auch in Gegenbewegung und verdeckt zwischen den Außenstimmen), Fehler im Stimmumfang, zu große Abstände, Stimmkreuzungen und -überschreitungen. Fehler werden rot, Stilhinweise orange im Notenbild markiert, jeweils mit Erklärung und Lexikon-Eintrag. Zum Ausprobieren unter **Hören** den Choralsatz oder den Übungssatz mit Fehlern wählen.
 
+**Chorsatz schreiben (M2):** Unter „Stück einstellen“ die Besetzung „Chorsatz“ wählen. Stimmen über die Knöpfe oder mit Tab wechseln; ein Tipp ins andere System wechselt automatisch die Stimme. Am MIDI-Keyboard verteilt ein Akkord mit vier Tönen sich von oben nach unten auf Sopran, Alt, Tenor und Bass. Einzelne Stimmen lassen sich stumm schalten, Liedtext erscheint unter dem Sopran, und „Satz prüfen“ markiert Fehler live beim Schreiben.
+
 ## M1 Grundlagen
 
 **Schreiben:** einstimmiger Noteneditor

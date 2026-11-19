@@ -13,6 +13,9 @@ export interface Befund {
   ids: string[];
   /** Takt ab 1 */
   takt: number;
+  /** Bei zusammengefassten Befunden: letzter Takt und Anzahl der Stellen */
+  bisTakt?: number;
+  anzahl?: number;
 }
 
 export interface Regel {
@@ -241,7 +244,18 @@ export function pruefeSatz(score: Score, opts: PruefOptionen = {}): Befund[] {
       gesehen.add(key);
       return true;
     })
-    .sort((a, b) => a.takt - b.takt || (a.art === b.art ? 0 : a.art === 'fehler' ? -1 : 1));
+    .sort((a, b) => a.takt - b.takt || (a.art === b.art ? 0 : a.art === 'fehler' ? -1 : 1))
+    .reduce<Befund[]>(zusammenfassen, []);
+}
+
+/** Gleiche Befunde in aufeinanderfolgenden Klängen (z. B. lange zu weite Lage) zu einem zusammenfassen */
+function zusammenfassen(out: Befund[], b: Befund): Befund[] {
+  const gleich = out.find((x) => x.regel === b.regel && x.text === b.text && (x.bisTakt ?? x.takt) >= b.takt - 1);
+  if (!gleich) return [...out, b];
+  gleich.ids = [...new Set([...gleich.ids, ...b.ids])];
+  gleich.bisTakt = Math.max(gleich.bisTakt ?? gleich.takt, b.takt);
+  gleich.anzahl = (gleich.anzahl ?? 1) + 1;
+  return out;
 }
 
 export function regel(id: string): Regel | undefined {
