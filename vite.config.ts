@@ -3,8 +3,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// GitHub Pages liefert die App unter https://<user>.github.io/kompositiontrainer/ aus.
-const base = process.env.BASE_PATH ?? '/kompositiontrainer/';
+// GitHub Pages liefert die App unter https://<user>.github.io/KompositionTrainer/ aus.
+const base = process.env.BASE_PATH ?? '/KompositionTrainer/';
 
 export default defineConfig({
   base,

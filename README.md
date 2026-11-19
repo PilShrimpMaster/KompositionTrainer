@@ -2,7 +2,7 @@
 
 Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klassischer Musik von Grund auf lernt: von Noten und Intervallen über den vierstimmigen Satz und Kontrapunkt bis zu Formenlehre, Instrumentation und eigenen Werken.
 
-**App öffnen:** https://pilshrimpmaster.github.io/kompositiontrainer/
+**App öffnen:** https://pilshrimpmaster.github.io/KompositionTrainer/
 
 ## Stand: M0 Fundament
 
@@ -17,7 +17,7 @@ Der vollständige Plan mit allen Meilensteinen (M0 bis M6) steht in den [GitHub-
 
 ## Auf dem iPad testen
 
-1. In Safari https://pilshrimpmaster.github.io/kompositiontrainer/ öffnen.
+1. In Safari https://pilshrimpmaster.github.io/KompositionTrainer/ öffnen.
 2. Teilen-Symbol → „Zum Home-Bildschirm“ → „Hinzufügen“.
 3. Die App vom Home-Bildschirm starten, eine Melodie wählen und auf „Abspielen“ tippen. Ton kommt erst nach dem ersten Antippen, das ist eine Vorgabe von Safari.
 
