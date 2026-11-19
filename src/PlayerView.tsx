@@ -159,6 +159,7 @@ export function PlayerView() {
             ) : (
               <PruefPanel
                 befunde={pruefung.befunde}
+                score={score}
                 auswahl={auswahl}
                 onAuswahl={setAuswahl}
                 hinweise={pruefung.hinweise}

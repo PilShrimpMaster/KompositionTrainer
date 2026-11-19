@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react';
+import { ausschnitt, satzAnfrage } from '../ki/erklaeren';
+import { KiErklaerung } from '../ki/KiErklaerung';
 import { eintrag } from '../lexikon/lexikon';
 import type { Score } from '../model/types';
 import { useNavigation } from '../navigation';
@@ -42,10 +44,12 @@ interface Props {
   onAuswahl: (i: number | null) => void;
   hinweise: boolean;
   onHinweise: (v: boolean) => void;
+  /** Der geprüfte Satz; mit ihm gibt es zu jedem Befund „Erklär mir das“ */
+  score?: Score;
 }
 
 /** Liste der Befunde mit Erklärung und Verweis ins Lexikon */
-export function PruefPanel({ befunde, auswahl, onAuswahl, hinweise, onHinweise }: Props) {
+export function PruefPanel({ befunde, auswahl, onAuswahl, hinweise, onHinweise, score }: Props) {
   const { oeffneLexikon } = useNavigation();
   const fehler = befunde.filter((b) => b.art === 'fehler').length;
   const hinw = befunde.length - fehler;
@@ -79,6 +83,16 @@ export function PruefPanel({ befunde, auswahl, onAuswahl, hinweise, onHinweise }
                   <button className="link small" onClick={() => oeffneLexikon(e.id)}>
                     Mehr dazu: {e.titel}
                   </button>
+                )}
+                {score && score.voices.length === 4 && (
+                  <KiErklaerung
+                    key={`${b.regel}-${b.takt}-${b.ids.join(',')}`}
+                    klein
+                    anfrage={() => {
+                      const { text, von, bis } = satzAnfrage(b, score);
+                      return { text, vorlage: score, original: ausschnitt(score, von, bis, `Dein Satz, Takt ${von}–${bis}`) };
+                    }}
+                  />
                 )}
               </li>
             );

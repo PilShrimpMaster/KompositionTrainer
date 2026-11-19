@@ -8,6 +8,8 @@ import { eintrag } from '../lexikon/lexikon';
 import { useNavigation } from '../navigation';
 import { ergebnisSpeichern, modulSicherheit } from './fortschritt';
 import { ScoreView } from '../ScoreView';
+import { uebungAnfrage } from '../ki/erklaeren';
+import { KiErklaerung } from '../ki/KiErklaerung';
 
 const RUNDE = 10;
 
@@ -242,6 +244,10 @@ export function UebungView({ typ, folge, titel, onEnde, zurueck = 'Lernpfad' }: 
               </button>
             )}
           </div>
+          <KiErklaerung
+            key={`${nr}`}
+            anfrage={() => ({ text: uebungAnfrage(aufgabe, antwort === 'falsch' ? gespielt.map((m) => germanName(spellMidi(m, 0))).join(' ') : antwort), vorlage: aufgabe.satz ?? null })}
+          />
         </div>
       )}
     </section>

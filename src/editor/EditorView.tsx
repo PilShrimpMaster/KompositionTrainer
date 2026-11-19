@@ -500,6 +500,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           {pruefen && (
             <PruefPanel
               befunde={pruefung.befunde}
+              score={bar.score}
               auswahl={auswahl}
               onAuswahl={setAuswahl}
               hinweise={pruefung.hinweise}

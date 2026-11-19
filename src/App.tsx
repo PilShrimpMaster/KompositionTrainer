@@ -6,6 +6,7 @@ import type { Schreibaufgabe } from './lernpfad/lektion';
 import { alleAufgaben } from './lernpfad/lektionen';
 import { NavigationContext, type Navigation } from './navigation';
 import { PlayerView } from './PlayerView';
+import { KiEinstellungen } from './ki/KiErklaerung';
 
 type Tab = 'lernen' | 'lexikon' | 'schreiben' | 'hoeren';
 const TABS: Tab[] = ['lernen', 'lexikon', 'schreiben', 'hoeren'];
@@ -108,6 +109,10 @@ export function App() {
       </NavigationContext.Provider>
 
       <footer>
+        <details className="ki-fuss">
+          <summary>KI-Einstellungen</summary>
+          <KiEinstellungen onFertig={() => {}} />
+        </details>
         Klavierklang: Salamander Grand Piano von Alexander Holm (CC BY 3.0). Version {__APP_VERSION__}
       </footer>
     </div>
