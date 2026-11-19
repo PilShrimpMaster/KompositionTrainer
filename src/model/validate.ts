@@ -53,8 +53,14 @@ export function validateScore(data: unknown): ValidationResult {
       if (!isObj(voice)) return errors.push(`${vName} ist kein Objekt.`);
       if (voice.clef !== 'treble' && voice.clef !== 'bass')
         errors.push(`${vName}: „clef“ muss "treble" oder "bass" sein.`);
+      if (voice.staff !== undefined && (!Number.isInteger(voice.staff) || (voice.staff as number) < 0))
+        errors.push(`${vName}: „staff“ muss eine Zahl ab 0 sein.`);
+      if (voice.stem !== undefined && voice.stem !== 'up' && voice.stem !== 'down')
+        errors.push(`${vName}: „stem“ muss "up" oder "down" sein.`);
       if (!Array.isArray(voice.measures) || voice.measures.length === 0)
         return errors.push(`${vName}: „measures“ fehlt oder ist leer.`);
+      const voiceMeasures = voice.measures;
+      let pickup = false;
 
       voice.measures.forEach((m, mi) => {
         const where = `${vName}, Takt ${mi + 1}`;
@@ -72,6 +78,7 @@ export function validateScore(data: unknown): ValidationResult {
             return;
           }
           sum += quarterLength({ type: n.duration.type as never, dots });
+          if (n.lyric !== undefined && typeof n.lyric !== 'string') errors.push(`${at}: „lyric“ muss Text sein.`);
           if (n.velocity !== undefined && (typeof n.velocity !== 'number' || n.velocity < 1 || n.velocity > 127)) {
             errors.push(`${at}: „velocity“ muss zwischen 1 und 127 liegen.`);
           }
@@ -91,7 +98,10 @@ export function validateScore(data: unknown): ValidationResult {
         });
         if (barLength && Math.abs(sum - barLength) > 1e-9) {
           const isPickup = mi === 0 && sum < barLength;
-          if (!isPickup) {
+          if (isPickup) pickup = true;
+          // Bei Auftakt darf der letzte Takt um den Auftakt kürzer sein
+          const isEnd = pickup && mi === voiceMeasures.length - 1 && mi > 0 && sum < barLength;
+          if (!isPickup && !isEnd) {
             errors.push(
               `${where}: enthält ${formatQuarters(sum)} statt ${formatQuarters(barLength)} Viertel.`,
             );

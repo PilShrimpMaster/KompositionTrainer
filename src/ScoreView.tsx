@@ -7,10 +7,12 @@ interface Props {
   showNoteNames: boolean;
   /** Kennung der gerade klingenden Note */
   activeId: string | null;
+  /** Zusätzliche CSS-Klassen je Note, z. B. für Fehler der Prüf-Engine */
+  markierungen?: Map<string, string>;
 }
 
 /** Zeigt eine Partitur mit VexFlow an und passt den Umbruch an die Bildschirmbreite an. */
-export function ScoreView({ score, showNoteNames, activeId }: Props) {
+export function ScoreView({ score, showNoteNames, activeId, markierungen }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const elementsRef = useRef<Map<string, SVGElement>>(new Map());
   const [width, setWidth] = useState(0);
@@ -43,6 +45,12 @@ export function ScoreView({ score, showNoteNames, activeId }: Props) {
     els.forEach((el) => el.classList.remove('is-playing'));
     if (activeId) els.get(activeId)?.classList.add('is-playing');
   }, [activeId, score, width, showNoteNames]);
+
+  useEffect(() => {
+    const els = elementsRef.current;
+    els.forEach((el) => el.classList.remove('is-fehler', 'is-hinweis', 'is-auswahl'));
+    markierungen?.forEach((cls, id) => els.get(id)?.classList.add(...cls.split(' ')));
+  }, [markierungen, score, width, showNoteNames]);
 
   return (
     <div className="score">
