@@ -3,8 +3,8 @@ id: variation
 titel: Variation
 kategorie: Form
 kurz: Ein Thema wird vorgestellt und dann mehrfach verändert: in Melodie, Rhythmus, Harmonie, Tongeschlecht oder Charakter.
-synonyme: Variationen, Thema mit Variationen, variieren, Variationssatz, Chaconne, Passacaglia, Ostinato, Basso ostinato
-siehe: thema, motiv, sequenz
+synonyme: Variationen, Thema mit Variationen, variieren, Variationssatz, Chaconne, Passacaglia
+siehe: thema, motiv, sequenz, ostinato
 ---
 
 Bei **Thema mit Variationen** erklingt zuerst ein meist schlichtes Thema, dann folgen Veränderungen. Jede Variation behält etwas bei (oft die Harmoniefolge oder die Taktzahl) und verändert anderes:

@@ -3,8 +3,8 @@ id: kirchentonarten
 titel: Kirchentonarten
 kategorie: Tonarten
 kurz: Die alten Modi der Musik vor 1600: Dorisch, Phrygisch, Lydisch, Mixolydisch, Äolisch, Ionisch. Jeder entsteht, wenn man die weißen Tasten auf einem anderen Ton beginnt.
-synonyme: Kirchentonart, Modus, Modi, modal, dorisch, phrygisch, lydisch, mixolydisch, ionisch, lokrisch, Skalen im Jazz
-siehe: tonleiter, durtonleiter, molltonleiter, renaissance
+synonyme: Kirchentonart, Modus, Modi, modal, dorisch, phrygisch, lydisch, mixolydisch, ionisch, lokrisch
+siehe: tonleiter, durtonleiter, molltonleiter, renaissance, modaler-jazz
 beispiel: D4 E4 F4 G4 A4 B4 C5 D5
 klang: nacheinander
 schluessel: treble
