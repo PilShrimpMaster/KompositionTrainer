@@ -9,6 +9,7 @@ import { analysiere, funktionPasst, funktionsfolge } from '../satz/analyse';
 import { pruefeSatz } from '../satz/regeln';
 import { pruefeKontrapunkt } from '../kontrapunkt/fux';
 import { findeMotive } from '../kontrapunkt/motive';
+import { MODUS_NAMEN, modusLeiter, type ModusName } from '../uebungen/modal';
 import { stimmenVon } from '../editor/satzdoc';
 import { parseTonart } from './kompakt';
 import { grundton } from '../model/tonart';
@@ -121,6 +122,31 @@ export function pruefe(doc: EditorDoc, kriterien: string[]): Pruefpunkt[] {
         const max = Math.max(...toene.map(toMidi));
         const ok = toene.filter((p) => toMidi(p) === max).length === 1;
         return { text: 'Der höchste Ton kommt nur einmal vor (Höhepunkt)', ok, hinweis: 'Ein einziger Gipfelton macht die Melodie zielgerichtet.' };
+      }
+      case 'finalis': {
+        const step = arg as Step;
+        return {
+          text: `Endet auf der Finalis ${germanName({ step, octave: 4 })}`,
+          ok: !!letzte && letzte.pitch!.step === step && !letzte.pitch!.alter,
+          hinweis: 'Im Modus ist der Schlusston die Finalis, der Grundton des Modus.',
+        };
+      }
+      case 'modus':
+      case 'charakterton': {
+        const modus = MODUS_NAMEN.find((m) => m.toLowerCase() === (arg ?? '').toLowerCase().replace('ae', 'ä')) as ModusName | undefined;
+        if (!modus || !args[1]) return { text: `Unbekannter Modus „${k}“`, ok: false };
+        const grund: Pitch = { step: args[1] as Step, octave: 4 };
+        const leiter = modusLeiter(grund, modus);
+        const klasse = (p: Pitch) => ((toMidi(p) % 12) + 12) % 12;
+        const erlaubt = new Set(leiter.map(klasse));
+        if (name === 'modus') {
+          const fremd = toene.filter((p) => !erlaubt.has(klasse(p)));
+          return { text: `Nur Töne aus ${germanName(grund)}-${modus}`, ok: fremd.length === 0, hinweis: fremd.length ? `Nicht im Modus: ${[...new Set(fremd.map(germanName))].join(', ')}.` : undefined };
+        }
+        const FARBE: Record<ModusName, number> = { Ionisch: 6, Dorisch: 5, Phrygisch: 1, Lydisch: 3, Mixolydisch: 6, Äolisch: 5 };
+        const ton = leiter[FARBE[modus]];
+        const anzahl = toene.filter((p) => klasse(p) === klasse(ton)).length;
+        return { text: `Der Farbton ${germanName(ton)} kommt mindestens zweimal vor`, ok: anzahl >= 2, hinweis: `Der Ton ${germanName(ton)} unterscheidet ${modus} von Dur und Moll. Bisher ${anzahl}-mal.` };
       }
       case 'vierstimmig':
       case 'vollstaendig':

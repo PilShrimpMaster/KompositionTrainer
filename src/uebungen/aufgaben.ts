@@ -1,5 +1,7 @@
 import { konsonanzAufgabe, kpFehlerAufgabe, motivformAufgabe } from '../kontrapunkt/uebungen';
 import { quarterLength } from '../model/duration';
+import { modusAufgabe } from './modal';
+import { analyseAufgabe } from './analyse';
 import { fromDiatonic, germanKeyName, germanName, germanNameWithOctave, toMidi, diatonicIndex } from '../model/pitch';
 import type { Clef, Duration, KeySignature, Pitch, Score, Step } from '../model/types';
 import { funktionAufgabe, kadenzAufgabe, satzfehlerAufgabe, umkehrungAufgabe } from './satzuebungen';
@@ -35,6 +37,8 @@ export interface Aufgabe {
   begriff: string;
   /** Diktat: erwartete Töne (der erste ist vorgegeben) */
   diktat?: Pitch[];
+  /** Analyse: Takte (ab 0), die man im Notenbild markieren soll */
+  markieren?: number[];
 }
 
 export type UebungTyp =
@@ -53,7 +57,9 @@ export type UebungTyp =
   | 'satzfehler-finden'
   | 'konsonanz-bestimmen'
   | 'kp-fehler-finden'
-  | 'motivform-bestimmen';
+  | 'motivform-bestimmen'
+  | 'modus-hoeren'
+  | 'analyse-markieren';
 
 export interface UebungInfo {
   typ: UebungTyp;
@@ -79,6 +85,8 @@ export const UEBUNGEN: UebungInfo[] = [
   { typ: 'konsonanz-bestimmen', titel: 'Konsonanz oder Dissonanz', modul: 's3-gattung1', hoeren: false },
   { typ: 'kp-fehler-finden', titel: 'Fehler im Kontrapunkt finden', modul: 's3-gattung2', hoeren: false },
   { typ: 'motivform-bestimmen', titel: 'Motiv, Umkehrung, Krebs', modul: 's3-imitation', hoeren: false },
+  { typ: 'modus-hoeren', titel: 'Modi hören', modul: 's3-modal-heute', hoeren: true },
+  { typ: 'analyse-markieren', titel: 'Werke analysieren', modul: 's3-invention', hoeren: false },
 ];
 
 /** Schwierigkeit 1–3, abhängig von der Sicherheit im Modul */
@@ -396,6 +404,10 @@ export function erzeugeAufgabe(typ: UebungTyp, stufe: Stufe, rng: Rng = Math.ran
       return kpFehlerAufgabe(rng, stufe);
     case 'motivform-bestimmen':
       return motivformAufgabe(rng, stufe);
+    case 'modus-hoeren':
+      return modusAufgabe(rng, stufe);
+    case 'analyse-markieren':
+      return analyseAufgabe(rng, stufe);
   }
 }
 
