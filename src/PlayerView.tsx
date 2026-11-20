@@ -6,6 +6,7 @@ import type { Score } from './model/types';
 import { validateScore } from './model/validate';
 import { ScoreView } from './ScoreView';
 import { markierungenFuer, PruefPanel, usePruefung } from './satz/PruefPanel';
+import { ladeDatei, NOTENDATEIEN, speichereMusicXml } from './musicxml/datei';
 
 type AudioState = 'aus' | 'lädt' | 'bereit' | 'fehler';
 
@@ -46,6 +47,7 @@ export function PlayerView() {
     setJsonErrors([]);
     setGeprueft(false);
     setAuswahl(null);
+    if (id !== 'eigene') setDateiHinweis(null);
   }
 
   async function handlePlay() {
@@ -86,11 +88,12 @@ export function PlayerView() {
     else setJsonErrors(result.errors);
   }
 
+  const [dateiHinweis, setDateiHinweis] = useState<{ fehler?: string; hinweise: string[] } | null>(null);
+
   async function handleFile(file: File) {
-    const text = await file.text();
-    setJsonText(text);
-    setJsonOpen(true);
-    applyJson(text);
+    const r = await ladeDatei(file);
+    setDateiHinweis({ fehler: r.fehler, hinweise: r.hinweise });
+    if (r.score) loadScore(r.score);
   }
 
   return (
@@ -143,6 +146,40 @@ export function PlayerView() {
           </p>
         )}
 
+        <div className="json-actions file-actions">
+          <button className="secondary" onClick={() => fileRef.current?.click()}>
+            Datei öffnen (MusicXML aus MuseScore, JSON) …
+          </button>
+          <button className="secondary" onClick={() => speichereMusicXml(score)} title="MusicXML öffnet sich direkt in MuseScore Studio 4">
+            Für MuseScore speichern
+          </button>
+          <input
+            ref={fileRef}
+            type="file"
+            accept={NOTENDATEIEN}
+            hidden
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) handleFile(f);
+              e.target.value = '';
+            }}
+          />
+        </div>
+        {dateiHinweis && (dateiHinweis.fehler || dateiHinweis.hinweise.length > 0) && (
+          <div className={dateiHinweis.fehler ? 'error' : 'notice'} role="status" onClick={() => setDateiHinweis(null)}>
+            {dateiHinweis.fehler ?? (
+              <>
+                Übernommen, mit kleinen Einschränkungen:
+                <ul>
+                  {dateiHinweis.hinweise.map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+        )}
+
         <section className="sheet" aria-label="Noten">
           <div className="sheet-head">
             <h2>{score.title}</h2>
@@ -188,20 +225,6 @@ export function PlayerView() {
               />
               <div className="json-actions">
                 <button onClick={() => applyJson(jsonText)}>Übernehmen</button>
-                <button className="secondary" onClick={() => fileRef.current?.click()}>
-                  JSON-Datei öffnen …
-                </button>
-                <input
-                  ref={fileRef}
-                  type="file"
-                  accept="application/json,.json"
-                  hidden
-                  onChange={(e) => {
-                    const f = e.target.files?.[0];
-                    if (f) handleFile(f);
-                    e.target.value = '';
-                  }}
-                />
               </div>
               {jsonErrors.length > 0 && (
                 <ul className="error-list">

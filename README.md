@@ -4,7 +4,11 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **App öffnen:** https://pilshrimpmaster.github.io/KompositionTrainer/
 
-## Stand: M2 Vierstimmiger Satz
+## Stand: M3 Kontrapunkt und Analyse (in Arbeit)
+
+**Brücke zu MuseScore (M3):** Unter „Schreiben“ und „Hören“ speichert „Für MuseScore speichern“ das Stück als MusicXML (`.musicxml`), das sich direkt in MuseScore Studio 4 (und Finale, Sibelius, Dorico) öffnen lässt. „Datei öffnen“ liest MusicXML, auch komprimiert (`.mxl`, MuseScores Standard beim Export), und das eigene JSON. Übernommen werden Noten, Pausen, Punktierung, Bögen, Vorzeichen, Tonart, Taktart, Auftakt, mehrere Stimmen und Systeme, Liedtext, Fermaten und Tempo; vier einzelne Chorstimmen werden zum Chorsatz auf zwei Systemen. Was nicht ins Lernmodell passt (Akkorde in einer Stimme, Vorschläge, N-tolen, Takt- und Tonartwechsel, mehr als zwei Stimmen je System), wird angenähert und beim Öffnen genannt. So lassen sich eigene Stücke und gemeinfreie Werke hier prüfen, analysieren und anhören.
+
+## M2 Vierstimmiger Satz
 
 **Satz prüfen (M2):** Notenanzeige für vier Stimmen auf zwei Systemen mit Liedtext und Fermaten; die Prüf-Engine findet Quint- und Oktavparallelen (auch in Gegenbewegung und verdeckt zwischen den Außenstimmen), Fehler im Stimmumfang, zu große Abstände, Stimmkreuzungen und -überschreitungen. Dazu erkennt sie jeden Akkord mit Stufe, Umkehrung und Funktion (T, S, D, Tp …) und prüft Verdopplungen (kein verdoppelter Leitton), die Auflösung von Leitton und Septime sowie melodische Sprünge (keine übermäßigen Intervalle, nichts über die Oktave). Fehler werden rot, Stilhinweise orange im Notenbild markiert, jeweils mit Erklärung und Lexikon-Eintrag. Zum Ausprobieren unter **Hören** den Choralsatz oder den Übungssatz mit Fehlern wählen.
 

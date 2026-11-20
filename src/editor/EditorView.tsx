@@ -2,7 +2,6 @@ import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { initAudio, play, playNote } from '../audio/player';
 import { germanKeyName, germanName, toToneName } from '../model/pitch';
 import type { DurationType, Pitch } from '../model/types';
-import { validateScore } from '../model/validate';
 import { EditorScore } from './EditorScore';
 import { Klavier } from './Klavier';
 import type { Schreibaufgabe } from '../lernpfad/lektion';
@@ -10,6 +9,8 @@ import { AufgabePanel } from './AufgabePanel';
 import { docFromScore, rebar, type EditorDoc } from './rebar';
 import { alsSatz, rebarSatz, STIMMEN, type SatzRebar } from './satzdoc';
 import { markierungenFuer, PruefPanel, usePruefung } from '../satz/PruefPanel';
+import { measureLength, quarterLength } from '../model/duration';
+import { ladeDatei, NOTENDATEIEN, speichereJson, speichereMusicXml } from '../musicxml/datei';
 import { SHORTCUT_HELP, shortcutFor } from './shortcuts';
 import { editorReducer, emptyDoc, initialState, type EditorAction } from './state';
 import { spellMidi } from '../model/pitch';
@@ -256,29 +257,21 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
     act({ type: 'insert', event: { pitch, duration: inputDuration() } }, pitch);
   }
 
-  function exportJson() {
-    const blob = new Blob([JSON.stringify(bar.score, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${doc.title.replace(/[^\p{L}\p{N}_-]+/gu, '_') || 'melodie'}.json`;
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
-
-  async function importJson(file: File) {
-    try {
-      const result = validateScore(JSON.parse(await file.text()));
-      if (!result.score) {
-        setNotice(`Datei nicht übernommen: ${result.errors[0]}`);
-        return;
-      }
-      setStueckId(null); // geöffnete Datei überschreibt kein gespeichertes Stück
-      act({ type: 'load', doc: docFromScore(result.score) });
-      setNotice(`„${result.score.title}“ geöffnet.`);
-    } catch {
-      setNotice('Die Datei ist kein gültiges JSON.');
+  async function importDatei(file: File) {
+    const r = await ladeDatei(file);
+    if (!r.score) {
+      setNotice(`Datei nicht übernommen: ${r.fehler}`);
+      return;
     }
+    setStueckId(null); // geöffnete Datei überschreibt kein gespeichertes Stück
+    act({ type: 'load', doc: docFromScore(r.score) });
+    const n = r.score.voices.length;
+    const teile = [`„${r.score.title}“ geöffnet.`];
+    if (n !== 1 && n !== 4) teile.push(`Der Editor zeigt nur die erste von ${n} Stimmen; alle Stimmen siehst und hörst du unter „Hören“.`);
+    const takt1 = r.score.voices[0].measures[0].notes.reduce((q, ev) => q + quarterLength(ev.duration), 0);
+    if (takt1 < measureLength(r.score.time) - 1e-6) teile.push('Der Auftakt geht im Editor verloren, weil er die Taktstriche neu setzt; unter „Hören“ bleibt er erhalten.');
+    if (r.hinweise.length) teile.push(...r.hinweise);
+    setNotice(teile.join(' '));
   }
 
   const status = (() => {
@@ -584,11 +577,14 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
       />
 
       <div className="json-actions file-actions">
-        <button className="secondary" onClick={exportJson} disabled={doc.events.length === 0}>
+        <button className="secondary" onClick={() => speichereMusicXml(bar.score)} disabled={doc.events.length === 0} title="MusicXML öffnet sich direkt in MuseScore Studio 4">
+          Für MuseScore speichern
+        </button>
+        <button className="secondary" onClick={() => speichereJson(bar.score)} disabled={doc.events.length === 0}>
           Als JSON speichern
         </button>
         <button className="secondary" onClick={() => fileRef.current?.click()}>
-          JSON-Datei öffnen …
+          Datei öffnen (MusicXML, JSON) …
         </button>
         <button
           className="secondary danger"
@@ -601,11 +597,11 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
         <input
           ref={fileRef}
           type="file"
-          accept="application/json,.json"
+          accept={NOTENDATEIEN}
           hidden
           onChange={(e) => {
             const f = e.target.files?.[0];
-            if (f) importJson(f);
+            if (f) importDatei(f);
             e.target.value = '';
           }}
         />
