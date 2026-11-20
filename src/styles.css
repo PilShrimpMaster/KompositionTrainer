@@ -1350,3 +1350,37 @@ a.lexikon-link:hover {
 .form-kadenzen .kadenz-halb {
   color: #0a58ca;
 }
+
+/* Fassungen und Portfolio */
+.fassungen {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 8px 0 12px;
+}
+.fassung-neu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.fassung-neu input[type='text'] {
+  flex: 1 1 200px;
+  min-width: 0;
+  font: inherit;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.fassung-liste {
+  margin: 8px 0 0;
+  padding-left: 22px;
+}
+.fassung-liste li {
+  margin: 4px 0;
+}
+.stueck-filter {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0;
+}
