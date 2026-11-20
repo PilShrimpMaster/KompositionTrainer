@@ -4,13 +4,19 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **App öffnen:** https://pilshrimpmaster.github.io/KompositionTrainer/
 
-## Stand: M4 Melodik und Formenlehre (in Arbeit)
+## Stand: M4 Melodik und Formenlehre
 
 **Klaviersatz (M4):** Besetzung „Klavier: Melodie mit Begleitung“. Die Harmonie wird je Taktschwerpunkt aus Melodie und Begleitung bestimmt, auch bei Alberti-Bass, Walzerbass und gebrochenen Akkorden, und Takt für Takt angezeigt. Die Prüfung meldet Parallelen zwischen Melodie und Bass, falsche Schlüsse, fremde Melodietöne auf schwerer Zeit, Quartsextakkorde und Begleitung über der Melodie.
 
 **Formenlehre (M4):** „Form zeigen“ im Editor und in Lektionsbeispielen: Zweitaktglieder mit Buchstaben (a, a′, b), Kadenzen alle vier Takte (Halb-, Ganzschluss, Kadenz in fremder Tonart) und die erkannte Form: Periode, Satz, dreiteilige Liedform, Menuett mit Trio. Prüfkriterien `periode`, `satzform`, `liedform`, `menuett-trio`, `halbschluss N`, `ganzschluss-takt N`, `begleitung-noten N`, `blues`.
 
 **Stufe 4 (M4):** Lektionen Melodiebau, Periode und Satz, Begleitmuster, Liedform, Menuett und Trio, Rondo und Variation, Einblick Sonatensatz, Seitenblick Songformen und 12-Takt-Blues sowie das Abschlussprojekt „Menuett mit Trio für Klavier“. Neue Übungen „Formen erkennen“ und „Begleitmuster erkennen“, weitere Analysefragen (Nachsatz, Mittelteil einer Liedform, Beginn des Trios).
+
+**Portfolio und Fassungen (M4):** Unter „Meine Stücke“ lassen sich Fassungen eines Stücks sichern und zurückholen, Stücke ins Portfolio aufnehmen (auch direkt nach einer bestandenen Aufgabe) und einzeln oder als Fassung nach MuseScore exportieren.
+
+**KI-Feedback (M4):** „Feedback zu meinem Stück“ im Editor schickt die Noten samt Form-, Kadenz- und Harmonieanalyse an Claude und zeigt Stärken, konkrete Verbesserungen mit Notenbeispiel und einen nächsten Schritt; wählbarer Schwerpunkt Melodie, Harmonie oder Form. Der API-Schlüssel bleibt im Browser.
+
+**Instrumente (M4):** Lektion „Instrumente und Transposition“ mit Umfang, guter Lage und Register von Saxophonen, Klarinette, Trompete, Horn, Flöte, Violine und Violoncello; Übung „Transponieren“ (klingend ↔ notiert, Vorzeichen der Stimme) und Prüfkriterien `instrument`, `gute-lage`, `transponiert`.
 
 ## M3 Kontrapunkt und Analyse
 

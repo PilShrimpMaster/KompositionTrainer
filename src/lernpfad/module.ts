@@ -53,5 +53,6 @@ export const MODULE: Modul[] = [
   { id: 's4-menuett', stufe: 4, titel: 'Menuett und Trio', ziel: 'Die Tanzform der Klassik mit ihren zwei Teilen und dem Trio' },
   { id: 's4-rondo-variation', stufe: 4, titel: 'Rondo und Variation', ziel: 'Ein Thema wiederkehren lassen und verändern' },
   { id: 's4-sonatensatz', stufe: 4, titel: 'Einblick: Sonatensatz', ziel: 'Exposition, Durchführung und Reprise im Überblick' },
+  { id: 's4-instrumente', stufe: 4, titel: 'Instrumente und Transposition', ziel: 'Transponierende Instrumente lesen, Tonumfänge kennen und für ein Instrument schreiben' },
   { id: 's4-songformen', stufe: 4, titel: 'Seitenblick: Songformen und Blues', ziel: 'Strophe, Refrain, Bridge, AABA und der 12-Takt-Blues' },
 ];

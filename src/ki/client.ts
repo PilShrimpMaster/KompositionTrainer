@@ -8,7 +8,7 @@ export class KiFehler extends Error {}
  * Fragt Claude direkt aus dem Browser. Der Schlüssel kommt aus dem localStorage
  * und geht nur an api.anthropic.com.
  */
-export async function frageClaude(text: string): Promise<string> {
+export async function frageClaude(text: string, art: { system: string; schema: object } = { system: SYSTEM, schema: SCHEMA }): Promise<string> {
   const apiKey = kiSchluessel();
   if (!apiKey) throw new KiFehler('Kein API-Schlüssel hinterlegt.');
   const client = new Anthropic({ apiKey, dangerouslyAllowBrowser: true });
@@ -16,9 +16,9 @@ export async function frageClaude(text: string): Promise<string> {
     const antwort = await client.messages.create({
       model: KI_MODELL,
       max_tokens: 16000,
-      system: SYSTEM,
+      system: art.system,
       messages: [{ role: 'user', content: text }],
-      output_config: { effort: 'medium', format: { type: 'json_schema', schema: SCHEMA as unknown as Record<string, unknown> } },
+      output_config: { effort: 'medium', format: { type: 'json_schema', schema: art.schema as unknown as Record<string, unknown> } },
     });
     zaehle(antwort.usage.input_tokens, antwort.usage.output_tokens);
     if (antwort.stop_reason === 'refusal') throw new KiFehler('Claude hat diese Anfrage abgelehnt.');

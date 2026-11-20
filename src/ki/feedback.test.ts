@@ -1,0 +1,43 @@
+import { describe, expect, it } from 'vitest';
+import { menuettMitTrio } from '../data/formbeispiele';
+import { FEEDBACK_SCHEMA, feedbackAnfrage, feedbackLesen } from './feedback';
+
+describe('KI-Feedback zu eigenen Stücken', () => {
+  it('schickt das ganze Stück mit Analyse und Schwerpunkt', () => {
+    const text = feedbackAnfrage(menuettMitTrio(), { besetzung: 'Klaviersatz', befunde: [], fokus: 'form', aufgabe: 'Schreib ein Menuett mit Trio.' });
+    expect(text).toContain('Klaviersatz, C-Dur, 3/4-Takt');
+    expect(text).toContain('32 Takte');
+    expect(text).toContain('Melodie: E5:4 C5:4 G4:4 | F5:4');
+    expect(text).toContain('Begleitung: C3:2.');
+    expect(text).toContain('Form: Menuett mit Trio');
+    expect(text).toContain('Takt 8: Halbschluss auf G-Dur');
+    expect(text).toContain('Harmonien: 1:T');
+    expect(text).toContain('Lösung dieser Aufgabe');
+    expect(text).toContain('Konzentriere dich auf die Form');
+    expect(text).not.toMatch(/sk-ant/);
+  });
+
+  it('liest die Antwort robust', () => {
+    const f = feedbackLesen(
+      JSON.stringify({
+        einordnung: ' Ein klassisches Menuett. ',
+        staerken: ['Klarer Halbschluss in Takt 8', 3, ''],
+        verbesserungen: [{ takte: 'Takt 9–12', beobachtung: 'Die Sequenz bleibt stehen.', vorschlag: 'Führe sie abwärts.', beispiel: 'G5:4 F5 E5 | F5:4 E5 D5' }, null, { takte: 'x', beobachtung: 'y', beispiel: 'Unsinn' }],
+        naechsterSchritt: 'Schreib ein Trio in Moll.',
+      }),
+    );
+    expect(f.einordnung).toBe('Ein klassisches Menuett.');
+    expect(f.staerken).toEqual(['Klarer Halbschluss in Takt 8']);
+    expect(f.verbesserungen).toHaveLength(2);
+    expect(f.verbesserungen[0].beispiel).toBeNull();
+    const mitVorlage = feedbackLesen(
+      JSON.stringify({ einordnung: '', staerken: [], naechsterSchritt: '', verbesserungen: [{ takte: 'Takt 9–10', beobachtung: 'a', vorschlag: 'b', beispiel: 'G5:4 F5 E5 | F5:4 E5 D5' }, { takte: 'x', beobachtung: 'y', vorschlag: 'z', beispiel: 'Unsinn' }] }),
+      menuettMitTrio(),
+    );
+    expect(mitVorlage.verbesserungen[0].beispiel?.voices[0].measures).toHaveLength(2);
+    expect(mitVorlage.verbesserungen[0].beispiel?.time.beats).toBe(3);
+    expect(mitVorlage.verbesserungen[1].beispiel).toBeNull();
+    expect(f.naechsterSchritt).toContain('Trio');
+    expect(FEEDBACK_SCHEMA.required).toContain('verbesserungen');
+  });
+});
