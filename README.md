@@ -4,7 +4,15 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **App öffnen:** https://pilshrimpmaster.github.io/KompositionTrainer/
 
-## Stand: M3 Kontrapunkt und Analyse (in Arbeit)
+## Stand: M4 Melodik und Formenlehre (in Arbeit)
+
+**Klaviersatz (M4):** Besetzung „Klavier: Melodie mit Begleitung“. Die Harmonie wird je Taktschwerpunkt aus Melodie und Begleitung bestimmt, auch bei Alberti-Bass, Walzerbass und gebrochenen Akkorden, und Takt für Takt angezeigt. Die Prüfung meldet Parallelen zwischen Melodie und Bass, falsche Schlüsse, fremde Melodietöne auf schwerer Zeit, Quartsextakkorde und Begleitung über der Melodie.
+
+**Formenlehre (M4):** „Form zeigen“ im Editor und in Lektionsbeispielen: Zweitaktglieder mit Buchstaben (a, a′, b), Kadenzen alle vier Takte (Halb-, Ganzschluss, Kadenz in fremder Tonart) und die erkannte Form: Periode, Satz, dreiteilige Liedform, Menuett mit Trio. Prüfkriterien `periode`, `satzform`, `liedform`, `menuett-trio`, `halbschluss N`, `ganzschluss-takt N`, `begleitung-noten N`, `blues`.
+
+**Stufe 4 (M4):** Lektionen Melodiebau, Periode und Satz, Begleitmuster, Liedform, Menuett und Trio, Rondo und Variation, Einblick Sonatensatz, Seitenblick Songformen und 12-Takt-Blues sowie das Abschlussprojekt „Menuett mit Trio für Klavier“. Neue Übungen „Formen erkennen“ und „Begleitmuster erkennen“, weitere Analysefragen (Nachsatz, Mittelteil einer Liedform, Beginn des Trios).
+
+## M3 Kontrapunkt und Analyse
 
 **Brücke zu MuseScore (M3):** Unter „Schreiben“ und „Hören“ speichert „Für MuseScore speichern“ das Stück als MusicXML (`.musicxml`), das sich direkt in MuseScore Studio 4 (und Finale, Sibelius, Dorico) öffnen lässt. „Datei öffnen“ liest MusicXML, auch komprimiert (`.mxl`, MuseScores Standard beim Export), und das eigene JSON. Übernommen werden Noten, Pausen, Punktierung, Bögen, Vorzeichen, Tonart, Taktart, Auftakt, mehrere Stimmen und Systeme, Liedtext, Fermaten und Tempo; vier einzelne Chorstimmen werden zum Chorsatz auf zwei Systemen. Was nicht ins Lernmodell passt (Akkorde in einer Stimme, Vorschläge, N-tolen, Takt- und Tonartwechsel, mehr als zwei Stimmen je System), wird angenähert und beim Öffnen genannt. So lassen sich eigene Stücke und gemeinfreie Werke hier prüfen, analysieren und anhören.
 

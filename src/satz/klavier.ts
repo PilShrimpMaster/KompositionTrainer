@@ -248,7 +248,9 @@ export function pruefeKlaviersatz(score: Score, opts: { hinweise?: boolean } = {
 
   // Schluss: Tonika mit Grundton im Bass, möglichst nach der Dominante
   const letzte = harmonien[harmonien.length - 1];
-  const letzterBass = beg[beg.length - 1];
+  // Bass des Schlussakkords: der tiefste Begleitton im letzten Abschnitt
+  const imLetzten = harmonien.length ? beg.filter((t) => t.ende > harmonien[harmonien.length - 1].start + 1e-9) : [];
+  const letzterBass = imLetzten.length ? imLetzten.reduce((a, b) => (toMidi(b.p) < toMidi(a.p) ? b : a)) : beg[beg.length - 1];
   const letzteMel = mel[mel.length - 1];
   if (letzte?.akkord) {
     const tonika = letzte.akkord.stufe === 1 && (letzte.akkord.art === 'Dur' || letzte.akkord.art === 'Moll');

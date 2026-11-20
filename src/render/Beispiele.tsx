@@ -6,6 +6,8 @@ import { ScoreView } from '../ScoreView';
 import { analysiere, funktionMitBass } from '../satz/analyse';
 import { renderNotes } from './renderNotes';
 import { motivMarkierungen, MotivPanel, useMotive } from '../kontrapunkt/MotivPanel';
+import { FormPanel } from '../satz/FormPanel';
+import { HarmoniePanel } from '../satz/HarmoniePanel';
 
 interface AkkordProps {
   gruppen: Pitch[][];
@@ -38,8 +40,21 @@ export function AkkordBeispiel({ gruppen, klang, schluessel, tonart }: AkkordPro
 }
 
 /** Ein kleines Notenbeispiel mit Takten, zum Mitlesen beim Abspielen */
-export function NotenBeispiel({ score, analyse = false, motive = false }: { score: Score; analyse?: boolean; motive?: boolean }) {
+export function NotenBeispiel({
+  score,
+  analyse = false,
+  motive = false,
+  form = false,
+  harmonien = false,
+}: {
+  score: Score;
+  analyse?: boolean;
+  motive?: boolean;
+  form?: boolean;
+  harmonien?: boolean;
+}) {
   const [aktiv, setAktiv] = useState<string | null>(null);
+  const [zeige, setZeige] = useState<'form' | 'harmonien' | null>(null);
   const [motiveAn, setMotiveAn] = useState(false);
   const mot = useMotive(score);
   const markierungen = useMemo(() => (motiveAn ? motivMarkierungen(mot.funde, mot.auswahl) : undefined), [motiveAn, mot.funde, mot.auswahl]);
@@ -76,7 +91,19 @@ export function NotenBeispiel({ score, analyse = false, motive = false }: { scor
             {motiveAn ? 'Motive ausblenden' : 'Motive zeigen'}
           </button>
         )}
+        {harmonien && (
+          <button className="secondary" onClick={() => setZeige(zeige === 'harmonien' ? null : 'harmonien')} aria-pressed={zeige === 'harmonien'}>
+            {zeige === 'harmonien' ? 'Harmonien ausblenden' : 'Harmonien zeigen'}
+          </button>
+        )}
+        {form && (
+          <button className="secondary" onClick={() => setZeige(zeige === 'form' ? null : 'form')} aria-pressed={zeige === 'form'}>
+            {zeige === 'form' ? 'Form ausblenden' : 'Form zeigen'}
+          </button>
+        )}
       </div>
+      {zeige === 'harmonien' && <HarmoniePanel score={score} />}
+      {zeige === 'form' && <FormPanel score={score} />}
       {motive && motiveAn && (
         <MotivPanel motiv={mot.motiv} funde={mot.funde} laenge={mot.laenge} onLaenge={mot.setLaenge} auswahl={mot.auswahl} onAuswahl={mot.setAuswahl} />
       )}

@@ -82,7 +82,7 @@ function BausteinView({ b, schon, onUebung }: { b: Baustein; schon: Set<string>;
     case 'text':
       return <Markdown text={b.markdown} schon={schon} />;
     case 'noten':
-      return <NotenBeispiel score={b.score} analyse={b.analyse} motive={b.motive} />;
+      return <NotenBeispiel score={b.score} analyse={b.analyse} motive={b.motive} form={b.form} harmonien={b.harmonien} />;
     case 'akkorde':
       return <AkkordBeispiel gruppen={b.gruppen} klang={b.klang} schluessel={b.schluessel} tonart={b.tonart} />;
     case 'uebungen':

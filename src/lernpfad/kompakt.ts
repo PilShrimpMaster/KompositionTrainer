@@ -67,7 +67,7 @@ export function parseNotenbeispiel(quelle: string): Score {
     return r.score;
   }
   const zeilen = q.split(/\r?\n/);
-  const istKopf = (z: string) => /^(titel|takt|tonart|schluessel|tempo)\s*:/.test(z.trim());
+  const istKopf = (z: string) => /^(titel|takt|tonart|schluessel|tempo|form)\s*:/.test(z.trim());
   const kopf = leseFelder(zeilen.filter(istKopf).join('\n'));
   const noten = zeilen.filter((z) => !istKopf(z)).join('\n');
   const doc: EditorDoc = {

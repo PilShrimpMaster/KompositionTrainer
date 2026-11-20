@@ -160,6 +160,8 @@ export function pruefe(gesamt: EditorDoc, kriterien: string[]): Pruefpunkt[] {
       case 'halbschluss':
       case 'ganzschluss-takt':
         return formKriterium(name, args, satz() ?? rebar(doc).score);
+      case 'begleitung-noten':
+      case 'blues':
       case 'vierstimmig':
       case 'vollstaendig':
       case 'fehlerfrei':
@@ -260,6 +262,24 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
             : 'Keine Satzfehler (Parallelen, Umfang, Auflösung …)',
         ok: fehler.length === 0,
         hinweis: erster ? `${fehler.length} Fehler, z. B. Takt ${erster.takt}: ${erster.text}` : undefined,
+      };
+    }
+    case 'begleitung-noten': {
+      const n = Number(args[0]);
+      const ist = doc.satz.klavier ? stimmen[1].filter((e) => e.pitch).length : 0;
+      return { text: `Die Begleitung hat mindestens ${n} Töne (ein Begleitmuster, nicht nur lange Bässe)`, ok: ist >= n, hinweis: `Bisher ${ist}.` };
+    }
+    case 'blues': {
+      // 12 Takte: I I I I | IV IV I I | V IV I I (in Takt 2 darf IV stehen, in Takt 12 V)
+      const erlaubt = [[1], [1, 4], [1], [1], [4], [4], [1], [1], [5], [4, 5], [1], [1, 5]];
+      const harm = klavierHarmonien(score).filter((h) => h.akkord && h.kurz !== '?');
+      const stufen = erlaubt.map((_, t) => harm.find((h) => h.takt === t)?.akkord?.stufe ?? null);
+      const falsch = stufen.map((s, t) => (s !== null && erlaubt[t].includes(s) ? null : t + 1)).filter((x): x is number => x !== null);
+      const ROEM = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
+      return {
+        text: 'Das Bluesschema: I I I I | IV IV I I | V IV I I',
+        ok: falsch.length === 0,
+        hinweis: falsch.length ? `Prüfe Takt ${falsch.slice(0, 4).join(', ')}: erkannt ${stufen.map((s) => (s ? ROEM[s] : '?')).join(' ')}.` : undefined,
       };
     }
     case 'mindestens-takte': {
