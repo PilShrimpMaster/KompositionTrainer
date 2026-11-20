@@ -1,4 +1,5 @@
 import { diatonicIndex, germanNameWithOctave, toMidi } from '../model/pitch';
+import { instrument, lageText, umfangText } from '../model/instrumente';
 import type { Pitch, Score } from '../model/types';
 import { klaenge, type Klang } from './klaenge';
 import { erkenneAkkord, istLeitton, type Akkord } from './akkorde';
@@ -35,6 +36,23 @@ export interface Kontext {
   /** Erkannter Akkord je Zusammenklang */
   akkorde: (Akkord | null)[];
 }
+
+/** Grammatisches Geschlecht der Stimm- und Instrumentennamen (Sopran, Viola, Violoncello …) */
+function genus(name: string): 'm' | 'f' | 'n' {
+  const w = name.replace(/ \d+$/, '').toLowerCase();
+  if (/(violine|viola|flöte|oboe|klarinette|trompete|posaune|tuba|ober|unter|melodie|begleitung|stimme)$/.test(w)) return 'f';
+  if (/(cello|fagott|horn|saxophon|klavier)$/.test(w)) return 'n';
+  return 'm';
+}
+/** „der Sopran“, „dem Violoncello“, „der Viola“ */
+export function art(name: string, kasus: 'nom' | 'dat'): string {
+  const g = genus(name);
+  const a = kasus === 'nom' ? { m: 'der', f: 'die', n: 'das' }[g] : { m: 'dem', f: 'der', n: 'dem' }[g];
+  return `${a} ${name}`;
+}
+/** „im Alt“, „in der Viola“ */
+const inDer = (name: string) => (genus(name) === 'f' ? `in der ${name}` : `im ${name}`);
+const gross = (s: string) => s[0].toUpperCase() + s.slice(1);
 
 const halbtoene = (a: Pitch, b: Pitch) => toMidi(a) - toMidi(b);
 const stufen = (a: Pitch, b: Pitch) => diatonicIndex(a) - diatonicIndex(b);
@@ -110,7 +128,7 @@ const verdeckte: Regel = {
       out.push({
         regel: 'verdeckte-parallelen',
         art: 'fehler',
-        text: `Verdeckte ${ziel} zwischen ${ctx.namen[0]} und ${ctx.namen[n - 1]}: Beide Außenstimmen gehen in dieselbe Richtung in eine ${ziel}, der ${ctx.namen[0]} springt. Erlaubt wäre es, wenn der ${ctx.namen[0]} schrittweise geht.`,
+        text: `Verdeckte ${ziel} zwischen ${ctx.namen[0]} und ${ctx.namen[n - 1]}: Beide Außenstimmen gehen in dieselbe Richtung in eine ${ziel}, ${art(ctx.namen[0], 'nom')} springt. Erlaubt wäre es, wenn ${art(ctx.namen[0], 'nom')} schrittweise geht.`,
         ids: ids(a.ids[0], a.ids[n - 1], b.ids[0], b.ids[n - 1]),
         takt: b.takt + 1,
       });
@@ -134,6 +152,7 @@ const umfang: Regel = {
   titel: 'Stimmumfang',
   begriff: 'stimmumfang',
   pruefe(ctx) {
+    if (ctx.score.voices.some((v) => instrument(v.instrument))) return instrumentUmfang(ctx);
     if (ctx.namen.length !== 4) return [];
     const out: Befund[] = [];
     for (const k of ctx.klaenge) {
@@ -154,6 +173,37 @@ const umfang: Regel = {
     return out;
   },
 };
+
+/** Umfang und gute Lage je Instrument: außerhalb des Umfangs ein Fehler, außerhalb der guten Lage ein Hinweis */
+function instrumentUmfang(ctx: Kontext): Befund[] {
+  const out: Befund[] = [];
+  for (const k of ctx.klaenge) {
+    k.toene.forEach((p, v) => {
+      const i = instrument(ctx.score.voices[v].instrument);
+      if (!p || !k.neu[v] || !i) return;
+      const m = toMidi(p);
+      const name = ctx.namen[v];
+      if (m < i.umfang[0] || m > i.umfang[1]) {
+        out.push({
+          regel: 'umfang',
+          art: 'fehler',
+          text: `${name}: ${germanNameWithOctave(p)} ist nicht spielbar, zu ${m > i.umfang[1] ? 'hoch' : 'tief'}. Der Umfang reicht klingend von ${umfangText(i)}.`,
+          ids: ids(k.ids[v]),
+          takt: k.takt + 1,
+        });
+      } else if (m < i.lage[0] || m > i.lage[1]) {
+        out.push({
+          regel: 'umfang',
+          art: 'hinweis',
+          text: `${gross(art(name, 'nom'))} liegt hier ${m > i.lage[1] ? 'sehr hoch' : 'sehr tief'}, außerhalb der guten Lage (${lageText(i)}). Das klingt ${m > i.lage[1] ? 'angestrengt' : 'dumpf oder unsicher'}; für einzelne Höhepunkte ist es in Ordnung.`,
+          ids: ids(k.ids[v]),
+          takt: k.takt + 1,
+        });
+      }
+    });
+  }
+  return out;
+}
 
 const abstand: Regel = {
   id: 'abstand',
@@ -200,7 +250,7 @@ const kreuzung: Regel = {
           out.push({
             regel: 'kreuzung',
             art: 'fehler',
-            text: `Stimmkreuzung: Der ${ctx.namen[u]} liegt über dem ${ctx.namen[o]}. Das Ohr verliert dann die Stimmen aus den Augen.`,
+            text: `Stimmkreuzung: ${gross(art(ctx.namen[u], 'nom'))} liegt über ${art(ctx.namen[o], 'dat')}. Das Ohr verliert dann die Stimmen aus den Augen.`,
             ids: ids(k.ids[o], k.ids[u]),
             takt: k.takt + 1,
           });
@@ -216,8 +266,8 @@ const kreuzung: Regel = {
             regel: 'kreuzung',
             art: 'hinweis',
             text: hoch
-              ? `Stimmüberschreitung: Der ${ctx.namen[u]} geht über den vorigen Ton im ${ctx.namen[o]} hinaus.`
-              : `Stimmüberschreitung: Der ${ctx.namen[o]} geht unter den vorigen Ton im ${ctx.namen[u]}.`,
+              ? `Stimmüberschreitung: ${gross(art(ctx.namen[u], 'nom'))} geht über den vorigen Ton ${inDer(ctx.namen[o])} hinaus.`
+              : `Stimmüberschreitung: ${gross(art(ctx.namen[o], 'nom'))} geht unter den vorigen Ton ${inDer(ctx.namen[u])}.`,
             ids: ids(hoch ? k.ids[u] : k.ids[o], hoch ? vorher.ids[o] : vorher.ids[u]),
             takt: k.takt + 1,
           });
@@ -292,8 +342,8 @@ const leittonAufloesung: Regel = {
           regel: 'leitton',
           art: aussen ? 'fehler' : 'hinweis',
           text: aussen
-            ? `Der Leitton im ${ctx.namen[v]} löst sich nicht aufwärts zum Grundton auf. In einer Außenstimme hört man das deutlich.`
-            : `Der Leitton im ${ctx.namen[v]} geht nicht zum Grundton (freier Leitton). In Mittelstimmen ist das erlaubt, wenn der Klang dadurch vollständig wird.`,
+            ? `Der Leitton ${inDer(ctx.namen[v])} löst sich nicht aufwärts zum Grundton auf. In einer Außenstimme hört man das deutlich.`
+            : `Der Leitton ${inDer(ctx.namen[v])} geht nicht zum Grundton (freier Leitton). In Mittelstimmen ist das erlaubt, wenn der Klang dadurch vollständig wird.`,
           ids: ids(a.ids[v], b.ids[v]),
           takt: b.takt + 1,
         });
@@ -321,7 +371,7 @@ const septime: Regel = {
         out.push({
           regel: 'septime',
           art: 'fehler',
-          text: `Die Septime von ${aa.name} im ${ctx.namen[v]} sollte sich einen Schritt abwärts auflösen, hier geht sie ${halbtoene(q, p) > 0 ? 'aufwärts' : 'im Sprung abwärts'}.`,
+          text: `Die Septime von ${aa.name} ${inDer(ctx.namen[v])} sollte sich einen Schritt abwärts auflösen, hier geht sie ${halbtoene(q, p) > 0 ? 'aufwärts' : 'im Sprung abwärts'}.`,
           ids: ids(a.ids[v], b.ids[v]),
           takt: b.takt + 1,
         });
@@ -365,6 +415,9 @@ const spruenge: Regel = {
 
 export const REGELN: Regel[] = [parallelen, verdeckte, umfang, abstand, kreuzung, verdopplung, leittonAufloesung, septime, spruenge];
 
+/** Regeln für Ensembles mit anderer Stimmenzahl als vier: Parallelen, Umfang, Kreuzung */
+const ENSEMBLE_REGELN = [parallelen, umfang, kreuzung];
+
 export interface PruefOptionen {
   /** Stilhinweise mitprüfen (ab Stufe 6 abschaltbar) */
   hinweise?: boolean;
@@ -374,7 +427,8 @@ export interface PruefOptionen {
 export function pruefeSatz(score: Score, opts: PruefOptionen = {}): Befund[] {
   const k = klaenge(score);
   const ctx: Kontext = { score, klaenge: k, namen: score.voices.map((v) => v.name), akkorde: k.map((x) => erkenneAkkord(x.toene, score.key)) };
-  const alle = REGELN.flatMap((r) => r.pruefe(ctx));
+  const regeln = score.voices.length !== 4 && score.voices.some((v) => instrument(v.instrument)) ? ENSEMBLE_REGELN : REGELN;
+  const alle = regeln.flatMap((r) => r.pruefe(ctx));
   const gesehen = new Set<string>();
   return alle
     .filter((b) => opts.hinweise !== false || b.art === 'fehler')

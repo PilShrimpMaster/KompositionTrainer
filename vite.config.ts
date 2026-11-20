@@ -38,7 +38,16 @@ export default defineConfig({
       workbox: {
         // Klaviersamples mit cachen, damit die Wiedergabe offline funktioniert.
         globPatterns: ['**/*.{js,css,html,svg,png,mp3,json}'],
+        // Instrumentenklänge (über 4 MB) erst laden, wenn sie gebraucht werden, dann offline behalten
+        globIgnores: ['**/samples/instrumente/**'],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        runtimeCaching: [
+          {
+            urlPattern: /\/samples\/instrumente\//,
+            handler: 'CacheFirst',
+            options: { cacheName: 'instrumente', expiration: { maxEntries: 200 } },
+          },
+        ],
       },
     }),
   ],

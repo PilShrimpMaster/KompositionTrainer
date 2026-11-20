@@ -15,6 +15,8 @@ export interface ShortcutContext {
   refPitch: Pitch | null;
   fifths: number;
   clef: Clef;
+  /** Oktave für den ersten Ton ohne Bezug (z. B. Mitte der guten Lage eines Instruments) */
+  oktave?: number;
   inputDuration: DurationType;
   inputDots: number;
 }
@@ -58,7 +60,7 @@ export function shortcutFor(e: KeyInput, ctx: ShortcutContext): ShortcutResult {
   const letter = LETTERS[key];
   if (letter) {
     const alter = letter.alter ?? keyAlter(letter.step, ctx.fifths);
-    const pitch = nearestOctave(letter.step, alter, ctx.refPitch, ctx.clef === 'bass' ? 3 : 4);
+    const pitch = nearestOctave(letter.step, alter, ctx.refPitch, ctx.oktave ?? (ctx.clef === 'bass' ? 3 : 4));
     return { type: 'insert', event: { pitch, duration: duration(ctx) } };
   }
   if (DIGITS[key]) return { type: 'setDuration', duration: DIGITS[key] };

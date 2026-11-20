@@ -1384,3 +1384,29 @@ a.lexikon-link:hover {
   gap: 6px;
   margin: 8px 0;
 }
+
+/* Ensemble: Instrumente je Stimme */
+.meta-panel .ensemble-wahl {
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.ensemble-stimmen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+.ensemble-stimme {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+.meta-panel .ensemble-stimme select {
+  min-width: 140px;
+}
+.meta-panel .ensemble-wahl .check,
+.meta-panel .ensemble-stimme {
+  color: inherit;
+}

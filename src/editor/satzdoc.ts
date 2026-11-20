@@ -4,6 +4,7 @@ import { SATB } from '../satz/kurzform';
 import type { Gattung } from '../kontrapunkt/fux';
 import type { Clef } from '../model/types';
 import { decompose, rebar, type EditorDoc } from './rebar';
+import { ENSEMBLES, instrument, stimmNamen } from '../model/instrumente';
 
 /** Zusatzdaten eines vierstimmigen Satzes im Editor */
 export interface Satzdaten {
@@ -21,6 +22,10 @@ export interface Satzdaten {
   gesperrt?: number[];
   /** Klaviersatz: Melodie (oben) mit Begleitung (unten) */
   klavier?: true;
+  /** Ensemble: Instrument je Stimme (von oben nach unten) */
+  ensemble?: string[];
+  /** Partitur transponiert anzeigen (sonst klingend); gespeichert wird immer klingend */
+  transponiert?: boolean;
 }
 
 export interface StimmInfo {
@@ -29,6 +34,8 @@ export interface StimmInfo {
   clef: Clef;
   staff: number;
   stem?: 'up' | 'down';
+  instrument?: string;
+  kurz?: string;
 }
 
 export const STIMMEN: StimmInfo[] = SATB;
@@ -68,6 +75,22 @@ export function klavierDoc(basis: EditorDoc, melodie: NoteEvent[] = [], begleitu
   const aktiv = melodie.length && !begleitung.length ? 1 : 0;
   const gesperrt = sperren && stimmen[1 - aktiv].length ? [1 - aktiv] : [];
   return { ...basis, clef: KLAVIER_BESETZUNG[aktiv].clef, events: stimmen[aktiv], satz: { stimmen, aktiv, besetzung: KLAVIER_BESETZUNG, klavier: true, gesperrt } };
+}
+
+/** Besetzung eines Ensembles: jedes Instrument auf eigenem System */
+export function ensembleBesetzung(ids: string[]): StimmInfo[] {
+  const namen = stimmNamen(ids);
+  return ids.map((id, k) => ({ id: `I${k}`, name: namen[k].name, kurz: namen[k].kurz, clef: instrument(id)!.schluessel, staff: k, instrument: id }));
+}
+
+/** Ensemble-Dokument: alle Stimmen offen; gesperrt sind Stimmen mit Vorgabe, wenn andere noch leer sind */
+export function ensembleDoc(basis: EditorDoc, ids: string[], vorgabe: NoteEvent[][] = [], sperren = false): EditorDoc {
+  const stimmen = ids.map((_, k) => structuredClone(vorgabe[k] ?? []));
+  const besetzung = ensembleBesetzung(ids);
+  const leer = stimmen.findIndex((st) => st.length === 0);
+  const aktiv = Math.max(0, leer);
+  const gesperrt = sperren && leer >= 0 ? stimmen.flatMap((st, k) => (st.length ? [k] : [])) : [];
+  return { ...basis, clef: besetzung[aktiv].clef, events: stimmen[aktiv], satz: { stimmen, aktiv, besetzung, ensemble: ids, gesperrt } };
 }
 
 /** Zwei Stimmen auf zwei Systemen: Cantus firmus oben (cf = 0) oder unten (cf = 1) */
@@ -155,7 +178,15 @@ export function rebarSatz(doc: EditorDoc, stumm: boolean[] = []): SatzRebar {
     });
     if (i === satz.aktiv) t.partsOf.forEach((ids, idx) => partsOf.set(idx, ids.map((id) => `${i}${id.slice(id.indexOf('-'))}`)));
     const info = besetzung[i];
-    return { id: info.id, name: info.name, clef: info.clef, staff: info.staff, ...(info.stem ? { stem: info.stem } : {}), measures };
+    return {
+      id: info.id,
+      name: info.name,
+      clef: info.clef,
+      staff: info.staff,
+      ...(info.stem ? { stem: info.stem } : {}),
+      ...(info.instrument ? { instrument: info.instrument, kurz: info.kurz } : {}),
+      measures,
+    };
   });
 
   return {
@@ -184,7 +215,8 @@ function mitText(events: NoteEvent[], text: string | undefined): NoteEvent[] {
 
 /** Liest einen vierstimmigen Satz aus einer Partitur (sonst null) */
 export function satzAusScore(score: Score): Satzdaten | null {
-  if (score.voices.length !== 4) return null;
+  const ensemble = score.voices.length >= 2 && score.voices.length <= 8 && score.voices.every((v) => instrument(v.instrument)) ? score.voices.map((v) => v.instrument!) : null;
+  if (score.voices.length !== 4 && !ensemble) return null;
   const stimmen = score.voices.map((v) => {
     const events = v.measures.flatMap((m) => m.notes.map((n) => structuredClone(n)));
     while (events.length && !events[events.length - 1].pitch) events.pop();
@@ -192,6 +224,7 @@ export function satzAusScore(score: Score): Satzdaten | null {
     return events;
   });
   const silben = score.voices[0].measures.flatMap((m) => m.notes.map((n) => n.lyric).filter(Boolean));
+  if (ensemble) return { stimmen, aktiv: 0, besetzung: ensembleBesetzung(ensemble), ensemble, gesperrt: [] };
   return { stimmen, aktiv: 0, ...(silben.length ? { text: silben.join(' ') } : {}) };
 }
 
@@ -205,7 +238,14 @@ export function besetzungsName(doc: EditorDoc): string {
   const s = doc.satz;
   if (!s) return 'Melodie';
   if (s.klavier) return 'Klaviersatz';
+  if (s.ensemble) return ensembleName(s.ensemble);
   if (s.kontrapunkt?.gattung === 'frei') return 'Zweistimmig';
   if (s.kontrapunkt) return 'Kontrapunkt';
   return 'Chorsatz';
+}
+
+/** Name einer Besetzung: „Streichquartett“ oder die Instrumente aufgezählt */
+export function ensembleName(ids: string[]): string {
+  const e = ENSEMBLES.find((x) => x.instrumente.join() === ids.join());
+  return e ? e.name : ids.map((id) => instrument(id)?.name ?? id).join(', ');
 }

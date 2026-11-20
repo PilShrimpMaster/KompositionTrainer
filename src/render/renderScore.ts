@@ -16,8 +16,9 @@ import {
 } from 'vexflow/bravura';
 import { toVexDuration } from '../model/duration';
 import { germanName, toVexKey, toVexKeySpec } from '../model/pitch';
-import type { Score } from '../model/types';
+import type { Clef, Score } from '../model/types';
 import { eventId } from '../model/ids';
+import { instrument } from '../model/instrumente';
 
 export interface RenderOptions {
   width: number;
@@ -41,7 +42,7 @@ export interface StaveLayout {
   spacing: number;
   /** x, ab dem Noten beginnen (nach Schlüssel und Vorzeichen) */
   noteStartX: number;
-  clef: 'treble' | 'bass';
+  clef: Clef;
 }
 
 export interface NoteLayout {
@@ -99,7 +100,10 @@ export function renderScore(
   const systemHeight = groups.reduce((sum, _g, i) => sum + STAVE_HEIGHT + (hasLyrics[i] ? LYRIC_SPACE : 0), 0) + SYSTEM_GAP;
 
   const measureCount = Math.max(1, ...score.voices.map((v) => v.measures.length));
-  const usable = Math.max(opts.width - 2 * MARGIN, 300);
+  // Partitur mit Instrumenten: Abkürzungen links neben den Systemen, eckige Klammer statt Klavierklammer
+  const partitur = score.voices.some((v) => instrument(v.instrument));
+  const label = partitur ? 58 : 0;
+  const usable = Math.max(opts.width - 2 * MARGIN - label, 300);
   const firstExtra = 90; // Platz für Schlüssel, Vorzeichen und Taktart
   const perRow = Math.max(1, Math.floor((usable - firstExtra) / MIN_MEASURE_WIDTH));
   const rows = Math.ceil(measureCount / perRow);
@@ -108,7 +112,8 @@ export function renderScore(
   const renderer = new Renderer(container as HTMLDivElement, Renderer.Backends.SVG);
   renderer.resize(opts.width, height);
   const ctx = renderer.getContext();
-  const keySpec = toVexKeySpec(score.key);
+  // Vorzeichen je System: transponierende Stimmen haben eigene
+  const keySpecs = groups.map((g) => toVexKeySpec(score.voices[g[0]].key ?? score.key));
   const timeSpec = `${score.time.beats}/${score.time.beatType}`;
 
   // Pro Stimme die zuletzt gezeichnete Note mit Bindebogen merken
@@ -122,7 +127,19 @@ export function renderScore(
     // In der letzten Zeile Takte nicht über die ganze Breite ziehen, wenn es wenige sind
     const rowWidth = isLastRow && inRow < perRow ? firstExtra + inRow * Math.min(usable / perRow, 320) : usable;
     const measureWidth = (rowWidth - firstExtra) / inRow;
-    let x = MARGIN;
+    let x = MARGIN + label;
+    if (partitur) {
+      ctx.save();
+      ctx.setFont('Helvetica, Arial, sans-serif', 12);
+      ctx.setFillStyle('#4a4560');
+      groups.forEach((g, si) => {
+        const v = score.voices[g[0]];
+        const text = v.kurz ?? instrument(v.instrument)?.kurz ?? v.name;
+        const w = ctx.measureText(text).width;
+        ctx.fillText(text, MARGIN + label - 6 - w, MARGIN + row * systemHeight + staffY[si] + 40 + 24);
+      });
+      ctx.restore();
+    }
 
     for (let mi = start; mi < end; mi++) {
       const first = mi === start;
@@ -133,7 +150,7 @@ export function renderScore(
         const clef = score.voices[g[0]].clef;
         const stave = new Stave(x, MARGIN + row * systemHeight + staffY[si], width);
         if (first) {
-          stave.addClef(clef).addKeySignature(keySpec);
+          stave.addClef(clef).addKeySignature(keySpecs[si]);
           if (row === 0) stave.addTimeSignature(timeSpec);
         }
         if (mi === measureCount - 1) stave.setEndBarType(Barline.type.END);
@@ -147,7 +164,7 @@ export function renderScore(
         const top = measureStaves[0];
         const bottom = measureStaves[measureStaves.length - 1];
         if (first) {
-          new StaveConnector(top, bottom).setType(StaveConnector.type.BRACE).setContext(ctx).draw();
+          new StaveConnector(top, bottom).setType(partitur ? StaveConnector.type.BRACKET : StaveConnector.type.BRACE).setContext(ctx).draw();
           new StaveConnector(top, bottom).setType(StaveConnector.type.SINGLE_LEFT).setContext(ctx).draw();
         }
         new StaveConnector(top, bottom)
@@ -184,7 +201,7 @@ export function renderScore(
           const dir = shared ? ((voice.stem ?? (pos === 0 ? 'up' : 'down')) === 'up' ? 1 : -1) : 0;
           const notes = measure.notes.map((ev) => {
             const rest = !ev.pitch;
-            const restKey = voice.clef === 'bass' ? (dir > 0 ? 'f/3' : dir < 0 ? 'b/2' : 'd/3') : dir > 0 ? 'e/5' : dir < 0 ? 'f/4' : 'b/4';
+            const restKey = voice.clef === 'bass' ? (dir > 0 ? 'f/3' : dir < 0 ? 'b/2' : 'd/3') : voice.clef === 'alto' ? (dir > 0 ? 'd/4' : dir < 0 ? 'g/3' : 'c/4') : dir > 0 ? 'e/5' : dir < 0 ? 'f/4' : 'b/4';
             const note = new StaveNote({
               keys: [rest ? restKey : toVexKey(ev.pitch!)],
               duration: toVexDuration(ev.duration, rest),
@@ -219,7 +236,7 @@ export function renderScore(
       // Vorzeichen je System gemeinsam, Formatierung über alle Systeme
       groups.forEach((_g, si) => {
         const vs = built.filter((b) => b.si === si).map((b) => b.vex);
-        if (vs.length) Accidental.applyAccidentals(vs, keySpec);
+        if (vs.length) Accidental.applyAccidentals(vs, keySpecs[si]);
       });
       const formatter = new Formatter();
       groups.forEach((_g, si) => {

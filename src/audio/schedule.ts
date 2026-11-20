@@ -2,6 +2,7 @@ import { measureLength, quarterLength } from '../model/duration';
 import { toToneName } from '../model/pitch';
 import type { Score } from '../model/types';
 import { eventId } from '../model/ids';
+import { instrument } from '../model/instrumente';
 
 export interface ScheduledEvent {
   /** Kennung der Note im Notenbild (für die Markierung) */
@@ -14,6 +15,8 @@ export interface ScheduledEvent {
   note?: string;
   /** Lautstärke 0–1 */
   velocity?: number;
+  /** Instrumentenklang; fehlt er, klingt das Klavier */
+  klang?: string;
 }
 
 /**
@@ -26,6 +29,7 @@ export function buildSchedule(score: Score): { events: ScheduledEvent[]; total: 
   let total = 0;
 
   score.voices.forEach((voice, vi) => {
+    const klang = instrument(voice.instrument)?.klang;
     let t = 0;
     let tieFrom: ScheduledEvent | null = null;
 
@@ -41,6 +45,7 @@ export function buildSchedule(score: Score): { events: ScheduledEvent[]; total: 
           } else {
             const e: ScheduledEvent = { id, start: t, length: len, note };
             if (ev.velocity) e.velocity = ev.velocity / 127;
+            if (klang) e.klang = klang;
             events.push(e);
             tieFrom = e;
           }

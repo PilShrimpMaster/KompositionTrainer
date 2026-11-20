@@ -1,5 +1,8 @@
 import { measureLength, quarterLength } from '../model/duration';
-import type { Duration, NoteEvent, Score, Voice } from '../model/types';
+import type { Clef, Duration, NoteEvent, Score, Voice } from '../model/types';
+import { instrument, MIDI_PROGRAMM, musicXmlTransposition, notierteTonart, verschiebe } from '../model/instrumente';
+
+const CLEF_XML: Record<Clef, string> = { treble: '<sign>G</sign><line>2</line>', bass: '<sign>F</sign><line>4</line>', alto: '<sign>C</sign><line>3</line>' };
 
 /** Teilungen je Viertel: 16 erlaubt auch doppelt punktierte Sechzehntel */
 export const DIVISIONS = 16;
@@ -90,20 +93,37 @@ export function exportMusicXml(score: Score): string {
     '<encoding><software>KompositionsTrainer</software></encoding>',
     '</identification>',
     '<part-list>',
-    ...parts.map((p, i) => `<score-part id="P${i + 1}"><part-name>${esc(partName(p))}</part-name></score-part>`),
+    ...parts.map((p, i) => {
+      const ins = p.length === 1 ? instrument(p[0].instrument) : undefined;
+      if (!ins) return `<score-part id="P${i + 1}"><part-name>${esc(partName(p))}</part-name></score-part>`;
+      const id = `P${i + 1}-I1`;
+      return (
+        `<score-part id="P${i + 1}"><part-name>${esc(partName(p))}</part-name>` +
+        `<part-abbreviation>${esc(p[0].kurz ?? ins.kurz)}</part-abbreviation>` +
+        `<score-instrument id="${id}"><instrument-name>${esc(ins.name)}</instrument-name><instrument-sound>${ins.sound}</instrument-sound></score-instrument>` +
+        `<midi-instrument id="${id}"><midi-channel>${(i % 15) + 1}</midi-channel><midi-program>${MIDI_PROGRAMM[ins.id] ?? 1}</midi-program></midi-instrument>` +
+        '</score-part>'
+      );
+    }),
     '</part-list>',
   ];
 
-  parts.forEach((voices, pi) => {
+  parts.forEach((original, pi) => {
+    // Transponierende Instrumente: notiert schreiben, mit <transpose> zurück zur klingenden Höhe
+    const ins = original.length === 1 ? instrument(original[0].instrument) : undefined;
+    const tr = ins ? musicXmlTransposition(ins) : null;
+    const voices = ins && tr ? original.map((v) => ({ ...v, measures: v.measures.map((m) => ({ notes: m.notes.map((n) => (n.pitch ? { ...n, pitch: verschiebe(n.pitch, ins.transposition.stufen, ins.transposition.halbtoene) } : n)) })) })) : original;
+    const key = ins && tr ? notierteTonart(score.key, ins) : score.key;
+    const transpose = tr ? `<transpose><diatonic>${tr.diatonic}</diatonic><chromatic>${tr.chromatic}</chromatic>${tr.octave ? `<octave-change>${tr.octave}</octave-change>` : ''}</transpose>` : '';
     out.push(`<part id="P${pi + 1}">`);
     const tieOffen = voices.map(() => false);
     for (let m = 0; m < takte; m++) {
       out.push(`<measure number="${m + 1}">`);
       if (m === 0) {
         out.push(
-          `<attributes><divisions>${DIVISIONS}</divisions><key><fifths>${score.key.fifths}</fifths><mode>${score.key.mode}</mode></key>` +
+          `<attributes><divisions>${DIVISIONS}</divisions><key><fifths>${key.fifths}</fifths><mode>${key.mode}</mode></key>` +
             `<time><beats>${score.time.beats}</beats><beat-type>${score.time.beatType}</beat-type></time>` +
-            `<clef>${voices[0].clef === 'bass' ? '<sign>F</sign><line>4</line>' : '<sign>G</sign><line>2</line>'}</clef></attributes>`,
+            `<clef>${CLEF_XML[voices[0].clef]}</clef>${transpose}</attributes>`,
         );
         if (pi === 0) out.push(`<direction placement="above"><direction-type><metronome><beat-unit>quarter</beat-unit><per-minute>${score.tempo}</per-minute></metronome></direction-type><sound tempo="${score.tempo}"/></direction>`);
       }

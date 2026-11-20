@@ -1,4 +1,4 @@
-import type { KeySignature, Pitch, Step } from './types';
+import type { Clef, KeySignature, Pitch, Step } from './types';
 
 const STEP_SEMITONES: Record<Step, number> = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
 
@@ -107,14 +107,15 @@ export function fromDiatonic(d: number, fifths: number): Pitch {
 }
 
 /** Stammtonnummer der obersten Notenlinie (Violinschlüssel f″, Bassschlüssel a) */
-export function topLineDiatonic(clef: 'treble' | 'bass'): number {
+export function topLineDiatonic(clef: Clef): number {
+  if (clef === 'alto') return diatonicIndex({ step: 'G', octave: 4 });
   return clef === 'treble' ? diatonicIndex({ step: 'F', octave: 5 }) : diatonicIndex({ step: 'A', octave: 3 });
 }
 
 /** Tonhöhe an einer y-Position im Notensystem (halber Linienabstand = ein Stammton) */
 export function pitchAtY(
   y: number,
-  staff: { topLineY: number; spacing: number; clef: 'treble' | 'bass' },
+  staff: { topLineY: number; spacing: number; clef: Clef },
   fifths: number,
 ): Pitch {
   const steps = Math.round((y - staff.topLineY) / (staff.spacing / 2));
