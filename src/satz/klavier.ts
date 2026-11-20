@@ -252,10 +252,15 @@ export function pruefeKlaviersatz(score: Score, opts: { hinweise?: boolean } = {
   const letzteMel = mel[mel.length - 1];
   if (letzte?.akkord) {
     const tonika = letzte.akkord.stufe === 1 && (letzte.akkord.art === 'Dur' || letzte.akkord.art === 'Moll');
-    if (!tonika) add('kl-schluss', 'fehler', `Der Satz endet auf ${letzte.akkord.name}, nicht auf der Tonika.`, [letzteMel.id, letzterBass.id], letzte.takt);
+    const davor = harmonien[harmonien.length - 2]?.akkord;
+    const eigeneDominante = !!davor && (((toMidi(davor.grundton) - toMidi(letzte.akkord.grundton)) % 12) + 12) % 12 === 7 && davor.art === 'Dur';
+    const anderer = !tonika && eigeneDominante && (letzte.akkord.art === 'Dur' || letzte.akkord.art === 'Moll') && letzte.akkord.umkehrung === 0;
+    if (anderer) {
+      if (opts.hinweise !== false)
+        add('kl-schluss', 'hinweis', `Der Satz schließt in ${letzte.akkord.name}, nicht in der Grundtonart. Für ein Trio ist das in Ordnung, weil danach das Menuett wiederholt wird; sonst gehört der Schluss auf die Tonika.`, [letzteMel.id, letzterBass.id], letzte.takt);
+    } else if (!tonika) add('kl-schluss', 'fehler', `Der Satz endet auf ${letzte.akkord.name}, nicht auf der Tonika.`, [letzteMel.id, letzterBass.id], letzte.takt);
     else if (abstand(letzterBass.p, letzte.akkord.grundton) !== 0) add('kl-schluss', 'fehler', 'Im Schlussakkord gehört der Grundton in den Bass.', [letzterBass.id], letzte.takt);
     else {
-      const davor = harmonien[harmonien.length - 2]?.akkord;
       if (davor && davor.stufe !== 5 && davor.stufe !== 7 && opts.hinweise !== false)
         add('kl-schluss', 'hinweis', 'Vor dem Schlussakkord steht keine Dominante. Ein Ganzschluss (D–T) schließt deutlicher.', [letzteMel.id, letzterBass.id], letzte.takt);
     }

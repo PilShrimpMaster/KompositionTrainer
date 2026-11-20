@@ -1340,3 +1340,13 @@ a.lexikon-link:hover {
 .harmonie.is-unklar {
   color: #c76a00;
 }
+.form-kadenzen {
+  margin: 6px 0;
+  padding-left: 20px;
+}
+.form-kadenzen .kadenz-ganz {
+  color: #1a7f37;
+}
+.form-kadenzen .kadenz-halb {
+  color: #0a58ca;
+}

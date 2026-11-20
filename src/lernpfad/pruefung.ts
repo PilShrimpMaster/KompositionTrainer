@@ -12,6 +12,7 @@ import { findeMotive } from '../kontrapunkt/motive';
 import { MODUS_NAMEN, modusLeiter, type ModusName } from '../uebungen/modal';
 import { stimmenVon, synchron } from '../editor/satzdoc';
 import { klavierHarmonien, pruefeKlaviersatz } from '../satz/klavier';
+import { analysiereForm, kadenzAm, kadenzText, menuettTrioFehlt, type KadenzArt } from '../satz/form';
 import type { Akkord } from '../satz/akkorde';
 import { parseTonart } from './kompakt';
 import { grundton } from '../model/tonart';
@@ -152,6 +153,13 @@ export function pruefe(gesamt: EditorDoc, kriterien: string[]): Pruefpunkt[] {
         const anzahl = toene.filter((p) => klasse(p) === klasse(ton)).length;
         return { text: `Der Farbton ${germanName(ton)} kommt mindestens zweimal vor`, ok: anzahl >= 2, hinweis: `Der Ton ${germanName(ton)} unterscheidet ${modus} von Dur und Moll. Bisher ${anzahl}-mal.` };
       }
+      case 'periode':
+      case 'satzform':
+      case 'liedform':
+      case 'menuett-trio':
+      case 'halbschluss':
+      case 'ganzschluss-takt':
+        return formKriterium(name, args, satz() ?? rebar(doc).score);
       case 'vierstimmig':
       case 'vollstaendig':
       case 'fehlerfrei':
@@ -169,6 +177,33 @@ export function pruefe(gesamt: EditorDoc, kriterien: string[]): Pruefpunkt[] {
         return { text: `Unbekanntes Kriterium „${k}“`, ok: false };
     }
   });
+}
+
+/** Kriterien der Formenlehre: gelten für Melodien und für Sätze (dort zählen die Akkorde) */
+function formKriterium(name: string, args: string[], score: Score): Pruefpunkt {
+  const f = analysiereForm(score);
+  const warum = f.text[0] ? ` ${f.text[0]}` : '';
+  switch (name) {
+    case 'periode':
+      return { text: 'Das Thema ist eine Periode (Vordersatz mit offenem Schluss, Nachsatz mit Ganzschluss)', ok: !!f.form?.includes('Periode'), hinweis: `Erkannt: ${f.form ?? 'noch keine Form'}.${warum}` };
+    case 'satzform':
+      return { text: 'Das Thema ist ein Satz (Grundgedanke, Wiederholung, Fortspinnung)', ok: f.form === 'Satz', hinweis: `Erkannt: ${f.form ?? 'noch keine Form'}.${warum}` };
+    case 'liedform':
+      return { text: 'Dreiteilige Liedform A B A', ok: !!f.form?.includes('Liedform'), hinweis: `Erkannt: ${f.form ?? 'noch keine Form'}. A und die Wiederkehr von A beginnen gleich, B bringt einen Kontrast.` };
+    case 'menuett-trio': {
+      const fehlt = menuettTrioFehlt(score);
+      return { text: 'Menuett mit Trio: 3/4-Takt, je zwei Teile, beide mit Ganzschluss am Ende', ok: fehlt.length === 0, hinweis: fehlt[0] };
+    }
+    case 'halbschluss':
+    case 'ganzschluss-takt': {
+      const t = Number(args[0]);
+      const k = kadenzAm(score, t);
+      const soll: KadenzArt = name === 'halbschluss' ? 'halb' : 'ganz';
+      const ok = !!k && (k.art === soll || (soll === 'halb' && !!k.fremd)) && (soll === 'halb' || !k.fremd);
+      return { text: `Takt ${t} endet mit einem ${soll === 'halb' ? 'Halbschluss' : 'Ganzschluss'}`, ok, hinweis: k ? `Erkannt: ${kadenzText(k)}.` : `Takt ${t} fehlt noch.` };
+    }
+  }
+  return { text: name, ok: false };
 }
 
 const OHNE_SATZ: Pruefpunkt = { text: 'Vierstimmiger Satz', ok: false, hinweis: 'Stelle unter „Stück einstellen“ die Besetzung „Chorsatz“ ein.' };

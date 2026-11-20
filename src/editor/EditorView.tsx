@@ -9,6 +9,7 @@ import { AufgabePanel } from './AufgabePanel';
 import { docFromScore, rebar, type EditorDoc } from './rebar';
 import { alsSatz, freiDoc, klavierDoc, kpBesetzung, kpDoc, rebarSatz, stimmenVon, synchron, type SatzRebar } from './satzdoc';
 import { HarmoniePanel } from '../satz/HarmoniePanel';
+import { FormPanel } from '../satz/FormPanel';
 import { erzeugeCantus, MODI } from '../kontrapunkt/cantus';
 import { GATTUNGEN, STRENGE_GATTUNGEN, type Gattung } from '../kontrapunkt/fux';
 import { motivMarkierungen, MotivPanel, useMotive } from '../kontrapunkt/MotivPanel';
@@ -142,6 +143,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   const [stumm, setStumm] = useState<boolean[]>([false, false, false, false]);
   const [pruefen, setPruefenState] = useState(() => lesen(PRUEFEN_KEY) === 'ja');
   const [auswahl, setAuswahl] = useState<number | null>(null);
+  const [formZeigen, setFormZeigen] = useState(false);
   function setPruefen(v: boolean) {
     setPruefenState(v);
     setAuswahl(null);
@@ -650,6 +652,15 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
             />
           )}
           {pruefen && <p className="meta">Die Prüfung läuft mit, während du schreibst.</p>}
+        </div>
+      )}
+
+      {bar.score.voices[0].measures.length >= 4 && (
+        <div className="pruefung">
+          <button className={formZeigen ? 'secondary' : ''} onClick={() => setFormZeigen(!formZeigen)} aria-expanded={formZeigen}>
+            {formZeigen ? 'Form ausblenden' : 'Form zeigen'}
+          </button>
+          {formZeigen && <FormPanel score={bar.score} />}
         </div>
       )}
 
