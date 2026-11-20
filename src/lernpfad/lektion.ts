@@ -28,10 +28,17 @@ const STIMM_FELDER = ['sopran', 'alt', 'tenor', 'bass'] as const;
 
 /** „kontrapunkt: 2“, „cantus: D3:1 F3 …“, „cf: unten“ (Standard) oder „oben“ */
 function kontrapunktFelder(f: Record<string, string>): { gattung: Gattung; cf: 0 | 1; cantus: NoteEvent[] } {
-  const gattung = Number(f.kontrapunkt);
-  if (![1, 2, 3, 4, 5].includes(gattung)) throw new Error(`Unbekannte Gattung „${f.kontrapunkt}“`);
-  if (!f.cantus) throw new Error('Kontrapunkt-Aufgabe braucht einen cantus');
-  return { gattung: gattung as Gattung, cf: f.cf === 'oben' ? 0 : 1, cantus: parseNotenfolge(f.cantus) };
+  const gattung = liesGattung(f.kontrapunkt);
+  // Im freien Satz ist „cantus“ ein optionaler Beginn der Oberstimme
+  if (!f.cantus && gattung !== 'frei') throw new Error('Kontrapunkt-Aufgabe braucht einen cantus');
+  return { gattung, cf: f.cf === 'oben' ? 0 : 1, cantus: f.cantus ? parseNotenfolge(f.cantus) : [] };
+}
+
+function liesGattung(s: string): Gattung {
+  if (s === 'frei') return 'frei';
+  const g = Number(s);
+  if (![1, 2, 3, 4, 5].includes(g)) throw new Error(`Unbekannte Gattung „${s}“`);
+  return g as Gattung;
 }
 
 /** Satz-Block: Kopfzeilen und je eine Zeile „S: …“, „A: …“, „T: …“, „B: …“ */
@@ -47,7 +54,7 @@ function parseSatzBlock(inhalt: string): { score: Score; analyse: boolean } {
 
 export type Baustein =
   | { art: 'text'; markdown: string }
-  | { art: 'noten'; score: Score; analyse?: boolean; kontrapunkt?: { gattung: Gattung; cf: 0 | 1 } }
+  | { art: 'noten'; score: Score; analyse?: boolean; kontrapunkt?: { gattung: Gattung; cf: 0 | 1 }; motive?: boolean }
   | { art: 'akkorde'; gruppen: Pitch[][]; klang: 'nacheinander' | 'zusammen'; schluessel: Clef; tonart?: KeySignature }
   | { art: 'uebungen'; typen: UebungTyp[] }
   | { art: 'aufgabe'; aufgabe: Schreibaufgabe };
@@ -87,10 +94,10 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
           const f = leseFelder(inhalt);
           if (!f.oben || !f.unten) throw new Error('Zweistimmig braucht oben und unten');
           const cf: 0 | 1 = f.cf === 'oben' ? 0 : 1;
-          const gattung = f.gattung ? (Number(f.gattung) as Gattung) : undefined;
-          const namen: [string, string] = gattung ? (cf === 1 ? ['Kontrapunkt', 'Cantus firmus'] : ['Cantus firmus', 'Kontrapunkt']) : ['Oberstimme', 'Unterstimme'];
+          const gattung = f.gattung ? liesGattung(f.gattung) : undefined;
+          const namen: [string, string] = gattung && gattung !== 'frei' ? (cf === 1 ? ['Kontrapunkt', 'Cantus firmus'] : ['Cantus firmus', 'Kontrapunkt']) : ['Oberstimme', 'Unterstimme'];
           const score = kpSatz({ titel: f.titel ?? '', tonart: f.tonart, takt: f.takt, tempo: f.tempo ? Number(f.tempo) : undefined, oben: f.oben, unten: f.unten, namen });
-          out.push({ art: 'noten', score, ...(gattung ? { kontrapunkt: { gattung, cf } } : {}) });
+          out.push({ art: 'noten', score, ...(gattung ? { kontrapunkt: { gattung, cf } } : {}), ...(f.motive === 'ja' ? { motive: true } : {}) });
           break;
         }
         case 'akkorde': {

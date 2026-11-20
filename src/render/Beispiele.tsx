@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { initAudio, play, playChord, playSequence } from '../audio/player';
 import { toToneName } from '../model/pitch';
 import type { Clef, KeySignature, Pitch, Score } from '../model/types';
 import { ScoreView } from '../ScoreView';
 import { analysiere, funktionMitBass } from '../satz/analyse';
 import { renderNotes } from './renderNotes';
+import { motivMarkierungen, MotivPanel, useMotive } from '../kontrapunkt/MotivPanel';
 
 interface AkkordProps {
   gruppen: Pitch[][];
@@ -37,8 +38,11 @@ export function AkkordBeispiel({ gruppen, klang, schluessel, tonart }: AkkordPro
 }
 
 /** Ein kleines Notenbeispiel mit Takten, zum Mitlesen beim Abspielen */
-export function NotenBeispiel({ score, analyse = false }: { score: Score; analyse?: boolean }) {
+export function NotenBeispiel({ score, analyse = false, motive = false }: { score: Score; analyse?: boolean; motive?: boolean }) {
   const [aktiv, setAktiv] = useState<string | null>(null);
+  const [motiveAn, setMotiveAn] = useState(false);
+  const mot = useMotive(score);
+  const markierungen = useMemo(() => (motiveAn ? motivMarkierungen(mot.funde, mot.auswahl) : undefined), [motiveAn, mot.funde, mot.auswahl]);
   const [laeuft, setLaeuft] = useState(false);
   const stopRef = useRef<(() => void) | null>(null);
   useEffect(() => () => stopRef.current?.(), []);
@@ -63,9 +67,19 @@ export function NotenBeispiel({ score, analyse = false }: { score: Score; analys
   return (
     <div className="beispiel beispiel-noten">
       {score.title && <p className="beispiel-titel">{score.title}</p>}
-      <ScoreView score={score} showNoteNames={false} activeId={aktiv} />
+      <ScoreView score={score} showNoteNames={false} activeId={aktiv} markierungen={markierungen} />
       {analyse && <AkkordAnalyse score={score} />}
-      <button onClick={umschalten}>{laeuft ? '■ Stopp' : '▶ Anhören'}</button>
+      <div className="beispiel-knoepfe">
+        <button onClick={umschalten}>{laeuft ? '■ Stopp' : '▶ Anhören'}</button>
+        {motive && (
+          <button className="secondary" onClick={() => setMotiveAn(!motiveAn)} aria-pressed={motiveAn}>
+            {motiveAn ? 'Motive ausblenden' : 'Motive zeigen'}
+          </button>
+        )}
+      </div>
+      {motive && motiveAn && (
+        <MotivPanel motiv={mot.motiv} funde={mot.funde} laenge={mot.laenge} onLaenge={mot.setLaenge} auswahl={mot.auswahl} onAuswahl={mot.setAuswahl} />
+      )}
     </div>
   );
 }

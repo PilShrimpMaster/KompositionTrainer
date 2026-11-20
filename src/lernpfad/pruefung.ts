@@ -8,6 +8,7 @@ import type { Score } from '../model/types';
 import { analysiere, funktionPasst, funktionsfolge } from '../satz/analyse';
 import { pruefeSatz } from '../satz/regeln';
 import { pruefeKontrapunkt } from '../kontrapunkt/fux';
+import { findeMotive } from '../kontrapunkt/motive';
 import { stimmenVon } from '../editor/satzdoc';
 import { parseTonart } from './kompakt';
 import { grundton } from '../model/tonart';
@@ -129,6 +130,10 @@ export function pruefe(doc: EditorDoc, kriterien: string[]): Pruefpunkt[] {
       case 'enthaelt':
       case 'endet-in':
       case 'liedtext':
+      case 'mindestens-takte':
+      case 'motiv-anzahl':
+      case 'motiv-imitation':
+      case 'motiv-verarbeitung':
         return satzKriterium(name, args, doc, satz());
       default:
         return { text: `Unbekanntes Kriterium „${k}“`, ok: false };
@@ -160,7 +165,7 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
       const soll = Math.max(...laengen);
       const namen = stimmenVon(doc.satz).map((st) => st.name);
       const kurz = laengen.map((l, i) => (l < soll - 1e-9 ? namen[i] : null)).filter(Boolean);
-      return { text: 'Die Gegenstimme reicht bis zum Schluss', ok: kurz.length === 0, hinweis: kurz.length ? `Noch zu kurz: ${kurz.join(', ')}.` : undefined };
+      return { text: doc.satz.kontrapunkt?.gattung === 'frei' ? 'Beide Stimmen sind gleich lang' : 'Die Gegenstimme reicht bis zum Schluss', ok: kurz.length === 0, hinweis: kurz.length ? `Noch zu kurz: ${kurz.join(', ')}.` : undefined };
     }
     case 'fehlerfrei': {
       const kp = doc.satz.kontrapunkt;
@@ -171,6 +176,25 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
         ok: fehler.length === 0,
         hinweis: erster ? `${fehler.length} Fehler, z. B. Takt ${erster.takt}: ${erster.text}` : undefined,
       };
+    }
+    case 'mindestens-takte': {
+      const n = Number(args[0]);
+      const ist = score.voices[0].measures.length;
+      return { text: `Mindestens ${n} Takte`, ok: ist >= n, hinweis: `Bisher ${ist} ${ist === 1 ? 'Takt' : 'Takte'}.` };
+    }
+    case 'motiv-anzahl': {
+      const n = Number(args[0]);
+      const ist = findeMotive(score).length;
+      return { text: `Das Motiv erklingt mindestens ${n}-mal`, ok: ist >= n, hinweis: `Bisher ${ist}-mal erkannt. Öffne „Satz prüfen“, um die Funde zu sehen; passe dort auch die Länge des Motivs an.` };
+    }
+    case 'motiv-imitation': {
+      const ok = findeMotive(score).some((f) => f.bezug === 'Imitation');
+      return { text: 'Die andere Stimme imitiert das Motiv', ok, hinweis: 'Lass das Motiv in der zweiten Stimme mit gleichem Rhythmus und gleichen Tonschritten einsetzen, zum Beispiel eine Oktave tiefer.' };
+    }
+    case 'motiv-verarbeitung': {
+      const f = findeMotive(score);
+      const ok = f.some((x) => x.bezug === 'Sequenz' || x.form !== 'Thema');
+      return { text: 'Das Motiv wird verarbeitet (Sequenz, Umkehrung, Krebs oder Vergrößerung)', ok, hinweis: 'Setze das Motiv zum Beispiel direkt hintereinander eine Stufe tiefer (Sequenz) oder kehre seine Richtung um.' };
     }
     case 'funktionen': {
       const ist = funktionsfolge(score);

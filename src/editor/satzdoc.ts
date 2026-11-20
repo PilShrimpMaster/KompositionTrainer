@@ -44,6 +44,17 @@ export function kpDoc(basis: EditorDoc, gattung: Gattung, cf: 0 | 1, cantus: Not
   return { ...basis, clef: besetzung[kp].clef, events: stimmen[kp], satz: { stimmen, aktiv: kp, besetzung, kontrapunkt: { gattung, cf }, gesperrt: [cf] } };
 }
 
+/** Freier zweistimmiger Satz (Invention): beide Stimmen offen, optional mit vorgegebenem Beginn */
+export function freiDoc(basis: EditorDoc, oben: NoteEvent[] = [], unten: NoteEvent[] = []): EditorDoc {
+  const besetzung: StimmInfo[] = [
+    { id: 'O', name: 'Oberstimme', clef: 'treble', staff: 0 },
+    { id: 'U', name: 'Unterstimme', clef: 'bass', staff: 1 },
+  ];
+  const stimmen = [structuredClone(oben), structuredClone(unten)];
+  const aktiv = oben.length && !unten.length ? 1 : 0;
+  return { ...basis, clef: besetzung[aktiv].clef, events: stimmen[aktiv], satz: { stimmen, aktiv, besetzung, kontrapunkt: { gattung: 'frei', cf: 1 }, gesperrt: [] } };
+}
+
 /** Zwei Stimmen auf zwei Systemen: Cantus firmus oben (cf = 0) oder unten (cf = 1) */
 export function kpBesetzung(cf: 0 | 1): StimmInfo[] {
   return [
