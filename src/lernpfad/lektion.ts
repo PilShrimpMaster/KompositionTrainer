@@ -1,3 +1,5 @@
+import type { Gattung } from '../kontrapunkt/fux';
+import { kpSatz } from '../kontrapunkt/kurzform';
 import { leseFelder, liste, parseBeispiel, trenneKopf } from '../lexikon/parse';
 import type { Clef, KeySignature, NoteEvent, Pitch, Score, TimeSignature } from '../model/types';
 import { satz } from '../satz/kurzform';
@@ -18,9 +20,19 @@ export interface Schreibaufgabe {
   vorgabe?: NoteEvent[][];
   /** Liedtext unter dem Sopran */
   liedtext?: string;
+  /** Kontrapunkt: Gattung, Lage des Cantus firmus (0 = oben, 1 = unten) und seine Noten */
+  kontrapunkt?: { gattung: Gattung; cf: 0 | 1; cantus: NoteEvent[] };
 }
 
 const STIMM_FELDER = ['sopran', 'alt', 'tenor', 'bass'] as const;
+
+/** „kontrapunkt: 2“, „cantus: D3:1 F3 …“, „cf: unten“ (Standard) oder „oben“ */
+function kontrapunktFelder(f: Record<string, string>): { gattung: Gattung; cf: 0 | 1; cantus: NoteEvent[] } {
+  const gattung = Number(f.kontrapunkt);
+  if (![1, 2, 3, 4, 5].includes(gattung)) throw new Error(`Unbekannte Gattung „${f.kontrapunkt}“`);
+  if (!f.cantus) throw new Error('Kontrapunkt-Aufgabe braucht einen cantus');
+  return { gattung: gattung as Gattung, cf: f.cf === 'oben' ? 0 : 1, cantus: parseNotenfolge(f.cantus) };
+}
 
 /** Satz-Block: Kopfzeilen und je eine Zeile „S: …“, „A: …“, „T: …“, „B: …“ */
 function parseSatzBlock(inhalt: string): { score: Score; analyse: boolean } {
@@ -35,7 +47,7 @@ function parseSatzBlock(inhalt: string): { score: Score; analyse: boolean } {
 
 export type Baustein =
   | { art: 'text'; markdown: string }
-  | { art: 'noten'; score: Score; analyse?: boolean }
+  | { art: 'noten'; score: Score; analyse?: boolean; kontrapunkt?: { gattung: Gattung; cf: 0 | 1 } }
   | { art: 'akkorde'; gruppen: Pitch[][]; klang: 'nacheinander' | 'zusammen'; schluessel: Clef; tonart?: KeySignature }
   | { art: 'uebungen'; typen: UebungTyp[] }
   | { art: 'aufgabe'; aufgabe: Schreibaufgabe };
@@ -52,7 +64,7 @@ export interface Lektion {
   schritte: Schritt[];
 }
 
-const FENCE = /```(noten|satz|akkorde|uebungen|aufgabe)[^\n]*\n([\s\S]*?)```/g;
+const FENCE = /```(noten|satz|akkorde|uebungen|aufgabe|zweistimmig)[^\n]*\n([\s\S]*?)```/g;
 
 function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: string): Baustein[] {
   const out: Baustein[] = [];
@@ -70,6 +82,17 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
         case 'satz':
           out.push({ art: 'noten', ...parseSatzBlock(inhalt) });
           break;
+        case 'zweistimmig': {
+          // Zweistimmiges Beispiel: oben/unten, optional gattung und cf (oben|unten) für die Prüfung
+          const f = leseFelder(inhalt);
+          if (!f.oben || !f.unten) throw new Error('Zweistimmig braucht oben und unten');
+          const cf: 0 | 1 = f.cf === 'oben' ? 0 : 1;
+          const gattung = f.gattung ? (Number(f.gattung) as Gattung) : undefined;
+          const namen: [string, string] = gattung ? (cf === 1 ? ['Kontrapunkt', 'Cantus firmus'] : ['Cantus firmus', 'Kontrapunkt']) : ['Oberstimme', 'Unterstimme'];
+          const score = kpSatz({ titel: f.titel ?? '', tonart: f.tonart, takt: f.takt, tempo: f.tempo ? Number(f.tempo) : undefined, oben: f.oben, unten: f.unten, namen });
+          out.push({ art: 'noten', score, ...(gattung ? { kontrapunkt: { gattung, cf } } : {}) });
+          break;
+        }
         case 'akkorde': {
           const zeilen = inhalt.split('\n').map((z) => z.trim()).filter(Boolean);
           const felder = leseFelder(zeilen.filter((z) => z.includes(':')).join('\n'));
@@ -99,6 +122,9 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
               takt: f.takt ? parseTakt(f.takt) : undefined,
               schluessel: f.schluessel ? parseSchluessel(f.schluessel) : undefined,
               pruefung: liste(f.pruefung),
+              ...(f.kontrapunkt
+                ? { kontrapunkt: kontrapunktFelder(f) }
+                : {}),
               ...(f.satz === 'ja'
                 ? { vorgabe: STIMM_FELDER.map((k) => (f[k] ? parseNotenfolge(f[k]) : [])), liedtext: f.liedtext || undefined }
                 : {}),

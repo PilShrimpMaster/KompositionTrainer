@@ -3,8 +3,8 @@ id: wechselnote
 titel: Wechselnote
 kategorie: Satztechnik
 kurz: Ein akkordfremder Ton, der einen Akkordton umspielt: Er geht einen Schritt weg und kehrt sofort zurück, z. B. E – F – E.
-synonyme: Wechselnoten, Nebennote, Nebennoten, Nebenton, Umspielung, Cambiata, Wechselnote obere, untere Wechselnote
-siehe: durchgang, vorhalt, verzierung
+synonyme: Wechselnoten, Nebennote, Nebennoten, Nebenton, Umspielung, Wechselnote obere, untere Wechselnote
+siehe: durchgang, vorhalt, verzierung, cambiata
 beispiel: E4 F4 E4 D4 E4
 klang: nacheinander
 schluessel: treble

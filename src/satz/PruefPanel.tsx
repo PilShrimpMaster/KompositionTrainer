@@ -5,6 +5,7 @@ import { eintrag } from '../lexikon/lexikon';
 import type { Score } from '../model/types';
 import { useNavigation } from '../navigation';
 import { pruefeSatz, regel, type Befund } from './regeln';
+import { kpRegel, pruefeKontrapunkt, type KpOptionen } from '../kontrapunkt/fux';
 
 const HINWEISE_KEY = 'kt-pruefung-hinweise';
 
@@ -24,9 +25,14 @@ export function markierungenFuer(befunde: Befund[], auswahl: number | null): Map
   return m;
 }
 
-export function usePruefung(score: Score) {
+export function usePruefung(score: Score, kontrapunkt?: Omit<KpOptionen, 'hinweise'>) {
   const [hinweise, setHinweiseState] = useState(hinweiseGespeichert);
-  const befunde = useMemo(() => pruefeSatz(score, { hinweise }), [score, hinweise]);
+  const gattung = kontrapunkt?.gattung;
+  const cf = kontrapunkt?.cf;
+  const befunde = useMemo(
+    () => (gattung && cf !== undefined ? pruefeKontrapunkt(score, { gattung, cf, hinweise }) : pruefeSatz(score, { hinweise })),
+    [score, hinweise, gattung, cf],
+  );
   function setHinweise(v: boolean) {
     setHinweiseState(v);
     try {
@@ -70,7 +76,7 @@ export function PruefPanel({ befunde, auswahl, onAuswahl, hinweise, onHinweise, 
       {befunde.length > 0 && (
         <ol className="befunde">
           {befunde.map((b, i) => {
-            const r = regel(b.regel);
+            const r = regel(b.regel) ?? kpRegel(b.regel);
             const e = r ? eintrag(r.begriff) : undefined;
             return (
               <li key={i} className={`befund ${b.art} ${auswahl === i ? 'is-on' : ''}`}>

@@ -1,6 +1,8 @@
 import { measureLength } from '../model/duration';
 import type { NoteEvent, Pitch, Score } from '../model/types';
 import { SATB } from '../satz/kurzform';
+import type { Gattung } from '../kontrapunkt/fux';
+import type { Clef } from '../model/types';
 import { decompose, rebar, type EditorDoc } from './rebar';
 
 /** Zusatzdaten eines vierstimmigen Satzes im Editor */
@@ -11,9 +13,44 @@ export interface Satzdaten {
   aktiv: number;
   /** Liedtext unter dem Sopran, Silben durch Leerzeichen getrennt */
   text?: string;
+  /** Andere Besetzung als SATB, z. B. zwei Stimmen im Kontrapunkt */
+  besetzung?: StimmInfo[];
+  /** Kontrapunkt-Aufgabe: Gattung und Stimme des Cantus firmus (0 = oben, 1 = unten) */
+  kontrapunkt?: { gattung: Gattung; cf: 0 | 1 };
+  /** Vorgegebene Stimmen, die nicht bearbeitet werden (z. B. der Cantus firmus) */
+  gesperrt?: number[];
 }
 
-export const STIMMEN = SATB;
+export interface StimmInfo {
+  id: string;
+  name: string;
+  clef: Clef;
+  staff: number;
+  stem?: 'up' | 'down';
+}
+
+export const STIMMEN: StimmInfo[] = SATB;
+
+/** Die Stimmen eines Satzes (SATB, wenn nichts anderes festgelegt ist) */
+export function stimmenVon(satz: Satzdaten | undefined): StimmInfo[] {
+  return satz?.besetzung ?? STIMMEN;
+}
+
+/** Ein Kontrapunkt-Dokument: Cantus firmus vorgegeben und gesperrt, die Gegenstimme ist aktiv */
+export function kpDoc(basis: EditorDoc, gattung: Gattung, cf: 0 | 1, cantus: NoteEvent[], kontrapunkt: NoteEvent[] = []): EditorDoc {
+  const kp = (1 - cf) as 0 | 1;
+  const stimmen = cf === 0 ? [structuredClone(cantus), kontrapunkt] : [kontrapunkt, structuredClone(cantus)];
+  const besetzung = kpBesetzung(cf);
+  return { ...basis, clef: besetzung[kp].clef, events: stimmen[kp], satz: { stimmen, aktiv: kp, besetzung, kontrapunkt: { gattung, cf }, gesperrt: [cf] } };
+}
+
+/** Zwei Stimmen auf zwei Systemen: Cantus firmus oben (cf = 0) oder unten (cf = 1) */
+export function kpBesetzung(cf: 0 | 1): StimmInfo[] {
+  return [
+    { id: 'O', name: cf === 0 ? 'Cantus firmus' : 'Kontrapunkt', clef: 'treble', staff: 0 },
+    { id: 'U', name: cf === 1 ? 'Cantus firmus' : 'Kontrapunkt', clef: 'bass', staff: 1 },
+  ];
+}
 
 /** Schreibt die Noten der aktiven Stimme (doc.events) zurück in die Satzdaten */
 export function synchron(doc: EditorDoc): EditorDoc {
@@ -27,8 +64,8 @@ export function synchron(doc: EditorDoc): EditorDoc {
 /** Wechselt die bearbeitete Stimme */
 export function aktiviere(doc: EditorDoc, aktiv: number): EditorDoc {
   const d = synchron(doc);
-  if (!d.satz || aktiv < 0 || aktiv >= d.satz.stimmen.length) return d;
-  return { ...d, satz: { ...d.satz, aktiv }, events: d.satz.stimmen[aktiv], clef: STIMMEN[aktiv].clef };
+  if (!d.satz || aktiv < 0 || aktiv >= d.satz.stimmen.length || d.satz.gesperrt?.includes(aktiv)) return d;
+  return { ...d, satz: { ...d.satz, aktiv }, events: d.satz.stimmen[aktiv], clef: stimmenVon(d.satz)[aktiv].clef };
 }
 
 /** Macht aus einer Melodie einen vierstimmigen Satz (die Melodie wird Sopran) oder umgekehrt */
@@ -73,7 +110,8 @@ export interface SatzRebar {
 export function rebarSatz(doc: EditorDoc, stumm: boolean[] = []): SatzRebar {
   const d = synchron(doc);
   const satz = d.satz!;
-  const teile = satz.stimmen.map((events, i) => rebar({ ...d, clef: STIMMEN[i].clef, events: mitText(events, i === 0 ? satz.text : undefined) }));
+  const besetzung = stimmenVon(satz);
+  const teile = satz.stimmen.map((events, i) => rebar({ ...d, clef: besetzung[i].clef, events: mitText(events, i === 0 ? satz.text : undefined) }));
   const takte = Math.max(1, ...teile.map((t, i) => (satz.stimmen[i].length ? t.score.voices[0].measures.length : 0)));
   const voll = measureLength(d.time);
   const stimmeVon = new Map<string, [number, number]>();
@@ -90,8 +128,8 @@ export function rebarSatz(doc: EditorDoc, stumm: boolean[] = []): SatzRebar {
       if (i === satz.aktiv) sourceOf.set(neu, idx);
     });
     if (i === satz.aktiv) t.partsOf.forEach((ids, idx) => partsOf.set(idx, ids.map((id) => `${i}${id.slice(id.indexOf('-'))}`)));
-    const info = STIMMEN[i];
-    return { id: info.id, name: info.name, clef: info.clef, staff: info.staff, stem: info.stem, measures };
+    const info = besetzung[i];
+    return { id: info.id, name: info.name, clef: info.clef, staff: info.staff, ...(info.stem ? { stem: info.stem } : {}), measures };
   });
 
   return {

@@ -389,7 +389,7 @@ export function pruefeSatz(score: Score, opts: PruefOptionen = {}): Befund[] {
 }
 
 /** Gleiche Befunde in aufeinanderfolgenden Klängen (z. B. lange zu weite Lage) zu einem zusammenfassen */
-function zusammenfassen(out: Befund[], b: Befund): Befund[] {
+export function zusammenfassen(out: Befund[], b: Befund): Befund[] {
   const gleich = out.find((x) => x.regel === b.regel && x.text === b.text && (x.bisTakt ?? x.takt) >= b.takt - 1);
   if (!gleich) return [...out, b];
   gleich.ids = [...new Set([...gleich.ids, ...b.ids])];
