@@ -1312,3 +1312,31 @@ a.lexikon-link:hover {
 .markieren p {
   margin: 8px 0;
 }
+
+/* Harmonien im Klaviersatz */
+.harmonie-takte {
+  list-style: none;
+  margin: 8px 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.harmonie-takte li {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.harmonie-takt {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.harmonie {
+  font-weight: 600;
+}
+.harmonie.is-unklar {
+  color: #c76a00;
+}

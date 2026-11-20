@@ -7,7 +7,8 @@ import { Klavier } from './Klavier';
 import type { Schreibaufgabe } from '../lernpfad/lektion';
 import { AufgabePanel } from './AufgabePanel';
 import { docFromScore, rebar, type EditorDoc } from './rebar';
-import { alsSatz, freiDoc, kpBesetzung, kpDoc, rebarSatz, stimmenVon, synchron, type SatzRebar } from './satzdoc';
+import { alsSatz, freiDoc, klavierDoc, kpBesetzung, kpDoc, rebarSatz, stimmenVon, synchron, type SatzRebar } from './satzdoc';
+import { HarmoniePanel } from '../satz/HarmoniePanel';
 import { erzeugeCantus, MODI } from '../kontrapunkt/cantus';
 import { GATTUNGEN, STRENGE_GATTUNGEN, type Gattung } from '../kontrapunkt/fux';
 import { motivMarkierungen, MotivPanel, useMotive } from '../kontrapunkt/MotivPanel';
@@ -26,7 +27,7 @@ const STORAGE_KEY = 'kt-editor-entwurf-v1';
 const STUECK_KEY = 'kt-editor-stueck-id';
 const MITSPIELEN_KEY = 'kt-midi-mitspielen';
 const PRUEFEN_KEY = 'kt-editor-pruefen';
-type Besetzungsart = 'melodie' | 'satz' | 'kontrapunkt' | 'frei';
+type Besetzungsart = 'melodie' | 'satz' | 'kontrapunkt' | 'frei' | 'klavier';
 /** Unterste Taste des Bildschirmklaviers je Stimme */
 const KLAVIER_TIEF = [60, 60, 48, 36];
 
@@ -151,7 +152,8 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   const aktiv = doc.satz?.aktiv ?? 0;
   const besetzung = stimmenVon(doc.satz);
   const gesperrt = doc.satz?.gesperrt ?? [];
-  const pruefung = usePruefung(bar.score, doc.satz?.kontrapunkt);
+  const klavier = !!doc.satz?.klavier;
+  const pruefung = usePruefung(bar.score, doc.satz?.kontrapunkt, klavier);
   const frei = doc.satz?.kontrapunkt?.gattung === 'frei';
   const motive = useMotive(bar.score);
   const markierungen = useMemo(() => {
@@ -290,6 +292,10 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   }
 
   const status = (() => {
+    if (doc.events.length === 0 && klavier)
+      return aktiv === 0
+        ? 'Melodie: noch leer. Schreib die Melodie ins obere System; Tab wechselt zur Begleitung.'
+        : 'Begleitung: noch leer. Schreib Bass oder gebrochene Akkorde ins untere System (z. B. c–g–e–g); Tab wechselt zur Melodie.';
     if (doc.events.length === 0 && doc.satz?.kontrapunkt?.gattung === 'frei') return `${besetzung[aktiv].name}: noch leer. Beginne mit einem kurzen Motiv in einer Stimme und lass es die andere nachahmen. Tab wechselt die Stimme.`;
     if (doc.events.length === 0 && doc.satz?.kontrapunkt) return `Schreib die Gegenstimme ins ${besetzung[aktiv].staff === 0 ? 'obere' : 'untere'} System: ${GATTUNGEN[doc.satz.kontrapunkt.gattung].kurz}.`;
     if (doc.events.length === 0 && doc.satz) return `${besetzung[aktiv].name}: noch leer. Tippe ins ${besetzung[aktiv].staff === 0 ? 'obere' : 'untere'} System, spiel auf dem Klavier oder wechsle die Stimme mit Tab.`;
@@ -322,11 +328,28 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
       if (!doc.satz?.kontrapunkt || doc.satz.kontrapunkt.gattung === 'frei') kontrapunktNeu();
       return;
     }
+    if (art === 'klavier') {
+      if (klavier) return;
+      // Eine vorhandene Melodie wird übernommen
+      const d = synchron(doc);
+      const melodie = d.satz ? (d.satz.kontrapunkt ? [] : d.satz.stimmen[0]) : d.clef === 'treble' ? d.events : [];
+      setStueckId(null);
+      act({ type: 'load', doc: klavierDoc({ ...d, satz: undefined, title: d.title === 'Meine Melodie' ? 'Mein Klavierstück' : d.title }, melodie) });
+      setPruefen(true);
+      return;
+    }
     if (art === 'frei') {
       if (doc.satz?.kontrapunkt?.gattung === 'frei') return;
       setStueckId(null);
       act({ type: 'load', doc: freiDoc({ ...emptyDoc(), title: 'Meine Invention', key: doc.key, time: { beats: 4, beatType: 4 } }) });
       setPruefen(true);
+      return;
+    }
+    if (klavier) {
+      // Vom Klaviersatz zurück: die Melodie bleibt
+      const melodie = synchron(doc).satz!.stimmen[0];
+      const basis = { ...doc, satz: undefined, clef: 'treble' as const, events: melodie };
+      act({ type: 'load', doc: art === 'satz' ? alsSatz(basis, true) : basis });
       return;
     }
     if (doc.satz?.kontrapunkt) {
@@ -351,6 +374,13 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   function aufgabeBeginnen(a: Schreibaufgabe) {
     setStueckId(null);
     const basis = { ...emptyDoc(), title: a.titel, key: a.tonart ?? doc.key, time: a.takt ?? doc.time, clef: a.schluessel ?? doc.clef };
+    if (a.klavier) {
+      const neu = klavierDoc(basis, a.klavier.melodie, a.klavier.begleitung, true);
+      act({ type: 'load', doc: neu });
+      setPianoLow(neu.satz!.aktiv === 1 ? 48 : 60);
+      setPruefen(true);
+      return;
+    }
     if (a.kontrapunkt) {
       const { gattung, cf, cantus } = a.kontrapunkt;
       const neu = gattung === 'frei' ? freiDoc(basis, cantus) : kpDoc(basis, gattung, cf, cantus);
@@ -469,7 +499,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
             <h2>{doc.title}</h2>
             <p className="meta">
               {germanKeyName(doc.key)} · {doc.time.beats}/{doc.time.beatType}-Takt ·{' '}
-              {doc.satz?.kontrapunkt ? GATTUNGEN[doc.satz.kontrapunkt.gattung].name : doc.satz ? 'Chorsatz SATB' : doc.clef === 'treble' ? 'Violinschlüssel' : 'Bassschlüssel'} · {doc.tempo} ♩/min
+              {doc.satz?.kontrapunkt ? GATTUNGEN[doc.satz.kontrapunkt.gattung].name : klavier ? 'Klaviersatz' : doc.satz ? 'Chorsatz SATB' : doc.clef === 'treble' ? 'Violinschlüssel' : 'Bassschlüssel'} · {doc.tempo} ♩/min
             </p>
           </div>
           <button className="secondary small" onClick={() => setShowMeta((s) => !s)} aria-expanded={showMeta}>
@@ -605,6 +635,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
               }}
             />
           )}
+          {pruefen && klavier && <HarmoniePanel score={bar.score} />}
           {pruefen && frei && (
             <MotivPanel
               motiv={motive.motiv}
@@ -782,10 +813,11 @@ function MetaPanel({
       <label className="field">
         <span>Besetzung</span>
         <select
-          value={doc.satz?.kontrapunkt ? (doc.satz.kontrapunkt.gattung === 'frei' ? 'frei' : 'kontrapunkt') : doc.satz ? 'satz' : 'melodie'}
+          value={doc.satz?.kontrapunkt ? (doc.satz.kontrapunkt.gattung === 'frei' ? 'frei' : 'kontrapunkt') : doc.satz?.klavier ? 'klavier' : doc.satz ? 'satz' : 'melodie'}
           onChange={(e) => onSatz(e.target.value as Besetzungsart)}
         >
           <option value="melodie">Melodie (einstimmig)</option>
+          <option value="klavier">Klavier: Melodie mit Begleitung</option>
           <option value="satz">Chorsatz: Sopran, Alt, Tenor, Bass</option>
           <option value="kontrapunkt">Kontrapunkt: Gegenstimme zu einem Cantus firmus</option>
           <option value="frei">Zweistimmig frei: Invention</option>
@@ -800,7 +832,7 @@ function MetaPanel({
           </select>
         </label>
       )}
-      {doc.satz && !doc.satz.kontrapunkt && (
+      {doc.satz && !doc.satz.kontrapunkt && !doc.satz.klavier && (
         <label className="field liedtext">
           <span>Liedtext (Silben mit Leerzeichen trennen: „Lo- be den Her- ren“)</span>
           <input type="text" value={doc.satz.text ?? ''} onChange={(e) => onText(e.target.value)} />

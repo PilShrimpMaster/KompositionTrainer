@@ -10,7 +10,9 @@ import { pruefeSatz } from '../satz/regeln';
 import { pruefeKontrapunkt } from '../kontrapunkt/fux';
 import { findeMotive } from '../kontrapunkt/motive';
 import { MODUS_NAMEN, modusLeiter, type ModusName } from '../uebungen/modal';
-import { stimmenVon } from '../editor/satzdoc';
+import { stimmenVon, synchron } from '../editor/satzdoc';
+import { klavierHarmonien, pruefeKlaviersatz } from '../satz/klavier';
+import type { Akkord } from '../satz/akkorde';
 import { parseTonart } from './kompakt';
 import { grundton } from '../model/tonart';
 import { dreiklangArt, intervall, INTERVALL_NAMEN } from '../uebungen/theorie';
@@ -34,7 +36,9 @@ export interface Pruefpunkt {
  * Prüft ein Stück gegen eine Liste von Kriterien, z. B.
  * „takte 8, dur, endet-grundton, schluss-lang, schritt-zum-schluss, umfang 10, sprung-max 6, leitereigen“.
  */
-export function pruefe(doc: EditorDoc, kriterien: string[]): Pruefpunkt[] {
+export function pruefe(gesamt: EditorDoc, kriterien: string[]): Pruefpunkt[] {
+  // Im Klaviersatz gelten die Melodie-Kriterien für die Melodie (obere Stimme)
+  const doc = gesamt.satz?.klavier ? { ...gesamt, clef: 'treble' as const, events: synchron(gesamt).satz!.stimmen[0] } : gesamt;
   const noten = doc.events.filter((e) => e.pitch);
   const toene = noten.map((e) => e.pitch!);
   const letzte = noten[noten.length - 1];
@@ -42,7 +46,7 @@ export function pruefe(doc: EditorDoc, kriterien: string[]): Pruefpunkt[] {
   const takte = doc.events.length ? rebar(doc).score.voices[0].measures.length : 0;
 
   let satzScore: Score | null | undefined;
-  const satz = () => (satzScore === undefined ? (satzScore = doc.satz ? rebarSatz(doc).score : null) : satzScore);
+  const satz = () => (satzScore === undefined ? (satzScore = gesamt.satz ? rebarSatz(gesamt).score : null) : satzScore);
 
   return kriterien.map((k): Pruefpunkt => {
     const [name, ...args] = k.trim().split(/\s+/);
@@ -160,7 +164,7 @@ export function pruefe(doc: EditorDoc, kriterien: string[]): Pruefpunkt[] {
       case 'motiv-anzahl':
       case 'motiv-imitation':
       case 'motiv-verarbeitung':
-        return satzKriterium(name, args, doc, satz());
+        return satzKriterium(name, args, gesamt, satz());
       default:
         return { text: `Unbekanntes Kriterium „${k}“`, ok: false };
     }
@@ -169,6 +173,20 @@ export function pruefe(doc: EditorDoc, kriterien: string[]): Pruefpunkt[] {
 
 const OHNE_SATZ: Pruefpunkt = { text: 'Vierstimmiger Satz', ok: false, hinweis: 'Stelle unter „Stück einstellen“ die Besetzung „Chorsatz“ ein.' };
 const UMKEHRUNG: Record<string, number> = { Grundstellung: 0, Sextakkord: 1, Quartsextakkord: 2 };
+
+/** Die Akkorde eines Satzes: im Klaviersatz je Abschnitt aus Melodie und Begleitung, sonst je Zusammenklang */
+function akkordStellen(score: Score, klavier: boolean): { akkord: Akkord }[] {
+  if (!klavier) return analysiere(score);
+  return klavierHarmonien(score)
+    .filter((h): h is typeof h & { akkord: Akkord } => !!h.akkord && h.kurz !== '?')
+    .filter((h, i, xs) => i === 0 || xs[i - 1].akkord.name !== h.akkord.name || xs[i - 1].akkord.umkehrung !== h.akkord.umkehrung);
+}
+
+function folge(stellen: { akkord: Akkord }[]): string[] {
+  const out: string[] = [];
+  for (const s of stellen) if (out[out.length - 1] !== s.akkord.funktion) out.push(s.akkord.funktion);
+  return out;
+}
 
 /** Kriterien für vierstimmige Sätze */
 function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Score | null): Pruefpunkt {
@@ -191,14 +209,20 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
       const soll = Math.max(...laengen);
       const namen = stimmenVon(doc.satz).map((st) => st.name);
       const kurz = laengen.map((l, i) => (l < soll - 1e-9 ? namen[i] : null)).filter(Boolean);
-      return { text: doc.satz.kontrapunkt?.gattung === 'frei' ? 'Beide Stimmen sind gleich lang' : 'Die Gegenstimme reicht bis zum Schluss', ok: kurz.length === 0, hinweis: kurz.length ? `Noch zu kurz: ${kurz.join(', ')}.` : undefined };
+      return {
+        text: doc.satz.klavier ? 'Melodie und Begleitung sind gleich lang' : doc.satz.kontrapunkt?.gattung === 'frei' ? 'Beide Stimmen sind gleich lang' : 'Die Gegenstimme reicht bis zum Schluss', ok: kurz.length === 0, hinweis: kurz.length ? `Noch zu kurz: ${kurz.join(', ')}.` : undefined };
     }
     case 'fehlerfrei': {
       const kp = doc.satz.kontrapunkt;
-      const fehler = (kp ? pruefeKontrapunkt(score, { ...kp, hinweise: false }) : pruefeSatz(score)).filter((b) => b.art === 'fehler');
+      const kl = !!doc.satz.klavier;
+      const fehler = (kl ? pruefeKlaviersatz(score, { hinweise: false }) : kp ? pruefeKontrapunkt(score, { ...kp, hinweise: false }) : pruefeSatz(score)).filter((b) => b.art === 'fehler');
       const erster = fehler[0];
       return {
-        text: kp ? 'Keine Fehler im Kontrapunkt (Konsonanzen, Dissonanzen, Parallelen, Schluss …)' : 'Keine Satzfehler (Parallelen, Umfang, Auflösung …)',
+        text: kl
+          ? 'Keine Fehler im Klaviersatz (Parallelen zwischen Melodie und Bass, Schluss)'
+          : kp
+            ? 'Keine Fehler im Kontrapunkt (Konsonanzen, Dissonanzen, Parallelen, Schluss …)'
+            : 'Keine Satzfehler (Parallelen, Umfang, Auflösung …)',
         ok: fehler.length === 0,
         hinweis: erster ? `${fehler.length} Fehler, z. B. Takt ${erster.takt}: ${erster.text}` : undefined,
       };
@@ -223,7 +247,7 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
       return { text: 'Das Motiv wird verarbeitet (Sequenz, Umkehrung, Krebs oder Vergrößerung)', ok, hinweis: 'Setze das Motiv zum Beispiel direkt hintereinander eine Stufe tiefer (Sequenz) oder kehre seine Richtung um.' };
     }
     case 'funktionen': {
-      const ist = funktionsfolge(score);
+      const ist = doc.satz.klavier ? folge(akkordStellen(score, true)) : funktionsfolge(score);
       const ok = ist.length === args.length && args.every((e, i) => funktionPasst(e, ist[i]));
       return {
         text: `Akkordfolge ${args.join(' – ').replace(/7/g, '⁷')}`,
@@ -232,7 +256,7 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
       };
     }
     case 'ganzschluss': {
-      const a = analysiere(score);
+      const a = akkordStellen(score, !!doc.satz.klavier);
       const [d, t] = a.slice(-2).map((s) => s?.akkord);
       const tonika = doc.key.mode === 'major' ? 'T' : 't';
       const ok = !!d && !!t && funktionPasst('D', d.funktion) && (t.funktion === tonika || t.funktion === 'T') && t.umkehrung === 0;
@@ -240,13 +264,13 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
     }
     case 'enthaelt': {
       const e = args[0];
-      const a = analysiere(score);
+      const a = akkordStellen(score, !!doc.satz.klavier);
       const ok = e in UMKEHRUNG ? a.some((s) => s.akkord.umkehrung === UMKEHRUNG[e] && !s.akkord.sept) : a.some((s) => funktionPasst(e, s.akkord.funktion));
       return { text: `Enthält ${e in UMKEHRUNG ? 'einen ' + e : e.replace(/7/g, '⁷')}`, ok };
     }
     case 'endet-in': {
       const ziel = parseTonart(args.join(' '));
-      const a = analysiere({ ...score, key: ziel });
+      const a = akkordStellen({ ...score, key: ziel }, !!doc.satz.klavier);
       const [d, t] = a.slice(-2).map((s) => s?.akkord);
       const ok = !!d && !!t && funktionPasst('D', d.funktion) && ['T', 't'].includes(t.funktion) && t.umkehrung === 0;
       return { text: 'Endet mit einer Kadenz in der neuen Tonart', ok, hinweis: 'Zum Schluss die Dominante der neuen Tonart (mit ihrem Leitton) und dann deren Tonika.' };
