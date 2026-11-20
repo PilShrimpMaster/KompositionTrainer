@@ -3,8 +3,8 @@ id: nonakkord
 titel: Nonakkord
 kategorie: Harmonik
 kurz: Ein Septakkord mit zusätzlicher None (neunter Ton über dem Grundton), z. B. G–H–D–F–A. Im vierstimmigen Satz fällt meist die Quinte weg.
-synonyme: Nonakkorde, Dominantseptnonakkord, None, D9, Optionstöne, Tensions
-siehe: dominantseptakkord, verminderter-septakkord, septakkord
+synonyme: Nonakkorde, Dominantseptnonakkord, None, D9
+siehe: dominantseptakkord, verminderter-septakkord, septakkord, optionstoene
 ---
 
 Schichtet man über den Septakkord noch eine Terz, kommt man zur **None** (Oktave + Sekunde). Der **Dominantseptnonakkord** in C-Dur: G–H–D–F–A (große None) oder in c-Moll G–H–D–F–As (kleine None).

@@ -3,8 +3,8 @@ id: gattungskontrapunkt
 titel: Gattungskontrapunkt
 kategorie: Satztechnik
 kurz: Die Lehrmethode von Johann Joseph Fux (1725): Zu einem Cantus firmus schreibt man eine Gegenstimme in fünf Stufen, den Gattungen, von Note gegen Note bis zum freien (floriden) Kontrapunkt.
-synonyme: Gattungen, Gattung, Fux, Gradus ad Parnassum, strenger Satz, Species counterpoint, erste Gattung, zweite Gattung, dritte Gattung, vierte Gattung, fünfte Gattung, floride Gattung, Note gegen Note
-siehe: kontrapunkt, cantus-firmus, konsonanz-dissonanz, durchgang, cambiata, vorhalt, clausula
+synonyme: Gattungen, Gattung, strenger Satz, Species counterpoint, erste Gattung, zweite Gattung, dritte Gattung, vierte Gattung, fünfte Gattung, floride Gattung, Note gegen Note
+siehe: kontrapunkt, cantus-firmus, konsonanz-dissonanz, durchgang, cambiata, vorhalt, clausula, fux
 beispiel: D4 F4 E4 D4 | A4 A4 G4 A4
 klang: nacheinander
 schluessel: treble

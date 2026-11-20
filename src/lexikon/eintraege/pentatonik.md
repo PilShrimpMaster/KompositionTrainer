@@ -3,8 +3,8 @@ id: pentatonik
 titel: Pentatonik
 kategorie: Tonarten
 kurz: Eine Tonleiter aus fünf Tönen ohne Halbtonschritte, z. B. C–D–E–G–A. Sie klingt offen und konfliktarm und findet sich weltweit in Volksmusik, Blues und Pop.
-synonyme: pentatonisch, Fünftonleiter, Dur-Pentatonik, Moll-Pentatonik, Bluestonleiter, Blue Note
-siehe: tonleiter, durtonleiter, kirchentonarten
+synonyme: pentatonisch, Fünftonleiter, Dur-Pentatonik, Moll-Pentatonik
+siehe: tonleiter, durtonleiter, kirchentonarten, blues
 beispiel: C4 D4 E4 G4 A4 C5
 klang: nacheinander
 schluessel: treble

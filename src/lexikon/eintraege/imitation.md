@@ -3,8 +3,8 @@ id: imitation
 titel: Imitation
 kategorie: Satztechnik
 kurz: Eine Stimme greift eine Melodie auf, die zuvor eine andere Stimme gespielt hat, oft auf anderer Tonhöhe. Grundlage von Kanon und Fuge.
-synonyme: Imitationen, imitieren, imitatorisch, Nachahmung, Engführung
-siehe: kanon, fuge, kontrapunkt, motiv
+synonyme: Imitationen, imitieren, imitatorisch, Nachahmung
+siehe: kanon, fuge, kontrapunkt, motiv, engfuehrung, invention
 ---
 
 Bei der **Imitation** beginnt eine Stimme mit einem Motiv, und eine andere wiederholt es etwas später, gleich oder auf anderer Stufe (meist Quinte oder Oktave). So entsteht ein Gespräch zwischen den Stimmen.

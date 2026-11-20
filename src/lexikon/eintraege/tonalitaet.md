@@ -3,8 +3,8 @@ id: tonalitaet
 titel: Tonalität und Atonalität
 kategorie: Tonarten
 kurz: Tonale Musik ist auf einen Grundton bezogen, um den sich alles ordnet. Atonale Musik (ab etwa 1908, Schönberg) verzichtet bewusst auf dieses Zentrum.
-synonyme: tonal, atonal, Atonalität, Zwölftonmusik, Zwölftontechnik, Dodekaphonie, Reihe, freie Atonalität
-siehe: tonart, chromatik, moderne
+synonyme: tonal, atonal, Atonalität, freie Atonalität
+siehe: tonart, chromatik, moderne, zwoelftonmusik
 ---
 
 **Tonalität** heißt, dass alle Töne und Akkorde auf ein Zentrum bezogen sind: die Tonika. Dur und Moll mit ihren Funktionen sind die bekannteste Form, aber auch die Kirchentonarten sind tonal.

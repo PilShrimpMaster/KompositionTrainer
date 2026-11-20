@@ -3,8 +3,8 @@ id: moderne
 titel: Musik des 20. und 21. Jahrhunderts
 kategorie: Geschichte
 kurz: Eine Vielfalt von Richtungen: Atonalität und Zwölftonmusik, Neoklassizismus, Minimal Music, elektronische Musik, dazu Jazz, Film- und Popmusik.
-synonyme: Moderne, Neue Musik, Schönberg, Strawinsky, Bartók, Neoklassizismus, Minimal Music, Steve Reich, Arvo Pärt, Filmmusik, Jazz
-siehe: tonalitaet, impressionismus, romantik
+synonyme: Moderne, Neue Musik
+siehe: tonalitaet, impressionismus, romantik, zwoelftonmusik, neoklassizismus, minimal-music, jazz, filmmusik
 ---
 
 Im 20. Jahrhundert zerfiel der gemeinsame Stil. Wichtige Richtungen:
