@@ -7,9 +7,10 @@ import { Klavier } from './Klavier';
 import type { Schreibaufgabe } from '../lernpfad/lektion';
 import { AufgabePanel } from './AufgabePanel';
 import { docFromScore, rebar, type EditorDoc } from './rebar';
-import { alsSatz, freiDoc, klavierDoc, kpBesetzung, kpDoc, rebarSatz, stimmenVon, synchron, type SatzRebar } from './satzdoc';
+import { alsSatz, besetzungsName, freiDoc, klavierDoc, kpBesetzung, kpDoc, rebarSatz, stimmenVon, synchron, type SatzRebar } from './satzdoc';
 import { HarmoniePanel } from '../satz/HarmoniePanel';
 import { FormPanel } from '../satz/FormPanel';
+import { KiFeedback } from '../ki/KiFeedback';
 import { erzeugeCantus, MODI } from '../kontrapunkt/cantus';
 import { GATTUNGEN, STRENGE_GATTUNGEN, type Gattung } from '../kontrapunkt/fux';
 import { motivMarkierungen, MotivPanel, useMotive } from '../kontrapunkt/MotivPanel';
@@ -144,6 +145,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   const [pruefen, setPruefenState] = useState(() => lesen(PRUEFEN_KEY) === 'ja');
   const [auswahl, setAuswahl] = useState<number | null>(null);
   const [formZeigen, setFormZeigen] = useState(false);
+  const [feedbackZeigen, setFeedbackZeigen] = useState(false);
   function setPruefen(v: boolean) {
     setPruefenState(v);
     setAuswahl(null);
@@ -675,7 +677,18 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           <button className={formZeigen ? 'secondary' : ''} onClick={() => setFormZeigen(!formZeigen)} aria-expanded={formZeigen}>
             {formZeigen ? 'Form ausblenden' : 'Form zeigen'}
           </button>
+          <button className="secondary" onClick={() => setFeedbackZeigen(!feedbackZeigen)} aria-expanded={feedbackZeigen}>
+            {feedbackZeigen ? 'KI-Feedback ausblenden' : '✨ Feedback zu meinem Stück'}
+          </button>
           {formZeigen && <FormPanel score={bar.score} />}
+          {feedbackZeigen && (
+            <KiFeedback
+              score={bar.score}
+              besetzung={besetzungsName(doc)}
+              befunde={doc.satz ? pruefung.befunde : []}
+              aufgabe={aufgabe && doc.title === aufgabe.titel ? aufgabe.text : undefined}
+            />
+          )}
         </div>
       )}
 

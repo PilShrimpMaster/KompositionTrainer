@@ -24,7 +24,7 @@ export function KiEinstellungen({ onFertig }: { onFertig: () => void }) {
         <strong>KI-Einstellungen</strong>
       </p>
       <p className="meta">
-        Für „Erklär mir das“ brauchst du einen eigenen API-Schlüssel von Anthropic (
+        Für die KI-Funktionen („Erklär mir das“, „Feedback zu meinem Stück“) brauchst du einen eigenen API-Schlüssel von Anthropic (
         <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noreferrer">
           Console → API Keys
         </a>

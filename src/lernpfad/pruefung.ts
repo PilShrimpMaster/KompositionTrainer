@@ -1,5 +1,6 @@
 import { measureLength, quarterLength } from '../model/duration';
-import { diatonicIndex, germanName, keyAlter, toMidi } from '../model/pitch';
+import { diatonicIndex, germanName, germanNameWithOctave, keyAlter, toMidi } from '../model/pitch';
+import { instrument, lagePruefen, lageText, notiert, umfangText } from '../model/instrumente';
 import type { Pitch, Step } from '../model/types';
 import type { EditorDoc } from '../editor/rebar';
 import { rebar } from '../editor/rebar';
@@ -14,7 +15,7 @@ import { stimmenVon, synchron } from '../editor/satzdoc';
 import { klavierHarmonien, pruefeKlaviersatz } from '../satz/klavier';
 import { analysiereForm, kadenzAm, kadenzText, menuettTrioFehlt, type KadenzArt } from '../satz/form';
 import type { Akkord } from '../satz/akkorde';
-import { parseTonart } from './kompakt';
+import { parseNotenfolge, parseTonart } from './kompakt';
 import { grundton } from '../model/tonart';
 import { dreiklangArt, intervall, INTERVALL_NAMEN } from '../uebungen/theorie';
 
@@ -153,6 +154,10 @@ export function pruefe(gesamt: EditorDoc, kriterien: string[]): Pruefpunkt[] {
         const anzahl = toene.filter((p) => klasse(p) === klasse(ton)).length;
         return { text: `Der Farbton ${germanName(ton)} kommt mindestens zweimal vor`, ok: anzahl >= 2, hinweis: `Der Ton ${germanName(ton)} unterscheidet ${modus} von Dur und Moll. Bisher ${anzahl}-mal.` };
       }
+      case 'instrument':
+      case 'gute-lage':
+      case 'transponiert':
+        return instrumentKriterium(name, args, doc);
       case 'periode':
       case 'satzform':
       case 'liedform':
@@ -179,6 +184,50 @@ export function pruefe(gesamt: EditorDoc, kriterien: string[]): Pruefpunkt[] {
         return { text: `Unbekanntes Kriterium „${k}“`, ok: false };
     }
   });
+}
+
+/** Instrumentation: Umfang, gute Lage und richtige Transposition (die Melodie im Editor) */
+function instrumentKriterium(name: string, args: string[], doc: EditorDoc): Pruefpunkt {
+  const i = instrument(args[0]);
+  if (!i) return { text: `Unbekanntes Instrument „${args[0]}“`, ok: false };
+  const toene = doc.events.filter((e) => e.pitch).map((e) => e.pitch!);
+  const titel = `${i.name}${i.stimmung ? ` ${i.stimmung}` : ''}`;
+  if (name === 'instrument') {
+    const { ausserhalb } = lagePruefen(toene, i);
+    return {
+      text: `Alle Töne liegen im Umfang ${titel === i.name ? `der ${i.name}` : `des ${titel}`} (klingend ${umfangText(i)})`,
+      ok: toene.length > 0 && ausserhalb.length === 0,
+      hinweis: ausserhalb.length ? `Nicht spielbar: ${[...new Set(ausserhalb.map(germanNameWithOctave))].join(', ')}.` : undefined,
+    };
+  }
+  if (name === 'gute-lage') {
+    const { anteilLage } = lagePruefen(toene, i);
+    return { text: `Die Melodie liegt überwiegend in der guten Lage (klingend ${lageText(i)})`, ok: toene.length > 0 && anteilLage >= 0.8, hinweis: `${Math.round(anteilLage * 100)} % der Töne liegen in der guten Lage.` };
+  }
+  // transponiert <id> <klingende Vorlage>: Die Melodie im Editor ist die notierte Stimme
+  const vorlage = parseNotenfolge(args.slice(1).join(' '));
+  const soll = vorlage.map((e) => (e.pitch ? notiert(e.pitch, i) : null));
+  const ist = doc.events;
+  let erster = -1;
+  for (let k = 0; k < Math.max(soll.length, ist.length); k++) {
+    const a = soll[k];
+    const b = ist[k]?.pitch;
+    const gleich = a === undefined ? false : a === null ? !b : !!b && toMidi(a) === toMidi(b) && a.step === b.step && ist[k].duration.type === vorlage[k].duration.type;
+    if (!gleich) {
+      erster = k;
+      break;
+    }
+  }
+  return {
+    text: `Die Stimme ist richtig für ${titel} notiert (${i.transposition.name} klingend)`,
+    ok: erster < 0,
+    hinweis:
+      erster < 0
+        ? undefined
+        : soll[erster]
+          ? `Note ${erster + 1}: notiert gehört dort ${germanNameWithOctave(soll[erster]!)} hin. Notiert wird ${i.transposition.name.replace('tiefer', 'höher')}, als es klingt.`
+          : `Note ${erster + 1}: dort steht in der Vorlage eine Pause oder die Melodie ist zu Ende.`,
+  };
 }
 
 /** Kriterien der Formenlehre: gelten für Melodien und für Sätze (dort zählen die Akkorde) */

@@ -28,6 +28,8 @@ const LOESUNGEN: Record<string, string> = {
     'C4:8 E4 G4 E4 G4 B4 G4 F4 | A4 C5 A4 F4 G4:2 | F4:8 A4 F4 D4 E4 G4 E4 C4 | D4 F4 D4 B3 C4:2',
   'Boogie-Bass zum Blues':
     'G4:8 Bb4 C5 Eb5 C5:4 Bb4:4 | G4:2 r:2 | G4:8 Bb4 C5 Eb5 C5:4 Bb4:4 | C5:2 r:2 | C5:8 Eb5 F5 Eb5 C5:4 A4:4 | A4:2 r:2 | G4:8 Bb4 C5 Eb5 C5:4 Bb4:4 | C5:2 r:2 | D5:8 F5 D5 B4 G4:2 | F5:8 Eb5 C5 A4 C5:2 | G4:8 Bb4 C5 Eb5 C5:4 G4:4 | C5:2 r:2 || C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | G2:8 B2 D3 E3 F3 E3 D3 B2 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3',
+  'Eine Stimme für Altsaxophon': 'A4:4 B4 C#5 D5 | E5:2 C#5:2 | D5:4 B4 G#4 B4 | A4:1',
+  'Eine Melodie für Klarinette': 'G4:4 E4 C4 E4 | G4:2 C5:2 | B4:4 A4 G4 F4 | E4:2 D4:2 | E4:4 G4 C5 E5 | D5:2 B4:2 | C5:4 A4 F4 D4 | C4:1',
   'Mein Menuett mit Trio':
     'E5:4 C5 G4 | F5:4 D5 B4 | C5:4 E5 G5 | A5:2 F5:4 | G5:4 E5 C5 | F5:4 D5 B4 | E5:4 C5 A4 | G4:2. | G5:4 F5 E5 | F5:4 E5 D5 | E5:4 D5 C5 | D5:2. | E5:4 C5 G4 | F5:4 D5 B4 | B4:4 D5 G5 | C5:2. | A4:4 F4 C4 | Bb4:4 G4 E4 | F4:4 A4 C5 | D5:2 Bb4:4 | C5:4 A4 F4 | Bb4:4 G4 E4 | A4:4 F4 D4 | C4:2. | C5:4 Bb4 A4 | Bb4:4 A4 G4 | A4:4 G4 F4 | G4:2. | A4:4 F4 C4 | Bb4:4 G4 E4 | E4:4 G4 C5 | F4:2. || C3:2. | G2:2. | C3:2. | F2:2. | C3:2. | G2:2. | A2:2. | G2:2. | C3:2. | D3:2. | C3:2. | G2:2. | C3:2. | G2:2. | G2:2. | C3:2. | F3:2. | C3:2. | F3:2. | Bb2:2. | F3:2. | C3:2. | D3:2. | C3:2. | F3:2. | G3:2. | F3:2. | C3:2. | F3:2. | C3:2. | C3:2. | F3:2.',
 };
