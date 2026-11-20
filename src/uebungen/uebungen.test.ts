@@ -55,6 +55,11 @@ describe('Aufgaben-Generatoren', () => {
             expect(a.diktat.length).toBeGreaterThanOrEqual(4);
             continue;
           }
+          if (a.markieren) {
+            expect(a.satz).toBeDefined();
+            expect(a.markieren.length).toBeGreaterThan(0);
+            continue;
+          }
           expect(a.optionen).toContain(a.loesung);
           expect(new Set(a.optionen).size).toBe(a.optionen.length);
           expect(a.optionen.length).toBeGreaterThanOrEqual(2);

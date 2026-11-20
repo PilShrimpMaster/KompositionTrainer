@@ -12,6 +12,8 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **Invention und Motivanalyse (M3):** Besetzung „Zweistimmig frei: Invention“: beide Stimmen sind offen, die Prüfung behandelt den freien Satz im Stil Bachs (Dissonanzen auf den Zählzeiten nur als Vorhalt, Durchgang oder Wechselnote, dazwischen im Schritt; Parallelen, Akzentparallelen, Schluss). Die Motivanalyse findet das Anfangsmotiv in allen Stimmen wieder, als Imitation, Wiederkehr, Sequenz, Umkehrung, Krebs, Krebsumkehrung, Vergrößerung oder Verkleinerung, markiert es im Notenbild und lässt sich in der Länge anpassen. Lektionen „Imitation und Kanon“, „Invention“ (mit Bachs BWV 772), „Fuge“ und das Abschlussprojekt „Zweistimmige Invention“; neue Übung „Motiv, Umkehrung, Krebs“.
 
+**Analyse und Modalität (M3):** Übung „Werke analysieren“: In Ausschnitten aus Beethoven, Petzold, Bach und einem Übungssatz markiert man Halb- und Ganzschlüsse, Sequenzen, Imitationen, Umkehrungen und Modulationen durch Tippen ins Notenbild. Seitenblick „Modalität heute“ mit modalen Vamps aus Jazz, Rock und Film, der Hörübung „Modi hören“ und einer Schreibaufgabe in D-Dorisch (Prüfkriterien `modus`, `charakterton`, `finalis`).
+
 **Lexikon (M3):** 190 Einträge, darunter Komponisten von Josquin bis Bartók, Zwölftonmusik, Minimal Music und eine eigene Kategorie „Jazz, Pop & Film“ (Blues, Swing, II–V–I, Optionstöne, Voicing, modaler Jazz, Songform, Akkordschema, Filmmusik, Leitmotiv).
 
 ## M2 Vierstimmiger Satz

@@ -39,7 +39,7 @@ Zum Weiterhören: Bachs „Wohltemperiertes Klavier“ enthält 48 Fugen in alle
 ## Üben
 
 ```uebungen
-motivform-bestimmen kp-fehler-finden
+motivform-bestimmen analyse-markieren
 ```
 
 ## Schreiben

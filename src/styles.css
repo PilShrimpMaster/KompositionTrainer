@@ -1300,3 +1300,15 @@ a.lexikon-link:hover {
   margin-top: 10px;
   text-align: left;
 }
+
+.score.ist-tippbar {
+  cursor: pointer;
+}
+.score-host .is-loesung,
+.score-host .is-loesung * {
+  fill: #1a7f37;
+  stroke: #1a7f37;
+}
+.markieren p {
+  margin: 8px 0;
+}

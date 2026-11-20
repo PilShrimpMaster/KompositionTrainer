@@ -49,8 +49,10 @@ E5:16 A5 G5 F5 E5 G5 F5 A5 G5 F5 E5 D5 C5 E5 D5 F5 | E5 D5 C5 B4 A4 C5 B4 D5 C5 
 
 ## Üben
 
+Erkenne Motivformen, und markiere in Werkausschnitten Kadenzen, Sequenzen, Imitationen und Modulationen direkt im Notenbild.
+
 ```uebungen
-motivform-bestimmen
+motivform-bestimmen analyse-markieren
 ```
 
 ## Schreiben

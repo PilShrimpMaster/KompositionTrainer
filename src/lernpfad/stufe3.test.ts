@@ -14,6 +14,7 @@ const LOESUNGEN: Record<string, string> = {
   'Zwei gegen eine': 'r:2 G3 | B3 C4 | D4 C4 | G3 C4 | A3 D4 | B3 D4 | C4 E4 | B3 D4 | C4 G3 | B3:1 | C4:1',
   'Vier gegen eine': 'D4:4 E4 F4 G4 | A4 G4 F4 A4 | G4 F4 E4 C4 | F4 E4 D4 C4 | B3 C4 D4 E4 | F4 G4 A4 F4 | E4 F4 G4 A4 | B4 A4 G4 B4 | A4 G4 F4 D4 | C#4 D4 E4 C#4 | D4:1',
   'Synkopen über dem Cantus firmus': 'r:2 G3~ | G3 F3~ | F3 C4~ | C4 E4~ | E4 D4~ | D4 E4~ | E4 C4~ | C4 B3~ | B3 C4~ | C4 B3 | C4:1',
+  'Melodie in D-Dorisch': 'D4:4 E4 F4 A4 | B4:2 A4:4 G4 | F4:4 G4 A4 C5 | B4:2 A4:2 | D5:4 C5 B4 A4 | G4:4 B4 A4 F4 | E4:4 F4 G4 E4 | D4:1',
   // Freier Satz: Oberstimme (samt Vorgabe) || Unterstimme
   'Kanon an der Oktave': 'C4:2 E4:2 | D4:4 C4:4 B3:2 | F4:2 G4:2 | D4:2 B3:2 | C4:1 || r:1 | C3:2 E3:2 | D3:4 C3:4 B2:2 | F3:2 G3:2 | C3:1',
   'Anfang einer Invention':
@@ -29,7 +30,7 @@ const stufe3 = LEKTIONEN.filter((l) => l.modul.startsWith('s3-'));
 
 describe('Stufe 3: Kontrapunkt', () => {
   it('hat Lektionen für Kirchentonarten und alle fünf Gattungen', () => {
-    for (const m of ['s3-kirchentonarten', 's3-gattung1', 's3-gattung2', 's3-gattung3', 's3-gattung4', 's3-gattung5', 's3-imitation', 's3-invention', 's3-fuge', 's3-abschluss']) expect(lektionFuer(m), m).toBeDefined();
+    for (const m of ['s3-kirchentonarten', 's3-gattung1', 's3-gattung2', 's3-gattung3', 's3-gattung4', 's3-gattung5', 's3-imitation', 's3-invention', 's3-fuge', 's3-abschluss', 's3-modal-heute']) expect(lektionFuer(m), m).toBeDefined();
   });
 
   it('alle zweistimmigen Beispiele sind in ihrer Gattung fehlerfrei', () => {

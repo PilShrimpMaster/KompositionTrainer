@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import { initAudio, playChord, playSequence } from '../audio/player';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { initAudio, play, playChord, playSequence } from '../audio/player';
+import { taktText } from './analyse';
 import { Klavier } from '../editor/Klavier';
 import { germanName, spellMidi, toMidi, toToneName } from '../model/pitch';
 import { renderNotes } from '../render/renderNotes';
@@ -37,11 +38,34 @@ export function UebungView({ typ, folge, titel, onEnde, zurueck = 'Lernpfad' }: 
   const [gespielt, setGespielt] = useState<number[]>([]);
   const [audioBereit, setAudioBereit] = useState(false);
   const [klavierTief, setKlavierTief] = useState(60);
+  const [markiert, setMarkiert] = useState<number[]>([]);
+  const stopRef = useRef<(() => void) | null>(null);
+  useEffect(() => () => stopRef.current?.(), []);
   const notenRef = useRef<HTMLDivElement>(null);
   const loesungRef = useRef<HTMLDivElement>(null);
 
   const info = UEBUNGEN.find((u) => u.typ === plan[Math.min(nr, runde - 1)])!;
   const stufe = stufen?.get(info.modul) ?? null;
+
+  // Analyse: markierte Takte im Notenbild, nach dem Prüfen richtig (grün) und falsch (rot)
+  const taktMarken = useMemo(() => {
+    if (!aufgabe?.markieren || !aufgabe.satz) return undefined;
+    const m = new Map<string, string>();
+    const fertig = antwort !== null;
+    aufgabe.satz.voices.forEach((v, vi) =>
+      v.measures.forEach((takt, mi) =>
+        takt.notes.forEach((_, ni) => {
+          const id = `${vi}-${mi}-${ni}`;
+          const gewaehlt = markiert.includes(mi);
+          const soll = aufgabe.markieren!.includes(mi);
+          if (fertig && soll) m.set(id, 'is-loesung');
+          else if (fertig && gewaehlt) m.set(id, 'is-fehler');
+          else if (gewaehlt) m.set(id, 'is-auswahl');
+        }),
+      ),
+    );
+    return m;
+  }, [aufgabe, markiert, antwort]);
 
   // Schwierigkeit je Modul aus dem bisherigen Fortschritt
   async function stufenLaden() {
@@ -65,8 +89,10 @@ export function UebungView({ typ, folge, titel, onEnde, zurueck = 'Lernpfad' }: 
     const t = plan[i];
     const u = UEBUNGEN.find((x) => x.typ === t)!;
     const a = erzeugeAufgabe(t, stufen?.get(u.modul) ?? 1);
+    stopRef.current?.();
     setAufgabe(a);
     setAntwort(null);
+    setMarkiert([]);
     setGespielt(a.diktat ? [toMidi(a.diktat[0])] : []);
     if (audioBereit && u.hoeren) setTimeout(() => abspielen(a), 300);
   }
@@ -102,6 +128,23 @@ export function UebungView({ typ, folge, titel, onEnde, zurueck = 'Lernpfad' }: 
     if (richtig) setRichtigAnzahl((n) => n + 1);
     if (!info.hoeren && aufgabe.klang) abspielen().catch(() => {});
     await ergebnisSpeichern(info.modul, info.typ, richtig).catch(() => {});
+  }
+
+  async function markierungPruefen() {
+    if (!aufgabe?.markieren) return;
+    const soll = [...aufgabe.markieren].sort((a, b) => a - b).join(',');
+    const ok = [...markiert].sort((a, b) => a - b).join(',') === soll;
+    setAntwort(ok ? aufgabe.loesung : markiert.length ? taktText(markiert) : '–');
+    if (ok) setRichtigAnzahl((n) => n + 1);
+    await ergebnisSpeichern(info.modul, info.typ, ok).catch(() => {});
+  }
+
+  async function satzAbspielen() {
+    if (!aufgabe?.satz) return;
+    stopRef.current?.();
+    await initAudio();
+    setAudioBereit(true);
+    stopRef.current = await play(aufgabe.satz, aufgabe.satz.tempo, { onEvent: () => {}, onEnd: () => (stopRef.current = null) });
   }
 
   async function diktatPruefen() {
@@ -170,14 +213,46 @@ export function UebungView({ typ, folge, titel, onEnde, zurueck = 'Lernpfad' }: 
 
       <h2 className="frage">{aufgabe.frage}</h2>
       <div ref={notenRef} className="uebung-noten" />
-      {aufgabe.satz && <ScoreView score={aufgabe.satz} showNoteNames={false} activeId={null} />}
+      {aufgabe.satz && (
+        <ScoreView
+          score={aufgabe.satz}
+          showNoteNames={false}
+          activeId={null}
+          markierungen={taktMarken}
+          onNoteClick={
+            aufgabe.markieren && antwort === null
+              ? (id) => {
+                  const t = Number(id.split('-')[1]);
+                  setMarkiert((m) => (m.includes(t) ? m.filter((x) => x !== t) : [...m, t]));
+                }
+              : undefined
+          }
+        />
+      )}
       {info.hoeren && (
         <button className="secondary" onClick={() => abspielen()}>
           {audioBereit ? '🔁 Nochmal anhören' : '▶ Anhören'}
         </button>
       )}
 
-      {aufgabe.diktat ? (
+      {aufgabe.markieren ? (
+        <div className="markieren">
+          <p>
+            Tippe auf eine Note, um ihren Takt zu markieren; nochmal tippen hebt die Markierung auf. Markiert:{' '}
+            <strong>{markiert.length ? taktText(markiert) : '–'}</strong>
+          </p>
+          <div className="json-actions">
+            <button className="secondary" onClick={satzAbspielen}>
+              ▶ Ausschnitt anhören
+            </button>
+            {antwort === null && (
+              <button onClick={markierungPruefen} disabled={markiert.length === 0}>
+                Prüfen
+              </button>
+            )}
+          </div>
+        </div>
+      ) : aufgabe.diktat ? (
         <div className="diktat">
           <p>
             Gespielt: <strong>{gespielt.map((m) => germanName(spellMidi(m, 0))).join(' ') || '–'}</strong> ({gespielt.length} von{' '}
