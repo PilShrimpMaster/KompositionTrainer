@@ -138,7 +138,7 @@ export function rebar(doc: EditorDoc): RebarResult {
 export function docFromScore(score: Score): EditorDoc {
   const satz = satzAusScore(score);
   if (satz) {
-    return { title: score.title, tempo: score.tempo, time: score.time, key: score.key, clef: 'treble', events: satz.stimmen[0], satz };
+    return { title: score.title, tempo: score.tempo, time: score.time, key: score.key, clef: satz.besetzung?.[0].clef ?? 'treble', events: satz.stimmen[0], satz };
   }
   const voice = score.voices[0];
   const events = voice ? voice.measures.flatMap((m) => m.notes.map((n) => structuredClone(n))) : [];

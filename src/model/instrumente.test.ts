@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { instrument, klingend, lagePruefen, notiert, notierteTonart, umfangText } from './instrumente';
+import { anzeigeTransposition, erkenneInstrument, INSTRUMENTE, instrument, klingend, lagePruefen, musicXmlTransposition, notiert, notierteTonart, stimmNamen, transponiereScore, umfangText } from './instrumente';
+import { KLANG_SAMPLES } from '../audio/klangSamples';
+import { buildSchedule } from '../audio/schedule';
 import { germanNameWithOctave } from './pitch';
 import type { Pitch } from './types';
 
@@ -30,5 +32,57 @@ describe('Transponierende Instrumente', () => {
     expect(r.ausserhalb.map(germanNameWithOctave)).toEqual(['c']);
     expect(r.anteilLage).toBeCloseTo(2 / 3);
     expect(umfangText(alt)).toBe('des bis a″');
+  });
+});
+
+describe('Partitur mit Instrumenten', () => {
+  const score = {
+    format: 'kt-score' as const,
+    version: 1 as const,
+    title: 'T',
+    tempo: 80,
+    time: { beats: 4, beatType: 4 },
+    key: { fifths: 0, mode: 'major' as const },
+    voices: [
+      { id: 'a', name: 'Altsaxophon', clef: 'treble' as const, instrument: 'altsax', measures: [{ notes: [{ pitch: p('C', 4), duration: { type: 'whole' as const } }] }] },
+      { id: 'b', name: 'Kontrabass', clef: 'bass' as const, instrument: 'kontrabass', measures: [{ notes: [{ pitch: p('C', 2), duration: { type: 'whole' as const } }] }] },
+    ],
+  };
+
+  it('zeigt transponiert mit eigenen Vorzeichen, klingend nur den Kontrabass oktaviert', () => {
+    const t = transponiereScore(score);
+    expect(t.voices[0].key?.fifths).toBe(3);
+    expect(t.voices[0].measures[0].notes[0].pitch).toEqual(p('A', 4));
+    expect(t.voices[1].measures[0].notes[0].pitch).toEqual(p('C', 3));
+    const k = transponiereScore(score, false);
+    expect(k.voices[0]).toBe(score.voices[0]);
+    expect(k.voices[1].measures[0].notes[0].pitch).toEqual(p('C', 3));
+    expect(anzeigeTransposition('violine', true)).toBeNull();
+  });
+
+  it('erkennt Instrumente an Klangkennung und Namen und nummeriert gleiche Stimmen', () => {
+    expect(erkenneInstrument('strings.viola', undefined)).toBe('viola');
+    expect(erkenneInstrument(undefined, 'Violoncello')).toBe('violoncello');
+    expect(erkenneInstrument(undefined, 'Violin II')).toBe('violine');
+    expect(erkenneInstrument(undefined, 'Horn in F')).toBe('horn');
+    expect(stimmNamen(['violine', 'violine', 'viola']).map((n) => n.name)).toEqual(['Violine 1', 'Violine 2', 'Viola']);
+    expect(musicXmlTransposition(instrument('tenorsax')!)).toEqual({ diatonic: -1, chromatic: -2, octave: -1 });
+  });
+
+  it('jedes Instrument hat Samples für seinen Klang', () => {
+    for (const i of INSTRUMENTE) expect(KLANG_SAMPLES[i.klang], i.id).toBeDefined();
+  });
+});
+
+describe('Wiedergabe mit Instrumentenklängen', () => {
+  it('jede Note bekommt den Klang ihrer Stimme', () => {
+    const s = {
+      format: 'kt-score' as const, version: 1 as const, title: 'T', tempo: 80, time: { beats: 4, beatType: 4 }, key: { fifths: 0, mode: 'major' as const },
+      voices: [
+        { id: 'a', name: 'Viola', clef: 'alto' as const, instrument: 'viola', measures: [{ notes: [{ pitch: p('C', 4), duration: { type: 'whole' as const } }] }] },
+        { id: 'b', name: 'Klavier', clef: 'bass' as const, measures: [{ notes: [{ pitch: p('C', 3), duration: { type: 'whole' as const } }] }] },
+      ],
+    };
+    expect(buildSchedule(s).events.map((e) => e.klang)).toEqual(['viola', undefined]);
   });
 });

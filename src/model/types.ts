@@ -44,7 +44,8 @@ export interface Measure {
   notes: NoteEvent[];
 }
 
-export type Clef = 'treble' | 'bass';
+/** Violin-, Bass- und Altschlüssel (Bratsche) */
+export type Clef = 'treble' | 'bass' | 'alto';
 
 export interface TimeSignature {
   beats: number;
@@ -68,6 +69,12 @@ export interface Voice {
   staff?: number;
   /** Halsrichtung, wenn sich zwei Stimmen ein System teilen */
   stem?: 'up' | 'down';
+  /** Instrument der Stimme (Kennung aus INSTRUMENTE); fehlt es, klingt sie als Klavier */
+  instrument?: string;
+  /** Abkürzung am System, z. B. „Vl. 1“ */
+  kurz?: string;
+  /** Eigene Vorzeichen dieser Stimme, nur in transponierter Notation */
+  key?: KeySignature;
   measures: Measure[];
 }
 

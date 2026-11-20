@@ -51,8 +51,8 @@ export function validateScore(data: unknown): ValidationResult {
     data.voices.forEach((voice, vi) => {
       const vName = `Stimme ${vi + 1}`;
       if (!isObj(voice)) return errors.push(`${vName} ist kein Objekt.`);
-      if (voice.clef !== 'treble' && voice.clef !== 'bass')
-        errors.push(`${vName}: „clef“ muss "treble" oder "bass" sein.`);
+      if (voice.clef !== 'treble' && voice.clef !== 'bass' && voice.clef !== 'alto')
+        errors.push(`${vName}: „clef“ muss "treble", "bass" oder "alto" sein.`);
       if (voice.staff !== undefined && (!Number.isInteger(voice.staff) || (voice.staff as number) < 0))
         errors.push(`${vName}: „staff“ muss eine Zahl ab 0 sein.`);
       if (voice.stem !== undefined && voice.stem !== 'up' && voice.stem !== 'down')

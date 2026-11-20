@@ -73,3 +73,34 @@ describe('Beispielsätze', () => {
     expect(pruefeSatz(FEHLERSATZ).filter((b) => b.art === 'fehler').length).toBeGreaterThan(3);
   });
 });
+
+describe('Ensemble mit Instrumenten', () => {
+  const quartett = (S: string, A: string, T: string, B: string) => {
+    const sc = s(S, A, T, B);
+    const ids = ['violine', 'violine', 'viola', 'violoncello'];
+    const namen = ['Violine 1', 'Violine 2', 'Viola', 'Violoncello'];
+    return { ...sc, voices: sc.voices.map((v, i) => ({ ...v, name: namen[i], instrument: ids[i], clef: i === 2 ? ('alto' as const) : v.clef })) };
+  };
+
+  it('prüft das Streichquartett mit Instrumentenumfängen statt Chorumfängen', () => {
+    // Violoncello auf großem C: im Chor zu tief, auf dem Cello spielbar
+    const k = quartett('C5:4 C5 B4 C5', 'G4:4 A4 G4 G4', 'E4:4 F4 D4 E4', 'C2:4 F2 G2 C2');
+    expect(pruefeSatz(k).filter((b) => b.regel === 'umfang' && b.art === 'fehler')).toEqual([]);
+    // Violine unter g ist nicht spielbar
+    const tief = quartett('C5:4 C5 B4 C5', 'G4:4 A4 G4 F3', 'E4:4 F4 D4 E4', 'C3:4 F3 G3 C3');
+    const f = pruefeSatz(tief).find((b) => b.regel === 'umfang' && b.art === 'fehler')!;
+    expect(f.text).toMatch(/^Violine 2: f ist nicht spielbar, zu tief/);
+  });
+
+  it('benennt Instrumente mit richtigem Artikel', () => {
+    const k = quartett('C5:4 C5', 'G4:4 A4', 'E4:4 F4', 'G4:4 C3');
+    const kreuz = pruefeSatz(k).find((b) => b.regel === 'kreuzung' && b.art === 'fehler')!;
+    expect(kreuz.text).toBe('Stimmkreuzung: Das Violoncello liegt über der Viola. Das Ohr verliert dann die Stimmen aus den Augen.');
+  });
+
+  it('prüft andere Besetzungen auf Parallelen, Umfang und Kreuzung', () => {
+    const sc = s('C5:4 D5', 'F3:4 G3', 'C3:4 C3', 'C3:4 C3');
+    const duo = { ...sc, voices: sc.voices.slice(0, 2).map((v, i) => ({ ...v, name: ['Flöte', 'Fagott'][i], instrument: ['floete', 'fagott'][i] })) };
+    expect(pruefeSatz(duo).map((b) => b.regel)).toEqual(['parallelen']);
+  });
+});

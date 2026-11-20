@@ -7,7 +7,8 @@ import { Klavier } from './Klavier';
 import type { Schreibaufgabe } from '../lernpfad/lektion';
 import { AufgabePanel } from './AufgabePanel';
 import { docFromScore, rebar, type EditorDoc } from './rebar';
-import { alsSatz, besetzungsName, freiDoc, klavierDoc, kpBesetzung, kpDoc, rebarSatz, stimmenVon, synchron, type SatzRebar } from './satzdoc';
+import { alsSatz, besetzungsName, ensembleDoc, ensembleName, freiDoc, klavierDoc, kpBesetzung, kpDoc, rebarSatz, stimmenVon, synchron, type SatzRebar } from './satzdoc';
+import { anzeigeTransposition, ENSEMBLES, INSTRUMENTE, instrument, partiturRang, transponiereScore, verschiebe } from '../model/instrumente';
 import { HarmoniePanel } from '../satz/HarmoniePanel';
 import { FormPanel } from '../satz/FormPanel';
 import { KiFeedback } from '../ki/KiFeedback';
@@ -29,7 +30,7 @@ const STORAGE_KEY = 'kt-editor-entwurf-v1';
 const STUECK_KEY = 'kt-editor-stueck-id';
 const MITSPIELEN_KEY = 'kt-midi-mitspielen';
 const PRUEFEN_KEY = 'kt-editor-pruefen';
-type Besetzungsart = 'melodie' | 'satz' | 'kontrapunkt' | 'frei' | 'klavier';
+type Besetzungsart = 'melodie' | 'satz' | 'kontrapunkt' | 'frei' | 'klavier' | 'ensemble';
 /** Unterste Taste des Bildschirmklaviers je Stimme */
 const KLAVIER_TIEF = [60, 60, 48, 36];
 
@@ -141,7 +142,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
     }
   });
 
-  const [stumm, setStumm] = useState<boolean[]>([false, false, false, false]);
+  const [stumm, setStumm] = useState<boolean[]>(() => Array(8).fill(false));
   const [pruefen, setPruefenState] = useState(() => lesen(PRUEFEN_KEY) === 'ja');
   const [auswahl, setAuswahl] = useState<number | null>(null);
   const [formZeigen, setFormZeigen] = useState(false);
@@ -157,6 +158,15 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   const besetzung = stimmenVon(doc.satz);
   const gesperrt = doc.satz?.gesperrt ?? [];
   const klavier = !!doc.satz?.klavier;
+  const ensemble = doc.satz?.ensemble;
+  const transponiert = !!doc.satz?.transponiert;
+  /** Angezeigte Partitur: bei Ensembles transponiert oder klingend (Kontrabass immer eine Oktave höher) */
+  const anzeige = useMemo(() => (ensemble ? transponiereScore(bar.score, transponiert) : bar.score), [bar.score, ensemble, transponiert]);
+  /** Ein getippter (notierter) Ton einer Stimme, zurück in die klingende Höhe */
+  const klingendIn = (pitch: Pitch, stimme: number) => {
+    const t = anzeigeTransposition(besetzung[stimme]?.instrument, transponiert);
+    return t ? verschiebe(pitch, -t.stufen, -t.halbtoene) : pitch;
+  };
   const pruefung = usePruefung(bar.score, doc.satz?.kontrapunkt, klavier);
   const frei = doc.satz?.kontrapunkt?.gattung === 'frei';
   const motive = useMotive(bar.score);
@@ -168,6 +178,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   useEffect(() => setAuswahl(null), [doc]);
   useEffect(() => {
     if (doc.satz) setPianoLow(doc.satz.besetzung ? (doc.satz.besetzung[aktiv]?.clef === 'bass' ? 48 : 60) : KLAVIER_TIEF[aktiv]);
+    if (doc.satz?.besetzung?.[aktiv]?.clef === 'alto') setPianoLow(48);
   }, [aktiv, doc.satz]);
   const selectedIds = selected === null ? [] : (bar.partsOf.get(selected) ?? []);
   const selectedEvent = selected === null ? null : doc.events[selected];
@@ -197,7 +208,8 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   /** Aktion ausführen und gesetzte oder geänderte Note kurz anspielen */
   function act(action: EditorAction, sound?: Pitch) {
     dispatch(action);
-    if (sound) playNote(toToneName(sound), 0.5).catch(() => setNotice('Ton konnte nicht gestartet werden.'));
+    const klang = instrument(stimmenVon(doc.satz)[doc.satz?.aktiv ?? 0]?.instrument)?.klang;
+    if (sound) playNote(toToneName(sound), klang ? 0.8 : 0.5, 0.7, klang).catch(() => setNotice('Ton konnte nicht gestartet werden.'));
   }
 
   function inputDuration() {
@@ -258,6 +270,10 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
         refPitch: ref,
         fifths: s.doc.key.fifths,
         clef: s.doc.clef,
+        oktave: (() => {
+          const i = instrument(stimmenVon(s.doc.satz)[s.doc.satz?.aktiv ?? 0]?.instrument);
+          return i ? Math.floor((i.lage[0] + i.lage[1]) / 24) - 1 : undefined;
+        })(),
         inputDuration: s.inputDuration,
         inputDots: s.inputDots,
       });
@@ -285,10 +301,11 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
       return;
     }
     setStueckId(null); // geöffnete Datei überschreibt kein gespeichertes Stück
-    act({ type: 'load', doc: docFromScore(r.score) });
+    const neu = docFromScore(r.score);
+    act({ type: 'load', doc: neu });
     const n = r.score.voices.length;
     const teile = [`„${r.score.title}“ geöffnet.`];
-    if (n !== 1 && n !== 4) teile.push(`Der Editor zeigt nur die erste von ${n} Stimmen; alle Stimmen siehst und hörst du unter „Hören“.`);
+    if (n !== 1 && !neu.satz) teile.push(`Der Editor zeigt nur die erste von ${n} Stimmen; alle Stimmen siehst und hörst du unter „Hören“.`);
     const takt1 = r.score.voices[0].measures[0].notes.reduce((q, ev) => q + quarterLength(ev.duration), 0);
     if (takt1 < measureLength(r.score.time) - 1e-6) teile.push('Der Auftakt geht im Editor verloren, weil er die Taktstriche neu setzt; unter „Hören“ bleibt er erhalten.');
     if (r.hinweise.length) teile.push(...r.hinweise);
@@ -342,6 +359,11 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
       setPruefen(true);
       return;
     }
+    if (art === 'ensemble') {
+      if (ensemble) return;
+      ensembleWaehlen(ENSEMBLES[0].instrumente);
+      return;
+    }
     if (art === 'frei') {
       if (doc.satz?.kontrapunkt?.gattung === 'frei') return;
       setStueckId(null);
@@ -349,8 +371,8 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
       setPruefen(true);
       return;
     }
-    if (klavier) {
-      // Vom Klaviersatz zurück: die Melodie bleibt
+    if (klavier || ensemble) {
+      // Vom Klaviersatz oder Ensemble zurück: die Melodie (oberste Stimme) bleibt
       const melodie = synchron(doc).satz!.stimmen[0];
       const basis = { ...doc, satz: undefined, clef: 'treble' as const, events: melodie };
       act({ type: 'load', doc: art === 'satz' ? alsSatz(basis, true) : basis });
@@ -363,6 +385,36 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
       return;
     }
     act({ type: 'setSatz', an: art === 'satz' });
+  }
+
+  /**
+   * Neue Besetzung für das Ensemble: Stimmen mit gleichem Instrument behalten ihre Noten,
+   * eine vorhandene Melodie wird zur obersten Stimme.
+   */
+  function ensembleWaehlen(ids: string[], quelle?: number[]) {
+    const d = synchron(doc);
+    const alt = d.satz?.ensemble;
+    let vorgabe: EditorDoc['events'][] = [];
+    if (alt && quelle) {
+      vorgabe = quelle.map((k) => d.satz!.stimmen[k] ?? []);
+    } else if (alt) {
+      const frei = alt.map((_, k) => k);
+      vorgabe = ids.map((id) => {
+        const k = frei.find((j) => alt[j] === id);
+        if (k === undefined) return [];
+        frei.splice(frei.indexOf(k), 1);
+        return d.satz!.stimmen[k];
+      });
+    } else {
+      const melodie = d.satz ? (d.satz.kontrapunkt ? [] : d.satz.stimmen[0]) : d.clef === 'treble' ? d.events : [];
+      vorgabe = [melodie];
+      setStueckId(null);
+    }
+    const title = alt ? d.title : d.title === 'Meine Melodie' || d.title === 'Mein Chorsatz' || d.title === 'Mein Klavierstück' ? 'Mein Ensemblesatz' : d.title;
+    const neu = ensembleDoc({ ...d, satz: undefined, title }, ids, vorgabe);
+    act({ type: 'load', doc: { ...neu, satz: { ...neu.satz!, transponiert: d.satz?.transponiert } } });
+    setStumm(Array(8).fill(false));
+    setPruefen(true);
   }
 
   /** Gattung oder Lage des Cantus firmus ändern, die Gegenstimme bleibt (bei neuer Lage wird sie geleert) */
@@ -518,7 +570,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
             <h2>{doc.title}</h2>
             <p className="meta">
               {germanKeyName(doc.key)} · {doc.time.beats}/{doc.time.beatType}-Takt ·{' '}
-              {doc.satz?.kontrapunkt ? GATTUNGEN[doc.satz.kontrapunkt.gattung].name : klavier ? 'Klaviersatz' : doc.satz ? 'Chorsatz SATB' : doc.clef === 'treble' ? 'Violinschlüssel' : 'Bassschlüssel'} · {doc.tempo} ♩/min
+              {doc.satz?.kontrapunkt ? GATTUNGEN[doc.satz.kontrapunkt.gattung].name : klavier ? 'Klaviersatz' : ensemble ? `${ensembleName(ensemble)}${transponiert ? ', transponiert' : ', klingend'}` : doc.satz ? 'Chorsatz SATB' : doc.clef === 'treble' ? 'Violinschlüssel' : 'Bassschlüssel'} · {doc.tempo} ♩/min
             </p>
           </div>
           <button className="secondary small" onClick={() => setShowMeta((s) => !s)} aria-expanded={showMeta}>
@@ -532,6 +584,8 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
             onChange={(meta) => act({ type: 'setMeta', meta })}
             onSatz={(art) => besetzungWaehlen(art)}
             onText={(text) => act({ type: 'setText', text })}
+            onEnsemble={ensembleWaehlen}
+            onTransponiert={(an) => act({ type: 'load', doc: { ...synchron(doc), satz: { ...synchron(doc).satz!, transponiert: an } } })}
           />
         )}
 
@@ -595,7 +649,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
         )}
 
         <EditorScore
-          score={bar.score}
+          score={anzeige}
           showNoteNames={showNames}
           selectedIds={selectedIds}
           activeId={activeId}
@@ -603,7 +657,8 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           sourceOf={bar.sourceOf}
           eventCount={doc.events.length}
           markierungen={markierungen}
-          onInsert={(pitch, at, voices) => {
+          onInsert={(notiert, at, voices) => {
+            const pitch = ensemble && voices.length ? klingendIn(notiert, voices[0]) : notiert;
             if (doc.satz && voices.length && voices.every((v) => gesperrt.includes(v))) {
               setNotice(`${besetzung[voices[0]].name} ist vorgegeben. Schreib in der anderen Stimme.`);
               return;
@@ -626,7 +681,8 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
             }
             act({ type: 'select', index: id === null ? null : (bar.sourceOf.get(id) ?? null) });
           }}
-          onDragPitch={(id, pitch) => {
+          onDragPitch={(id, notiert) => {
+            const pitch = ensemble ? klingendIn(notiert, aktiv) : notiert;
             const idx = bar.sourceOf.get(id);
             if (idx !== undefined) act({ type: 'setPitch', index: idx, pitch }, pitch);
           }}
@@ -800,12 +856,18 @@ function MetaPanel({
   onChange,
   onSatz,
   onText,
+  onEnsemble,
+  onTransponiert,
 }: {
   doc: EditorDoc;
   onChange: (m: Partial<Omit<EditorDoc, 'events'>>) => void;
   onSatz: (art: Besetzungsart) => void;
   onText: (text: string) => void;
+  onEnsemble: (ids: string[], quelle?: number[]) => void;
+  onTransponiert: (an: boolean) => void;
 }) {
+  const ens = doc.satz?.ensemble;
+  const sortiert = (ids: string[]) => [...ids].sort((a, b) => partiturRang(a) - partiturRang(b));
   const keys = [];
   for (let f = -7; f <= 7; f++) keys.push(f);
   return (
@@ -852,7 +914,7 @@ function MetaPanel({
       <label className="field">
         <span>Besetzung</span>
         <select
-          value={doc.satz?.kontrapunkt ? (doc.satz.kontrapunkt.gattung === 'frei' ? 'frei' : 'kontrapunkt') : doc.satz?.klavier ? 'klavier' : doc.satz ? 'satz' : 'melodie'}
+          value={doc.satz?.kontrapunkt ? (doc.satz.kontrapunkt.gattung === 'frei' ? 'frei' : 'kontrapunkt') : doc.satz?.klavier ? 'klavier' : ens ? 'ensemble' : doc.satz ? 'satz' : 'melodie'}
           onChange={(e) => onSatz(e.target.value as Besetzungsart)}
         >
           <option value="melodie">Melodie (einstimmig)</option>
@@ -860,8 +922,67 @@ function MetaPanel({
           <option value="satz">Chorsatz: Sopran, Alt, Tenor, Bass</option>
           <option value="kontrapunkt">Kontrapunkt: Gegenstimme zu einem Cantus firmus</option>
           <option value="frei">Zweistimmig frei: Invention</option>
+          <option value="ensemble">Ensemble: Streichquartett, Bläser …</option>
         </select>
       </label>
+      {ens && (
+        <div className="field ensemble-wahl">
+          <span>Instrumente</span>
+          <select
+            value={ENSEMBLES.find((e) => e.instrumente.join() === ens.join())?.id ?? ''}
+            onChange={(e) => {
+              const neu = ENSEMBLES.find((x) => x.id === e.target.value);
+              if (neu) onEnsemble(neu.instrumente);
+            }}
+            aria-label="Besetzung wählen"
+          >
+            <option value="" disabled>
+              Eigene Besetzung
+            </option>
+            {ENSEMBLES.map((e) => (
+              <option key={e.id} value={e.id}>
+                {e.name}
+              </option>
+            ))}
+          </select>
+          <div className="ensemble-stimmen">
+            {ens.map((id, k) => (
+              <span key={k} className="ensemble-stimme">
+                <select
+                  value={id}
+                  onChange={(e) => onEnsemble(ens.map((x, j) => (j === k ? e.target.value : x)), ens.map((_, j) => j))}
+                  aria-label={`Instrument der Stimme ${k + 1}`}
+                >
+                  {INSTRUMENTE.map((i) => (
+                    <option key={i.id} value={i.id}>
+                      {i.name}
+                      {i.stimmung ? ` ${i.stimmung}` : ''}
+                    </option>
+                  ))}
+                </select>
+                {ens.length > 2 && (
+                  <button
+                    className="link small"
+                    onClick={() => onEnsemble(ens.filter((_, j) => j !== k), ens.map((_, j) => j).filter((j) => j !== k))}
+                    title="Stimme entfernen"
+                  >
+                    ✕
+                  </button>
+                )}
+              </span>
+            ))}
+            {ens.length < 8 && (
+              <button className="secondary small" onClick={() => onEnsemble(sortiert([...ens, 'violine']))}>
+                + Stimme
+              </button>
+            )}
+          </div>
+          <label className="check">
+            <input type="checkbox" checked={!!doc.satz?.transponiert} onChange={(e) => onTransponiert(e.target.checked)} />
+            Partitur transponiert zeigen (wie die Spieler lesen)
+          </label>
+        </div>
+      )}
       {!doc.satz && (
         <label className="field">
           <span>Schlüssel</span>
@@ -871,7 +992,7 @@ function MetaPanel({
           </select>
         </label>
       )}
-      {doc.satz && !doc.satz.kontrapunkt && !doc.satz.klavier && (
+      {doc.satz && !doc.satz.kontrapunkt && !doc.satz.klavier && !ens && (
         <label className="field liedtext">
           <span>Liedtext (Silben mit Leerzeichen trennen: „Lo- be den Her- ren“)</span>
           <input type="text" value={doc.satz.text ?? ''} onChange={(e) => onText(e.target.value)} />

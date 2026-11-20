@@ -1,3 +1,4 @@
+import { erkenneInstrument, verschiebe } from '../model/instrumente';
 import type { Clef, Duration, DurationType, KeySignature, NoteEvent, Pitch, Score, Step, TimeSignature, Voice } from '../model/types';
 import { measureLength, quarterLength } from '../model/duration';
 import { validateScore } from '../model/validate';
@@ -78,8 +79,13 @@ export function importMusicXml(xml: string, dateiname = 'Import', Parser: typeof
   const tempo = tempoEl ? Math.round(Math.min(300, Math.max(20, Number(tempoEl.getAttribute('tempo'))))) : 80;
 
   const partNamen = new Map<string, string>();
+  const partInstrument = new Map<string, string | undefined>();
   for (const sp of Array.from(wurzel.getElementsByTagName('score-part'))) {
-    partNamen.set(sp.getAttribute('id') ?? '', text(sp, 'part-name') ?? text(sp, 'part-abbreviation') ?? 'Stimme');
+    const id = sp.getAttribute('id') ?? '';
+    const name = text(sp, 'part-name') ?? text(sp, 'part-abbreviation') ?? 'Stimme';
+    partNamen.set(id, name);
+    const si = kind(sp, 'score-instrument');
+    partInstrument.set(id, erkenneInstrument(text(si, 'instrument-sound') ?? undefined, text(si, 'instrument-name') ?? name) ?? erkenneInstrument(undefined, text(sp, 'part-abbreviation') ?? undefined));
   }
 
   let key: KeySignature | undefined;
@@ -88,13 +94,17 @@ export function importMusicXml(xml: string, dateiname = 'Import', Parser: typeof
   const stimmen: StimmeBau[] = [];
   const schluessel = new Map<number, Clef>();
   const systemName = new Map<number, string>();
+  const systemInstrument = new Map<number, string>();
   let systemOffset = 0;
   let reihenfolge = 0;
 
   for (const part of kinder(wurzel, 'part')) {
     const name = partNamen.get(part.getAttribute('id') ?? '') ?? 'Stimme';
+    const partIns = partInstrument.get(part.getAttribute('id') ?? '');
     let divisions = 1;
     let staves = 1;
+    /** Transposition der Stimme (<transpose>): notiert → klingend */
+    let trans = { stufen: 0, halbtoene: 0 };
     const imPart = new Map<string, StimmeBau>();
 
     kinder(part, 'measure').forEach((takt, ti) => {
@@ -107,9 +117,19 @@ export function importMusicXml(xml: string, dateiname = 'Import', Parser: typeof
           case 'attributes': {
             divisions = zahl(el, 'divisions') ?? divisions;
             staves = zahl(el, 'staves') ?? staves;
+            const tr = kind(el, 'transpose');
+            if (tr) {
+              const okt = zahl(tr, 'octave-change') ?? 0;
+              trans = { stufen: (zahl(tr, 'diatonic') ?? 0) + 7 * okt, halbtoene: (zahl(tr, 'chromatic') ?? 0) + 12 * okt };
+            }
             const k = kind(el, 'key');
             if (k) {
-              const neu: KeySignature = { fifths: zahl(k, 'fifths') ?? 0, mode: text(k, 'mode') === 'minor' ? 'minor' : 'major' };
+              // Bei transponierenden Stimmen die klingende Tonart zurückrechnen
+              const q = (((trans.halbtoene * 7) % 12) + 12) % 12;
+              let fifths = (zahl(k, 'fifths') ?? 0) + (q > 6 ? q - 12 : q);
+              if (fifths > 7) fifths -= 12;
+              if (fifths < -7) fifths += 12;
+              const neu: KeySignature = { fifths, mode: text(k, 'mode') === 'minor' ? 'minor' : 'major' };
               if (!key) key = neu;
               else if (key.fifths !== neu.fifths || key.mode !== neu.mode) hinweise.add('Tonartwechsel im Stück werden nicht übernommen; es gilt die erste Tonart.');
             }
@@ -123,8 +143,11 @@ export function importMusicXml(xml: string, dateiname = 'Import', Parser: typeof
               const nr = Number(c.getAttribute('number') ?? 1);
               const sign = text(c, 'sign');
               // Tenorschlüssel (G mit Oktavierung nach unten) liegt im Bassschlüssel besser
-              const clef: Clef = sign === 'F' || (sign === 'G' && (zahl(c, 'clef-octave-change') ?? 0) < 0) ? 'bass' : 'treble';
-              if (sign !== 'G' && sign !== 'F') hinweise.add('C- und Schlagzeugschlüssel werden als Violin- oder Bassschlüssel gezeigt.');
+              const linie = zahl(c, 'line');
+              const clef: Clef =
+                sign === 'C' && linie === 3 ? 'alto' : sign === 'F' || (sign === 'C' && (linie ?? 3) > 3) || (sign === 'G' && (zahl(c, 'clef-octave-change') ?? 0) < 0) ? 'bass' : 'treble';
+              if (sign === 'C' && linie !== 3) hinweise.add('Tenor- und andere C-Schlüssel werden als Bassschlüssel gezeigt.');
+              else if (sign !== 'G' && sign !== 'F' && sign !== 'C') hinweise.add('Schlagzeugschlüssel werden als Violinschlüssel gezeigt.');
               if (!schluessel.has(systemOffset + nr - 1)) schluessel.set(systemOffset + nr - 1, clef);
             }
             break;
@@ -152,6 +175,7 @@ export function importMusicXml(xml: string, dateiname = 'Import', Parser: typeof
               const alter = Math.round(zahl(pitchEl, 'alter') ?? 0);
               pitch = { step, octave: zahl(pitchEl, 'octave') ?? 4 };
               if (alter) pitch.alter = alter;
+              if (trans.stufen || trans.halbtoene) pitch = verschiebe(pitch, trans.stufen, trans.halbtoene);
             } else if (kind(el, 'unpitched')) {
               hinweise.add('Schlagzeugnoten werden als Pausen übernommen.');
             }
@@ -184,6 +208,7 @@ export function importMusicXml(xml: string, dateiname = 'Import', Parser: typeof
               imPart.set(voiceId, bau);
               stimmen.push(bau);
               if (!systemName.has(sys)) systemName.set(sys, name);
+              if (partIns && staves === 1 && !systemInstrument.has(sys)) systemInstrument.set(sys, partIns);
             }
             const noten = bau.takte.get(ti) ?? [];
             bau.takte.set(ti, noten);
@@ -281,6 +306,7 @@ export function importMusicXml(xml: string, dateiname = 'Import', Parser: typeof
         clef: schluessel.get(sys) ?? 'treble',
         staff: sys,
         ...(liste.length > 1 ? { stem: i === 0 ? ('up' as const) : ('down' as const) } : {}),
+        ...(systemInstrument.has(sys) && liste.length === 1 ? { instrument: systemInstrument.get(sys) } : {}),
         measures,
       });
     });
@@ -289,7 +315,7 @@ export function importMusicXml(xml: string, dateiname = 'Import', Parser: typeof
   const nummern = [...new Set(voices.map((v) => v.staff!))].sort((a, b) => a - b);
   voices.forEach((v) => (v.staff = nummern.indexOf(v.staff!)));
   // Vier einzelne Stimmen (Sopran, Alt, Tenor, Bass) als Chorsatz auf zwei Systemen
-  if (voices.length === 4 && voices.every((v, i) => v.staff === i && v.clef === (['treble', 'treble', 'bass', 'bass'] as Clef[])[i])) {
+  if (voices.length === 4 && !voices.some((v) => v.instrument) && voices.every((v, i) => v.staff === i && v.clef === (['treble', 'treble', 'bass', 'bass'] as Clef[])[i])) {
     voices.forEach((v, i) => {
       v.staff = i < 2 ? 0 : 1;
       v.stem = i % 2 === 0 ? 'up' : 'down';

@@ -1,6 +1,7 @@
 import * as Tone from 'tone';
 import type { Score } from '../model/types';
 import { buildSchedule } from './schedule';
+import { KLANG_SAMPLES } from './klangSamples';
 
 /** Salamander Grand Piano, jede kleine Terz ein Sample; Tone.js transponiert dazwischen. */
 const SAMPLE_NOTES = ['C', 'Ds', 'Fs', 'A'];
@@ -45,6 +46,32 @@ export async function initAudio(): Promise<Tone.Sampler> {
   return loading;
 }
 
+const klaenge = new Map<string, Promise<Tone.Sampler>>();
+
+/** Lädt die Samples eines Instruments beim ersten Gebrauch (Streicher, Holz, Blech) */
+export function ladeKlang(klang: string | undefined): Promise<Tone.Sampler> {
+  if (!klang || !KLANG_SAMPLES[klang]) return initAudio();
+  let p = klaenge.get(klang);
+  if (!p) {
+    p = new Promise((resolve, reject) => {
+      const urls: Record<string, string> = {};
+      for (const n of KLANG_SAMPLES[klang]) urls[n] = `${n.replace('#', 's')}.mp3`;
+      const s = new Tone.Sampler({
+        urls,
+        baseUrl: `${import.meta.env.BASE_URL}samples/instrumente/${klang}/`,
+        release: 0.35,
+        onload: () => resolve(s),
+        onerror: (e) => {
+          klaenge.delete(klang);
+          reject(e);
+        },
+      }).toDestination();
+    });
+    klaenge.set(klang, p);
+  }
+  return p;
+}
+
 export interface PlaybackCallbacks {
   /** Wird genau zum Klangbeginn einer Note bzw. Pause aufgerufen. */
   onEvent: (id: string) => void;
@@ -53,7 +80,11 @@ export interface PlaybackCallbacks {
 
 /** Spielt die Partitur ab und gibt eine Funktion zum Stoppen zurück. */
 export async function play(score: Score, tempo: number, cb: PlaybackCallbacks): Promise<() => void> {
-  const piano = await initAudio();
+  const { events, total } = buildSchedule(score);
+  await initAudio();
+  const namen = [...new Set(events.map((e) => e.klang))];
+  const geladen = await Promise.all(namen.map((k) => ladeKlang(k).catch(() => initAudio())));
+  const instrumente = new Map(namen.map((k, i) => [k, geladen[i]]));
   const transport = Tone.getTransport();
   const draw = Tone.getDraw();
   transport.stop();
@@ -61,12 +92,11 @@ export async function play(score: Score, tempo: number, cb: PlaybackCallbacks): 
   transport.position = 0;
 
   const secPerQuarter = 60 / tempo;
-  const { events, total } = buildSchedule(score);
 
   for (const e of events) {
     transport.schedule((time) => {
       if (e.note && e.length > 0) {
-        piano.triggerAttackRelease(e.note, e.length * secPerQuarter * 0.95, time, e.velocity ?? 0.7);
+        instrumente.get(e.klang)!.triggerAttackRelease(e.note, e.length * secPerQuarter * (e.klang ? 0.98 : 0.95), time, e.velocity ?? 0.7);
       }
       draw.schedule(() => cb.onEvent(e.id), time);
     }, e.start * secPerQuarter);
@@ -78,7 +108,7 @@ export async function play(score: Score, tempo: number, cb: PlaybackCallbacks): 
     stopped = true;
     transport.stop();
     transport.cancel();
-    piano.releaseAll();
+    instrumente.forEach((s) => s.releaseAll());
     cb.onEnd();
   };
 
@@ -89,9 +119,10 @@ export async function play(score: Score, tempo: number, cb: PlaybackCallbacks): 
 }
 
 /** Einzelnen Ton sofort anspielen, z. B. beim Setzen einer Note */
-export async function playNote(note: string, seconds = 0.6, velocity = 0.7): Promise<void> {
-  const piano = await initAudio();
-  piano.triggerAttackRelease(note, seconds, undefined, velocity);
+export async function playNote(note: string, seconds = 0.6, velocity = 0.7, klang?: string): Promise<void> {
+  await initAudio();
+  const s = await ladeKlang(klang).catch(() => initAudio());
+  s.triggerAttackRelease(note, seconds, undefined, velocity);
 }
 
 /** Klavier bereits geladen? Dann klingt die erste Note ohne Verzögerung. */
@@ -106,8 +137,9 @@ export async function playChord(notes: string[], seconds = 1.5): Promise<void> {
 }
 
 /** Töne nacheinander, z. B. ein melodisches Intervall oder ein Diktat */
-export async function playSequence(notes: string[], secondsEach = 0.7): Promise<void> {
-  const piano = await initAudio();
+export async function playSequence(notes: string[], secondsEach = 0.7, klang?: string): Promise<void> {
+  await initAudio();
+  const piano = await ladeKlang(klang).catch(() => initAudio());
   const now = Tone.now() + 0.05;
   notes.forEach((n, i) => piano.triggerAttackRelease(n, secondsEach * 0.95, now + i * secondsEach, 0.7));
 }

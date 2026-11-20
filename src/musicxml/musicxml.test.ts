@@ -194,3 +194,47 @@ describe('Notenwerte zerlegen', () => {
     expect(zerlege(7)).toEqual([{ type: 'whole', dots: 1 }, { type: 'quarter' }]);
   });
 });
+
+describe('MusicXML mit Instrumenten', () => {
+  const ens: Score = {
+    format: 'kt-score',
+    version: 1,
+    title: 'Ensemble',
+    tempo: 90,
+    time: { beats: 4, beatType: 4 },
+    key: { fifths: -1, mode: 'major' },
+    voices: [
+      { id: 'a', name: 'Altsaxophon', clef: 'treble', staff: 0, instrument: 'altsax', measures: [{ notes: [{ pitch: { step: 'F', octave: 4 }, duration: { type: 'half' } }, { pitch: { step: 'B', alter: -1, octave: 4 }, duration: { type: 'half' } }] }] },
+      { id: 'b', name: 'Viola', clef: 'alto', staff: 1, instrument: 'viola', measures: [{ notes: [{ pitch: { step: 'C', octave: 4 }, duration: { type: 'whole' } }] }] },
+      { id: 'c', name: 'Kontrabass', clef: 'bass', staff: 2, instrument: 'kontrabass', measures: [{ notes: [{ pitch: { step: 'F', octave: 2 }, duration: { type: 'whole' } }] }] },
+    ],
+  };
+
+  it('schreibt notierte Töne, Altschlüssel, Transposition und Klangkennung', () => {
+    const xml = exportMusicXml(ens);
+    expect(xml).toContain('<instrument-sound>wind.reed.saxophone.alto</instrument-sound>');
+    expect(xml).toContain('<transpose><diatonic>-5</diatonic><chromatic>-9</chromatic></transpose>');
+    expect(xml).toContain('<transpose><diatonic>0</diatonic><chromatic>0</chromatic><octave-change>-1</octave-change></transpose>');
+    expect(xml).toContain('<sign>C</sign><line>3</line>');
+    // Altsaxophon in F-Dur klingend steht in D-Dur: f′ wird d″ notiert
+    expect(xml).toContain('<key><fifths>2</fifths>');
+    expect(xml).toContain('<step>D</step><octave>5</octave>');
+  });
+
+  it('kommt klingend und mit Instrumenten zurück', () => {
+    const z = rundreise(ens);
+    expect(z.key.fifths).toBe(-1);
+    expect(z.voices.map((v) => [v.instrument, v.clef])).toEqual([
+      ['altsax', 'treble'],
+      ['viola', 'alto'],
+      ['kontrabass', 'bass'],
+    ]);
+    expect(noten(z)).toEqual(noten(ens));
+  });
+
+  it('erkennt Instrumente auch nur am Namen', () => {
+    const xml = exportMusicXml(ens).replace(/<score-instrument.*?<\/score-instrument>/g, '').replace(/Altsaxophon/g, 'Alto Saxophone');
+    expect(rundreise({ ...ens, voices: ens.voices }).voices[0].instrument).toBe('altsax');
+    expect(importMusicXml(xml).score!.voices.map((v) => v.instrument)).toEqual(['altsax', 'viola', 'kontrabass']);
+  });
+});

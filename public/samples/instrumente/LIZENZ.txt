@@ -1,0 +1,5 @@
+Instrumentenklänge: VS Chamber Orchestra 2, Community Edition (VSCO 2 CE)
+Aufgenommen von Sam Gossner und Simon Dalzell, Versilian Studios.
+https://github.com/sgossner/VSCO-2-CE
+Lizenz: CC0 1.0 Universal (gemeinfrei).
+Für den KompositionsTrainer gekürzt (4,5 s), lautheitsangeglichen und als MP3 (mono, 64 kbit/s) gespeichert.
