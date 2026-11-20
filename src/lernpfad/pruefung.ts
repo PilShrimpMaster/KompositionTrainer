@@ -1,6 +1,6 @@
 import { measureLength, quarterLength } from '../model/duration';
 import { diatonicIndex, germanName, germanNameWithOctave, keyAlter, toMidi } from '../model/pitch';
-import { instrument, lagePruefen, lageText, notiert, umfangText } from '../model/instrumente';
+import { ENSEMBLES, instrument, lagePruefen, lageText, notiert, umfangText } from '../model/instrumente';
 import type { Pitch, Step } from '../model/types';
 import type { EditorDoc } from '../editor/rebar';
 import { rebar } from '../editor/rebar';
@@ -11,7 +11,7 @@ import { pruefeSatz } from '../satz/regeln';
 import { pruefeKontrapunkt } from '../kontrapunkt/fux';
 import { findeMotive } from '../kontrapunkt/motive';
 import { MODUS_NAMEN, modusLeiter, type ModusName } from '../uebungen/modal';
-import { stimmenVon, synchron } from '../editor/satzdoc';
+import { ensembleName, stimmenVon, synchron } from '../editor/satzdoc';
 import { klavierHarmonien, pruefeKlaviersatz } from '../satz/klavier';
 import { analysiereForm, kadenzAm, kadenzText, menuettTrioFehlt, type KadenzArt } from '../satz/form';
 import type { Akkord } from '../satz/akkorde';
@@ -40,7 +40,11 @@ export interface Pruefpunkt {
  */
 export function pruefe(gesamt: EditorDoc, kriterien: string[]): Pruefpunkt[] {
   // Im Klaviersatz gelten die Melodie-Kriterien für die Melodie (obere Stimme)
-  const doc = gesamt.satz?.klavier ? { ...gesamt, clef: 'treble' as const, events: synchron(gesamt).satz!.stimmen[0] } : gesamt;
+  // Im Ensemble für die oberste Stimme
+  const doc =
+    gesamt.satz?.klavier || gesamt.satz?.ensemble
+      ? { ...gesamt, clef: stimmenVon(gesamt.satz)[0].clef, events: synchron(gesamt).satz!.stimmen[0] }
+      : gesamt;
   const noten = doc.events.filter((e) => e.pitch);
   const toene = noten.map((e) => e.pitch!);
   const letzte = noten[noten.length - 1];
@@ -165,6 +169,8 @@ export function pruefe(gesamt: EditorDoc, kriterien: string[]): Pruefpunkt[] {
       case 'halbschluss':
       case 'ganzschluss-takt':
         return formKriterium(name, args, satz() ?? rebar(doc).score);
+      case 'ensemble':
+      case 'im-umfang':
       case 'begleitung-noten':
       case 'blues':
       case 'vierstimmig':
@@ -279,6 +285,23 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
   if (!score || !doc.satz) return OHNE_SATZ;
   const stimmen = doc.satz.stimmen;
   switch (name) {
+    case 'ensemble': {
+      const soll = ENSEMBLES.find((e) => e.id === args[0])?.instrumente ?? args.join('').split(/[+,]/);
+      const ist = doc.satz.ensemble ?? [];
+      return {
+        text: `Besetzung: ${ensembleName(soll)}`,
+        ok: ist.join() === soll.join(),
+        hinweis: 'Wähle unter „Stück einstellen“ die Besetzung „Ensemble“ und die passenden Instrumente, oder beginne die Aufgabe neu.',
+      };
+    }
+    case 'im-umfang': {
+      const fehler = pruefeSatz(score).filter((b) => b.regel === 'umfang' && b.art === 'fehler');
+      return {
+        text: 'Jedes Instrument bleibt in seinem Tonumfang',
+        ok: !!doc.satz.ensemble && fehler.length === 0,
+        hinweis: fehler[0] ? `Takt ${fehler[0].takt}: ${fehler[0].text}` : undefined,
+      };
+    }
     case 'vierstimmig': {
       const laengen = stimmen.map((st) => st.reduce((s, e) => s + quarterLength(e.duration), 0));
       const leer = stimmen.map((st, i) => (st.some((e) => e.pitch) ? null : ['Sopran', 'Alt', 'Tenor', 'Bass'][i])).filter(Boolean);
@@ -296,7 +319,13 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
       const namen = stimmenVon(doc.satz).map((st) => st.name);
       const kurz = laengen.map((l, i) => (l < soll - 1e-9 ? namen[i] : null)).filter(Boolean);
       return {
-        text: doc.satz.klavier ? 'Melodie und Begleitung sind gleich lang' : doc.satz.kontrapunkt?.gattung === 'frei' ? 'Beide Stimmen sind gleich lang' : 'Die Gegenstimme reicht bis zum Schluss', ok: kurz.length === 0, hinweis: kurz.length ? `Noch zu kurz: ${kurz.join(', ')}.` : undefined };
+        text: doc.satz.klavier
+          ? 'Melodie und Begleitung sind gleich lang'
+          : doc.satz.ensemble
+            ? 'Alle Stimmen reichen bis zum Schluss'
+            : doc.satz.kontrapunkt?.gattung === 'frei'
+              ? 'Beide Stimmen sind gleich lang'
+              : 'Die Gegenstimme reicht bis zum Schluss', ok: kurz.length === 0, hinweis: kurz.length ? `Noch zu kurz: ${kurz.join(', ')}.` : undefined };
     }
     case 'fehlerfrei': {
       const kp = doc.satz.kontrapunkt;
@@ -308,7 +337,9 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
           ? 'Keine Fehler im Klaviersatz (Parallelen zwischen Melodie und Bass, Schluss)'
           : kp
             ? 'Keine Fehler im Kontrapunkt (Konsonanzen, Dissonanzen, Parallelen, Schluss …)'
-            : 'Keine Satzfehler (Parallelen, Umfang, Auflösung …)',
+            : doc.satz.ensemble
+              ? 'Keine Satzfehler (Parallelen, Umfang der Instrumente, Auflösung …)'
+              : 'Keine Satzfehler (Parallelen, Umfang, Auflösung …)',
         ok: fehler.length === 0,
         hinweis: erster ? `${fehler.length} Fehler, z. B. Takt ${erster.takt}: ${erster.text}` : undefined,
       };

@@ -4,6 +4,7 @@ import { modusAufgabe } from './modal';
 import { analyseAufgabe } from './analyse';
 import { begleitmusterAufgabe, formAufgabe } from './form';
 import { transpositionAufgabe } from './instrumente';
+import { altschluesselAufgabe, instrumentHoerenAufgabe, lageAufgabe } from './orchester';
 import { fromDiatonic, germanKeyName, germanName, germanNameWithOctave, toMidi, diatonicIndex } from '../model/pitch';
 import type { Clef, Duration, KeySignature, Pitch, Score, Step } from '../model/types';
 import { funktionAufgabe, kadenzAufgabe, satzfehlerAufgabe, umkehrungAufgabe } from './satzuebungen';
@@ -27,7 +28,7 @@ export interface Aufgabe {
   /** Notenbild (optional) */
   noten?: { clef: Clef; key?: KeySignature; groups: Pitch[][] };
   /** Klang (optional): Töne nacheinander oder gleichzeitig; `folge` spielt mehrere Akkorde nacheinander */
-  klang?: { art: 'nacheinander' | 'zusammen'; toene: Pitch[]; folge?: Pitch[][] };
+  klang?: { art: 'nacheinander' | 'zusammen'; toene: Pitch[]; folge?: Pitch[][]; instrument?: string };
   /** Mehrstimmiges Notenbild (z. B. zwei Akkorde im Chorsatz) */
   satz?: Score;
   /** Antwortmöglichkeiten; leer bei Diktaten */
@@ -64,7 +65,10 @@ export type UebungTyp =
   | 'analyse-markieren'
   | 'form-bestimmen'
   | 'begleitmuster-bestimmen'
-  | 'transponieren';
+  | 'transponieren'
+  | 'altschluessel-lesen'
+  | 'instrument-hoeren'
+  | 'lage-einschaetzen';
 
 export interface UebungInfo {
   typ: UebungTyp;
@@ -95,6 +99,9 @@ export const UEBUNGEN: UebungInfo[] = [
   { typ: 'form-bestimmen', titel: 'Formen erkennen', modul: 's4-periode', hoeren: false },
   { typ: 'begleitmuster-bestimmen', titel: 'Begleitmuster erkennen', modul: 's4-begleitung', hoeren: false },
   { typ: 'transponieren', titel: 'Transponierende Instrumente', modul: 's4-instrumente', hoeren: false },
+  { typ: 'altschluessel-lesen', titel: 'Altschlüssel lesen', modul: 's5-streicher', hoeren: false },
+  { typ: 'instrument-hoeren', titel: 'Instrumente am Klang erkennen', modul: 's5-holz', hoeren: true },
+  { typ: 'lage-einschaetzen', titel: 'Umfang und Lage einschätzen', modul: 's5-blech', hoeren: false },
 ];
 
 /** Schwierigkeit 1–3, abhängig von der Sicherheit im Modul */
@@ -422,6 +429,12 @@ export function erzeugeAufgabe(typ: UebungTyp, stufe: Stufe, rng: Rng = Math.ran
       return begleitmusterAufgabe(rng, stufe);
     case 'transponieren':
       return transpositionAufgabe(rng, stufe);
+    case 'altschluessel-lesen':
+      return altschluesselAufgabe(rng, stufe);
+    case 'instrument-hoeren':
+      return instrumentHoerenAufgabe(rng, stufe);
+    case 'lage-einschaetzen':
+      return lageAufgabe(rng, stufe);
   }
 }
 

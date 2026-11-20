@@ -3,8 +3,8 @@ id: orchester
 titel: Orchester
 kategorie: Instrumente
 kurz: Ein großes Instrumentalensemble aus Streichern, Holzbläsern, Blechbläsern und Schlagwerk, geleitet von einem Dirigenten.
-synonyme: Orchester, Sinfonieorchester, Kammerorchester, Streichorchester, Instrumentation, Orchestrierung, Dirigent
-siehe: streicher, holzblaeser, blechblaeser, schlagwerk, sinfonie
+synonyme: Orchester, Sinfonieorchester, Kammerorchester, Streichorchester, Dirigent
+siehe: streicher, holzblaeser, blechblaeser, schlagwerk, sinfonie, instrumentation
 ---
 
 Das klassische **Sinfonieorchester** ist in vier Gruppen gegliedert, die in der Partitur von oben nach unten stehen:

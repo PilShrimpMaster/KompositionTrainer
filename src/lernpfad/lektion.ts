@@ -3,6 +3,8 @@ import { kpSatz } from '../kontrapunkt/kurzform';
 import { leseFelder, liste, parseBeispiel, trenneKopf } from '../lexikon/parse';
 import type { Clef, KeySignature, NoteEvent, Pitch, Score, TimeSignature } from '../model/types';
 import { satz } from '../satz/kurzform';
+import { ENSEMBLES, instrument } from '../model/instrumente';
+import { ensembleDoc, rebarSatz } from '../editor/satzdoc';
 import type { UebungTyp } from '../uebungen/aufgaben';
 import { parseNotenbeispiel, parseNotenfolge, parseSchluessel, parseTakt, parseTonart } from './kompakt';
 
@@ -24,6 +26,31 @@ export interface Schreibaufgabe {
   kontrapunkt?: { gattung: Gattung; cf: 0 | 1; cantus: NoteEvent[] };
   /** Klaviersatz: vorgegebene Melodie und/oder Begleitung (eine davon darf leer sein) */
   klavier?: { melodie: NoteEvent[]; begleitung: NoteEvent[] };
+  /** Ensemble: Instrumente von oben nach unten und vorgegebene Noten je Stimme */
+  ensemble?: { instrumente: string[]; vorgabe: NoteEvent[][] };
+}
+
+/** „besetzung: streichquartett“ oder „besetzung: oboe, klarinette, fagott“ und Stimmen „v1:“ bis „v8:“ */
+function ensembleFelder(f: Record<string, string>): { instrumente: string[]; vorgabe: NoteEvent[][] } {
+  const name = (f.besetzung ?? f.ensemble ?? '').trim();
+  const instrumente = ENSEMBLES.find((e) => e.id === name)?.instrumente ?? name.split(/\s*,\s*/).filter(Boolean);
+  if (!instrumente.length) throw new Error('Ensemble braucht eine besetzung');
+  for (const id of instrumente) if (!instrument(id)) throw new Error(`Unbekanntes Instrument „${id}“`);
+  return { instrumente, vorgabe: instrumente.map((_, k) => (f[`v${k + 1}`] ? parseNotenfolge(f[`v${k + 1}`]) : [])) };
+}
+
+/** Partitur eines Ensemble-Beispiels */
+function ensembleScore(f: Record<string, string>): Score {
+  const { instrumente, vorgabe } = ensembleFelder(f);
+  const basis = {
+    title: f.titel ?? '',
+    tempo: f.tempo ? Number(f.tempo) : 80,
+    time: f.takt ? parseTakt(f.takt) : { beats: 4, beatType: 4 },
+    key: f.tonart ? parseTonart(f.tonart) : { fifths: 0, mode: 'major' as const },
+    clef: 'treble' as const,
+    events: [],
+  };
+  return rebarSatz(ensembleDoc(basis, instrumente, vorgabe)).score;
 }
 
 const STIMM_FELDER = ['sopran', 'alt', 'tenor', 'bass'] as const;
@@ -73,7 +100,7 @@ export interface Lektion {
   schritte: Schritt[];
 }
 
-const FENCE = /```(noten|satz|akkorde|uebungen|aufgabe|zweistimmig)[^\n]*\n([\s\S]*?)```/g;
+const FENCE = /```(noten|satz|akkorde|uebungen|aufgabe|zweistimmig|ensemble)[^\n]*\n([\s\S]*?)```/g;
 
 function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: string): Baustein[] {
   const out: Baustein[] = [];
@@ -108,6 +135,12 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
             ...(klavier ? { harmonien: true } : {}),
             ...(f.form === 'ja' ? { form: true } : {}),
           });
+          break;
+        }
+        case 'ensemble': {
+          const f = leseFelder(inhalt);
+          const score = ensembleScore(f);
+          out.push({ art: 'noten', score, ...(f.analyse === 'ja' ? { analyse: true } : {}), ...(f.form === 'ja' ? { form: true } : {}) });
           break;
         }
         case 'akkorde': {
@@ -145,6 +178,7 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
               ...(f.klavier === 'ja'
                 ? { klavier: { melodie: f.melodie ? parseNotenfolge(f.melodie) : [], begleitung: f.begleitung ? parseNotenfolge(f.begleitung) : [] } }
                 : {}),
+              ...(f.besetzung ? { ensemble: ensembleFelder(f) } : {}),
               ...(f.satz === 'ja'
                 ? { vorgabe: STIMM_FELDER.map((k) => (f[k] ? parseNotenfolge(f[k]) : [])), liedtext: f.liedtext || undefined }
                 : {}),

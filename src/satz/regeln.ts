@@ -79,14 +79,29 @@ function* paare(n: number) {
   for (let o = 0; o < n; o++) for (let u = o + 1; u < n; u++) yield [o, u] as const;
 }
 
+/**
+ * Verdopplung im Ensemble („colla parte“): Zwei Instrumente spielen dieselbe Linie im Einklang
+ * oder in Oktaven, Ton für Ton im selben Rhythmus. Das ist Orchestrierung, keine Parallelführung.
+ */
+function verdoppelt(score: Score, o: number, u: number): boolean {
+  const [a, b] = [score.voices[o], score.voices[u]];
+  if (!instrument(a.instrument) || !instrument(b.instrument)) return false;
+  const folge = (v: typeof a) => v.measures.flatMap((m) => m.notes.map((n) => `${n.pitch ? ((toMidi(n.pitch) % 12) + 12) % 12 : 'r'}:${n.duration.type}${n.duration.dots ?? ''}`));
+  const [fa, fb] = [folge(a), folge(b)];
+  return fa.length > 1 && fa.join() === fb.join();
+}
+
 const parallelen: Regel = {
   id: 'parallelen',
   titel: 'Quint- und Oktavparallelen',
   begriff: 'quintparallele',
   pruefe(ctx) {
     const out: Befund[] = [];
+    const doppel = new Set<string>();
+    for (const [o, u] of paare(ctx.namen.length)) if (verdoppelt(ctx.score, o, u)) doppel.add(`${o}-${u}`);
     for (const [a, b] of schritte(ctx)) {
       for (const [o, u] of paare(ctx.namen.length)) {
+        if (doppel.has(`${o}-${u}`)) continue;
         const [ao, au, bo, bu] = [a.toene[o], a.toene[u], b.toene[o], b.toene[u]];
         if (!ao || !au || !bo || !bu) continue;
         if (gleich(ao, bo) || gleich(au, bu)) continue; // eine Stimme bleibt liegen
@@ -400,10 +415,10 @@ const spruenge: Regel = {
           const iv = intervall(vorher.p, p);
           const weit = Math.abs(halbtoene(p, vorher.p));
           let befund: { art: BefundArt; text: string } | null = null;
-          if (weit > 12) befund = { art: 'fehler', text: `Sprung größer als eine Oktave im ${name}. Das ist schwer zu singen.` };
+          if (weit > 12) befund = { art: 'fehler', text: `Sprung größer als eine Oktave ${inDer(name)}. Das ist schwer zu singen.` };
           else if (iv.qualitaet.includes('übermäßig') && iv.nummer !== 8)
-            befund = { art: 'fehler', text: `${intervallName(iv)[0].toUpperCase()}${intervallName(iv).slice(1)} im ${name}: Übermäßige Schritte sind schwer zu treffen und klingen fremd.` };
-          else if (iv.nummer === 7) befund = { art: 'hinweis', text: `Septimsprung im ${name}: Das ist schwer zu singen, besser vermeiden.` };
+            befund = { art: 'fehler', text: `${intervallName(iv)[0].toUpperCase()}${intervallName(iv).slice(1)} ${inDer(name)}: Übermäßige Schritte sind schwer zu treffen und klingen fremd.` };
+          else if (iv.nummer === 7) befund = { art: 'hinweis', text: `Septimsprung ${inDer(name)}: Das ist schwer zu singen, besser vermeiden.` };
           if (befund) out.push({ regel: 'spruenge', ...befund, ids: ids(vorher.id, k.ids[v]), takt: k.takt + 1 });
         }
         vorher = { p, id: k.ids[v] };

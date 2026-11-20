@@ -14,6 +14,8 @@ export interface Eintrag {
   klang: 'nacheinander' | 'zusammen';
   schluessel: Clef;
   tonart?: KeySignature;
+  /** Instrument-Id, in dessen Klang das Beispiel erklingt */
+  instrument?: string;
   /** Markdown-Text ohne Kopfzeilen */
   text: string;
 }
@@ -85,8 +87,9 @@ export function parseEintrag(quelle: string, datei = '?'): Eintrag {
     siehe: liste(kopf.siehe),
     beispiel: kopf.beispiel ? parseBeispiel(kopf.beispiel) : undefined,
     klang: kopf.klang === 'zusammen' ? 'zusammen' : 'nacheinander',
-    schluessel: kopf.schluessel === 'bass' ? 'bass' : 'treble',
+    schluessel: kopf.schluessel === 'bass' ? 'bass' : kopf.schluessel === 'alto' ? 'alto' : 'treble',
     tonart,
+    ...(kopf.instrument ? { instrument: kopf.instrument } : {}),
     text,
   };
 }

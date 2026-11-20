@@ -78,7 +78,7 @@ function EintragSeite({ eintrag: e, onOeffne }: { eintrag: Eintrag; onOeffne: (i
       <p className="lexikon-kat">{e.kategorie}</p>
       <p className="lexikon-definition">{e.kurz}</p>
       {e.synonyme.length > 0 && <p className="hinweis">Auch: {e.synonyme.join(', ')}</p>}
-      {e.beispiel && <AkkordBeispiel gruppen={e.beispiel} klang={e.klang} schluessel={e.schluessel} tonart={e.tonart} />}
+      {e.beispiel && <AkkordBeispiel gruppen={e.beispiel} klang={e.klang} schluessel={e.schluessel} tonart={e.tonart} instrument={e.instrument} />}
       <Markdown text={e.text} ausser={e.id} className="lexikon-text" />
       {e.siehe.length > 0 && (
         <nav className="lexikon-siehe" aria-label="Siehe auch">

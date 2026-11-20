@@ -319,7 +319,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
         : 'Begleitung: noch leer. Schreib Bass oder gebrochene Akkorde ins untere System (z. B. c–g–e–g); Tab wechselt zur Melodie.';
     if (doc.events.length === 0 && doc.satz?.kontrapunkt?.gattung === 'frei') return `${besetzung[aktiv].name}: noch leer. Beginne mit einem kurzen Motiv in einer Stimme und lass es die andere nachahmen. Tab wechselt die Stimme.`;
     if (doc.events.length === 0 && doc.satz?.kontrapunkt) return `Schreib die Gegenstimme ins ${besetzung[aktiv].staff === 0 ? 'obere' : 'untere'} System: ${GATTUNGEN[doc.satz.kontrapunkt.gattung].kurz}.`;
-    if (doc.events.length === 0 && doc.satz) return `${besetzung[aktiv].name}: noch leer. Tippe ins ${besetzung[aktiv].staff === 0 ? 'obere' : 'untere'} System, spiel auf dem Klavier oder wechsle die Stimme mit Tab.`;
+    if (doc.events.length === 0 && doc.satz) return `${besetzung[aktiv].name}: noch leer. Tippe ins ${doc.satz.ensemble ? `System ${besetzung[aktiv].kurz ?? besetzung[aktiv].name}` : besetzung[aktiv].staff === 0 ? 'obere System' : 'untere System'}, spiel auf dem Klavier oder wechsle die Stimme mit Tab.`;
     if (doc.events.length === 0) return 'Tippe mit dem Apple Pencil (oder der Maus) ins Notensystem, spiel auf dem Klavier oder tippe Buchstaben wie c, d, e.';
     const parts: string[] = [];
     if (selectedEvent) {
@@ -434,6 +434,12 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
       const neu = klavierDoc(basis, a.klavier.melodie, a.klavier.begleitung, true);
       act({ type: 'load', doc: neu });
       setPianoLow(neu.satz!.aktiv === 1 ? 48 : 60);
+      setPruefen(true);
+      return;
+    }
+    if (a.ensemble) {
+      act({ type: 'load', doc: ensembleDoc(basis, a.ensemble.instrumente, a.ensemble.vorgabe, true) });
+      setStumm(Array(8).fill(false));
       setPruefen(true);
       return;
     }
