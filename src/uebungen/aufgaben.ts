@@ -1,4 +1,4 @@
-import { konsonanzAufgabe, kpFehlerAufgabe } from '../kontrapunkt/uebungen';
+import { konsonanzAufgabe, kpFehlerAufgabe, motivformAufgabe } from '../kontrapunkt/uebungen';
 import { quarterLength } from '../model/duration';
 import { fromDiatonic, germanKeyName, germanName, germanNameWithOctave, toMidi, diatonicIndex } from '../model/pitch';
 import type { Clef, Duration, KeySignature, Pitch, Score, Step } from '../model/types';
@@ -52,7 +52,8 @@ export type UebungTyp =
   | 'umkehrung-bestimmen'
   | 'satzfehler-finden'
   | 'konsonanz-bestimmen'
-  | 'kp-fehler-finden';
+  | 'kp-fehler-finden'
+  | 'motivform-bestimmen';
 
 export interface UebungInfo {
   typ: UebungTyp;
@@ -77,6 +78,7 @@ export const UEBUNGEN: UebungInfo[] = [
   { typ: 'kadenz-hoeren', titel: 'Schlüsse hören', modul: 's2-nebenfunktionen', hoeren: true },
   { typ: 'konsonanz-bestimmen', titel: 'Konsonanz oder Dissonanz', modul: 's3-gattung1', hoeren: false },
   { typ: 'kp-fehler-finden', titel: 'Fehler im Kontrapunkt finden', modul: 's3-gattung2', hoeren: false },
+  { typ: 'motivform-bestimmen', titel: 'Motiv, Umkehrung, Krebs', modul: 's3-imitation', hoeren: false },
 ];
 
 /** Schwierigkeit 1–3, abhängig von der Sicherheit im Modul */
@@ -392,6 +394,8 @@ export function erzeugeAufgabe(typ: UebungTyp, stufe: Stufe, rng: Rng = Math.ran
       return konsonanzAufgabe(rng, stufe);
     case 'kp-fehler-finden':
       return kpFehlerAufgabe(rng, stufe);
+    case 'motivform-bestimmen':
+      return motivformAufgabe(rng, stufe);
   }
 }
 

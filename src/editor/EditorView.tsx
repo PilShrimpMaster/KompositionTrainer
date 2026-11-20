@@ -7,9 +7,10 @@ import { Klavier } from './Klavier';
 import type { Schreibaufgabe } from '../lernpfad/lektion';
 import { AufgabePanel } from './AufgabePanel';
 import { docFromScore, rebar, type EditorDoc } from './rebar';
-import { alsSatz, kpBesetzung, kpDoc, rebarSatz, stimmenVon, synchron, type SatzRebar } from './satzdoc';
+import { alsSatz, freiDoc, kpBesetzung, kpDoc, rebarSatz, stimmenVon, synchron, type SatzRebar } from './satzdoc';
 import { erzeugeCantus, MODI } from '../kontrapunkt/cantus';
-import { GATTUNGEN, type Gattung } from '../kontrapunkt/fux';
+import { GATTUNGEN, STRENGE_GATTUNGEN, type Gattung } from '../kontrapunkt/fux';
+import { motivMarkierungen, MotivPanel, useMotive } from '../kontrapunkt/MotivPanel';
 import { markierungenFuer, PruefPanel, usePruefung } from '../satz/PruefPanel';
 import { measureLength, quarterLength } from '../model/duration';
 import { ladeDatei, NOTENDATEIEN, speichereJson, speichereMusicXml } from '../musicxml/datei';
@@ -25,6 +26,7 @@ const STORAGE_KEY = 'kt-editor-entwurf-v1';
 const STUECK_KEY = 'kt-editor-stueck-id';
 const MITSPIELEN_KEY = 'kt-midi-mitspielen';
 const PRUEFEN_KEY = 'kt-editor-pruefen';
+type Besetzungsart = 'melodie' | 'satz' | 'kontrapunkt' | 'frei';
 /** Unterste Taste des Bildschirmklaviers je Stimme */
 const KLAVIER_TIEF = [60, 60, 48, 36];
 
@@ -150,10 +152,13 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   const besetzung = stimmenVon(doc.satz);
   const gesperrt = doc.satz?.gesperrt ?? [];
   const pruefung = usePruefung(bar.score, doc.satz?.kontrapunkt);
-  const markierungen = useMemo(
-    () => (doc.satz && pruefen ? markierungenFuer(pruefung.befunde, auswahl) : undefined),
-    [doc.satz, pruefen, pruefung.befunde, auswahl],
-  );
+  const frei = doc.satz?.kontrapunkt?.gattung === 'frei';
+  const motive = useMotive(bar.score);
+  const markierungen = useMemo(() => {
+    if (!doc.satz || !pruefen) return undefined;
+    const regeln = markierungenFuer(pruefung.befunde, auswahl);
+    return frei ? motivMarkierungen(motive.funde, motive.auswahl, regeln) : regeln;
+  }, [doc.satz, pruefen, pruefung.befunde, auswahl, frei, motive.funde, motive.auswahl]);
   useEffect(() => setAuswahl(null), [doc]);
   useEffect(() => {
     if (doc.satz) setPianoLow(doc.satz.besetzung ? (doc.satz.besetzung[aktiv]?.clef === 'bass' ? 48 : 60) : KLAVIER_TIEF[aktiv]);
@@ -285,6 +290,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   }
 
   const status = (() => {
+    if (doc.events.length === 0 && doc.satz?.kontrapunkt?.gattung === 'frei') return `${besetzung[aktiv].name}: noch leer. Beginne mit einem kurzen Motiv in einer Stimme und lass es die andere nachahmen. Tab wechselt die Stimme.`;
     if (doc.events.length === 0 && doc.satz?.kontrapunkt) return `Schreib die Gegenstimme ins ${besetzung[aktiv].staff === 0 ? 'obere' : 'untere'} System: ${GATTUNGEN[doc.satz.kontrapunkt.gattung].kurz}.`;
     if (doc.events.length === 0 && doc.satz) return `${besetzung[aktiv].name}: noch leer. Tippe ins ${besetzung[aktiv].staff === 0 ? 'obere' : 'untere'} System, spiel auf dem Klavier oder wechsle die Stimme mit Tab.`;
     if (doc.events.length === 0) return 'Tippe mit dem Apple Pencil (oder der Maus) ins Notensystem, spiel auf dem Klavier oder tippe Buchstaben wie c, d, e.';
@@ -311,9 +317,16 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
     setPruefen(true);
   }
 
-  function besetzungWaehlen(art: 'melodie' | 'satz' | 'kontrapunkt') {
+  function besetzungWaehlen(art: Besetzungsart) {
     if (art === 'kontrapunkt') {
-      if (!doc.satz?.kontrapunkt) kontrapunktNeu();
+      if (!doc.satz?.kontrapunkt || doc.satz.kontrapunkt.gattung === 'frei') kontrapunktNeu();
+      return;
+    }
+    if (art === 'frei') {
+      if (doc.satz?.kontrapunkt?.gattung === 'frei') return;
+      setStueckId(null);
+      act({ type: 'load', doc: freiDoc({ ...emptyDoc(), title: 'Meine Invention', key: doc.key, time: { beats: 4, beatType: 4 } }) });
+      setPruefen(true);
       return;
     }
     if (doc.satz?.kontrapunkt) {
@@ -340,7 +353,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
     const basis = { ...emptyDoc(), title: a.titel, key: a.tonart ?? doc.key, time: a.takt ?? doc.time, clef: a.schluessel ?? doc.clef };
     if (a.kontrapunkt) {
       const { gattung, cf, cantus } = a.kontrapunkt;
-      const neu = kpDoc(basis, gattung, cf, cantus);
+      const neu = gattung === 'frei' ? freiDoc(basis, cantus) : kpDoc(basis, gattung, cf, cantus);
       act({ type: 'load', doc: neu });
       setPianoLow(kpBesetzung(cf)[1 - cf].clef === 'bass' ? 48 : 60);
       setPruefen(true);
@@ -473,14 +486,14 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           />
         )}
 
-        {doc.satz?.kontrapunkt && (
+        {doc.satz?.kontrapunkt && doc.satz.kontrapunkt.gattung !== 'frei' && (
           <div className="kp-leiste" role="group" aria-label="Kontrapunkt">
             <select
               value={doc.satz.kontrapunkt.gattung}
               onChange={(e) => kontrapunktAendern(Number(e.target.value) as Gattung, doc.satz!.kontrapunkt!.cf)}
               aria-label="Gattung"
             >
-              {([1, 2, 3, 4, 5] as Gattung[]).map((g) => (
+              {STRENGE_GATTUNGEN.map((g) => (
                 <option key={g} value={g}>
                   {GATTUNGEN[g].name}
                 </option>
@@ -589,6 +602,19 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
               onHinweise={(v) => {
                 setAuswahl(null);
                 pruefung.setHinweise(v);
+              }}
+            />
+          )}
+          {pruefen && frei && (
+            <MotivPanel
+              motiv={motive.motiv}
+              funde={motive.funde}
+              laenge={motive.laenge}
+              onLaenge={motive.setLaenge}
+              auswahl={motive.auswahl}
+              onAuswahl={(i) => {
+                setAuswahl(null);
+                motive.setAuswahl(i);
               }}
             />
           )}
@@ -707,7 +733,7 @@ function MetaPanel({
 }: {
   doc: EditorDoc;
   onChange: (m: Partial<Omit<EditorDoc, 'events'>>) => void;
-  onSatz: (art: 'melodie' | 'satz' | 'kontrapunkt') => void;
+  onSatz: (art: Besetzungsart) => void;
   onText: (text: string) => void;
 }) {
   const keys = [];
@@ -756,12 +782,13 @@ function MetaPanel({
       <label className="field">
         <span>Besetzung</span>
         <select
-          value={doc.satz?.kontrapunkt ? 'kontrapunkt' : doc.satz ? 'satz' : 'melodie'}
-          onChange={(e) => onSatz(e.target.value as 'melodie' | 'satz' | 'kontrapunkt')}
+          value={doc.satz?.kontrapunkt ? (doc.satz.kontrapunkt.gattung === 'frei' ? 'frei' : 'kontrapunkt') : doc.satz ? 'satz' : 'melodie'}
+          onChange={(e) => onSatz(e.target.value as Besetzungsart)}
         >
           <option value="melodie">Melodie (einstimmig)</option>
           <option value="satz">Chorsatz: Sopran, Alt, Tenor, Bass</option>
           <option value="kontrapunkt">Kontrapunkt: Gegenstimme zu einem Cantus firmus</option>
+          <option value="frei">Zweistimmig frei: Invention</option>
         </select>
       </label>
       {!doc.satz && (

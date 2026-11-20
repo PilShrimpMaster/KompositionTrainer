@@ -1051,6 +1051,16 @@ a.lexikon-link:hover {
 }
 
 /* Prüf-Engine */
+.score-host .is-motiv,
+.score-host .is-motiv * {
+  fill: #127a6a;
+  stroke: #127a6a;
+}
+.score-host .is-motiv-original,
+.score-host .is-motiv-original * {
+  fill: #7a3fb8;
+  stroke: #7a3fb8;
+}
 .score-host .is-hinweis,
 .score-host .is-hinweis * {
   fill: #c76a00;
@@ -1158,6 +1168,16 @@ a.lexikon-link:hover {
 .meta-panel .liedtext {
   grid-column: 1 / -1;
 }
+.score-canvas .is-motiv,
+.score-canvas .is-motiv * {
+  fill: #127a6a;
+  stroke: #127a6a;
+}
+.score-canvas .is-motiv-original,
+.score-canvas .is-motiv-original * {
+  fill: #7a3fb8;
+  stroke: #7a3fb8;
+}
 .score-canvas .is-hinweis,
 .score-canvas .is-hinweis * {
   fill: #c76a00;
@@ -1258,4 +1278,25 @@ a.lexikon-link:hover {
   border-radius: 6px;
   background: var(--paper);
   color: var(--ink);
+}
+
+.motiv-laenge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+.befund.motiv .befund-art {
+  background: #127a6a;
+}
+
+.beispiel-knoepfe {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.beispiel .motiv-panel {
+  margin-top: 10px;
+  text-align: left;
 }

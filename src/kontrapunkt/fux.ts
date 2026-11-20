@@ -4,12 +4,14 @@ import type { Pitch, Score } from '../model/types';
 import { klaenge, type Klang } from '../satz/klaenge';
 import { zusammenfassen, type Befund, type BefundArt } from '../satz/regeln';
 import { intervall, intervallName } from '../uebungen/theorie';
+import { FREI_REGELN, pruefeFreienSatz } from './frei';
 
 /**
  * Zweistimmiger Gattungskontrapunkt nach Johann Joseph Fux („Gradus ad Parnassum“, 1725).
  * Eine Stimme ist der Cantus firmus (ganze Noten), die andere die Gegenstimme (Kontrapunkt).
  */
-export type Gattung = 1 | 2 | 3 | 4 | 5;
+export type Gattung = 1 | 2 | 3 | 4 | 5 | 'frei';
+export const STRENGE_GATTUNGEN: Gattung[] = [1, 2, 3, 4, 5];
 
 export const GATTUNGEN: Record<Gattung, { name: string; kurz: string }> = {
   1: { name: '1. Gattung: Note gegen Note', kurz: 'eine Ganze gegen jede Ganze' },
@@ -17,6 +19,7 @@ export const GATTUNGEN: Record<Gattung, { name: string; kurz: string }> = {
   3: { name: '3. Gattung: vier gegen eine', kurz: 'vier Viertel gegen jede Ganze' },
   4: { name: '4. Gattung: Synkopen', kurz: 'übergebundene Halbe (Synkopen) gegen jede Ganze' },
   5: { name: '5. Gattung: floride', kurz: 'gemischte Notenwerte' },
+  frei: { name: 'Freier Satz (Invention)', kurz: 'freie Notenwerte in beiden Stimmen' },
 };
 
 export interface KpOptionen {
@@ -49,7 +52,7 @@ export const KP_REGELN: KpRegel[] = [
   { id: 'kp-leiter', titel: 'Leitereigene Töne', begriff: 'kirchentonarten' },
 ];
 
-export const kpRegel = (id: string) => KP_REGELN.find((r) => r.id === id);
+export const kpRegel = (id: string) => KP_REGELN.find((r) => r.id === id) ?? FREI_REGELN.find((r) => r.id === id);
 
 /* ---------- Intervalle ---------- */
 
@@ -113,6 +116,7 @@ const idsVon = (...xs: (string | null | undefined)[]) => [...new Set(xs.filter((
 
 export function pruefeKontrapunkt(score: Score, opts: KpOptionen): Befund[] {
   if (score.voices.length !== 2) return [];
+  if (opts.gattung === 'frei') return pruefeFreienSatz(score, opts);
   const { gattung } = opts;
   const cfV = opts.cf;
   const kpV = (1 - cfV) as 0 | 1;
@@ -133,7 +137,7 @@ export function pruefeKontrapunkt(score: Score, opts: KpOptionen): Befund[] {
   const finalis = cf[cf.length - 1].p!;
 
   /* Rhythmus der Gattung */
-  const erwartet: Record<Gattung, number | null> = { 1: 1, 2: 2, 3: 4, 4: null, 5: null };
+  const erwartet: Record<Gattung, number | null> = { 1: 1, 2: 2, 3: 4, 4: null, 5: null, frei: null };
   const anzahl = erwartet[gattung];
   score.voices[kpV].measures.forEach((m, mi) => {
     if (mi >= letzterTakt) return; // Schlusston darf eine Ganze sein
