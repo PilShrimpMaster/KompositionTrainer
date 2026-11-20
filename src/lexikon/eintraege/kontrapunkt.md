@@ -3,8 +3,8 @@ id: kontrapunkt
 titel: Kontrapunkt
 kategorie: Satztechnik
 kurz: Die Kunst, mehrere selbstständige Melodien gleichzeitig zu führen, sodass sie zusammen gut klingen. Wörtlich „Note gegen Note“ (punctus contra punctum).
-synonyme: Kontrapunktik, kontrapunktisch, Polyphonie, polyphon, Gattungskontrapunkt, Cantus firmus, Fux
-siehe: homophonie, kanon, fuge, imitation
+synonyme: Kontrapunktik, kontrapunktisch, Polyphonie, polyphon
+siehe: gattungskontrapunkt, cantus-firmus, homophonie, kanon, fuge, imitation
 ---
 
 Beim **Kontrapunkt** steht nicht der Akkord im Vordergrund, sondern die **Linie**: Jede Stimme ist eine eigene Melodie mit eigenem Rhythmus und Profil. Die Harmonie ergibt sich aus ihrem Zusammenspiel.

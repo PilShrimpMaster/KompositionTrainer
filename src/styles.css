@@ -1242,3 +1242,20 @@ a.lexikon-link:hover {
 .ki-fuss summary {
   cursor: pointer;
 }
+
+/* Kontrapunkt */
+.kp-leiste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+.kp-leiste select {
+  font: inherit;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+}

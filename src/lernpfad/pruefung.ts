@@ -7,6 +7,8 @@ import { rebarSatz } from '../editor/satzdoc';
 import type { Score } from '../model/types';
 import { analysiere, funktionPasst, funktionsfolge } from '../satz/analyse';
 import { pruefeSatz } from '../satz/regeln';
+import { pruefeKontrapunkt } from '../kontrapunkt/fux';
+import { stimmenVon } from '../editor/satzdoc';
 import { parseTonart } from './kompakt';
 import { grundton } from '../model/tonart';
 import { dreiklangArt, intervall, INTERVALL_NAMEN } from '../uebungen/theorie';
@@ -120,6 +122,7 @@ export function pruefe(doc: EditorDoc, kriterien: string[]): Pruefpunkt[] {
         return { text: 'Der höchste Ton kommt nur einmal vor (Höhepunkt)', ok, hinweis: 'Ein einziger Gipfelton macht die Melodie zielgerichtet.' };
       }
       case 'vierstimmig':
+      case 'vollstaendig':
       case 'fehlerfrei':
       case 'funktionen':
       case 'ganzschluss':
@@ -151,13 +154,22 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
         hinweis: leer.length ? `Noch leer: ${leer.join(', ')}.` : 'Die Stimmen sind unterschiedlich lang.',
       };
     }
+    case 'vollstaendig': {
+      // Jede Stimme ist so lang wie die vorgegebene (z. B. der Cantus firmus)
+      const laengen = stimmen.map((st) => st.reduce((s, e) => s + quarterLength(e.duration), 0));
+      const soll = Math.max(...laengen);
+      const namen = stimmenVon(doc.satz).map((st) => st.name);
+      const kurz = laengen.map((l, i) => (l < soll - 1e-9 ? namen[i] : null)).filter(Boolean);
+      return { text: 'Die Gegenstimme reicht bis zum Schluss', ok: kurz.length === 0, hinweis: kurz.length ? `Noch zu kurz: ${kurz.join(', ')}.` : undefined };
+    }
     case 'fehlerfrei': {
-      const fehler = pruefeSatz(score).filter((b) => b.art === 'fehler');
+      const kp = doc.satz.kontrapunkt;
+      const fehler = (kp ? pruefeKontrapunkt(score, { ...kp, hinweise: false }) : pruefeSatz(score)).filter((b) => b.art === 'fehler');
       const erster = fehler[0];
       return {
-        text: 'Keine Satzfehler (Parallelen, Umfang, Auflösung …)',
+        text: kp ? 'Keine Fehler im Kontrapunkt (Konsonanzen, Dissonanzen, Parallelen, Schluss …)' : 'Keine Satzfehler (Parallelen, Umfang, Auflösung …)',
         ok: fehler.length === 0,
-        hinweis: erster ? `${fehler.length} Fehler, z. B. Takt ${erster.takt + 1}: ${erster.text}` : undefined,
+        hinweis: erster ? `${fehler.length} Fehler, z. B. Takt ${erster.takt}: ${erster.text}` : undefined,
       };
     }
     case 'funktionen': {

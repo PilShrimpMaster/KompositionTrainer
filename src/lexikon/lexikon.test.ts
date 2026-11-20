@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { REGELN } from '../satz/regeln';
+import { KP_REGELN } from '../kontrapunkt/fux';
 import { UEBUNGEN, erzeugeAufgabe } from '../uebungen/aufgaben';
 import { EINTRAEGE, eintrag, normalisiere, sucheEintraege } from './lexikon';
 import { parseBeispiel, parseEintrag, parsePitch } from './parse';
@@ -27,7 +28,7 @@ describe('Lexikon', () => {
   });
 
   it('hat für jede Regel der Satzprüfung einen Eintrag', () => {
-    for (const r of REGELN) expect(eintrag(r.begriff), `${r.id} → ${r.begriff}`).toBeDefined();
+    for (const r of [...REGELN, ...KP_REGELN]) expect(eintrag(r.begriff), `${r.id} → ${r.begriff}`).toBeDefined();
   });
 
   it('kennt alle Begriffe, auf die Übungen verweisen', () => {

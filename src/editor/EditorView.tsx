@@ -7,7 +7,9 @@ import { Klavier } from './Klavier';
 import type { Schreibaufgabe } from '../lernpfad/lektion';
 import { AufgabePanel } from './AufgabePanel';
 import { docFromScore, rebar, type EditorDoc } from './rebar';
-import { alsSatz, rebarSatz, STIMMEN, type SatzRebar } from './satzdoc';
+import { alsSatz, kpBesetzung, kpDoc, rebarSatz, stimmenVon, synchron, type SatzRebar } from './satzdoc';
+import { erzeugeCantus, MODI } from '../kontrapunkt/cantus';
+import { GATTUNGEN, type Gattung } from '../kontrapunkt/fux';
 import { markierungenFuer, PruefPanel, usePruefung } from '../satz/PruefPanel';
 import { measureLength, quarterLength } from '../model/duration';
 import { ladeDatei, NOTENDATEIEN, speichereJson, speichereMusicXml } from '../musicxml/datei';
@@ -145,14 +147,16 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   const bar = useMemo(() => (doc.satz ? rebarSatz(doc) : rebar(doc)), [doc]);
   const stimmeVon = doc.satz ? (bar as SatzRebar).stimmeVon : null;
   const aktiv = doc.satz?.aktiv ?? 0;
-  const pruefung = usePruefung(bar.score);
+  const besetzung = stimmenVon(doc.satz);
+  const gesperrt = doc.satz?.gesperrt ?? [];
+  const pruefung = usePruefung(bar.score, doc.satz?.kontrapunkt);
   const markierungen = useMemo(
     () => (doc.satz && pruefen ? markierungenFuer(pruefung.befunde, auswahl) : undefined),
     [doc.satz, pruefen, pruefung.befunde, auswahl],
   );
   useEffect(() => setAuswahl(null), [doc]);
   useEffect(() => {
-    if (doc.satz) setPianoLow(KLAVIER_TIEF[aktiv]);
+    if (doc.satz) setPianoLow(doc.satz.besetzung ? (doc.satz.besetzung[aktiv]?.clef === 'bass' ? 48 : 60) : KLAVIER_TIEF[aktiv]);
   }, [aktiv, doc.satz]);
   const selectedIds = selected === null ? [] : (bar.partsOf.get(selected) ?? []);
   const selectedEvent = selected === null ? null : doc.events[selected];
@@ -226,7 +230,13 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
       const { state: s, togglePlay: tp, act: a } = kbdRef.current;
       if (e.key === 'Tab' && s.doc.satz && !e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault();
-        a({ type: 'setAktiv', stimme: (s.doc.satz.aktiv + (e.shiftKey ? 3 : 1)) % 4 });
+        const n = s.doc.satz.stimmen.length;
+        let ziel = s.doc.satz.aktiv;
+        for (let i = 0; i < n; i++) {
+          ziel = (ziel + (e.shiftKey ? n - 1 : 1)) % n;
+          if (!s.doc.satz.gesperrt?.includes(ziel)) break;
+        }
+        a({ type: 'setAktiv', stimme: ziel });
         return;
       }
       const ref =
@@ -275,7 +285,8 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   }
 
   const status = (() => {
-    if (doc.events.length === 0 && doc.satz) return `${STIMMEN[aktiv].name}: noch leer. Tippe ins ${aktiv < 2 ? 'obere' : 'untere'} System, spiel auf dem Klavier oder wechsle die Stimme mit Tab.`;
+    if (doc.events.length === 0 && doc.satz?.kontrapunkt) return `Schreib die Gegenstimme ins ${besetzung[aktiv].staff === 0 ? 'obere' : 'untere'} System: ${GATTUNGEN[doc.satz.kontrapunkt.gattung].kurz}.`;
+    if (doc.events.length === 0 && doc.satz) return `${besetzung[aktiv].name}: noch leer. Tippe ins ${besetzung[aktiv].staff === 0 ? 'obere' : 'untere'} System, spiel auf dem Klavier oder wechsle die Stimme mit Tab.`;
     if (doc.events.length === 0) return 'Tippe mit dem Apple Pencil (oder der Maus) ins Notensystem, spiel auf dem Klavier oder tippe Buchstaben wie c, d, e.';
     const parts: string[] = [];
     if (selectedEvent) {
@@ -285,21 +296,62 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           : `Ausgewählt: Pause (Note ${selected! + 1})`,
       );
     }
-    if (doc.satz) parts.unshift(STIMMEN[aktiv].name);
+    if (doc.satz) parts.unshift(besetzung[aktiv].name);
     if (bar.missing > 0) parts.push(`Im letzten Takt fehlt noch ${fmtQuarters(bar.missing)}.`);
     else parts.push(`${bar.score.voices[0].measures.length} volle Takte.`);
     return parts.join(' · ');
   })();
 
+  /** Neuer Kontrapunkt mit einem frisch erzeugten Cantus firmus */
+  function kontrapunktNeu(gattung: Gattung = 1, cf: 0 | 1 = 1, modus = MODI[Math.floor(Math.random() * MODI.length)].id) {
+    setStueckId(null);
+    const cantus = erzeugeCantus(modus, Math.random, cf === 1 ? 3 : 4);
+    const name = MODI.find((m) => m.id === modus)!.name;
+    act({ type: 'load', doc: kpDoc({ ...emptyDoc(), title: `Kontrapunkt (${name})`, key: { fifths: 0, mode: 'major' }, time: { beats: 4, beatType: 4 } }, gattung, cf, cantus) });
+    setPruefen(true);
+  }
+
+  function besetzungWaehlen(art: 'melodie' | 'satz' | 'kontrapunkt') {
+    if (art === 'kontrapunkt') {
+      if (!doc.satz?.kontrapunkt) kontrapunktNeu();
+      return;
+    }
+    if (doc.satz?.kontrapunkt) {
+      // Vom Kontrapunkt zurück: neu beginnen
+      const leer = { ...emptyDoc(), title: art === 'satz' ? 'Mein Chorsatz' : 'Meine Melodie' };
+      act({ type: 'load', doc: art === 'satz' ? alsSatz(leer, true) : leer });
+      return;
+    }
+    act({ type: 'setSatz', an: art === 'satz' });
+  }
+
+  /** Gattung oder Lage des Cantus firmus ändern, die Gegenstimme bleibt (bei neuer Lage wird sie geleert) */
+  function kontrapunktAendern(gattung: Gattung, cf: 0 | 1) {
+    const d = synchron(doc);
+    const alt = d.satz!.kontrapunkt!;
+    const cantus = d.satz!.stimmen[alt.cf];
+    const kp = cf === alt.cf ? d.satz!.stimmen[1 - alt.cf] : [];
+    const verschoben = cf === alt.cf ? cantus : cantus.map((e) => (e.pitch ? { ...e, pitch: { ...e.pitch, octave: e.pitch.octave + (cf === 0 ? 1 : -1) } } : e));
+    act({ type: 'load', doc: kpDoc(d, gattung, cf, verschoben, kp) });
+  }
+
   function aufgabeBeginnen(a: Schreibaufgabe) {
     setStueckId(null);
     const basis = { ...emptyDoc(), title: a.titel, key: a.tonart ?? doc.key, time: a.takt ?? doc.time, clef: a.schluessel ?? doc.clef };
+    if (a.kontrapunkt) {
+      const { gattung, cf, cantus } = a.kontrapunkt;
+      const neu = kpDoc(basis, gattung, cf, cantus);
+      act({ type: 'load', doc: neu });
+      setPianoLow(kpBesetzung(cf)[1 - cf].clef === 'bass' ? 48 : 60);
+      setPruefen(true);
+      return;
+    }
     if (a.vorgabe) {
       // Vierstimmiger Satz: Vorgaben übernehmen, die erste leere Stimme wird bearbeitet
       const stimmen = a.vorgabe.map((st) => structuredClone(st));
       const aktiv = Math.max(0, stimmen.findIndex((st) => st.length === 0));
-      act({ type: 'load', doc: { ...basis, clef: STIMMEN[aktiv].clef, events: stimmen[aktiv], satz: { stimmen, aktiv, text: a.liedtext } } });
-      setPianoLow(STIMMEN[aktiv].clef === 'bass' ? 48 : 60);
+      act({ type: 'load', doc: { ...basis, clef: stimmenVon(undefined)[aktiv].clef, events: stimmen[aktiv], satz: { stimmen, aktiv, text: a.liedtext } } });
+      setPianoLow(stimmenVon(undefined)[aktiv].clef === 'bass' ? 48 : 60);
       return;
     }
     act({ type: 'load', doc: basis });
@@ -404,7 +456,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
             <h2>{doc.title}</h2>
             <p className="meta">
               {germanKeyName(doc.key)} · {doc.time.beats}/{doc.time.beatType}-Takt ·{' '}
-              {doc.satz ? 'Chorsatz SATB' : doc.clef === 'treble' ? 'Violinschlüssel' : 'Bassschlüssel'} · {doc.tempo} ♩/min
+              {doc.satz?.kontrapunkt ? GATTUNGEN[doc.satz.kontrapunkt.gattung].name : doc.satz ? 'Chorsatz SATB' : doc.clef === 'treble' ? 'Violinschlüssel' : 'Bassschlüssel'} · {doc.tempo} ♩/min
             </p>
           </div>
           <button className="secondary small" onClick={() => setShowMeta((s) => !s)} aria-expanded={showMeta}>
@@ -416,16 +468,48 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           <MetaPanel
             doc={doc}
             onChange={(meta) => act({ type: 'setMeta', meta })}
-            onSatz={(an) => act({ type: 'setSatz', an })}
+            onSatz={(art) => besetzungWaehlen(art)}
             onText={(text) => act({ type: 'setText', text })}
           />
         )}
 
+        {doc.satz?.kontrapunkt && (
+          <div className="kp-leiste" role="group" aria-label="Kontrapunkt">
+            <select
+              value={doc.satz.kontrapunkt.gattung}
+              onChange={(e) => kontrapunktAendern(Number(e.target.value) as Gattung, doc.satz!.kontrapunkt!.cf)}
+              aria-label="Gattung"
+            >
+              {([1, 2, 3, 4, 5] as Gattung[]).map((g) => (
+                <option key={g} value={g}>
+                  {GATTUNGEN[g].name}
+                </option>
+              ))}
+            </select>
+            <select
+              value={doc.satz.kontrapunkt.cf}
+              onChange={(e) => kontrapunktAendern(doc.satz!.kontrapunkt!.gattung, Number(e.target.value) as 0 | 1)}
+              aria-label="Lage des Cantus firmus"
+            >
+              <option value={1}>Cantus firmus unten</option>
+              <option value={0}>Cantus firmus oben</option>
+            </select>
+            <button className="secondary small" onClick={() => kontrapunktNeu(doc.satz!.kontrapunkt!.gattung, doc.satz!.kontrapunkt!.cf)}>
+              Neuer Cantus firmus
+            </button>
+          </div>
+        )}
+
         {doc.satz && (
           <div className="stimmen-wahl" role="group" aria-label="Stimme">
-            {STIMMEN.map((st, i) => (
+            {besetzung.map((st, i) => (
               <div key={st.id} className={`stimme stimme-${i} ${i === aktiv ? 'is-on' : ''}`}>
-                <button onClick={() => act({ type: 'setAktiv', stimme: i })} aria-pressed={i === aktiv} title="Stimme bearbeiten (Tab wechselt)">
+                <button
+                  onClick={() => act({ type: 'setAktiv', stimme: i })}
+                  aria-pressed={i === aktiv}
+                  disabled={gesperrt.includes(i)}
+                  title={gesperrt.includes(i) ? 'Vorgegeben' : 'Stimme bearbeiten (Tab wechselt)'}
+                >
                   {st.name}
                   <span className="stimme-anzahl">{doc.satz!.stimmen[i].filter((e) => e.pitch).length}</span>
                 </button>
@@ -441,9 +525,9 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
             ))}
             <button
               className="link small"
-              onClick={() => setStumm((m) => (m.every((v, j) => v === (j !== aktiv)) ? [false, false, false, false] : STIMMEN.map((_, j) => j !== aktiv)))}
+              onClick={() => setStumm((m) => (m.every((v, j) => v === (j !== aktiv)) ? besetzung.map(() => false) : besetzung.map((_, j) => j !== aktiv)))}
             >
-              {stumm.every((v, j) => v === (j !== aktiv)) ? 'Alle hören' : `Nur ${STIMMEN[aktiv].name} hören`}
+              {stumm.slice(0, besetzung.length).every((v, j) => v === (j !== aktiv)) ? 'Alle hören' : `Nur ${besetzung[aktiv].name} hören`}
             </button>
           </div>
         )}
@@ -458,6 +542,10 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           eventCount={doc.events.length}
           markierungen={markierungen}
           onInsert={(pitch, at, voices) => {
+            if (doc.satz && voices.length && voices.every((v) => gesperrt.includes(v))) {
+              setNotice(`${besetzung[voices[0]].name} ist vorgegeben. Schreib in der anderen Stimme.`);
+              return;
+            }
             if (doc.satz && !voices.includes(aktiv)) {
               // Tipp ins andere System: passende Stimme dort wählen (Sopran↔Tenor, Alt↔Bass)
               act({ type: 'setAktiv', stimme: voices[Math.min(aktiv % 2, voices.length - 1)] });
@@ -468,6 +556,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           }}
           onSelect={(id) => {
             const andere = id ? stimmeVon?.get(id) : undefined;
+            if (andere && gesperrt.includes(andere[0])) return;
             if (andere && andere[0] !== aktiv) {
               act({ type: 'setAktiv', stimme: andere[0] });
               act({ type: 'select', index: andere[1] });
@@ -618,7 +707,7 @@ function MetaPanel({
 }: {
   doc: EditorDoc;
   onChange: (m: Partial<Omit<EditorDoc, 'events'>>) => void;
-  onSatz: (an: boolean) => void;
+  onSatz: (art: 'melodie' | 'satz' | 'kontrapunkt') => void;
   onText: (text: string) => void;
 }) {
   const keys = [];
@@ -666,9 +755,13 @@ function MetaPanel({
       </label>
       <label className="field">
         <span>Besetzung</span>
-        <select value={doc.satz ? 'satz' : 'melodie'} onChange={(e) => onSatz(e.target.value === 'satz')}>
+        <select
+          value={doc.satz?.kontrapunkt ? 'kontrapunkt' : doc.satz ? 'satz' : 'melodie'}
+          onChange={(e) => onSatz(e.target.value as 'melodie' | 'satz' | 'kontrapunkt')}
+        >
           <option value="melodie">Melodie (einstimmig)</option>
           <option value="satz">Chorsatz: Sopran, Alt, Tenor, Bass</option>
+          <option value="kontrapunkt">Kontrapunkt: Gegenstimme zu einem Cantus firmus</option>
         </select>
       </label>
       {!doc.satz && (
@@ -680,7 +773,7 @@ function MetaPanel({
           </select>
         </label>
       )}
-      {doc.satz && (
+      {doc.satz && !doc.satz.kontrapunkt && (
         <label className="field liedtext">
           <span>Liedtext (Silben mit Leerzeichen trennen: „Lo- be den Her- ren“)</span>
           <input type="text" value={doc.satz.text ?? ''} onChange={(e) => onText(e.target.value)} />
