@@ -3,8 +3,8 @@ id: jazz
 titel: Jazz
 kategorie: Jazz, Pop & Film
 kurz: Um 1900 in New Orleans entstanden, aus Blues, Ragtime und afroamerikanischer Musik. Kennzeichen sind Improvisation, Swing und eine reiche Akkordsprache mit Optionstönen.
-synonyme: Jazz, Jazzmusik, Bebop, Cool Jazz, Hard Bop, Big Band, Improvisation, improvisieren, Standard, Jazzstandard, Real Book, Duke Ellington, Charlie Parker, Miles Davis, Bill Evans
-siehe: blues, swing, zwei-fuenf-eins, optionstoene, voicing, modaler-jazz, akkordsymbole
+synonyme: Jazz, Jazzmusik, Bebop, Cool Jazz, Hard Bop, Improvisation, improvisieren, Standard, Jazzstandard, Real Book, Duke Ellington, Charlie Parker, Miles Davis, Bill Evans
+siehe: blues, swing, zwei-fuenf-eins, optionstoene, voicing, modaler-jazz, akkordsymbole, big-band
 ---
 
 Der **Jazz** hat sich in rund 100 Jahren rasant entwickelt: vom New-Orleans-Jazz über Swing und **Big Band** (Duke Ellington, Count Basie), den schnellen, chromatischen **Bebop** (Charlie Parker, Dizzy Gillespie), **Cool Jazz** und **modalen Jazz** (Miles Davis, Bill Evans) bis zu Free Jazz und Fusion.

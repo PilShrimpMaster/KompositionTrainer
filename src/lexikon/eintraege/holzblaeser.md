@@ -3,8 +3,8 @@ id: holzblaeser
 titel: Holzblasinstrumente
 kategorie: Instrumente
 kurz: Flöte, Oboe, Klarinette, Fagott und Saxophon: Blasinstrumente, deren Ton an einer Kante oder an einem Rohrblatt entsteht, egal ob aus Holz oder Metall.
-synonyme: Holzbläser, Flöte, Querflöte, Piccolo, Oboe, Englischhorn, Klarinette, Fagott, Rohrblatt, Doppelrohrblatt
-siehe: orchester, saxophon, transponierende-instrumente
+synonyme: Holzbläser, Rohrblatt
+siehe: orchester, saxophon, transponierende-instrumente, floete, oboe, klarinette, fagott, blaeserquintett
 ---
 
 Holzbläser heißen so wegen der Tonerzeugung, nicht wegen des Materials (die Querflöte ist aus Metall, das Saxophon auch):

@@ -3,8 +3,8 @@ id: blechblaeser
 titel: Blechblasinstrumente
 kategorie: Instrumente
 kurz: Horn, Trompete, Posaune und Tuba: Der Ton entsteht durch die schwingenden Lippen im Kesselmundstück; Ventile oder ein Zug verändern die Rohrlänge.
-synonyme: Blechbläser, Horn, Waldhorn, Trompete, Posaune, Tuba, Ventil, Naturhorn, Naturtrompete
-siehe: orchester, obertonreihe, transponierende-instrumente
+synonyme: Blechbläser, Ventil
+siehe: orchester, obertonreihe, transponierende-instrumente, horn, trompete, posaune, tuba
 ---
 
 Bei Blechblasinstrumenten summen die Lippen ins Mundstück. Durch die Lippenspannung wählt der Spieler einen Ton der **Obertonreihe**. **Ventile** (Trompete, Horn, Tuba) oder der **Zug** (Posaune) verlängern das Rohr und erschließen die Töne dazwischen.

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { initAudio, play, playChord, playSequence } from '../audio/player';
+import { instrument as findeInstrument } from '../model/instrumente';
 import { toToneName } from '../model/pitch';
 import type { Clef, KeySignature, Pitch, Score } from '../model/types';
 import { ScoreView } from '../ScoreView';
@@ -14,10 +15,12 @@ interface AkkordProps {
   klang: 'nacheinander' | 'zusammen';
   schluessel: Clef;
   tonart?: KeySignature;
+  /** Instrument, in dessen Klang einzelne Töne erklingen */
+  instrument?: string;
 }
 
 /** Einzeltöne, Intervalle oder Akkorde als ganze Noten, mit Knopf zum Anhören */
-export function AkkordBeispiel({ gruppen, klang, schluessel, tonart }: AkkordProps) {
+export function AkkordBeispiel({ gruppen, klang, schluessel, tonart, instrument }: AkkordProps) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!ref.current) return;
@@ -28,7 +31,7 @@ export function AkkordBeispiel({ gruppen, klang, schluessel, tonart }: AkkordPro
   async function anhoeren() {
     await initAudio();
     if (klang === 'zusammen') gruppen.forEach((g, i) => setTimeout(() => playChord(g.map(toToneName), 1.2), i * 1400));
-    else playSequence(gruppen.flat().map(toToneName), 0.5);
+    else playSequence(gruppen.flat().map(toToneName), instrument ? 0.7 : 0.5, findeInstrument(instrument)?.klang);
   }
 
   return (

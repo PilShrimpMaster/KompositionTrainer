@@ -3,8 +3,8 @@ id: streicher
 titel: Streichinstrumente
 kategorie: Instrumente
 kurz: Violine, Bratsche, Violoncello und Kontrabass: Saiteninstrumente, die mit dem Bogen gestrichen werden. Sie bilden das Fundament des Orchesters.
-synonyme: Streicher, Violine, Geige, Bratsche, Viola, Violoncello, Cello, Kontrabass, pizzicato, arco, Streichquartett
-siehe: orchester, besetzung, altschluessel
+synonyme: Streicher
+siehe: orchester, besetzung, altschluessel, violine, viola, violoncello, kontrabass, streicher-spieltechniken, streichquartett
 ---
 
 | Instrument | Saiten (Stimmung in Quinten) | Schlüssel |

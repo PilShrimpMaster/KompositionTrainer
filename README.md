@@ -4,7 +4,17 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **App öffnen:** https://pilshrimpmaster.github.io/KompositionTrainer/
 
-## Stand: M4 Melodik und Formenlehre
+## Stand: M5 Instrumentation
+
+**Instrumentenklänge (M5):** Echte Samples (VSCO 2 Community Edition, gemeinfrei) für Violine, Viola, Violoncello, Kontrabass, Flöte, Oboe, Klarinette, Fagott, Horn, Trompete, Posaune und Tuba. Sie werden beim ersten Abspielen geladen und danach offline zwischengespeichert. Die Saxophone klingen vorerst mit dem Klarinetten- bzw. Fagottklang.
+
+**Ensemble-Editor (M5):** Besetzung „Ensemble“ mit Vorlagen (Streichquartett, Streichtrio, Holzbläsertrio, Bläserquintett, Blechbläserquartett, Saxophonsatz, Duo) oder frei bis acht Stimmen; Stimmen hinzufügen, entfernen und ein Instrument je Stimme wählen. Partitur mit Instrumentenkürzeln und eckiger Klammer, Altschlüssel für die Viola, Kontrabass eine Oktave höher notiert. Die Noten werden klingend gespeichert; „Partitur transponiert zeigen“ zeigt Klarinette, Trompete, Horn und Saxophone so, wie die Spieler sie lesen, und man kann auch in dieser Ansicht schreiben. Die Satzprüfung meldet Töne außerhalb des Umfangs (Fehler) und außerhalb der guten Lage (Hinweis), Parallelen und Stimmkreuzungen; Oktavverdopplungen wie Kontrabass mit Violoncello gelten nicht als Parallelen.
+
+**MuseScore mit Instrumenten (M5):** Der MusicXML-Export schreibt Instrumentname, Kürzel, MIDI-Klang und Transposition, sodass MuseScore die Stimmen als Violine, Klarinette in B usw. öffnet. Beim Import werden Instrumente erkannt und transponierte Stimmen in klingende Töne zurückgerechnet.
+
+**Stufe 5 (M5):** Lektionen Streicher, Holzbläser, Blechbläser, Streichquartett, Orchestrieren, Big Band und Filmmusik sowie das Abschlussprojekt „Mein Streichquartett“. Schreibaufgaben öffnen direkt die passende Besetzung mit gesperrten Vorgaben. Neue Übungen „Altschlüssel lesen“, „Instrumente erkennen“ (am Klang) und „Lage einschätzen“; Prüfkriterien `ensemble`, `im-umfang`. Das Lexikon hat eigene Einträge zu allen Orchesterinstrumenten, Spieltechniken der Streicher, Instrumentation, Streichquartett, Bläserquintett und Big Band, mit Klangbeispielen.
+
+## M4 Melodik und Formenlehre
 
 **Klaviersatz (M4):** Besetzung „Klavier: Melodie mit Begleitung“. Die Harmonie wird je Taktschwerpunkt aus Melodie und Begleitung bestimmt, auch bei Alberti-Bass, Walzerbass und gebrochenen Akkorden, und Takt für Takt angezeigt. Die Prüfung meldet Parallelen zwischen Melodie und Bass, falsche Schlüsse, fremde Melodietöne auf schwerer Zeit, Quartsextakkorde und Begleitung über der Melodie.
 
@@ -102,4 +112,5 @@ Jeder Push auf `main` wird getestet, gebaut und auf GitHub Pages veröffentlicht
 
 - Code: MIT, siehe [LICENSE](LICENSE)
 - Klaviersamples: Salamander Grand Piano von Alexander Holm, CC BY 3.0, siehe [public/samples/piano/LIZENZ.txt](public/samples/piano/LIZENZ.txt)
+- Instrumentensamples: Versilian Studios Chamber Orchestra 2 Community Edition (VSCO 2 CE), CC0, siehe [public/samples/instrumente/LIZENZ.txt](public/samples/instrumente/LIZENZ.txt)
 - Beispielmelodien: gemeinfreie Werke

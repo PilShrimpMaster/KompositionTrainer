@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { instrument } from '../model/instrumente';
 import { initAudio, play, playChord, playSequence } from '../audio/player';
 import { taktText } from './analyse';
 import { Klavier } from '../editor/Klavier';
@@ -118,7 +119,7 @@ export function UebungView({ typ, folge, titel, onEnde, zurueck = 'Lernpfad' }: 
       return;
     }
     if (a.klang.art === 'zusammen') await playChord(namen);
-    else await playSequence(namen, a.typ === 'melodiediktat' ? 0.6 : 0.8);
+    else await playSequence(namen, a.typ === 'melodiediktat' ? 0.6 : 0.8, instrument(a.klang.instrument)?.klang);
   }
 
   async function beantworten(wahl: string) {

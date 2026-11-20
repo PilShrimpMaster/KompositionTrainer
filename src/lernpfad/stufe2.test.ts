@@ -36,6 +36,8 @@ describe('Stufe 2', () => {
       for (const s of l.schritte)
         for (const b of s.bausteine) {
           if (b.art !== 'noten' || b.score.voices.length < 4 || b.score.title.startsWith('Mit Fehler')) continue;
+          // Im Jazz-Satz (Saxophone in Drop-2) sind Parallelen gewollt
+          if (b.score.voices.some((v) => v.instrument?.endsWith('sax'))) continue;
           const fehler = pruefeSatz(b.score).filter((x) => x.art === 'fehler');
           expect(fehler.map((f) => f.text), `${l.modul}: ${b.score.title}`).toEqual([]);
         }

@@ -55,4 +55,10 @@ export const MODULE: Modul[] = [
   { id: 's4-sonatensatz', stufe: 4, titel: 'Einblick: Sonatensatz', ziel: 'Exposition, Durchführung und Reprise im Überblick' },
   { id: 's4-instrumente', stufe: 4, titel: 'Instrumente und Transposition', ziel: 'Transponierende Instrumente lesen, Tonumfänge kennen und für ein Instrument schreiben' },
   { id: 's4-songformen', stufe: 4, titel: 'Seitenblick: Songformen und Blues', ziel: 'Strophe, Refrain, Bridge, AABA und der 12-Takt-Blues' },
+  { id: 's5-streicher', stufe: 5, titel: 'Streicher', ziel: 'Violine, Viola, Violoncello und Kontrabass: Saiten, Lagen, Spielweisen und der Altschlüssel' },
+  { id: 's5-holz', stufe: 5, titel: 'Holzbläser', ziel: 'Flöte, Oboe, Klarinette und Fagott: Register, Atem und Klangfarben' },
+  { id: 's5-blech', stufe: 5, titel: 'Blechbläser', ziel: 'Horn, Trompete, Posaune und Tuba: Naturtöne, Kraft und Ausdauer' },
+  { id: 's5-streichquartett', stufe: 5, titel: 'Streichquartett', ziel: 'Vom Chorsatz zum Quartett: Lage, Stimmführung und Begleitfiguren' },
+  { id: 's5-orchestrieren', stufe: 5, titel: 'Orchestrieren', ziel: 'Einen Satz auf Instrumente verteilen: verdoppeln, Farben mischen, Tutti und Solo' },
+  { id: 's5-bigband-film', stufe: 5, titel: 'Seitenblick: Big Band und Filmorchester', ziel: 'Saxophonsatz in Drop-2, Bläserriffs und die Klangfarben der Filmmusik' },
 ];
