@@ -8,6 +8,17 @@ export interface Stueck {
   doc: EditorDoc;
   erstellt: number;
   geaendert: number;
+  /** Gesicherte Fassungen, älteste zuerst */
+  versionen?: StueckVersion[];
+  /** Fertiges Werk im Portfolio */
+  portfolio?: boolean;
+}
+
+export interface StueckVersion {
+  id: string;
+  name: string;
+  zeit: number;
+  doc: EditorDoc;
 }
 
 export interface Fortschritt {

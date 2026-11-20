@@ -10,16 +10,22 @@ interface Props {
   /** Beginnt ein neues Stück mit den Vorgaben der Aufgabe */
   onBeginnen: () => void;
   onSchliessen: () => void;
+  /** Nimmt die gelöste Aufgabe als Stück mit Fassung ins Portfolio auf */
+  onPortfolio?: () => Promise<void>;
 }
 
 /** Aufgabe aus einer Lektion über dem Editor, mit automatischer Prüfung */
-export function AufgabePanel({ aufgabe, doc, onBeginnen, onSchliessen }: Props) {
+export function AufgabePanel({ aufgabe, doc, onBeginnen, onSchliessen, onPortfolio }: Props) {
   const [geprueft, setGeprueft] = useState(false);
+  const [imPortfolio, setImPortfolio] = useState(false);
   const ergebnis = useMemo(() => pruefe(doc, aufgabe.pruefung), [doc, aufgabe]);
   const alleOk = ergebnis.length > 0 && ergebnis.every((p) => p.ok);
   const begonnen = doc.title === aufgabe.titel;
 
-  useEffect(() => setGeprueft(false), [aufgabe]);
+  useEffect(() => {
+    setGeprueft(false);
+    setImPortfolio(false);
+  }, [aufgabe]);
   useEffect(() => {
     if (geprueft && alleOk) erledigt(`aufgabe:${aufgabe.id}`);
   }, [geprueft, alleOk, aufgabe.id]);
@@ -56,7 +62,23 @@ export function AufgabePanel({ aufgabe, doc, onBeginnen, onSchliessen }: Props) 
           ))}
         </ul>
       )}
-      {geprueft && alleOk && <p className="aufgabe-geschafft">Geschafft! Alle Punkte sind erfüllt.</p>}
+      {geprueft && alleOk && (
+        <div className="aufgabe-geschafft">
+          <p>Geschafft! Alle Punkte sind erfüllt.</p>
+          {onPortfolio && (
+            <button
+              className="secondary"
+              disabled={imPortfolio}
+              onClick={async () => {
+                await onPortfolio();
+                setImPortfolio(true);
+              }}
+            >
+              {imPortfolio ? '★ Im Portfolio gesichert' : '★ Ins Portfolio aufnehmen'}
+            </button>
+          )}
+        </div>
+      )}
     </section>
   );
 }

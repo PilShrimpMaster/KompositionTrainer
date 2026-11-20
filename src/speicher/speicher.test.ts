@@ -61,3 +61,32 @@ describe('Lokale Datenbank', () => {
     expect((await alleStuecke())[0].titel).toBe('Lied');
   });
 });
+
+describe('Fassungen und Portfolio', () => {
+  beforeEach(async () => {
+    await db.stuecke.clear();
+  });
+
+  it('sichert Fassungen, holt sie zurück und behält sie beim automatischen Speichern', async () => {
+    const { versionSichern, versionZurueckholen, insPortfolio } = await import('./db');
+    const doc1 = { ...emptyDoc(), title: 'Menuett', events: [{ pitch: { step: 'C' as const, octave: 4 }, duration: { type: 'quarter' as const } }] };
+    const s = await stueckSpeichern(doc1);
+    await versionSichern(s.id, doc1, 'Erste Idee');
+    const doc2 = { ...doc1, events: [...doc1.events, ...doc1.events] };
+    await stueckSpeichern(doc2, s.id);
+    let gespeichert = (await alleStuecke())[0];
+    expect(gespeichert.versionen?.map((v) => v.name)).toEqual(['Erste Idee']);
+    expect(gespeichert.doc.events).toHaveLength(2);
+
+    const zurueck = await versionZurueckholen(s.id, gespeichert.versionen![0].id, doc2);
+    expect(zurueck.events).toHaveLength(1);
+    gespeichert = (await alleStuecke())[0];
+    expect(gespeichert.versionen?.map((v) => v.name)).toEqual(['Erste Idee', 'Stand vor „Erste Idee“']);
+    expect(gespeichert.doc.events).toHaveLength(1);
+
+    const p = await insPortfolio(doc2, null, 'Aufgabe gelöst');
+    expect(p.portfolio).toBe(true);
+    expect(p.versionen?.[0].name).toBe('Aufgabe gelöst');
+    expect(await alleStuecke()).toHaveLength(2);
+  });
+});

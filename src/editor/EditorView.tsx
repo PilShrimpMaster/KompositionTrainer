@@ -22,7 +22,7 @@ import { spellMidi } from '../model/pitch';
 import { MidiPanel } from '../midi/MidiPanel';
 import { useMidi } from '../midi/useMidi';
 import { StueckePanel } from '../speicher/StueckePanel';
-import { stueckSpeichern } from '../speicher/db';
+import { insPortfolio, stueckSpeichern } from '../speicher/db';
 
 const STORAGE_KEY = 'kt-editor-entwurf-v1';
 const STUECK_KEY = 'kt-editor-stueck-id';
@@ -412,7 +412,22 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   return (
     <div className="editor">
       {aufgabe && (
-        <AufgabePanel aufgabe={aufgabe} doc={doc} onBeginnen={() => aufgabeBeginnen(aufgabe)} onSchliessen={() => onAufgabeSchliessen?.()} />
+        <AufgabePanel
+          aufgabe={aufgabe}
+          doc={doc}
+          onBeginnen={() => aufgabeBeginnen(aufgabe)}
+          onSchliessen={() => onAufgabeSchliessen?.()}
+          onPortfolio={async () => {
+            try {
+              const s = await insPortfolio(synchron(doc), stueckId, `Aufgabe gelöst: ${aufgabe.titel}`);
+              setStueckId(s.id);
+              setSaveVersion((v) => v + 1);
+              setNotice(`„${s.titel}“ ist jetzt in deinem Portfolio (unter „Meine Stücke“), mit einer gesicherten Fassung.`);
+            } catch {
+              setNotice('Das Stück konnte nicht gespeichert werden.');
+            }
+          }}
+        />
       )}
       <div className="toolbar" role="toolbar" aria-label="Werkzeuge">
         <div className="tool-group" aria-label="Notenwert">

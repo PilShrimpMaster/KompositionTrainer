@@ -194,3 +194,18 @@ export function satzAusScore(score: Score): Satzdaten | null {
   const silben = score.voices[0].measures.flatMap((m) => m.notes.map((n) => n.lyric).filter(Boolean));
   return { stimmen, aktiv: 0, ...(silben.length ? { text: silben.join(' ') } : {}) };
 }
+
+/** Die Partitur eines Editor-Dokuments, mit allen Stimmen */
+export function scoreAusDoc(doc: EditorDoc): Score {
+  return doc.satz ? rebarSatz(doc).score : rebar(doc).score;
+}
+
+/** Kurzbeschreibung der Besetzung, z. B. „Klaviersatz“ */
+export function besetzungsName(doc: EditorDoc): string {
+  const s = doc.satz;
+  if (!s) return 'Melodie';
+  if (s.klavier) return 'Klaviersatz';
+  if (s.kontrapunkt?.gattung === 'frei') return 'Zweistimmig';
+  if (s.kontrapunkt) return 'Kontrapunkt';
+  return 'Chorsatz';
+}
