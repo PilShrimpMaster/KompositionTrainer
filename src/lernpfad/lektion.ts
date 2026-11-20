@@ -22,6 +22,8 @@ export interface Schreibaufgabe {
   liedtext?: string;
   /** Kontrapunkt: Gattung, Lage des Cantus firmus (0 = oben, 1 = unten) und seine Noten */
   kontrapunkt?: { gattung: Gattung; cf: 0 | 1; cantus: NoteEvent[] };
+  /** Klaviersatz: vorgegebene Melodie und/oder Begleitung (eine davon darf leer sein) */
+  klavier?: { melodie: NoteEvent[]; begleitung: NoteEvent[] };
 }
 
 const STIMM_FELDER = ['sopran', 'alt', 'tenor', 'bass'] as const;
@@ -131,6 +133,9 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
               pruefung: liste(f.pruefung),
               ...(f.kontrapunkt
                 ? { kontrapunkt: kontrapunktFelder(f) }
+                : {}),
+              ...(f.klavier === 'ja'
+                ? { klavier: { melodie: f.melodie ? parseNotenfolge(f.melodie) : [], begleitung: f.begleitung ? parseNotenfolge(f.begleitung) : [] } }
                 : {}),
               ...(f.satz === 'ja'
                 ? { vorgabe: STIMM_FELDER.map((k) => (f[k] ? parseNotenfolge(f[k]) : [])), liedtext: f.liedtext || undefined }

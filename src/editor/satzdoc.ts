@@ -19,6 +19,8 @@ export interface Satzdaten {
   kontrapunkt?: { gattung: Gattung; cf: 0 | 1 };
   /** Vorgegebene Stimmen, die nicht bearbeitet werden (z. B. der Cantus firmus) */
   gesperrt?: number[];
+  /** Klaviersatz: Melodie (oben) mit Begleitung (unten) */
+  klavier?: true;
 }
 
 export interface StimmInfo {
@@ -53,6 +55,19 @@ export function freiDoc(basis: EditorDoc, oben: NoteEvent[] = [], unten: NoteEve
   const stimmen = [structuredClone(oben), structuredClone(unten)];
   const aktiv = oben.length && !unten.length ? 1 : 0;
   return { ...basis, clef: besetzung[aktiv].clef, events: stimmen[aktiv], satz: { stimmen, aktiv, besetzung, kontrapunkt: { gattung: 'frei', cf: 1 }, gesperrt: [] } };
+}
+
+export const KLAVIER_BESETZUNG: StimmInfo[] = [
+  { id: 'M', name: 'Melodie', clef: 'treble', staff: 0 },
+  { id: 'B', name: 'Begleitung', clef: 'bass', staff: 1 },
+];
+
+/** Klaviersatz: Melodie im oberen, Begleitung im unteren System; Vorgaben sind gesperrt, wenn die andere Stimme offen ist */
+export function klavierDoc(basis: EditorDoc, melodie: NoteEvent[] = [], begleitung: NoteEvent[] = [], sperren = false): EditorDoc {
+  const stimmen = [structuredClone(melodie), structuredClone(begleitung)];
+  const aktiv = melodie.length && !begleitung.length ? 1 : 0;
+  const gesperrt = sperren && stimmen[1 - aktiv].length ? [1 - aktiv] : [];
+  return { ...basis, clef: KLAVIER_BESETZUNG[aktiv].clef, events: stimmen[aktiv], satz: { stimmen, aktiv, besetzung: KLAVIER_BESETZUNG, klavier: true, gesperrt } };
 }
 
 /** Zwei Stimmen auf zwei Systemen: Cantus firmus oben (cf = 0) oder unten (cf = 1) */
