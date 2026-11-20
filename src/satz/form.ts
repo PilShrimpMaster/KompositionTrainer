@@ -1,4 +1,4 @@
-import { diatonicIndex, germanName, toMidi } from '../model/pitch';
+import { diatonicIndex, germanName, keyAlter, toMidi } from '../model/pitch';
 import type { Pitch, Score } from '../model/types';
 import { grundton } from '../model/tonart';
 import { stimmToene, type MotivTon } from '../kontrapunkt/motive';
@@ -85,8 +85,9 @@ export function vergleiche(takte: TaktInhalt[], a: number, b: number, laenge: nu
   const vA = schritte(A.slice(0, vorn).flatMap((t) => t.toene));
   const vB = schritte(B.slice(0, vorn).flatMap((t) => t.toene));
   const n = Math.min(vA.length, vB.length);
-  const treffer = vA.slice(0, n).filter((s, i) => s === vB[i] || Math.sign(s) === Math.sign(vB[i])).length;
-  if (rVorn && n > 0 && treffer / Math.max(vA.length, vB.length) >= 0.7) return 'aehnlich';
+  // Gleiche Schritte zählen voll, gleiche Richtung halb
+  const treffer = vA.slice(0, n).reduce((sum, s, i) => sum + (s === vB[i] ? 1 : Math.sign(s) === Math.sign(vB[i]) ? 0.5 : 0), 0);
+  if (rVorn && n > 0 && treffer / Math.max(vA.length, vB.length) >= 0.75) return 'aehnlich';
   return 'verschieden';
 }
 
@@ -101,6 +102,7 @@ function harmonienVon(score: Score): Harm[] | null {
   return null;
 }
 
+const STEPS: Pitch['step'][] = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 const PC: Record<Pitch['step'], number> = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
 const pc = (p: { step: Pitch['step']; alter?: number }) => (((PC[p.step] + (p.alter ?? 0)) % 12) + 12) % 12;
 
@@ -120,8 +122,11 @@ export function kadenzAm(score: Score, t: number, harm = harmonienVon(score), ta
       // Ganzschluss: Dur/Moll in Grundstellung, davor sein Dominantakkord (Grundton eine Quinte höher)
       const dominanteDavor = !!vorher && (pc(vorher.grundton) - pc(a.grundton) + 12) % 12 === 7 && (vorher.art === 'Dur' || vorher.sept === 'Dominantseptakkord');
       if (a.stufe === 1 && hauptklang && a.umkehrung === 0) return { takt: t, art: dominanteDavor ? 'ganz' : 'offen', ziel: a.name };
-      // Nach der eigenen Dominante wirkt ein anderer Akkord als neue Tonika (Ausweichung oder Modulation)
-      if (hauptklang && a.umkehrung === 0 && dominanteDavor && !a.sept) return { takt: t, art: 'ganz', ziel: a.name, fremd: a.name };
+      // Nach der eigenen Dominante mit leiterfremdem Leitton (oder ganz am Schluss) wirkt ein anderer Akkord als neue Tonika
+      const terz = vorher ? { step: STEPS[(STEPS.indexOf(vorher.grundton.step) + 2) % 7], pc: (pc(vorher.grundton) + 4) % 12 } : null;
+      const leitton = !!terz && pc({ step: terz.step, alter: keyAlter(terz.step, score.key.fifths) }) !== terz.pc;
+      const amEnde = t >= takte.length;
+      if (hauptklang && a.umkehrung === 0 && dominanteDavor && !a.sept && (leitton || amEnde)) return { takt: t, art: 'ganz', ziel: a.name, fremd: a.name };
       if (a.stufe === 5 && a.art === 'Dur' && !a.sept) return { takt: t, art: 'halb', ziel: a.name };
       return { takt: t, art: 'offen', ziel: a.name };
     }
@@ -135,7 +140,8 @@ export function kadenzAm(score: Score, t: number, harm = harmonienVon(score), ta
 }
 
 const ART_TEXT: Record<KadenzArt, string> = { ganz: 'Ganzschluss', halb: 'Halbschluss', offen: 'offenes Ende' };
-export const kadenzText = (k: Kadenz) => `Takt ${k.takt}: ${k.fremd ? `Ganzschluss in ${k.fremd}` : ART_TEXT[k.art]} (auf ${k.ziel})`;
+export const kadenzArt = (k: Kadenz) => (k.fremd ? `Ganzschluss in ${k.fremd}` : `${ART_TEXT[k.art]} auf ${k.ziel}`);
+export const kadenzText = (k: Kadenz) => `Takt ${k.takt}: ${kadenzArt(k)}`;
 
 /** Analysiert die Form eines Stücks oder Themas */
 export function analysiereForm(score: Score): FormAnalyse {
@@ -203,15 +209,23 @@ export function analysiereForm(score: Score): FormAnalyse {
   return { takte: n, kadenzen, glieder, form, text };
 }
 
-/** Liedform: A B A′ (dreiteilig) oder A B (zweiteilig), Teile zu vier oder acht Takten */
+/**
+ * Liedform A B A: Am Ende kehrt ein Abschnitt von vier oder acht Takten aus dem Anfang wieder (A),
+ * dazwischen steht ein kontrastierender Mittelteil (B) von mindestens vier Takten.
+ */
 function liedform(takte: TaktInhalt[]): { name: string; text: string } | null {
   const n = takte.length;
   for (const L of [8, 4]) {
-    if (n === 3 * L) {
-      const reprise = vergleiche(takte, 0, 2 * L, Math.min(L, 4));
-      const kontrast = vergleiche(takte, 0, L, 2) === 'verschieden';
-      if (reprise !== 'verschieden' && kontrast)
-        return { name: 'Dreiteilige Liedform (A B A)', text: `A (Takt 1–${L}), B (Takt ${L + 1}–${2 * L}) als Kontrast und die Wiederkehr von A (Takt ${2 * L + 1}–${3 * L}).` };
+    const reprise = n - L;
+    for (const k of L === 4 ? [0, 4] : [0]) {
+      const aEnde = k + L;
+      if (reprise - aEnde < 4 || reprise % 2) continue;
+      if (vergleiche(takte, k, reprise, L) === 'verschieden') continue;
+      if (vergleiche(takte, 0, aEnde, 2) !== 'verschieden') continue;
+      return {
+        name: 'Dreiteilige Liedform (A B A)',
+        text: `A (Takt 1–${aEnde}), B (Takt ${aEnde + 1}–${reprise}) als Kontrast und die Wiederkehr von A (Takt ${reprise + 1}–${n}).`,
+      };
     }
   }
   return null;
@@ -233,8 +247,8 @@ function menuettTrio(score: Score, takte: TaktInhalt[], kad: (t: number) => Kade
   if (!mEnde || mEnde.art !== 'ganz' || mEnde.fremd) fehlt.push(`Das Menuett (Takt ${S}) schließt mit einem Ganzschluss in der Grundtonart.`);
   if (!tEnde || tEnde.art !== 'ganz') fehlt.push(`Das Trio (Takt ${n}) schließt mit einem Ganzschluss.`);
   const text = [
-    `Menuett: Takt 1–${S}. Erster Teil bis Takt ${S / 2} (${mitte ? kadenzText(mitte).replace(/^Takt \d+: /, '') : '?'}), zweiter Teil bis Takt ${S} (${mEnde ? kadenzText(mEnde).replace(/^Takt \d+: /, '') : '?'}).`,
-    `Trio: Takt ${S + 1}–${n}. Erster Teil bis Takt ${S + S / 2} (${tMitte ? kadenzText(tMitte).replace(/^Takt \d+: /, '') : '?'}), zweiter Teil bis Takt ${n} (${tEnde ? kadenzText(tEnde).replace(/^Takt \d+: /, '') : '?'}).`,
+    `Menuett: Takt 1–${S}. Erster Teil bis Takt ${S / 2} (${mitte ? kadenzArt(mitte) : '?'}), zweiter Teil bis Takt ${S} (${mEnde ? kadenzArt(mEnde) : '?'}).`,
+    `Trio: Takt ${S + 1}–${n}. Erster Teil bis Takt ${S + S / 2} (${tMitte ? kadenzArt(tMitte) : '?'}), zweiter Teil bis Takt ${n} (${tEnde ? kadenzArt(tEnde) : '?'}).`,
     'Danach wird das Menuett wiederholt (Menuetto da capo), so entsteht die dreiteilige Form A B A.',
   ];
   return { ok: fehlt.length === 0, text, fehlt };

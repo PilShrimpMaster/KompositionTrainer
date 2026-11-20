@@ -3,7 +3,7 @@ id: klassik
 titel: Wiener Klassik
 kategorie: Geschichte
 kurz: Etwa 1750 bis 1827: klare Formen, ausgewogene Perioden und motivische Arbeit. Ihre Hauptvertreter sind Haydn, Mozart und Beethoven, alle in Wien tätig.
-synonyme: Klassik, Wiener Klassik, klassisch, Vorklassik, Mannheimer Schule, Alberti-Bass
+synonyme: Klassik, Wiener Klassik, klassisch, Vorklassik, Mannheimer Schule
 siehe: haydn, mozart, beethoven, sonatensatz, sinfonie
 ---
 

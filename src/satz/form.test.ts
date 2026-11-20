@@ -3,14 +3,10 @@ import { BEISPIELE } from '../data/melodien';
 import { kpSatz } from '../kontrapunkt/kurzform';
 import { analysiereForm, kadenzAm, menuettTrioFehlt } from './form';
 import { pruefeKlaviersatz } from './klavier';
+import { HAENSCHEN, melodie, MENUETT, MENUETT_BASS, TRIO, TRIO_BASS } from '../data/formbeispiele';
 
 const beispiel = (id: string) => BEISPIELE.find((b) => b.id === id)!.score;
 
-/** Übungssatz: Menuett in C-Dur (16 Takte) und Trio in F-Dur (16 Takte) */
-const MENUETT = 'E5:4 C5 G4 | F5:4 D5 B4 | C5:4 E5 G5 | A5:2 F5:4 | G5:4 E5 C5 | F5:4 D5 B4 | E5:4 C5 A4 | G4:2. | G5:4 F5 E5 | F5:4 E5 D5 | E5:4 D5 C5 | D5:2. | E5:4 C5 G4 | F5:4 D5 B4 | B4:4 D5 G5 | C5:2.';
-const MENUETT_BASS = 'C3:2. | G2:2. | C3:2. | F2:2. | C3:2. | G2:2. | A2:2. | G2:2. | C3:2. | D3:2. | C3:2. | G2:2. | C3:2. | G2:2. | G2:2. | C3:2.';
-const TRIO = 'A4:4 F4 C4 | Bb4:4 G4 E4 | F4:4 A4 C5 | D5:2 Bb4:4 | C5:4 A4 F4 | Bb4:4 G4 E4 | A4:4 F4 D4 | C4:2. | C5:4 Bb4 A4 | Bb4:4 A4 G4 | A4:4 G4 F4 | G4:2. | A4:4 F4 C4 | Bb4:4 G4 E4 | E4:4 G4 C5 | F4:2.';
-const TRIO_BASS = 'F3:2. | C3:2. | F3:2. | Bb2:2. | F3:2. | C3:2. | D3:2. | C3:2. | F3:2. | G3:2. | F3:2. | C3:2. | F3:2. | C3:2. | C3:2. | F3:2.';
 
 describe('Formenlehre', () => {
   it('erkennt die Periode in der Ode an die Freude', () => {
@@ -29,6 +25,10 @@ describe('Formenlehre', () => {
     const b = 'A4:2 B4:2 | C5:4 A4 B4:2 | E5:2 D5:4 C5 | B4:1';
     const s = kpSatz({ titel: 'Lied', oben: `${a} | ${b} | ${a}`, unten: 'r:1 | r:1 | r:1 | r:1 | r:1 | r:1 | r:1 | r:1 | r:1 | r:1 | r:1 | r:1' });
     expect(analysiereForm({ ...s, voices: [s.voices[0]] }).form).toBe('Dreiteilige Liedform (A B A)');
+    // Hänschen klein: A (8 Takte), B (4 Takte), A′ = zweite Hälfte von A
+    const f = analysiereForm(melodie('Hänschen klein', HAENSCHEN));
+    expect(f.form).toBe('Dreiteilige Liedform (A B A)');
+    expect(f.text[0]).toContain('B (Takt 9–12)');
   });
 
   it('liest Kadenzen aus den Harmonien eines Klaviersatzes', () => {

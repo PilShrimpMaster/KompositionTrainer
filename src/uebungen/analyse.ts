@@ -1,5 +1,6 @@
 import { BEISPIELE } from '../data/melodien';
 import { CHORALSATZ } from '../data/saetze';
+import { HAENSCHEN, melodie, menuettMitTrio } from '../data/formbeispiele';
 import { kpSatz } from '../kontrapunkt/kurzform';
 import type { Score } from '../model/types';
 import { satz } from '../satz/kurzform';
@@ -125,6 +126,33 @@ export const ANALYSE_FRAGEN: AnalyseFrage[] = [
     takte: [1],
     erklaerung: 'In Takt 2 ist a-Moll der Drehakkord: In C-Dur die Tonikaparallele, in G-Dur die Subdominantparallele. Danach bringt D-Dur das fis, und G-Dur wird zur neuen Tonika. Takt 3 bestätigt die neue Tonart mit D⁷–G.',
     begriff: 'modulation',
+  },
+  {
+    id: 'ode-nachsatz',
+    ab: 1,
+    score: beispiel('ode-an-die-freude'),
+    frage: 'Markiere den Takt, in dem der Nachsatz der Periode beginnt.',
+    takte: [4],
+    erklaerung: 'Takt 5 beginnt genau wie Takt 1: Hier setzt der Nachsatz ein. Er wiederholt den Anfang und biegt erst am Ende zum Ganzschluss ab.',
+    begriff: 'periode',
+  },
+  {
+    id: 'haenschen-mittelteil',
+    ab: 1,
+    score: () => melodie('Volkslied: Hänschen klein', HAENSCHEN),
+    frage: 'Das Lied hat die Form A B A. Markiere die vier Takte des Mittelteils B.',
+    takte: [8, 9, 10, 11],
+    erklaerung: 'Takt 9–12 bringen neue Musik: Tonwiederholungen auf d und e statt der fallenden Terzen. Danach kehrt A wieder (Takt 13–16, wie Takt 5–8).',
+    begriff: 'liedform',
+  },
+  {
+    id: 'menuett-trio',
+    ab: 2,
+    score: menuettMitTrio,
+    frage: 'Markiere den Takt, in dem das Trio beginnt.',
+    takte: [16],
+    erklaerung: 'Das Menuett schließt in Takt 16 mit dem Ganzschluss in C-Dur. In Takt 17 beginnt das Trio, hier in F-Dur (mit b). Danach wird das Menuett wiederholt.',
+    begriff: 'menuett',
   },
 ];
 

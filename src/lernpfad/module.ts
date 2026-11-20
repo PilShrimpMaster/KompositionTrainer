@@ -46,4 +46,12 @@ export const MODULE: Modul[] = [
   { id: 's3-invention', stufe: 3, titel: 'Invention', ziel: 'Motiv, Umkehrung und Sequenz im zweistimmigen Satz' },
   { id: 's3-fuge', stufe: 3, titel: 'Fuge', ziel: 'Thema, Antwort und Exposition verstehen' },
   { id: 's3-modal-heute', stufe: 3, titel: 'Seitenblick: Modalität heute', ziel: 'Kirchentonarten in Jazz, Pop und Filmmusik' },
+  { id: 's4-melodiebau', stufe: 4, titel: 'Melodiebau', ziel: 'Bogen, Höhepunkt, Motiv und Spannung in einer Melodie' },
+  { id: 's4-periode', stufe: 4, titel: 'Periode und Satz', ziel: 'Die zwei Grundformen des klassischen Themas bauen und erkennen' },
+  { id: 's4-begleitung', stufe: 4, titel: 'Begleitmuster im Klaviersatz', ziel: 'Eine Melodie mit Bass, Alberti-Bass oder gebrochenen Akkorden begleiten' },
+  { id: 's4-liedform', stufe: 4, titel: 'Liedform', ziel: 'A B A: Wiederkehr und Kontrast' },
+  { id: 's4-menuett', stufe: 4, titel: 'Menuett und Trio', ziel: 'Die Tanzform der Klassik mit ihren zwei Teilen und dem Trio' },
+  { id: 's4-rondo-variation', stufe: 4, titel: 'Rondo und Variation', ziel: 'Ein Thema wiederkehren lassen und verändern' },
+  { id: 's4-sonatensatz', stufe: 4, titel: 'Einblick: Sonatensatz', ziel: 'Exposition, Durchführung und Reprise im Überblick' },
+  { id: 's4-songformen', stufe: 4, titel: 'Seitenblick: Songformen und Blues', ziel: 'Strophe, Refrain, Bridge, AABA und der 12-Takt-Blues' },
 ];

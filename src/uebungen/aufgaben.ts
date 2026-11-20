@@ -2,6 +2,7 @@ import { konsonanzAufgabe, kpFehlerAufgabe, motivformAufgabe } from '../kontrapu
 import { quarterLength } from '../model/duration';
 import { modusAufgabe } from './modal';
 import { analyseAufgabe } from './analyse';
+import { begleitmusterAufgabe, formAufgabe } from './form';
 import { fromDiatonic, germanKeyName, germanName, germanNameWithOctave, toMidi, diatonicIndex } from '../model/pitch';
 import type { Clef, Duration, KeySignature, Pitch, Score, Step } from '../model/types';
 import { funktionAufgabe, kadenzAufgabe, satzfehlerAufgabe, umkehrungAufgabe } from './satzuebungen';
@@ -59,7 +60,9 @@ export type UebungTyp =
   | 'kp-fehler-finden'
   | 'motivform-bestimmen'
   | 'modus-hoeren'
-  | 'analyse-markieren';
+  | 'analyse-markieren'
+  | 'form-bestimmen'
+  | 'begleitmuster-bestimmen';
 
 export interface UebungInfo {
   typ: UebungTyp;
@@ -87,6 +90,8 @@ export const UEBUNGEN: UebungInfo[] = [
   { typ: 'motivform-bestimmen', titel: 'Motiv, Umkehrung, Krebs', modul: 's3-imitation', hoeren: false },
   { typ: 'modus-hoeren', titel: 'Modi hören', modul: 's3-modal-heute', hoeren: true },
   { typ: 'analyse-markieren', titel: 'Werke analysieren', modul: 's3-invention', hoeren: false },
+  { typ: 'form-bestimmen', titel: 'Formen erkennen', modul: 's4-periode', hoeren: false },
+  { typ: 'begleitmuster-bestimmen', titel: 'Begleitmuster erkennen', modul: 's4-begleitung', hoeren: false },
 ];
 
 /** Schwierigkeit 1–3, abhängig von der Sicherheit im Modul */
@@ -408,6 +413,10 @@ export function erzeugeAufgabe(typ: UebungTyp, stufe: Stufe, rng: Rng = Math.ran
       return modusAufgabe(rng, stufe);
     case 'analyse-markieren':
       return analyseAufgabe(rng, stufe);
+    case 'form-bestimmen':
+      return formAufgabe(rng, stufe);
+    case 'begleitmuster-bestimmen':
+      return begleitmusterAufgabe(rng, stufe);
   }
 }
 
