@@ -4,6 +4,7 @@ import type { Pitch, Score } from '../model/types';
 import { klaenge, type Klang } from './klaenge';
 import { erkenneAkkord, istLeitton, type Akkord } from './akkorde';
 import { intervall, intervallName } from '../uebungen/theorie';
+import { stilAnwenden, type Stil } from './stil';
 
 export type BefundArt = 'fehler' | 'hinweis';
 
@@ -19,6 +20,8 @@ export interface Befund {
   /** Bei zusammengefassten Befunden: letzter Takt und Anzahl der Stellen */
   bisTakt?: number;
   anzahl?: number;
+  /** Vom Stilprofil zum Hinweis herabgestuft */
+  stil?: Stil;
 }
 
 export interface Regel {
@@ -443,7 +446,7 @@ export function pruefeSatz(score: Score, opts: PruefOptionen = {}): Befund[] {
   const k = klaenge(score);
   const ctx: Kontext = { score, klaenge: k, namen: score.voices.map((v) => v.name), akkorde: k.map((x) => erkenneAkkord(x.toene, score.key)) };
   const regeln = score.voices.length !== 4 && score.voices.some((v) => instrument(v.instrument)) ? ENSEMBLE_REGELN : REGELN;
-  const alle = regeln.flatMap((r) => r.pruefe(ctx));
+  const alle = stilAnwenden(regeln.flatMap((r) => r.pruefe(ctx)), score.stil as Stil | undefined);
   const gesehen = new Set<string>();
   return alle
     .filter((b) => opts.hinweise !== false || b.art === 'fehler')

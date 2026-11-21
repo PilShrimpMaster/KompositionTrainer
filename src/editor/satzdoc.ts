@@ -190,7 +190,7 @@ export function rebarSatz(doc: EditorDoc, stumm: boolean[] = []): SatzRebar {
   });
 
   return {
-    score: { format: 'kt-score', version: 1, title: d.title, tempo: d.tempo, time: d.time, key: d.key, voices },
+    score: { format: 'kt-score', version: 1, title: d.title, tempo: d.tempo, time: d.time, key: d.key, voices, ...(d.stil ? { stil: d.stil } : {}) },
     sourceOf,
     partsOf,
     stimmeVon,

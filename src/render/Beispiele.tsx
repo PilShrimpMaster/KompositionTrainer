@@ -9,6 +9,8 @@ import { renderNotes } from './renderNotes';
 import { motivMarkierungen, MotivPanel, useMotive } from '../kontrapunkt/MotivPanel';
 import { FormPanel } from '../satz/FormPanel';
 import { HarmoniePanel } from '../satz/HarmoniePanel';
+import { StilPanel } from '../satz/StilPanel';
+import type { Merkmal } from '../satz/stilmerkmale';
 
 interface AkkordProps {
   gruppen: Pitch[][];
@@ -49,18 +51,24 @@ export function NotenBeispiel({
   motive = false,
   form = false,
   harmonien = false,
+  merkmale = false,
 }: {
   score: Score;
   analyse?: boolean;
   motive?: boolean;
   form?: boolean;
   harmonien?: boolean;
+  merkmale?: boolean;
 }) {
   const [aktiv, setAktiv] = useState<string | null>(null);
-  const [zeige, setZeige] = useState<'form' | 'harmonien' | null>(null);
+  const [zeige, setZeige] = useState<'form' | 'harmonien' | 'stil' | null>(null);
+  const [merkmal, setMerkmal] = useState<Merkmal | null>(null);
   const [motiveAn, setMotiveAn] = useState(false);
   const mot = useMotive(score);
-  const markierungen = useMemo(() => (motiveAn ? motivMarkierungen(mot.funde, mot.auswahl) : undefined), [motiveAn, mot.funde, mot.auswahl]);
+  const markierungen = useMemo(
+    () => (zeige === 'stil' && merkmal ? new Map(merkmal.ids.map((id) => [id, 'is-auswahl'])) : motiveAn ? motivMarkierungen(mot.funde, mot.auswahl) : undefined),
+    [motiveAn, mot.funde, mot.auswahl, zeige, merkmal],
+  );
   const [laeuft, setLaeuft] = useState(false);
   const stopRef = useRef<(() => void) | null>(null);
   useEffect(() => () => stopRef.current?.(), []);
@@ -99,6 +107,11 @@ export function NotenBeispiel({
             {zeige === 'harmonien' ? 'Harmonien ausblenden' : 'Harmonien zeigen'}
           </button>
         )}
+        {merkmale && (
+          <button className="secondary" onClick={() => setZeige(zeige === 'stil' ? null : 'stil')} aria-pressed={zeige === 'stil'}>
+            {zeige === 'stil' ? 'Stilmerkmale ausblenden' : 'Stilmerkmale zeigen'}
+          </button>
+        )}
         {form && (
           <button className="secondary" onClick={() => setZeige(zeige === 'form' ? null : 'form')} aria-pressed={zeige === 'form'}>
             {zeige === 'form' ? 'Form ausblenden' : 'Form zeigen'}
@@ -107,6 +120,7 @@ export function NotenBeispiel({
       </div>
       {zeige === 'harmonien' && <HarmoniePanel score={score} />}
       {zeige === 'form' && <FormPanel score={score} />}
+      {zeige === 'stil' && <StilPanel score={score} auswahl={merkmal?.id ?? null} onAuswahl={setMerkmal} />}
       {motive && motiveAn && (
         <MotivPanel motiv={mot.motiv} funde={mot.funde} laenge={mot.laenge} onLaenge={mot.setLaenge} auswahl={mot.auswahl} onAuswahl={mot.setAuswahl} />
       )}

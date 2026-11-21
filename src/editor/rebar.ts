@@ -16,6 +16,8 @@ export interface EditorDoc {
   clef: Clef;
   events: NoteEvent[];
   satz?: Satzdaten;
+  /** Stilprofil der Prüfung; fehlt es, gilt der strenge Satz */
+  stil?: string;
 }
 
 export interface RebarResult {
@@ -127,6 +129,7 @@ export function rebar(doc: EditorDoc): RebarResult {
     time: doc.time,
     key: doc.key,
     voices: [{ id: 'v1', name: 'Melodie', clef: doc.clef, measures }],
+    ...(doc.stil ? { stil: doc.stil } : {}),
   };
   return { score, sourceOf, partsOf, missing };
 }
@@ -138,7 +141,7 @@ export function rebar(doc: EditorDoc): RebarResult {
 export function docFromScore(score: Score): EditorDoc {
   const satz = satzAusScore(score);
   if (satz) {
-    return { title: score.title, tempo: score.tempo, time: score.time, key: score.key, clef: satz.besetzung?.[0].clef ?? 'treble', events: satz.stimmen[0], satz };
+    return { title: score.title, tempo: score.tempo, time: score.time, key: score.key, clef: satz.besetzung?.[0].clef ?? 'treble', events: satz.stimmen[0], satz, ...(score.stil ? { stil: score.stil } : {}) };
   }
   const voice = score.voices[0];
   const events = voice ? voice.measures.flatMap((m) => m.notes.map((n) => structuredClone(n))) : [];
@@ -151,5 +154,6 @@ export function docFromScore(score: Score): EditorDoc {
     key: score.key,
     clef: voice?.clef ?? 'treble',
     events,
+    ...(score.stil ? { stil: score.stil } : {}),
   };
 }

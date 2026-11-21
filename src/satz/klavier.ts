@@ -1,3 +1,4 @@
+import { stilAnwenden, type Stil } from './stil';
 import { measureLength } from '../model/duration';
 import { diatonicIndex, fromDiatonic, germanName, germanNameWithOctave, toMidi } from '../model/pitch';
 import { grundton } from '../model/tonart';
@@ -192,6 +193,11 @@ const istQuinte = (o: Pitch, u: Pitch) => halb(o, u) > 0 && halb(o, u) % 12 === 
 const istOktave = (o: Pitch, u: Pitch) => halb(o, u) >= 0 && halb(o, u) % 12 === 0 && stufen(o, u) % 7 === 0;
 
 export function pruefeKlaviersatz(score: Score, opts: { hinweise?: boolean } = {}): Befund[] {
+  const alle = stilAnwenden(klaviersatzBefunde(score), score.stil as Stil | undefined);
+  return opts.hinweise === false ? alle.filter((b) => b.art === 'fehler') : alle;
+}
+
+function klaviersatzBefunde(score: Score, opts: { hinweise?: boolean } = {}): Befund[] {
   if (score.voices.length !== 2) return [];
   const mel = toeneVon(score, 0);
   const beg = toeneVon(score, 1);

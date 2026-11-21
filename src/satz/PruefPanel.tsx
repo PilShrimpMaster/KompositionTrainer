@@ -7,6 +7,7 @@ import { useNavigation } from '../navigation';
 import { pruefeSatz, regel, type Befund } from './regeln';
 import { kpRegel, pruefeKontrapunkt, type KpOptionen } from '../kontrapunkt/fux';
 import { klavierRegel, pruefeKlaviersatz } from './klavier';
+import { stilProfil } from './stil';
 
 const HINWEISE_KEY = 'kt-pruefung-hinweise';
 
@@ -70,6 +71,7 @@ export function PruefPanel({ befunde, auswahl, onAuswahl, hinweise, onHinweise, 
     <section className="pruef-panel" aria-label="Prüfung">
       <div className="pruef-kopf">
         <strong>
+          {score?.stil && score.stil !== 'streng' && <span className="stil-marke">Stil: {stilProfil(score.stil).name}</span>}{' '}
           {befunde.length === 0
             ? 'Keine Regelverstöße gefunden.'
             : `${fehler} ${fehler === 1 ? 'Fehler' : 'Fehler'}${hinw ? `, ${hinw} ${hinw === 1 ? 'Hinweis' : 'Hinweise'}` : ''}`}
@@ -87,7 +89,7 @@ export function PruefPanel({ befunde, auswahl, onAuswahl, hinweise, onHinweise, 
             return (
               <li key={i} className={`befund ${b.art} ${auswahl === i ? 'is-on' : ''}`}>
                 <button className="befund-text" onClick={() => onAuswahl(auswahl === i ? null : i)} aria-pressed={auswahl === i}>
-                  <span className="befund-art">{b.art === 'fehler' ? 'Fehler' : 'Hinweis'}</span>{' '}
+                  <span className="befund-art">{b.art === 'fehler' ? 'Fehler' : b.stil ? 'Stilmittel' : 'Hinweis'}</span>{' '}
                   {b.bisTakt && b.bisTakt !== b.takt ? `Takt ${b.takt}–${b.bisTakt}` : `Takt ${b.takt}`}
                   {b.anzahl ? ` (${b.anzahl}×)` : ''}: {b.text}
                 </button>

@@ -11,11 +11,14 @@ import { alsSatz, besetzungsName, ensembleDoc, ensembleName, freiDoc, klavierDoc
 import { anzeigeTransposition, ENSEMBLES, INSTRUMENTE, instrument, partiturRang, transponiereScore, verschiebe } from '../model/instrumente';
 import { HarmoniePanel } from '../satz/HarmoniePanel';
 import { FormPanel } from '../satz/FormPanel';
+import { StilPanel } from '../satz/StilPanel';
+import type { Merkmal } from '../satz/stilmerkmale';
 import { KiFeedback } from '../ki/KiFeedback';
 import { erzeugeCantus, MODI } from '../kontrapunkt/cantus';
 import { GATTUNGEN, STRENGE_GATTUNGEN, type Gattung } from '../kontrapunkt/fux';
 import { motivMarkierungen, MotivPanel, useMotive } from '../kontrapunkt/MotivPanel';
 import { markierungenFuer, PruefPanel, usePruefung } from '../satz/PruefPanel';
+import { STILE, stilProfil } from '../satz/stil';
 import { measureLength, quarterLength } from '../model/duration';
 import { ladeDatei, NOTENDATEIEN, speichereJson, speichereMusicXml } from '../musicxml/datei';
 import { SHORTCUT_HELP, shortcutFor } from './shortcuts';
@@ -146,6 +149,8 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   const [pruefen, setPruefenState] = useState(() => lesen(PRUEFEN_KEY) === 'ja');
   const [auswahl, setAuswahl] = useState<number | null>(null);
   const [formZeigen, setFormZeigen] = useState(false);
+  const [stilZeigen, setStilZeigen] = useState(false);
+  const [merkmal, setMerkmal] = useState<Merkmal | null>(null);
   const [feedbackZeigen, setFeedbackZeigen] = useState(false);
   function setPruefen(v: boolean) {
     setPruefenState(v);
@@ -171,10 +176,11 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
   const frei = doc.satz?.kontrapunkt?.gattung === 'frei';
   const motive = useMotive(bar.score);
   const markierungen = useMemo(() => {
+    if (stilZeigen && merkmal) return new Map(merkmal.ids.map((id) => [id, 'is-auswahl']));
     if (!doc.satz || !pruefen) return undefined;
     const regeln = markierungenFuer(pruefung.befunde, auswahl);
     return frei ? motivMarkierungen(motive.funde, motive.auswahl, regeln) : regeln;
-  }, [doc.satz, pruefen, pruefung.befunde, auswahl, frei, motive.funde, motive.auswahl]);
+  }, [doc.satz, pruefen, pruefung.befunde, auswahl, frei, motive.funde, motive.auswahl, stilZeigen, merkmal]);
   useEffect(() => setAuswahl(null), [doc]);
   useEffect(() => {
     if (doc.satz) setPianoLow(doc.satz.besetzung ? (doc.satz.besetzung[aktiv]?.clef === 'bass' ? 48 : 60) : KLAVIER_TIEF[aktiv]);
@@ -429,7 +435,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
 
   function aufgabeBeginnen(a: Schreibaufgabe) {
     setStueckId(null);
-    const basis = { ...emptyDoc(), title: a.titel, key: a.tonart ?? doc.key, time: a.takt ?? doc.time, clef: a.schluessel ?? doc.clef };
+    const basis = { ...emptyDoc(), title: a.titel, key: a.tonart ?? doc.key, time: a.takt ?? doc.time, clef: a.schluessel ?? doc.clef, ...(a.stil ? { stil: a.stil } : {}) };
     if (a.klavier) {
       const neu = klavierDoc(basis, a.klavier.melodie, a.klavier.begleitung, true);
       act({ type: 'load', doc: neu });
@@ -576,7 +582,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
             <h2>{doc.title}</h2>
             <p className="meta">
               {germanKeyName(doc.key)} · {doc.time.beats}/{doc.time.beatType}-Takt ·{' '}
-              {doc.satz?.kontrapunkt ? GATTUNGEN[doc.satz.kontrapunkt.gattung].name : klavier ? 'Klaviersatz' : ensemble ? `${ensembleName(ensemble)}${transponiert ? ', transponiert' : ', klingend'}` : doc.satz ? 'Chorsatz SATB' : doc.clef === 'treble' ? 'Violinschlüssel' : 'Bassschlüssel'} · {doc.tempo} ♩/min
+              {doc.satz?.kontrapunkt ? GATTUNGEN[doc.satz.kontrapunkt.gattung].name : klavier ? 'Klaviersatz' : ensemble ? `${ensembleName(ensemble)}${transponiert ? ', transponiert' : ', klingend'}` : doc.satz ? 'Chorsatz SATB' : doc.clef === 'treble' ? 'Violinschlüssel' : 'Bassschlüssel'} {doc.stil && doc.stil !== 'streng' ? ` · Stil: ${stilProfil(doc.stil).name}` : ''} · {doc.tempo} ♩/min
             </p>
           </div>
           <button className="secondary small" onClick={() => setShowMeta((s) => !s)} aria-expanded={showMeta}>
@@ -739,10 +745,14 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
           <button className={formZeigen ? 'secondary' : ''} onClick={() => setFormZeigen(!formZeigen)} aria-expanded={formZeigen}>
             {formZeigen ? 'Form ausblenden' : 'Form zeigen'}
           </button>
+          <button className={stilZeigen ? 'secondary' : ''} onClick={() => { setStilZeigen(!stilZeigen); setMerkmal(null); }} aria-expanded={stilZeigen}>
+            {stilZeigen ? 'Stilmerkmale ausblenden' : 'Stilmerkmale zeigen'}
+          </button>
           <button className="secondary" onClick={() => setFeedbackZeigen(!feedbackZeigen)} aria-expanded={feedbackZeigen}>
             {feedbackZeigen ? 'KI-Feedback ausblenden' : '✨ Feedback zu meinem Stück'}
           </button>
           {formZeigen && <FormPanel score={bar.score} />}
+          {stilZeigen && <StilPanel score={bar.score} auswahl={merkmal?.id ?? null} onAuswahl={setMerkmal} />}
           {feedbackZeigen && (
             <KiFeedback
               score={bar.score}
@@ -931,6 +941,19 @@ function MetaPanel({
           <option value="ensemble">Ensemble: Streichquartett, Bläser …</option>
         </select>
       </label>
+      {doc.satz && !(doc.satz.kontrapunkt && doc.satz.kontrapunkt.gattung !== 'frei') && (
+        <label className="field">
+          <span>Stil der Prüfung</span>
+          <select value={doc.stil ?? 'streng'} onChange={(e) => onChange({ stil: e.target.value === 'streng' ? undefined : e.target.value })}>
+            {STILE.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.name}
+              </option>
+            ))}
+          </select>
+          <small className="feld-hilfe">{stilProfil(doc.stil).epoche}</small>
+        </label>
+      )}
       {ens && (
         <div className="field ensemble-wahl">
           <span>Instrumente</span>
