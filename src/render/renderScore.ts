@@ -64,6 +64,8 @@ export interface RenderResult {
 
 const STAVE_HEIGHT = 110;
 const LYRIC_SPACE = 56;
+/** Zusätzlicher Platz über einem System mit Akkordsymbolen */
+const CHORD_SPACE = 24;
 const SYSTEM_GAP = 30;
 const MARGIN = 10;
 /** Mindestbreite eines Takts in Pixeln; daraus ergibt sich die Anzahl Takte pro Zeile. */
@@ -96,8 +98,10 @@ export function renderScore(
 
   const groups = staffGroups(score);
   const hasLyrics = groups.map((g) => g.some((vi) => score.voices[vi].measures.some((m) => m.notes.some((n) => n.lyric))));
-  const staffY = groups.map((_, si) => groups.slice(0, si).reduce((sum, _g, i) => sum + STAVE_HEIGHT + (hasLyrics[i] ? LYRIC_SPACE : 0), 0));
-  const systemHeight = groups.reduce((sum, _g, i) => sum + STAVE_HEIGHT + (hasLyrics[i] ? LYRIC_SPACE : 0), 0) + SYSTEM_GAP;
+  const hasChords = groups.map((g) => g.some((vi) => score.voices[vi].measures.some((m) => m.notes.some((n) => n.akkord))));
+  const hoehe = (i: number) => STAVE_HEIGHT + (hasLyrics[i] ? LYRIC_SPACE : 0) + (hasChords[i] ? CHORD_SPACE : 0);
+  const staffY = groups.map((_, si) => groups.slice(0, si).reduce((sum, _g, i) => sum + hoehe(i), 0) + (hasChords[si] ? CHORD_SPACE : 0));
+  const systemHeight = groups.reduce((sum, _g, i) => sum + hoehe(i), 0) + SYSTEM_GAP;
 
   const measureCount = Math.max(1, ...score.voices.map((v) => v.measures.length));
   // Partitur mit Instrumenten: Abkürzungen links neben den Systemen, eckige Klammer statt Klavierklammer
@@ -272,6 +276,22 @@ export function renderScore(
             const center = (note.getNoteHeadBeginX() + note.getNoteHeadEndX()) / 2;
             const w = ctx.measureText(text).width;
             ctx.fillText(text, center - w / 2, nameY);
+          });
+          ctx.restore();
+        }
+
+        // Akkordsymbole über dem System, oberhalb der höchsten Note samt Hals
+        if (measure.notes.some((n) => n.akkord)) {
+          const hoechste = Math.min(
+            ...built.filter((x) => x.si === b.si).flatMap((x) => x.notes.map((n) => Math.min(...n.getYs(), n.getStemExtents?.().topY ?? Infinity, n.getStemExtents?.().baseY ?? Infinity))),
+          );
+          const chordY = Math.max(st.getY() + 14 - CHORD_SPACE, Math.min(st.getYForLine(0) - 14, hoechste - 12));
+          ctx.save();
+          ctx.setFont('Helvetica, Arial, sans-serif', 15, 'bold');
+          ctx.setFillStyle('#1f1b2e');
+          measure.notes.forEach((ev, ni) => {
+            if (!ev.akkord) return;
+            ctx.fillText(ev.akkord, b.notes[ni].getNoteHeadBeginX() - 2, chordY);
           });
           ctx.restore();
         }

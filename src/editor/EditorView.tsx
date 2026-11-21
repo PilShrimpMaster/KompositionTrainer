@@ -27,6 +27,8 @@ import { spellMidi } from '../model/pitch';
 import { MidiPanel } from '../midi/MidiPanel';
 import { useMidi } from '../midi/useMidi';
 import { StueckePanel } from '../speicher/StueckePanel';
+import { AkkordFeld } from '../jazz/AkkordFeld';
+import { LeadsheetPanel } from '../jazz/LeadsheetPanel';
 import { insPortfolio, stueckSpeichern } from '../speicher/db';
 
 const STORAGE_KEY = 'kt-editor-entwurf-v1';
@@ -465,7 +467,7 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
       setPianoLow(stimmenVon(undefined)[aktiv].clef === 'bass' ? 48 : 60);
       return;
     }
-    act({ type: 'load', doc: basis });
+    act({ type: 'load', doc: a.leadsheet ? { ...basis, events: structuredClone(a.leadsheet) } : basis });
     if (a.schluessel) setPianoLow(a.schluessel === 'bass' ? 48 : 60);
   }
 
@@ -702,6 +704,8 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
         <p className="status" aria-live="polite">
           {status}
         </p>
+        {selected !== null && selectedEvent && <AkkordFeld key={selected} wert={selectedEvent.akkord ?? ''} onSetzen={(akkord) => act({ type: 'setAkkord', index: selected, akkord })} />}
+        <LeadsheetPanel score={bar.score} />
       </div>
 
       {doc.satz && (

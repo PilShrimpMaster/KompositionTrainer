@@ -3,6 +3,7 @@ import { toToneName } from '../model/pitch';
 import type { Score } from '../model/types';
 import { eventId } from '../model/ids';
 import { instrument } from '../model/instrumente';
+import { begleitVoicing, parseAkkordsymbol } from '../jazz/akkordsymbol';
 
 export interface ScheduledEvent {
   /** Kennung der Note im Notenbild (für die Markierung) */
@@ -64,6 +65,26 @@ export function buildSchedule(score: Score): { events: ScheduledEvent[]; total: 
     });
     total = Math.max(total, t);
   });
+
+  // Leadsheet: Akkordsymbole der Melodie als leise Klavierbegleitung, jeweils bis zum nächsten Symbol
+  if (score.voices.length === 1) {
+    const symbole: { start: number; text: string }[] = [];
+    let t = 0;
+    score.voices[0].measures.forEach((m, mi) => {
+      let pos = 0;
+      m.notes.forEach((ev) => {
+        if (ev.akkord) symbole.push({ start: t + pos, text: ev.akkord });
+        pos += quarterLength(ev.duration);
+      });
+      t += mi > 0 ? Math.max(pos, bar) : pos;
+    });
+    symbole.forEach((s, i) => {
+      const a = parseAkkordsymbol(s.text);
+      if (!a) return;
+      const ende = i + 1 < symbole.length ? symbole[i + 1].start : total;
+      for (const p of begleitVoicing(a)) events.push({ id: `akkord-${i}`, start: s.start, length: Math.max(0.25, ende - s.start), note: toToneName(p), velocity: 0.4 });
+    });
+  }
 
   events.sort((a, b) => a.start - b.start);
   return { events, total };

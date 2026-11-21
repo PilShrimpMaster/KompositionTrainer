@@ -10,6 +10,7 @@ import { stimmeKurz } from './erklaeren';
 import { rebar } from '../editor/rebar';
 import { emptyDoc } from '../editor/state';
 import { parseNotenfolge } from '../lernpfad/kompakt';
+import { jazzAnalyse, leadsheet } from '../jazz/analyse';
 
 /**
  * KI-Feedback zu eigenen Kompositionen: Claude bekommt das ganze Stück in Kurzform
@@ -19,7 +20,7 @@ export const FEEDBACK_SYSTEM = `Du bist Kompositionslehrer in einer Lern-App. Di
 Schreibe Deutsch, duze die Person, verwende deutsche Tonnamen (H statt B, B für Hb, Fis, Es) und Funktionsbezeichnungen (T, S, D, Tp …). Nenne Stellen immer mit Taktzahl.
 Gib Feedback wie ein guter Lehrer in der Kompositionsstunde: zuerst, was musikalisch gelingt (konkret, nicht pauschal), dann höchstens drei Verbesserungen, die am meisten bringen, jeweils mit einem konkreten Vorschlag, was man ändern könnte und warum es dann besser klingt. Ordne das Stück stilistisch ein (z. B. klassisches Menuett, Choral, Invention, Popsong) und miss es an diesem Stil.
 Wiederhole keine Regelverstöße, die die App schon meldet, außer um zu sagen, welcher davon am wichtigsten ist. Achte vor allem auf das, was eine Regelprüfung nicht sieht: Melodiebogen und Höhepunkt, Motivarbeit, Spannung und Entspannung, Proportionen der Form, Kadenzplan, Abwechslung im Rhythmus, Charakter.
-Wo es hilft, gib zu einer Verbesserung ein kurzes Notenbeispiel (die geänderte Oberstimme der genannten Takte, vollständige Takte in der Taktart des Stücks). Noten schreibst du in der Kurzform der App: Ton mit Oktave (C4 = eingestrichenes c, F#4, Bb3; r = Pause), Doppelpunkt, Notenwert (1 2 4 8 16, Punkt mit .), | als Taktstrich. Englische Tonbuchstaben: B4 ist das deutsche h′.
+Wo es hilft, gib zu einer Verbesserung ein kurzes Notenbeispiel (die geänderte Oberstimme der genannten Takte, vollständige Takte in der Taktart des Stücks). Noten schreibst du in der Kurzform der App: Ton mit Oktave (C4 = eingestrichenes c, F#4, Bb3; r = Pause), Doppelpunkt, Notenwert (1 2 4 8 16, Punkt mit .), | als Taktstrich. Englische Tonbuchstaben: B4 ist das deutsche h′. Akkordsymbole stehen in eckigen Klammern hinter der Note, über der sie stehen (C5:4[Dm7]), ebenfalls mit englischen Tonbuchstaben (Bb7 = B⁷, B7 = H⁷). Bei Leadsheets darfst du im Beispiel auch Akkordsymbole ändern (Reharmonisierung).
 Fasse dich kurz: insgesamt höchstens etwa 250 Wörter.`;
 
 export const FEEDBACK_SCHEMA = {
@@ -91,6 +92,11 @@ export function feedbackAnfrage(score: Score, k: FeedbackKontext): string {
     .slice(0, 2)
     .map((t) => stilProfil(t.stil).name);
   const stil = score.stil && score.stil !== 'streng' ? stilProfil(score.stil) : undefined;
+  const lead = leadsheet(score, 0);
+  const jazz = lead.akkorde.length ? jazzAnalyse(lead.akkorde, score.key) : undefined;
+  const leadZeile = jazz
+    ? `- Leadsheet: ${jazz.deutungen.map((d) => `T${d.akkord.takt} ${d.akkord.text}=${d.stufe}`).join(', ')}${jazz.muster.length ? `; Muster: ${jazz.muster.map((m) => `${m.text} (T${m.takt})`).join('; ')}` : ''}`
+    : '';
   const befunde = k.befunde.slice(0, 8).map((b) => `- Takt ${b.takt}${b.bisTakt && b.bisTakt !== b.takt ? `–${b.bisTakt}` : ''} (${b.art}): ${b.text}`);
   return [
     `Mein Stück „${score.title}“: ${k.besetzung}, ${germanKeyName(score.key)}, ${score.time.beats}/${score.time.beatType}-Takt, Tempo ${score.tempo}, ${takte} Takte.`,
@@ -104,6 +110,7 @@ export function feedbackAnfrage(score: Score, k: FeedbackKontext): string {
     `- Form: ${form.form ?? 'keine bekannte Form erkannt'}; Zweitakter ${form.glieder.map((g) => g.name).join(' ') || '–'}`,
     form.kadenzen.length ? `- Kadenzen: ${form.kadenzen.map(kadenzText).join('; ')}` : '',
     harmonien ? `- Harmonien: ${harmonien}` : '',
+    leadZeile,
     merkmale.length ? `- Stilmerkmale: ${merkmale.map((m) => m.text).join('; ')}${tendenz.length ? ` (passt am ehesten zu: ${tendenz.join(', ')})` : ''}` : '',
     befunde.length ? `- Befunde der Regelprüfung:\n${befunde.join('\n')}` : '- Die Regelprüfung findet keine Fehler.',
     '',

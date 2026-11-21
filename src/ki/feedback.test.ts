@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { menuettMitTrio } from '../data/formbeispiele';
 import { FORTSPINNUNG } from '../data/stilbeispiele';
+import { emptyDoc } from '../editor/state';
+import { rebar } from '../editor/rebar';
+import { parseNotenfolge } from '../lernpfad/kompakt';
 import { FEEDBACK_SCHEMA, feedbackAnfrage, feedbackLesen } from './feedback';
 
 describe('KI-Feedback zu eigenen Stücken', () => {
@@ -25,6 +28,14 @@ describe('KI-Feedback zu eigenen Stücken', () => {
     expect(text).toContain('Stilmerkmale: Sequenzen');
     expect(text).toContain('passt am ehesten zu: Barock');
     expect(text).toContain('Konzentriere dich auf den Stil');
+  });
+
+  it('schickt bei Leadsheets Akkordsymbole, Stufen und Jazzmuster mit', () => {
+    const score = rebar({ ...emptyDoc(), events: parseNotenfolge('F4:1[Dm7] | F4:1[G7] | E4:1[Cmaj7] | E4:1[Cmaj7]') }).score;
+    const text = feedbackAnfrage(score, { besetzung: 'Leadsheet', befunde: [], fokus: 'harmonie' });
+    expect(text).toContain('F4:1[Dm7]');
+    expect(text).toContain('Leadsheet: T1 Dm7=IIm7');
+    expect(text).toContain('II–V–I nach');
   });
 
   it('liest die Antwort robust', () => {

@@ -1,7 +1,7 @@
 import type { Befund } from './regeln';
 
 /** Stilprofile: Welche Satzregeln in einer Epoche bewusst gebrochen werden dürfen */
-export type Stil = 'streng' | 'barock' | 'klassik' | 'romantik' | 'impressionismus' | 'moderne';
+export type Stil = 'streng' | 'barock' | 'klassik' | 'romantik' | 'impressionismus' | 'moderne' | 'jazz';
 
 export interface StilProfil {
   id: Stil;
@@ -103,6 +103,26 @@ export const STILE: StilProfil[] = [
       'kl-quartsext': 'In der Moderne gibt es keine Funktionsregeln für Quartsextakkorde.',
       'kl-schluss': 'Moderne Stücke brauchen keinen Ganzschluss.',
       'kl-kreuzung': 'Melodie und Begleitung dürfen sich in der Moderne kreuzen.',
+    },
+  },
+  {
+    id: 'jazz',
+    name: 'Jazz und Pop',
+    epoche: 'Ab etwa 1920, Ellington, Gershwin, Evans, die Beatles: Akkordsymbole, Septakkorde als Grundklang, Optionstöne, Voicings statt Stimmführungsregeln.',
+    begriff: 'jazz',
+    locker: {
+      parallelen: 'In Voicings und Bläsersätzen bewegen sich Klänge im Jazz oft parallel (Planing).',
+      'verdeckte-parallelen': 'Im Jazz- und Popsatz spielen verdeckte Parallelen keine Rolle.',
+      verdopplung: 'Im Jazz entscheidet das Voicing, nicht die Verdopplungsregel.',
+      abstand: 'Jazz-Voicings verteilen die Töne frei auf die Lagen.',
+      spruenge: 'Jazzmelodien springen frei, auch in Optionstöne.',
+      leitton: 'Im Jazz ist die Septime Grundklang; Leittöne lösen sich oft in Optionstöne auf oder bleiben liegen.',
+      septime: 'Septimen sind im Jazz Teil des Grundklangs und müssen sich nicht auflösen.',
+      'kl-parallelen': 'Parallel verschobene Voicings sind im Jazz ein Stilmittel.',
+      'kl-fremdton': 'Optionstöne (9, 11, 13) gehören im Jazz zum Akkord.',
+      'kl-harmonie': 'Erweiterte und alterierte Akkorde sind im Jazz gewollt.',
+      'kl-quartsext': 'Im Jazz gibt es keine Funktionsregeln für Quartsextakkorde.',
+      'kl-schluss': 'Jazzstücke enden oft auf Imaj7, I6 oder einem Optionston.',
     },
   },
 ];

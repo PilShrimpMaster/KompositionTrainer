@@ -100,6 +100,7 @@ export function rebar(doc: EditorDoc): RebarResult {
       durations.forEach((d, i) => {
         const isLastPart = remaining <= EPS && i === durations.length - 1;
         const part: NoteEvent = { duration: d };
+        if (ev.akkord && first && i === 0) part.akkord = ev.akkord;
         if (ev.pitch) {
           part.pitch = ev.pitch;
           if (ev.velocity) part.velocity = ev.velocity;

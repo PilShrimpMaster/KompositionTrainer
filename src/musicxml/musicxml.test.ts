@@ -79,6 +79,27 @@ const MUSESCORE = `<?xml version="1.0" encoding="UTF-8"?>
   </part>
 </score-partwise>`;
 
+describe('Akkordsymbole in MusicXML', () => {
+  it('überstehen die Rundreise und lesen MuseScores <harmony>', async () => {
+    const { rebar } = await import('../editor/rebar');
+    const { emptyDoc } = await import('../editor/state');
+    const { parseNotenfolge } = await import('../lernpfad/kompakt');
+    const s = rebar({ ...emptyDoc(), title: 'Leadsheet', events: parseNotenfolge('E5:2[Dm7] D5:2[G7b9] | C5:1[Cmaj7] | r:2[F#ø7] B4:2[B7#9] | E5:1[Em/G]') }).score;
+    const xml = exportMusicXml(s);
+    expect(xml).toContain('<harmony><root><root-step>D</root-step></root><kind text="m7">minor-seventh</kind></harmony>');
+    expect(xml).toContain('<kind text="ø7">half-diminished</kind>');
+    expect(noten(rundreise(s))).toEqual(noten(s));
+
+    const ms = `<?xml version="1.0"?><score-partwise version="4.0"><part-list><score-part id="P1"><part-name>Melodie</part-name></score-part></part-list><part id="P1"><measure number="1"><attributes><divisions>1</divisions><key><fifths>0</fifths></key><time><beats>4</beats><beat-type>4</beat-type></time><clef><sign>G</sign><line>2</line></clef></attributes>
+      <harmony><root><root-step>B</root-step><root-alter>-1</root-alter></root><kind>dominant</kind><degree><degree-value>11</degree-value><degree-alter>1</degree-alter><degree-type>add</degree-type></degree></harmony>
+      <note><pitch><step>D</step><octave>5</octave></pitch><duration>2</duration><voice>1</voice><type>half</type></note>
+      <harmony><root><root-step>E</root-step><root-alter>-1</root-alter></root><kind>major-seventh</kind><bass><bass-step>G</bass-step></bass></harmony>
+      <note><pitch><step>G</step><octave>4</octave></pitch><duration>2</duration><voice>1</voice><type>half</type></note></measure></part></score-partwise>`;
+    const r = importMusicXml(ms);
+    expect(r.score!.voices[0].measures[0].notes.map((n) => n.akkord)).toEqual(['Bb7#11', 'Ebmaj7/G']);
+  });
+});
+
 describe('Import aus MuseScore', () => {
   const r = importMusicXml(MUSESCORE);
   const s = r.score!;

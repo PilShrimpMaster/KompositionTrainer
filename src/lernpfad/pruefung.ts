@@ -1,7 +1,9 @@
 import { measureLength, quarterLength } from '../model/duration';
 import { diatonicIndex, germanName, germanNameWithOctave, keyAlter, toMidi } from '../model/pitch';
 import { ENSEMBLES, instrument, lagePruefen, lageText, notiert, umfangText } from '../model/instrumente';
-import type { Pitch, Step } from '../model/types';
+import type { NoteEvent, Pitch, Step } from '../model/types';
+import { reihenform } from '../neuemusik/pcset';
+import { jazzAnalyse, leadsheet, pruefeLeadsheet, type MusterArt } from '../jazz/analyse';
 import type { EditorDoc } from '../editor/rebar';
 import { rebar } from '../editor/rebar';
 import { rebarSatz } from '../editor/satzdoc';
@@ -40,7 +42,12 @@ export interface Pruefpunkt {
  * Prüft ein Stück gegen eine Liste von Kriterien, z. B.
  * „takte 8, dur, endet-grundton, schluss-lang, schritt-zum-schluss, umfang 10, sprung-max 6, leitereigen“.
  */
-export function pruefe(gesamt: EditorDoc, kriterien: string[]): Pruefpunkt[] {
+export interface PruefKontext {
+  /** Vorgegebenes Leadsheet (Melodie mit Akkordsymbolen), z. B. für „reharmonisiert“ */
+  leadsheet?: NoteEvent[];
+}
+
+export function pruefe(gesamt: EditorDoc, kriterien: string[], kontext: PruefKontext = {}): Pruefpunkt[] {
   // Im Klaviersatz gelten die Melodie-Kriterien für die Melodie (obere Stimme)
   // Im Ensemble für die oberste Stimme
   const doc =
@@ -192,6 +199,26 @@ export function pruefe(gesamt: EditorDoc, kriterien: string[]): Pruefpunkt[] {
           hinweis: anzahl ? `Bisher in ${anzahl === 1 ? 'einem Takt' : `${anzahl} Takten`}.` : `Noch nicht gefunden. Schau im Lexikon unter „${def.name}“ nach, wie es gebaut ist.`,
         };
       }
+      case 'reihenform': {
+        const formen = { P: 'Grundgestalt', I: 'Umkehrung', R: 'Krebs', RI: 'Krebsumkehrung' } as const;
+        const form = (arg ?? 'I').toUpperCase() as keyof typeof formen;
+        if (!formen[form]) return { text: `Unbekannte Reihenform „${arg}“`, ok: false };
+        const pcs = toene.map((p) => ((toMidi(p) % 12) + 12) % 12);
+        const reihe = pcs.slice(0, 12);
+        const zweite = pcs.slice(12, 24);
+        const istReihe = new Set(reihe).size === 12;
+        const passt = istReihe && zweite.length === 12 && Array.from({ length: 12 }, (_, t) => reihenform(reihe, form, t)).some((r) => r.every((x, i) => x === zweite[i]));
+        return {
+          text: `Auf die Reihe folgt ihre ${formen[form]} (Töne 13–24)`,
+          ok: passt,
+          hinweis: !istReihe ? 'Die ersten zwölf Töne müssen alle zwölf Tonklassen genau einmal enthalten.' : zweite.length < 12 ? `Nach der Reihe fehlen noch ${12 - zweite.length} Töne.` : `Prüfe die Töne 13–24: ${formen[form]} heißt ${form === 'I' ? 'jedes Intervall in die Gegenrichtung' : form === 'R' ? 'die Reihe rückwärts' : form === 'RI' ? 'die Umkehrung rückwärts' : 'dieselben Intervalle'}.`,
+        };
+      }
+      case 'akkordsymbole':
+      case 'leadsheet-fehlerfrei':
+      case 'jazzmuster':
+      case 'reharmonisiert':
+        return leadsheetKriterium(name, args, doc, kontext);
       case 'ensemble':
       case 'im-umfang':
       case 'begleitung-noten':
@@ -450,4 +477,62 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
     }
   }
   return { text: name, ok: false };
+}
+
+const MUSTER_NAMEN: Record<MusterArt, string> = {
+  'ii-v-i': 'II–V–I',
+  'ii-v': 'II–V',
+  'v-i': 'V–I',
+  zwischendominante: 'Zwischendominante',
+  'tritonus-substitution': 'Tritonus-Substitution',
+  'modale-mischung': 'Akkord aus Moll (modale Mischung)',
+};
+
+/** Leadsheet: Akkordsymbole über der Melodie (oberste Stimme) */
+function leadsheetKriterium(name: string, args: string[], doc: EditorDoc, kontext: PruefKontext): Pruefpunkt {
+  const score = rebar(doc).score;
+  const { akkorde, ungueltig } = leadsheet(score);
+  const n = Number(args[0]);
+  switch (name) {
+    case 'akkordsymbole':
+      return {
+        text: `Mindestens ${n} Akkordsymbole über der Melodie`,
+        ok: akkorde.length >= n && ungueltig.length === 0,
+        hinweis: ungueltig.length ? `Nicht lesbar: ${ungueltig.map((u) => `„${u.text}“`).join(', ')}.` : `Bisher ${akkorde.length}. Wähle eine Note aus und schreib das Symbol in das Feld „Akkordsymbol“.`,
+      };
+    case 'leadsheet-fehlerfrei': {
+      const fehler = pruefeLeadsheet(score).filter((b) => b.art === 'fehler');
+      return {
+        text: 'Melodie und Akkorde passen zusammen (keine langen Avoid Notes)',
+        ok: akkorde.length > 0 && fehler.length === 0,
+        hinweis: fehler.length ? `Takt ${fehler[0].takt}: ${fehler[0].text}` : 'Noch keine Akkordsymbole.',
+      };
+    }
+    case 'jazzmuster': {
+      const art = args[0] as MusterArt;
+      const mindestens = args[1] ? Number(args[1]) : 1;
+      if (!MUSTER_NAMEN[art]) return { text: `Unbekanntes Muster „${args[0]}“`, ok: false };
+      const zahl = jazzAnalyse(akkorde, doc.key).muster.filter((m) => m.art === art).length;
+      return {
+        text: mindestens > 1 ? `Mindestens ${mindestens}-mal: ${MUSTER_NAMEN[art]}` : `Enthält: ${MUSTER_NAMEN[art]}`,
+        ok: zahl >= mindestens,
+        hinweis: zahl ? `Bisher ${zahl}-mal.` : `Noch nicht gefunden. Schau im Lexikon unter „${MUSTER_NAMEN[art]}“ nach.`,
+      };
+    }
+    default: {
+      // reharmonisiert N: Melodie wie vorgegeben, mindestens N Akkorde ersetzt oder ergänzt
+      const vorgabe = kontext.leadsheet;
+      if (!vorgabe) return { text: 'Reharmonisierung', ok: false, hinweis: 'Diese Prüfung braucht das vorgegebene Leadsheet der Aufgabe.' };
+      const melodie = (evs: NoteEvent[]) => evs.map((e) => `${e.pitch ? toMidi(e.pitch) : 'r'}:${e.duration.type}${e.duration.dots ?? ''}`).join(' ');
+      const gleich = melodie(doc.events) === melodie(vorgabe);
+      const alt = leadsheet(rebar({ ...doc, events: vorgabe }).score).akkorde;
+      const altAn = new Map(alt.map((a) => [a.start, a.text]));
+      const geaendert = akkorde.filter((a) => altAn.get(a.start) !== a.text).length;
+      return {
+        text: `Mindestens ${n} Akkorde neu gewählt, die Melodie bleibt unverändert`,
+        ok: gleich && geaendert >= n && ungueltig.length === 0,
+        hinweis: !gleich ? 'Die Melodie soll genau wie vorgegeben bleiben; ändere nur die Akkordsymbole. „Neu beginnen“ holt die Vorgabe zurück.' : `Bisher ${geaendert} Akkorde geändert oder ergänzt.`,
+      };
+    }
+  }
 }

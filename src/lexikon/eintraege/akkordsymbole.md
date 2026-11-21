@@ -4,7 +4,7 @@ titel: Akkordsymbole
 kategorie: Harmonik
 kurz: Kurzschrift für Akkorde in Pop und Jazz: Grundton als Buchstabe plus Zusätze, z. B. Am, G7, Cmaj7, F/A. Im Englischen heißt H „B“.
 synonyme: Akkordsymbol, Leadsheet, Akkordbezeichnung, Gitarrengriffe, maj7, Slash-Akkord
-siehe: generalbass, septakkord, notennamen
+siehe: generalbass, septakkord, notennamen, zwei-fuenf-eins, voicing, avoid-note
 ---
 
 In Liederbüchern, Jazz und Pop stehen über der Melodie **Akkordsymbole**:

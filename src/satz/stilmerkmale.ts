@@ -1,5 +1,6 @@
 import { diatonicIndex, keyAlter, toMidi } from '../model/pitch';
 import type { Pitch, Score } from '../model/types';
+import { eventId } from '../model/ids';
 import { findeMotive, stimmToene, type MotivTon } from '../kontrapunkt/motive';
 import type { Akkord } from './akkorde';
 import { analysiere } from './analyse';
@@ -22,7 +23,8 @@ export type MerkmalId =
   | 'pentatonik'
   | 'quarten'
   | 'cluster'
-  | 'zwoelfton';
+  | 'zwoelfton'
+  | 'ostinato';
 
 export interface Merkmal {
   id: MerkmalId;
@@ -61,6 +63,7 @@ export const MERKMALE: Record<MerkmalId, Def> = {
   quarten: { name: 'Quartenklänge', begriff: 'quartenharmonik', epochen: ['impressionismus', 'moderne'] },
   cluster: { name: 'Cluster', begriff: 'cluster', epochen: ['moderne'] },
   zwoelfton: { name: 'Zwölftonreihe', begriff: 'zwoelftonmusik', epochen: ['moderne'] },
+  ostinato: { name: 'Ostinato', begriff: 'ostinato', epochen: ['barock', 'moderne'] },
 };
 
 const pc = (p: Pitch) => ((toMidi(p) % 12) + 12) % 12;
@@ -181,6 +184,30 @@ export function stilmerkmale(score: Score): Merkmal[] {
       i = j + 1;
     }
   }
+
+  // Ostinato: ein Takt (oder zwei) kehrt in einer Stimme mindestens dreimal unverändert wieder
+  score.voices.forEach((v, vi) => {
+    const sig = v.measures.map((m) => (m.notes.filter((n) => n.pitch).length >= 2 ? m.notes.map((n) => `${n.pitch ? toMidi(n.pitch) : 'r'}:${n.duration.type}${n.duration.dots ?? ''}`).join(' ') : ''));
+    const ids = (mi: number) => v.measures[mi].notes.map((_, ni) => eventId(vi, mi, ni));
+    let mi = 0;
+    while (mi < sig.length) {
+      let gefunden = false;
+      for (const laenge of [1, 2]) {
+        const muster = sig.slice(mi, mi + laenge);
+        if (muster.length < laenge || muster.some((x) => !x)) continue;
+        let wdh = 1;
+        while (sig.slice(mi + wdh * laenge, mi + (wdh + 1) * laenge).join('|') === muster.join('|')) wdh++;
+        if (wdh >= 3) {
+          const takte = Array.from({ length: wdh * laenge }, (_, k) => mi + k);
+          add('ostinato', { takt: mi + 1, ids: takte.flatMap(ids) });
+          mi += wdh * laenge;
+          gefunden = true;
+          break;
+        }
+      }
+      if (!gefunden) mi++;
+    }
+  });
 
   // Sequenzen der Oberstimme
   if (stimmen[0]?.length >= 6) {

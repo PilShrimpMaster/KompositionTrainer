@@ -1,3 +1,4 @@
+import { harmonyLesen } from '../jazz/harmonyXml';
 import { erkenneInstrument, verschiebe } from '../model/instrumente';
 import type { Clef, Duration, DurationType, KeySignature, NoteEvent, Pitch, Score, Step, TimeSignature, Voice } from '../model/types';
 import { measureLength, quarterLength } from '../model/duration';
@@ -109,6 +110,7 @@ export function importMusicXml(xml: string, dateiname = 'Import', Parser: typeof
 
     kinder(part, 'measure').forEach((takt, ti) => {
       let cursor = 0; // in Vierteln
+      let akkordOffen: string | undefined; // Akkordsymbol für die nächste Note
       let maxPos = 0;
       let letzte: { ev: NoteEvent; bass: boolean } | null = null;
 
@@ -150,6 +152,12 @@ export function importMusicXml(xml: string, dateiname = 'Import', Parser: typeof
               else if (sign !== 'G' && sign !== 'F' && sign !== 'C') hinweise.add('Schlagzeugschlüssel werden als Violinschlüssel gezeigt.');
               if (!schluessel.has(systemOffset + nr - 1)) schluessel.set(systemOffset + nr - 1, clef);
             }
+            break;
+          }
+          case 'harmony': {
+            const sym = harmonyLesen(el);
+            if (sym) akkordOffen = sym;
+            else hinweise.add('Ein Akkordsymbol konnte nicht gelesen werden und fehlt.');
             break;
           }
           case 'backup':
@@ -230,6 +238,10 @@ export function importMusicXml(xml: string, dateiname = 'Import', Parser: typeof
             const istPause = !!kind(el, 'rest') || !pitch;
             werte.forEach((d, i) => {
               const ev: NoteEvent = { duration: d };
+              if (i === 0 && akkordOffen) {
+                ev.akkord = akkordOffen;
+                akkordOffen = undefined;
+              }
               if (!istPause && pitch) {
                 ev.pitch = { ...pitch };
                 if (i < werte.length - 1 || tieStart) ev.tie = true;

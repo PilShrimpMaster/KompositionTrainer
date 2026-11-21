@@ -2,6 +2,7 @@ import { rebar, type EditorDoc } from '../editor/rebar';
 import { parsePitch, leseFelder } from '../lexikon/parse';
 import type { Clef, Duration, DurationType, KeySignature, NoteEvent, Score, TimeSignature } from '../model/types';
 import { validateScore } from '../model/validate';
+import { parseAkkordsymbol } from '../jazz/akkordsymbol';
 
 const WERTE: Record<string, DurationType> = { '1': 'whole', '2': 'half', '4': 'quarter', '8': 'eighth', '16': '16th' };
 
@@ -14,7 +15,7 @@ export function parseDauer(s: string): Duration {
   return d;
 }
 
-/** „C4:4“, „F#4:8.“, „r:2“ (Pause), „G4:2~“ (Haltebogen), „C4:2^“ (Fermate); ohne Dauer gilt die vorige */
+/** „C4:4“, „F#4:8.“, „r:2“ (Pause), „G4:2~“ (Haltebogen), „C4:2^“ (Fermate), „C5:4[Dm7]“ (Akkordsymbol); ohne Dauer gilt die vorige */
 export function parseNotenfolge(text: string): NoteEvent[] {
   let dauer: Duration = { type: 'quarter' };
   return text
@@ -22,6 +23,14 @@ export function parseNotenfolge(text: string): NoteEvent[] {
     .filter(Boolean)
     .map((tok) => {
       let t = tok;
+      // Akkordsymbol in eckigen Klammern: „C5:4[Dm7]“, „r:2[G7]“
+      let akkord: string | undefined;
+      const am = /\[([^\]]+)\]/.exec(t);
+      if (am) {
+        akkord = am[1];
+        if (!parseAkkordsymbol(akkord)) throw new Error(`Unbekanntes Akkordsymbol „${akkord}“`);
+        t = t.replace(am[0], '');
+      }
       const fermata = t.endsWith('^');
       if (fermata) t = t.slice(0, -1);
       const tie = t.endsWith('~');
@@ -32,6 +41,7 @@ export function parseNotenfolge(text: string): NoteEvent[] {
       if (ton !== 'r') ev.pitch = parsePitch(ton);
       if (tie) ev.tie = true;
       if (fermata) ev.fermata = true;
+      if (akkord) ev.akkord = akkord;
       return ev;
     });
 }
