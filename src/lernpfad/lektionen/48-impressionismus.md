@@ -72,3 +72,41 @@ pruefung: stil impressionismus, vierstimmig, fehlerfrei, stilmerkmal parallelver
 ## Freie Aufgabe
 
 Hör Debussys „La cathédrale engloutie“ (Préludes I): Ganze Akkordblöcke werden parallel verschoben, über tiefen Orgelpunkten. Hör dann Ravels „Pavane pour une infante défunte“. Schreib ein kurzes Klavierstück über einem liegenden Bass, in dem die rechte Hand eine pentatonische Melodie mit parallelen Quarten oder Quinten begleitet.
+
+## Quiz
+
+? Was ist Parallelverschiebung (Planing)?
++ Ein Akkord wird als Ganzes verschoben, alle Stimmen parallel
+- Zwei Stimmen tauschen die Lage
+- Der Bass bleibt liegen, die Oberstimmen bewegen sich
+- Eine Melodie in Gegenbewegung
+
+? Was unterscheidet eine reale von einer diatonischen Mixtur?
++ Bei der realen wird der Akkord genau gleich verschoben, bei der diatonischen bleiben die Töne in der Tonleiter
+- Die reale klingt nur in Dur
+- Die diatonische hat keine Parallelen
+- Es gibt keinen Unterschied
+
+? Wie viele Töne hat die Ganztonleiter?
++ Sechs
+- Fünf
+- Sieben
+- Zwölf
+
+? Was fehlt der Ganztonleiter?
++ Leitton und Grundton
+- Die Quinte
+- Jeder Ganzton
+- Die Oktave
+
+? Wo hörte Debussy 1889 die Pentatonik des Gamelan?
++ Auf der Pariser Weltausstellung
+- In Bayreuth
+- In Wien
+- In New York
+
+? Welches Debussy-Stück schwebt in der Ganztonleiter?
++ Voiles
+- Pagodes
+- Clair de lune
+- Golliwogg’s Cakewalk

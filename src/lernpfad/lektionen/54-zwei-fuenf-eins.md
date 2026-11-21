@@ -59,3 +59,47 @@ pruefung: akkordsymbole 7, leadsheet-fehlerfrei, jazzmuster ii-v-i 2
 ## Freie Aufgabe
 
 Spiel die II–V–I auf dem Klavier oder dem Saxophon in allen zwölf Tonarten, im Quintenzirkel abwärts: C, F, Bb, Eb … Auf dem Saxophon spielst du die Guide Tones als Linie: Terz der II, Septime der V, Terz der I.
+
+## Quiz
+
+? Welche Akkorde bilden die II–V–I in C-Dur?
++ Dm7 – G7 – Cmaj7
+- Dm7 – G7 – C7
+- D7 – G7 – C
+- Dm – Em – C
+
+? Welche II–V–I gehört zu a-Moll?
++ Bm7b5 – E7 – Am6
+- Bm7 – E7 – Amaj7
+- Dm7 – G7 – Am7
+- Bdim7 – Em – Am
+
+? Welcher klassischen Kadenz entspricht die II–V–I?
++ S – D – T
+- T – S – T
+- D – T – Tp
+- T – D – S
+
+? Was sind Guide Tones?
++ Terz und Septime jedes Akkords
+- Grundton und Quinte
+- Die Optionstöne 9, 11, 13
+- Die Töne der Melodie
+
+? Welcher Ton von Dm7 wird in der II–V zur Terz von G7?
++ Die Septime c wird zu h
+- Die Terz f bleibt liegen
+- Der Grundton d wird zu g
+- Die Quinte a wird zu h
+
+? Wie geht ein Turnaround in C-Dur?
++ Cmaj7 – A7 – Dm7 – G7
+- C – F – G – C
+- Dm7 – G7 – Cmaj7
+- Fm7 – Bb7 – Cmaj7
+
+? Was ist die Backdoor-Kadenz?
++ IVm7 – bVII7 – Imaj7, z. B. Fm7 – Bb7 – Cmaj7
+- II – V – I mit Tritonus-Substitution
+- V – IV – I
+- I – VI – II – V

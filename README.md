@@ -6,6 +6,10 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 ## Stand: M7 Jenseits der Klassik (Lernpfad komplett)
 
+**Quiz nach jeder Lektion:** Jede Lektion endet mit einem Quiz: Wissensfragen zu allem, was die Lektion erklärt (rund 360 Fragen insgesamt, mit Erklärung nach jeder Antwort), danach ein Praxisteil mit den Übungen der Lektion. Das Quiz eines Abschlussprojekts fragt die ganze Stufe ab. Ab 80 % gilt ein Quiz als bestanden; falsche Fragen lassen sich gleich wiederholen. Die Fragen stehen im Abschnitt `## Quiz` der Lektionsdateien.
+
+**Fortschrittsbalken:** Der Lernpfad zeigt den Gesamtfortschritt und den Fortschritt je Stufe (Lektionen durchgearbeitet und Quiz bestanden), jede Lektion zeigt, bei welchem Schritt du bist.
+
 **Akkordsymbole und Leadsheets (M7):** Über jede Note kann man ein Akkordsymbol setzen (Cmaj7, Dm7, G7b9, F/A, Bø …, mit englischen Tonbuchstaben: Bb7 = B⁷, B7 = H⁷). Die Symbole stehen fett über dem System, klingen beim Abspielen als leise Klavierbegleitung und gehen als `<harmony>` nach MuseScore und zurück. In der Kurzform der Lektionen schreibt man `C5:4[Dm7]`.
 
 **Jazzharmonik (M7):** Die Leadsheet-Tafel unter dem Editor zeigt je Akkord Stufe und Rolle (IIm7, V7, Zwischendominante, Tritonus-Substitution, modale Mischung), findet II–V–I-Verbindungen, spielt Shell- und Drop-2-Voicings vor und meldet unlesbare Symbole, Avoid Notes und Melodietöne, die zu keinem Akkord passen. Neuer Stil „Jazz und Pop“.

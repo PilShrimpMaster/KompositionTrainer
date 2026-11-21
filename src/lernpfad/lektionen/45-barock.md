@@ -67,3 +67,47 @@ pruefung: stil barock, vollstaendig, fehlerfrei, ganzschluss, stilmerkmal sequen
 ## Freie Aufgabe
 
 Hör die Sarabande aus Bachs Französischer Suite Nr. 1 d-Moll (BWV 812) und Händels Sarabande d-Moll (HWV 437), die Stanley Kubrick in „Barry Lyndon“ verwendet. Schreib dann eine eigene Sarabande von acht Takten im 3/4-Takt, mit der Betonung auf der Zählzeit 2 und einem Halbschluss in Takt 4.
+
+## Quiz
+
+? Wie ist ein Fortspinnungsthema gebaut?
++ Vordersatz, Sequenz (Fortspinnung), Epilog mit Kadenz
+- Vordersatz und Nachsatz mit gleichem Anfang
+- Hauptthema, Seitenthema, Schlussgruppe
+- Strophe, Refrain, Bridge
+
+? Wie bewegt sich der Bass in einer Quintfallsequenz?
++ Er fällt in Quinten (oder steigt in Quarten): C – F – H – E …
+- Er steigt in Quinten: C – G – D – A …
+- Er bleibt liegen
+- Er fällt in Sekunden
+
+? Welcher Tanz der Suite ist langsam und betont die Zählzeit 2?
++ Sarabande
+- Gigue
+- Courante
+- Allemande
+
+? Welcher Tanz steht meist am Schluss einer Suite und ist schnell im 6/8 oder 12/8?
++ Gigue
+- Allemande
+- Sarabande
+- Menuett
+
+? Was bedeutet „ein Affekt pro Satz“?
++ Ein Stück hält eine Stimmung durch, statt zu kontrastieren
+- Jeder Takt hat eine andere Stimmung
+- Ein Satz hat nur einen Akkord
+- Jeder Satz hat nur eine Stimme
+
+? Was bildet im Barock das Fundament?
++ Der Generalbass: Bass- und Akkordinstrument
+- Das Streichquartett
+- Der Alberti-Bass
+- Die Ganztonleiter
+
+? Welche Zeit umfasst der Barock etwa?
++ 1600 bis 1750
+- 1750 bis 1820
+- 1820 bis 1900
+- 1450 bis 1600

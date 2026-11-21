@@ -46,3 +46,29 @@ pruefung: mindestens-takte 32, menuett-trio, vollstaendig, fehlerfrei
 ## Freie Aufgabe
 
 Speichere dein Menuett unter „Meine Stücke“. Schreib danach ein zweites in Moll, mit einem Trio in der Durparallele, und vergleiche den Charakter. Spiel das Menuett auf dem Saxophon (Melodie) mit einer Klavierbegleitung aus MuseScore.
+
+## Quiz
+
+? Wie lang sind Menuett und Trio im Abschlussprojekt jeweils?
++ 16 Takte, 8 + 8
+- 8 Takte
+- 12 Takte
+- 32 Takte
+
+? Was kennzeichnet das Trio im Abschlussprojekt?
++ Kontrast: ruhigere Melodie, andere Begleitung, neue Tonart
+- Gleiche Melodie in anderer Lage
+- Eine Fuge
+- Dieselbe Begleitung, nur lauter
+
+? Was ist ein guter Arbeitsweg, wenn die Begleitung schwerfällt?
++ Erst die ganze Melodie, dann einen Basston pro Takt, dann die Begleitmuster
+- Erst die Begleitung, dann die Melodie
+- Alles gleichzeitig Takt für Takt
+- Nur die Melodie schreiben
+
+? Wo fügst du Wiederholungszeichen, Dynamik und Pedal hinzu?
++ In MuseScore nach dem Export
+- Gar nicht, das braucht ein Menuett nicht
+- Im Lexikon
+- In der Übung „Formen“

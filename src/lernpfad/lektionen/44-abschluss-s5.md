@@ -46,3 +46,29 @@ pruefung: ensemble streichquartett, mindestens-takte 8, vollstaendig, im-umfang,
 ## Freie Aufgabe
 
 Spiel die 1. Violine deines Quartetts auf dem Saxophon: Für das Altsaxophon musst du sie eine große Sexte höher lesen, die Partitur zeigt dir unter „Stück einstellen“ mit „Partitur transponiert“, wie das aussieht, wenn du das Instrument der 1. Violine auf Altsaxophon stellst. Hör dir danach ein Quartett von Haydn, Mozart oder Beethoven an und vergleiche: Wie oft spielen dort alle vier Stimmen zugleich, und wie oft schweigt eine?
+
+## Quiz
+
+? Welche Stimmen schreibst du im Quartett-Abschlussprojekt zuerst?
++ 1. Violine und Violoncello
+- 2. Violine und Viola
+- Nur die Viola
+- Alle gleichzeitig
+
+? Woran misst die Prüfung im Quartett den Umfang?
++ An den Instrumentenumfängen statt an den Chorumfängen
+- An den Chorumfängen
+- Gar nicht
+- Nur am Violoncello
+
+? Wie prüfst du, ob jede Stimme für sich gut klingt?
++ Einzelne Stimmen stumm schalten und anhören
+- Alle Stimmen lauter stellen
+- Nur die Partitur ansehen
+- In MuseScore drucken
+
+? Wie belebst du den fertigen Quartettsatz?
++ Begleitfiguren, eine Antwort in der Viola, Melodie im Cello
+- Mehr Pausen in allen Stimmen
+- Alles eine Oktave höher
+- Alle Stimmen im Einklang

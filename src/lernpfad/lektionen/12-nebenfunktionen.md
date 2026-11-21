@@ -74,3 +74,48 @@ pruefung: vierstimmig, fehlerfrei, enthaelt Tp, ganzschluss
 ## Freie Aufgabe
 
 Schreib eine Folge von acht Akkorden in G-Dur, die alle drei Parallelklänge und eine Doppeldominante enthält. Lass dir mit „Satz prüfen“ und der Analyse zeigen, ob alles stimmt.
+
+## Quiz
+
+? Welcher Akkord ist in C-Dur die Tonikaparallele (Tp)?
++ a-Moll
+- e-Moll
+- d-Moll
+- F-Dur
+
+? Welcher Akkord ist in C-Dur die Subdominantparallele (Sp)?
++ d-Moll
+- a-Moll
+- e-Moll
+- G-Dur
+
+? Was passiert beim Trugschluss?
++ Die Dominante geht zur Tonikaparallele statt zur Tonika
+- Die Subdominante geht zur Tonika
+- Das Stück endet auf der Dominante
+- Die Tonika wird nach Moll verändert
+
+? Welcher Ton wird im Trugschluss in der Tp ausnahmsweise verdoppelt?
++ Die Terz
+- Der Grundton
+- Die Quinte
+- Der Leitton
+= Der Leitton geht aufwärts, die anderen Oberstimmen abwärts. So landen zwei Stimmen auf der Terz.
+
+? Was ist die Doppeldominante in C-Dur?
++ D-Dur, die Dominante der Dominante
+- G-Dur mit Septime
+- Zweimal G-Dur hintereinander
+- d-Moll
+
+? Was ist eine Zwischendominante?
++ Eine kurze Dominante zu einem anderen Akkord als der Tonika
+- Ein Akkord zwischen zwei Dominanten
+- Die Dominante in der Mitte eines Stücks
+- Eine Dominante ohne Leitton
+
+? Wie heißt der Schluss Subdominante → Tonika?
++ Plagalschluss
+- Halbschluss
+- Trugschluss
+- Ganzschluss

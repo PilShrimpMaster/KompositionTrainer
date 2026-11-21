@@ -49,3 +49,35 @@ pruefung: vollstaendig, fehlerfrei
 ## Freie Aufgabe
 
 Spiel deine Lösung und dann dieselbe Linie ohne Bögen (alle Halben neu angeschlagen). Was geht verloren? Beschreibe in einem Satz, was ein Vorhalt für den Ausdruck tut.
+
+## Quiz
+
+? Welche drei Teile hat ein Vorhalt?
++ Vorbereitung, Dissonanz, Auflösung
+- Durchgang, Wechselnote, Sprung
+- Anfang, Höhepunkt, Schluss
+- Synkope, Pause, Wiederholung
+
+? Wohin löst sich ein Vorhalt auf?
++ Einen Schritt abwärts in eine Konsonanz
+- Einen Schritt aufwärts
+- Durch einen Sprung
+- Er bleibt liegen
+
+? Welche Vorhalte sind über dem Cantus firmus typisch?
++ 7–6 und 4–3
+- 2–3 und 4–5
+- 5–6 und 8–7
+- 6–5 und 3–2
+
+? Welche Vorhalte stehen typischerweise unter dem Cantus firmus?
++ 2–3 und 4–5
+- 7–6 und 4–3
+- 9–8 und 6–5
+- 3–4 und 5–6
+
+? Was darf eine konsonante Synkope?
++ Frei weitergehen
+- Muss sich abwärts auflösen
+- Darf nicht vorkommen
+- Muss wiederholt werden

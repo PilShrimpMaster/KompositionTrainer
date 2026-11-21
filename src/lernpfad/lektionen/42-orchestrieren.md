@@ -57,3 +57,41 @@ pruefung: ensemble violine+violine+viola+violoncello+kontrabass, vollstaendig, i
 ## Freie Aufgabe
 
 Nimm ein Klavierstück aus deinem Portfolio, zum Beispiel dein Menuett, und orchestriere es in MuseScore für Streichquartett oder Bläserquintett. Entscheide zuerst für jede Phrase: Wer spielt die Melodie, wer den Bass, wer füllt? Wechsle die Melodie mindestens einmal in ein anderes Instrument. Vergleich danach mit Ravels Orchesterfassung der „Promenade“ aus den „Bildern einer Ausstellung“: Trompete allein, dann das Blech, dann die Streicher.
+
+## Quiz
+
+? Welche drei Ebenen hat fast jeder Satz?
++ Melodie, Bass und Harmoniefüllung
+- Holz, Blech und Streicher
+- Piano, Mezzoforte und Forte
+- Thema, Durchführung und Reprise
+
+? Warum ist das Verdoppeln einer Linie in Oktaven im Orchester kein Fehler?
++ Es ist eine Verdopplung (colla parte), keine selbstständige Stimme
+- Weil Orchester keine Regeln haben
+- Weil man es nicht hört
+- Weil es nur bei Bläsern vorkommt
+
+? Welches Instrument gilt als „Klebstoff“ des Orchesters?
++ Das Horn
+- Die Trompete
+- Die Oboe
+- Die Pauke
+
+? Was ist das stärkste Mittel der Instrumentation?
++ Der Wechsel zwischen Solo und Tutti
+- Immer alle spielen lassen
+- Viele Dämpfer
+- Nur Streicher verwenden
+
+? Wer orchestrierte Mussorgskys „Bilder einer Ausstellung“?
++ Maurice Ravel
+- Claude Debussy
+- Igor Strawinsky
+- Gustav Mahler
+
+? Welche Instrumente übernehmen typischerweise den Bass?
++ Violoncello, Kontrabass, Fagott, Posaune, Tuba
+- Flöte und Oboe
+- 2. Violine und Viola
+- Trompete und Horn

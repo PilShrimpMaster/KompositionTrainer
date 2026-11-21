@@ -7,6 +7,7 @@ import { satz } from '../satz/kurzform';
 import { ENSEMBLES, instrument } from '../model/instrumente';
 import { ensembleDoc, rebarSatz } from '../editor/satzdoc';
 import type { UebungTyp } from '../uebungen/aufgaben';
+import { parseQuiz, type QuizFrage } from './quiz';
 import { parseNotenbeispiel, parseNotenfolge, parseSchluessel, parseTakt, parseTonart } from './kompakt';
 
 /** Eine Schreibaufgabe, die im Editor bearbeitet und geprüft wird */
@@ -109,6 +110,8 @@ export interface Lektion {
   titel: string;
   dauer?: string;
   schritte: Schritt[];
+  /** Wissensfragen aus dem Abschnitt „## Quiz“ (kein eigener Schritt) */
+  quiz: QuizFrage[];
 }
 
 const FENCE = /```(noten|satz|akkorde|uebungen|aufgabe|zweistimmig|ensemble)[^\n]*\n([\s\S]*?)```/g;
@@ -224,8 +227,13 @@ export function parseLektion(quelle: string, datei = '?'): Lektion {
   const schritte: Schritt[] = [];
   const nr = { n: 0 };
   if (teile[0].trim()) schritte.push({ titel: 'Einführung', bausteine: bausteine(teile[0], datei, nr, kopf.modul) });
+  let quiz: QuizFrage[] = [];
   for (let i = 1; i < teile.length; i += 2) {
+    if (teile[i].trim() === 'Quiz') {
+      quiz = parseQuiz(teile[i + 1] ?? '', kopf.modul, `${datei} „Quiz“`);
+      continue;
+    }
     schritte.push({ titel: teile[i].trim(), bausteine: bausteine(teile[i + 1] ?? '', `${datei} „${teile[i].trim()}“`, nr, kopf.modul) });
   }
-  return { modul: kopf.modul, titel: kopf.titel, dauer: kopf.dauer, schritte };
+  return { modul: kopf.modul, titel: kopf.titel, dauer: kopf.dauer, schritte, quiz };
 }

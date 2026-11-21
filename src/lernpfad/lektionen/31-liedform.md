@@ -52,3 +52,35 @@ pruefung: takte 12, liedform, halbschluss 8, endet-grundton, schluss-lang
 ## Freie Aufgabe
 
 Schreib dasselbe Lied als A B A′: Verändere bei der Wiederkehr den Schluss, etwa mit einem höheren Höhepunkt kurz vor dem Ende. Wirkt die Wiederkehr dadurch stärker?
+
+## Quiz
+
+? Was ist das stärkste Formmittel überhaupt?
++ Die Wiederkehr (Reprise)
+- Die Modulation
+- Der Taktwechsel
+- Die Fermate
+
+? Wie endet der Mittelteil B einer dreiteiligen Liedform oft?
++ Mit einem Halbschluss, der die Rückkehr von A vorbereitet
+- Mit dem Schlussakkord des Stücks
+- Mit einer Generalpause
+- In einer weit entfernten Tonart
+
+? Was kann den Mittelteil B zum Kontrast machen?
++ Andere Motive, Lage, Tonart oder Rhythmus
+- Nur ein lauteres Tempo
+- Genau dieselben Takte wie A
+- Eine andere Instrumentenstimmung
+
+? Wie ist die zweiteilige Liedform gebaut?
++ A endet offen, B führt zurück zur Tonika
+- A und B enden beide auf der Dominante
+- A B A mit Wiederkehr
+- Nur ein Teil, zweimal gespielt
+
+? Was bedeutet A′?
++ Eine veränderte oder verkürzte Wiederkehr von A
+- Ein ganz neuer Teil
+- A in einer anderen Taktart
+- A rückwärts gespielt

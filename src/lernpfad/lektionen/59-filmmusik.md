@@ -51,3 +51,47 @@ pruefung: vollstaendig, stilmerkmal ostinato
 ## Freie Aufgabe
 
 Schau eine Szene aus einem Film, den du magst, einmal mit und einmal ohne Ton. Notiere, wo die Musik einsetzt und endet, was sie unterstreicht und welche Mittel sie nutzt: Leitmotiv, Ostinato, Pedal, Mediantik?
+
+## Quiz
+
+? Was ist ein Leitmotiv?
++ Ein Motiv, das für eine Figur, einen Ort oder eine Idee steht
+- Die Melodie im Abspann
+- Ein liegender Bass
+- Musik unter Dialog
+
+? Was ist ein Ostinato?
++ Ein Muster, das sich unablässig wiederholt
+- Ein einmaliger Akzent im Bild
+- Ein langsamer Akkordwechsel
+- Ein lautes Tutti
+
+? Was ist Underscore?
++ Leise Musik unter Dialog, die der Stimme Platz lässt
+- Musik über dem Abspann
+- Ein lautes Hauptthema
+- Musik, die jede Bewegung nachbildet
+
+? Was ist Mickey-Mousing?
++ Musik bildet jede Bewegung im Bild nach
+- Ein Leitmotiv für eine Maus
+- Musik ohne Bild
+- Eine Technik der Minimal Music
+
+? Was sind Hit Points?
++ Zeitpunkte, an denen die Musik etwas im Bild unterstreicht
+- Die lautesten Stellen
+- Die Takte mit Pausen
+- Die Anfänge der Szenen
+
+? Wie wirkt eine chromatische Mediante wie C – E?
++ Heroisch, magisch oder fremd, ohne Kadenz
+- Wie eine Schlusskadenz
+- Wie ein Trugschluss
+- Wie eine Modulation zur Dominante
+
+? Wie kehrt ein Leitmotiv oft wieder?
++ Verwandelt: in Moll, langsamer, anderes Instrument
+- Immer genau gleich
+- Nur im Abspann
+- Gar nicht

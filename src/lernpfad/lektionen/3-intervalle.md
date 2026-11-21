@@ -61,3 +61,51 @@ pruefung: noten 12, sprung-max 3, leitereigen
 ## Freie Aufgabe
 
 Schreibe über dem Ton c′ nacheinander alle Intervalle von der Prime bis zur Oktave (c′–c′, c′–d′, c′–e′ …) und spiele sie ab. Wähle danach einen anderen Grundton, z. B. f′, und achte darauf, wo du ein Vorzeichen brauchst, damit die Größe stimmt (die Quarte über f′ ist b′, nicht h′).
+
+## Quiz
+
+? Wie bestimmst du die Nummer eines Intervalls (Terz, Quarte …)?
++ Stammtöne abzählen, beide Töne mitgezählt
+- Halbtöne abzählen
+- Tasten auf dem Klavier zählen, ohne den ersten Ton
+- Ganztöne abzählen
+= Von C nach E: C, D, E, also eine Terz. Die Halbtöne bestimmen danach die Größe.
+
+? Wie viele Halbtöne hat eine reine Quinte?
++ 7
+- 5
+- 6
+- 8
+
+? Welches Intervall ist C–Es?
++ kleine Terz
+- übermäßige Sekunde
+- große Terz
+- verminderte Terz
+= C, D, E ergibt eine Terz, drei Halbtöne machen sie klein. C–Dis klingt gleich, ist aber eine übermäßige Sekunde.
+
+? Welches Intervall heißt Tritonus?
++ Die übermäßige Quarte mit sechs Halbtönen
+- Die reine Quinte
+- Die kleine Septime
+- Die große Sexte
+
+? Welche Intervalle heißen „rein“?
++ Prime, Quarte, Quinte und Oktave
+- Terz, Sexte und Oktave
+- Sekunde, Terz und Septime
+- Alle Intervalle ohne Vorzeichen
+
+? Welche Intervalle klingen eher leer und offen?
++ Oktave, Quinte und Quarte
+- Terz und Sexte
+- Sekunde und Septime
+- Tritonus und kleine Sekunde
+= Terzen und Sexten klingen weich und voll, Sekunden und Septimen reiben.
+
+? Welcher Ton ist die reine Quarte über f′?
++ b′
+- h′
+- a′
+- c″
+= F, G, A, B: Mit H wären es sechs Halbtöne, also ein Tritonus.

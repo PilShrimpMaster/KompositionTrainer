@@ -62,3 +62,41 @@ pruefung: vollstaendig, begleitung-noten 48, blues
 ## Freie Aufgabe
 
 Nimm einen Song, den du gern hörst, und schreib seine Form auf: Intro, Strophe, Pre-Chorus, Refrain, Bridge, Outro, mit Taktzahlen. Vergleiche mit einem Jazzstandard in AABA (etwa „I Got Rhythm“ oder „Blue Moon“). Am Saxophon kannst du über das Bluesschema improvisieren: Die Blues-Tonleiter c–es–f–ges–g–b passt über alle drei Akkorde.
+
+## Quiz
+
+? Wie ist die 32-Takt-Form gebaut?
++ AABA
+- ABAB
+- AAB
+- ABAC
+
+? Welcher Akkord steht im 12-Takt-Blues in Takt 9?
++ V
+- IV
+- I
+- II
+
+? Was ist der „Quick Change“ im Blues?
++ Schon in Takt 2 die IV statt der I
+- Ein schnelles Tempo
+- Ein Tonartwechsel im Refrain
+- Die V in Takt 12
+
+? Welche Töne sind Blue Notes?
++ Kleine Terz, verminderte Quinte und kleine Septime über Durakkorden
+- Große Terz und große Septime
+- Nur die Quinte
+- Alle Töne mit Kreuz
+
+? Welches Textschema hat eine Bluesstrophe oft?
++ A A B
+- A B A
+- A B C
+- A A A
+
+? Was ist die Bridge in einem Song?
++ Ein Kontrastteil, meist vor dem letzten Refrain
+- Der erste Takt
+- Die Hookline
+- Das Schlussfade-out

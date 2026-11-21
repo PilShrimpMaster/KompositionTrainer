@@ -35,3 +35,29 @@ pruefung: mindestens-takte 8, vollstaendig, motiv-anzahl 3, stilmerkmal ostinato
 ## Freie Aufgabe
 
 Arrangiere dein Leadsheet in MuseScore für eine kleine Besetzung: Melodie im Altsaxophon, Drop-2-Voicings im Klavier, ein Walking Bass. Oder vertone den Cue für Streicher und Horn mit dem, was du in Stufe 5 gelernt hast.
+
+## Quiz
+
+? Was bleibt beim Reharmonisieren des Leadsheets unverändert?
++ Die Melodie
+- Die Akkordsymbole
+- Die Anzahl der Akkorde
+- Der Bass
+
+? Was muss das Film-Cue enthalten?
++ Ein Leitmotiv, das mindestens dreimal erklingt, über einem Ostinato
+- Eine Zwölftonreihe
+- Einen 12-Takt-Blues
+- Eine Fuge
+
+? Was soll beim Reharmonisieren mindestens einmal vorkommen?
++ Eine Tritonus-Substitution
+- Ein Cluster
+- Eine Ganztonleiter
+- Ein Quartenakkord
+
+? Welche Form hat der Song im Abschlussprojekt?
++ AABA
+- 12-Takt-Blues
+- Rondo
+- Sonatensatz

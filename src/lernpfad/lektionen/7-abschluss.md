@@ -39,3 +39,29 @@ pruefung: takte 8, dur, leitereigen, endet-grundton, schluss-lang, schritt-zum-s
 ## Freie Aufgabe
 
 Speichere deine Melodie unter „Meine Stücke“. Schreibe danach eine zweite Fassung in einer anderen Taktart (z. B. 3/4) oder in Moll und vergleiche, wie sich der Charakter ändert. In Stufe 2 lernst du, eine Begleitung dazu zu schreiben, und ab Meilenstein 4 bekommst du eine ausführliche Rückmeldung zu deinen Kompositionen.
+
+## Quiz
+
+? Wie ist eine achttaktige Periode gebaut?
++ Vordersatz endet offen (meist Dominante), Nachsatz endet geschlossen auf der Tonika
+- Vordersatz endet auf der Tonika, Nachsatz auf der Dominante
+- Acht Takte ohne Wiederholung
+- Zwei gleiche Hälften mit gleichem Schluss
+
+? Was gehört zu einem guten Melodieschluss?
++ Grundton, lang und betont, durch einen Schritt erreicht
+- Ein großer Sprung zum höchsten Ton
+- Ein kurzer Ton auf unbetonter Zeit
+- Die 5. Stufe als letzter Ton
+
+? Wie oft sollte der Höhepunkt einer Melodie vorkommen?
++ Nur einmal
+- In jedem Takt
+- Am Anfang und am Ende
+- Mindestens dreimal
+
+? Was macht man nach einem großen Sprung in einer Melodie meist?
++ In der Gegenrichtung schrittweise zurückgehen
+- Gleich noch einen Sprung in dieselbe Richtung
+- Den Ton wiederholen
+- Eine Pause setzen

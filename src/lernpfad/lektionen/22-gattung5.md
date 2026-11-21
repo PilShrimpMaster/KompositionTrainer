@@ -48,3 +48,35 @@ pruefung: vollstaendig, fehlerfrei
 ## Freie Aufgabe
 
 Exportiere deine floride Gegenstimme mit „Für MuseScore speichern“, öffne sie in MuseScore und gib beiden Stimmen andere Instrumente, zum Beispiel Flöte und Fagott. Klingt der Satz noch, wenn die Klangfarben so verschieden sind?
+
+## Quiz
+
+? Was verbindet die 5. Gattung?
++ Alle vorigen Gattungen: Halbe, Viertel, Synkopen und ein paar Achtel
+- Nur ganze Noten
+- Nur Synkopen
+- Zwei Cantus firmi
+
+? Wo stehen längere Notenwerte in der floriden Gegenstimme eher?
++ Am Taktanfang
+- Am Taktende
+- Nur im letzten Takt
+- Überall gleich verteilt
+
+? Wie schließt eine floride Gegenstimme oft?
++ Mit einem 7–6-Vorhalt vor dem Leitton
+- Mit einem Oktavsprung
+- Mit einer Wechselnote
+- Mit einer Pause
+
+? Wo sind Dissonanzen in der 5. Gattung erlaubt?
++ Unbetont als Durchgang, Wechselnote oder Cambiata, betont nur als vorbereiteter Vorhalt
+- Überall, solange es floride klingt
+- Nur auf der Eins
+- Gar nicht
+
+? Was bedeutet „floride“?
++ Blühend
+- Fließend
+- Streng
+- Frei

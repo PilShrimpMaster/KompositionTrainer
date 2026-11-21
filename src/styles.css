@@ -3,7 +3,7 @@
   --paper: #ffffff;
   --ink: #1f1b2e;
   --muted: #6b6580;
-  --accent: #3b2f63;
+  --accent: #2a1f4e;
   --accent-ink: #ffffff;
   --highlight: #d9480f;
   --border: #e3ddd0;
@@ -795,7 +795,7 @@ button.option.ist-aus:disabled {
     --ink: #ece9f5;
     --muted: #a59fba;
     --border: #2e2939;
-    --accent: #7c6bd6;
+    --accent: #6a55c9;
   }
   .sheet-head h2 {
     color: #1f1b2e;
@@ -1502,4 +1502,72 @@ a.lexikon-link:hover {
 }
 .voicing-knoepfe {
   white-space: nowrap;
+}
+
+/* Fortschrittsbalken und Quiz */
+.gesamtfortschritt {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+.gesamtfortschritt-kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+  color: #1f1b2e;
+}
+.gesamtfortschritt-zahl {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2a1f4e;
+}
+.gesamtfortschritt .meta {
+  margin: 8px 0 0;
+}
+.gesamtfortschritt .balken,
+.lektion-fortschritt .balken,
+.stufe-fortschritt .balken {
+  flex: 1;
+  min-width: 0;
+}
+.balken.gross {
+  height: 16px;
+}
+.stufe-fortschritt,
+.lektion-fortschritt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0 10px;
+}
+.stufe-fortschritt .meta,
+.lektion-fortschritt .meta {
+  white-space: nowrap;
+}
+.quiz-marke {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.quiz-marke.ok {
+  border-color: #2f9e44;
+  color: #1a7f37;
+}
+.quiz .frage {
+  margin-top: 8px;
+}
+.quiz-optionen .option {
+  text-align: left;
+}
+@media (prefers-color-scheme: dark) {
+  .gesamtfortschritt .meta {
+    color: #6b6580;
+  }
 }

@@ -71,3 +71,47 @@ pruefung: stilmerkmal zwoelfton, takte 4, schluss-lang
 ## Freie Aufgabe
 
 Hör den Anfang von Schönbergs Klavierstück op. 33a und Weberns Variationen op. 27: Dort wird die Reihe in Akkorde und weit auseinanderliegende Töne zerlegt. Hör dann Bartóks „Mikrokosmos“, etwa Nr. 101 „Verminderte Quinte“. Bilde aus deiner Reihe die Umkehrung (jedes Intervall in die Gegenrichtung) und schreib damit eine zweite Melodie, die auf die erste antwortet.
+
+## Quiz
+
+? Was nannte Schönberg die „Emanzipation der Dissonanz“?
++ Dissonanzen müssen sich nicht mehr auflösen
+- Dissonanzen sind verboten
+- Jede Dissonanz wird vorbereitet
+- Nur Septimen sind erlaubt
+
+? Was ist die Grundregel der Zwölftontechnik?
++ Kein Ton kehrt wieder, bevor die anderen elf erklungen sind
+- Jeder Ton wird zwölfmal wiederholt
+- Es gibt zwölf Akkorde
+- Jeder Takt hat zwölf Schläge
+
+? Wie heißt die Reihe rückwärts und gespiegelt zugleich?
++ Krebsumkehrung
+- Krebs
+- Umkehrung
+- Grundgestalt
+
+? Woraus bestehen Quartenakkorde?
++ Aus geschichteten Quarten, z. B. d – g – c – f
+- Aus vier Terzen
+- Aus Sekunden
+- Aus Quinten und Oktaven
+
+? Welche Tonarten kombiniert Strawinsky in „Petruschka“?
++ C-Dur und Fis-Dur
+- C-Dur und G-Dur
+- a-Moll und A-Dur
+- Es-Dur und B-Dur
+
+? Was ist ein Cluster?
++ Ein Klang aus dicht gelagerten Sekunden
+- Ein Akkord aus Quarten
+- Eine Zwölftonreihe
+- Ein Akkord in zwei Tonarten
+
+? Was prüft die App im Stilprofil Moderne noch?
++ Nur ob die Stimmen im Umfang bleiben
+- Alle Regeln der Harmonielehre
+- Nur Quintparallelen
+- Gar nichts

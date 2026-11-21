@@ -61,3 +61,41 @@ pruefung: takte 4, noten 24, endet-grundton, sprung-max 6
 ## Freie Aufgabe
 
 Schreib zu deiner Variation eine zweite in c-Moll (mit es, as und h) und eine dritte im 3/4-Takt. Was bleibt gleich, was verändert den Charakter am meisten?
+
+## Quiz
+
+? Wie ist das kleine Rondo gebaut?
++ A B A C A
+- A B A
+- A A B A
+- A B C D
+
+? Was bleibt bei einer Variation erhalten?
++ Das Gerüst: Harmonie, Länge und meist die Hauptnoten
+- Nur das Tempo
+- Nur der Rhythmus
+- Gar nichts
+
+? Was ist eine figurative Variation?
++ Die Melodie wird in kleineren Notenwerten umspielt
+- Das Tempo ändert sich
+- Die Begleitung ändert sich, die Melodie bleibt
+- Das Thema wird nach Moll versetzt
+
+? Wo steht ein Rondo typischerweise?
++ Als letzter Satz einer Sonate oder eines Konzerts
+- Als langsamer Mittelsatz
+- Als Einleitung
+- Nur in Opern
+
+? Welche Popform ähnelt dem Rondo?
++ Strophe und Refrain
+- Der 12-Takt-Blues
+- AABA
+- Durchkomponiertes Lied
+
+? Wie heißen die Zwischenteile eines Rondos?
++ Couplets
+- Episoden
+- Trios
+- Refrains

@@ -75,3 +75,41 @@ pruefung: takte 8, satzform, ganzschluss-takt 8
 ## Freie Aufgabe
 
 Such in Mozarts Klaviersonaten (zum Beispiel KV 331, erster Satz, oder KV 545) die ersten acht Takte und bestimme: Periode oder Satz? Öffne die Noten als MusicXML unter „Hören“ und schreib die Melodie im Editor ab; dann zeigt „Form zeigen“ die Kadenzen.
+
+## Quiz
+
+? Wie endet der Vordersatz einer Periode meist?
++ Offen, mit einem Halbschluss
+- Mit einem Ganzschluss
+- Mit einem Trugschluss
+- Mit einer Modulation in entfernte Tonarten
+
+? Woran erkennst du eine Periode?
++ Der Anfang kehrt in Takt 5 wieder
+- Der Anfang kehrt in Takt 3 wieder
+- Es gibt keine Wiederholung
+- Die Takte 1–2 und 7–8 sind gleich
+
+? Woraus besteht die Präsentation eines Satzes?
++ Einem Zweitakter, der gleich wiederholt wird
+- Vordersatz und Nachsatz
+- Einer Kadenz
+- Vier verschiedenen Taktgruppen
+
+? Was passiert in der Fortspinnung eines Satzes?
++ Kürzere Glieder, mehr Bewegung, oft eine Sequenz, dann die Kadenz
+- Das Thema wird unverändert wiederholt
+- Ein neues Thema in einer neuen Tonart
+- Die Musik bleibt stehen
+
+? Welche Wirkung hat der Satz im Vergleich zur Periode?
++ Er drängt nach vorn
+- Er wirkt ausgewogen wie Frage und Antwort
+- Er wirkt immer langsamer
+- Er klingt immer in Moll
+
+? Wer benannte Periode und Satz in ihrer heutigen Form?
++ Arnold Schönberg und Erwin Ratz
+- Bach und Händel
+- Fux und Rameau
+- Mozart und Haydn

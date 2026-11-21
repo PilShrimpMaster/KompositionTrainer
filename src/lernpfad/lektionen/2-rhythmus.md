@@ -67,3 +67,50 @@ pruefung: takte 4, schluss-lang
 ## Freie Aufgabe
 
 Denk an ein Lied, das du gut kennst, und klopfe seinen Rhythmus. In welcher Taktart steht es? Schreib die ersten zwei Takte nur mit einer Tonhöhe (z. B. immer c″), sodass nur der Rhythmus zählt. Spiel es ab und vergleiche mit deiner Erinnerung.
+
+## Quiz
+
+? Wie viele Viertel dauert eine punktierte Halbe?
++ 3
+- 2½
+- 4
+- 2
+= Der Punkt verlängert um die Hälfte: 2 + 1 = 3 Viertel.
+
+? Wie viele Achtel passen in eine punktierte Viertel?
++ 3
+- 2
+- 4
+- 1½
+= Eine punktierte Viertel dauert 1½ Viertel, also drei Achtel.
+
+? Was bewirkt ein Haltebogen zwischen zwei gleichen Tönen?
++ Sie klingen als ein langer Ton zusammen
+- Der zweite Ton wird lauter gespielt
+- Die Töne werden gebunden, aber neu angeschlagen
+- Der zweite Ton wird zur Pause
+
+? Wie zählt man einen 6/8-Takt?
++ Sechs Achtel in zwei Gruppen zu je drei, mit zwei schweren Schlägen
+- Drei Gruppen zu je zwei Achteln
+- Sechs gleich betonte Achtel
+- Wie einen 3/4-Takt, nur doppelt so schnell
+= Darum wirkt 6/8 wiegend: „eins zwei drei, vier fünf sechs“.
+
+? Welche Taktart haben Walzer und Menuett?
++ 3/4
+- 4/4
+- 6/8
+- 2/4
+
+? Welche Zählzeit ist in jedem Takt betont?
++ Die erste
+- Die letzte
+- Die zweite
+- Keine, alle sind gleich
+
+? In einem 4/4-Takt stehen schon eine Halbe und eine Viertel. Was fehlt noch?
++ Eine Viertel
+- Eine Halbe
+- Eine Achtel
+- Nichts, der Takt ist voll

@@ -63,3 +63,53 @@ pruefung: tonleiter
 ## Freie Aufgabe
 
 Stell im Editor den Bassschlüssel ein und schreibe eine kurze Melodie, die zwischen dem großen G und dem c′ bleibt. Lies dir danach jede Note laut mit ihrem deutschen Namen vor, mit Oktavlage (z. B. „kleines e“). Schalte die Notennamen im Editor zur Kontrolle ein.
+
+## Quiz
+
+? Welcher Ton liegt auf der Linie, die der Violinschlüssel umkreist?
++ g′
+- f
+- c′
+- e′
+= Der Violinschlüssel ist ein verziertes G: Er legt das g′ auf die zweite Linie von unten.
+
+? Um welche Linie setzt der Bassschlüssel seine zwei Punkte, und welcher Ton liegt dort?
++ Um die vierte Linie, dort liegt das kleine f
+- Um die zweite Linie, dort liegt das g
+- Um die dritte Linie, dort liegt das c′
+- Um die vierte Linie, dort liegt das g
+= Der Bassschlüssel ist ein F-Schlüssel: Seine Punkte rahmen die Linie des kleinen f.
+
+? Wo steht das mittlere c′ im Violinschlüssel?
++ Auf einer Hilfslinie unter dem System
+- Im untersten Zwischenraum
+- Auf der untersten Linie
+- Auf einer Hilfslinie über dem System
+= Das c′ liegt genau zwischen Violin- und Bassschlüssel und braucht in beiden eine Hilfslinie.
+
+? Wie heißt im Deutschen das um einen Halbton erniedrigte H?
++ B
+- Hes
+- Bes
+- As
+= Eine deutsche Besonderheit: Der Stammton zwischen A und C heißt H, das erniedrigte H heißt B.
+
+? Zwischen welchen Stammtönen liegt von Natur aus ein Halbton?
++ E–F und H–C
+- C–D und F–G
+- D–E und A–H
+- G–A und H–C
+= Auf der Klaviatur fehlt dort die schwarze Taste dazwischen.
+
+? Was macht ein Kreuz vor dem Ton F?
++ Es erhöht ihn um einen Halbton zu Fis
+- Es erniedrigt ihn um einen Halbton zu Fes
+- Es erhöht ihn um einen Ganzton zu G
+- Es löst ein vorheriges Vorzeichen auf
+
+? Wie heißt das c eine Oktave über dem mittleren c′?
++ zweigestrichenes c″
+- kleines c
+- großes C
+- dreigestrichenes c‴
+= Großes C, kleines c, eingestrichenes c′ (das mittlere), zweigestrichenes c″.

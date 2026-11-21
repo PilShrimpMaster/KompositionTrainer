@@ -54,3 +54,41 @@ pruefung: stil romantik, vierstimmig, fehlerfrei, stilmerkmal mediante
 ## Freie Aufgabe
 
 Schau dir eine Szene aus einem Film deiner Wahl ohne Ton an. Überlege, welche Epoche zu ihr passt, und schreib eine Skizze von acht Takten in diesem Stil. Vergleiche danach mit der Originalmusik.
+
+## Quiz
+
+? Wofür steht im Film oft Barockmusik?
++ Ordnung, Macht und Vergangenheit
+- Das Fremde und Bedrohliche
+- Traum und Wasser
+- Heldentum im Weltraum
+
+? Welche Mittel nutzt John Williams in „Star Wars“?
++ Leitmotive wie bei Wagner, großes Orchester und Medianten
+- Zwölftonreihen
+- Nur Synthesizer
+- Barocke Fugen
+
+? Welcher Akkordschritt klingt heldisch und weit?
++ Ein Dur-Akkord springt eine große Terz, z. B. C-Dur – As-Dur
+- Dominante – Tonika
+- Ein Tritonus im Bass
+- Ein verminderter Septakkord
+
+? Welche Musik setzt Kubrick in „2001“ für das Unbekannte ein?
++ Ligetis Klangflächen
+- Händels Sarabande
+- Mozarts Sonaten
+- Debussys Pentatonik
+
+? Was sind die Streicherschreie in „Psycho“?
++ Cluster
+- Mixturen
+- Quintfallsequenzen
+- Alberti-Bässe
+
+? Wer brachte die Spätromantik nach Hollywood?
++ Max Steiner und Erich Wolfgang Korngold
+- Bernard Herrmann und Hans Zimmer
+- Ravel und Debussy
+- Bach und Händel

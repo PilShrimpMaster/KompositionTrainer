@@ -49,3 +49,35 @@ pruefung: vollstaendig, fehlerfrei
 ## Freie Aufgabe
 
 Nimm einen neuen Cantus firmus im Phrygischen (auf e) und schreib eine Gegenstimme der 2. Gattung darunter. Im Phrygischen schließt die Unterstimme mit d–e und die Oberstimme mit f–e: Es gibt keinen Leitton, das gibt dem Schluss seine besondere Farbe.
+
+## Quiz
+
+? Was muss auf der Eins in der 2. Gattung stehen?
++ Eine Konsonanz
+- Eine Dissonanz
+- Eine Pause
+- Immer eine Oktave
+
+? Wie darf eine Dissonanz auf der zweiten Halben eingesetzt werden?
++ Als Durchgang: schrittweise hinein und in derselben Richtung weiter
+- Beliebig, solange sie kurz ist
+- Durch einen Sprung erreicht
+- Nur als Wiederholung des vorigen Tons
+
+? Was sind Akzentparallelen?
++ Quinten oder Oktaven auf zwei aufeinanderfolgenden Einsen
+- Parallelen auf unbetonten Zeiten
+- Zwei Durchgänge nacheinander
+- Terzen auf der Eins
+
+? Womit darf die Gegenstimme in der 2. Gattung beginnen?
++ Mit einer halben Pause
+- Mit einer Dissonanz
+- Mit einer Viertel
+- Mit einem Vorhalt
+
+? Was dürfen konsonante zweite Halben, was dissonante nicht dürfen?
++ Springen
+- Länger klingen
+- Auf der Eins stehen
+- Parallel laufen
