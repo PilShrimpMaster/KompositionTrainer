@@ -3,8 +3,8 @@ id: impressionismus
 titel: Impressionismus
 kategorie: Geschichte
 kurz: Um 1890 bis 1920, vor allem in Frankreich: Klangfarben und Stimmungen statt funktionaler Harmonik. Debussy und Ravel verwenden Ganztonleiter, Pentatonik und parallele Akkorde.
-synonyme: Impressionismus, impressionistisch, Ravel, Mixturen, Akkordparallelen
-siehe: ganztonleiter, pentatonik, kirchentonarten, romantik, debussy
+synonyme: Impressionismus, impressionistisch, Ravel
+siehe: ganztonleiter, pentatonik, kirchentonarten, romantik, debussy, parallelverschiebung
 ---
 
 Wie die impressionistischen Maler das flüchtige Licht einfingen, so suchten **Claude Debussy** und **Maurice Ravel** nach schwebenden **Klangfarben** und Stimmungen.

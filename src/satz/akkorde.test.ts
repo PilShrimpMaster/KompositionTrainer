@@ -24,6 +24,30 @@ describe('Akkorderkennung', () => {
     expect(ak('A4 F#4 D4 D3')).toMatchObject({ funktion: 'DD' });
   });
 
+  it('erkennt alterierte Akkorde der Romantik', () => {
+    // Neapolitaner in a-Moll und C-Dur, als Sextakkord
+    expect(ak('Bb4 F4 D4 D3', a)).toMatchObject({ funktion: 'sN', alteriert: 'neapolitaner', umkehrung: 1 });
+    expect(ak('Db5 Ab4 F4 F3')).toMatchObject({ funktion: 'sN' });
+    // Übermäßige Sextakkorde vor der Dominante in a-Moll
+    expect(ak('D#4 B3 A3 F3', a)).toMatchObject({ name: 'Französischer Sextakkord', alteriert: 'uebermaessig' });
+    expect(ak('D#4 C4 A3 F2', a)).toMatchObject({ name: 'Deutscher Sextakkord' });
+    expect(ak('F#4 C4 Eb4 Ab3')).toMatchObject({ name: 'Deutscher Sextakkord', funktion: 'DD⁷>', grundton: { step: 'D' } });
+    expect(ak('D#4 C4 A3 F2', a).grundton).toMatchObject({ step: 'B' });
+    expect(ak('F#4 C4 C4 Ab3')).toMatchObject({ name: 'Italienischer Sextakkord', funktion: 'DD>' });
+    // Zwischendominanten
+    expect(ak('G#4 E4 B3 E3')).toMatchObject({ funktion: '(D)Tp', alteriert: 'zwischendominante' });
+    expect(ak('Bb4 E4 G4 C3')).toMatchObject({ funktion: '(D⁷)S' });
+    expect(ak('C#5 A4 E4 A2')).toMatchObject({ funktion: '(D)Sp' });
+    // Medianten aus Moll
+    expect(ak('G4 Eb4 Bb3 Eb3')).toMatchObject({ funktion: 'tP', alteriert: 'mediante' });
+    expect(ak('C5 Eb4 Ab3 Ab2')).toMatchObject({ funktion: 'sP' });
+    // Dominantnonakkord, groß und klein
+    expect(ak('A4 F4 B3 G2')).toMatchObject({ funktion: 'D⁹', none: 'groß' });
+    expect(ak('F4 Ab4 B3 G2')).toMatchObject({ funktion: 'D⁹>', none: 'klein' });
+    // Ohne Septime bleibt die None ein Vorhalt: kein Akkord
+    expect(erkenneAkkord(['D5', 'G4', 'E4', 'C3'].map(parsePitch), C)).toBeNull();
+  });
+
   it('kennt den Leitton, in Moll erhöht', () => {
     expect(istLeitton(parsePitch('B3'), C)).toBe(true);
     expect(istLeitton(parsePitch('G#4'), a)).toBe(true);

@@ -1,3 +1,4 @@
+import { liesStil, type Stil } from '../satz/stil';
 import type { Gattung } from '../kontrapunkt/fux';
 import { kpSatz } from '../kontrapunkt/kurzform';
 import { leseFelder, liste, parseBeispiel, trenneKopf } from '../lexikon/parse';
@@ -28,6 +29,14 @@ export interface Schreibaufgabe {
   klavier?: { melodie: NoteEvent[]; begleitung: NoteEvent[] };
   /** Ensemble: Instrumente von oben nach unten und vorgegebene Noten je Stimme */
   ensemble?: { instrumente: string[]; vorgabe: NoteEvent[][] };
+  /** Stilprofil der Prüfung, z. B. „romantik“ */
+  stil?: Stil;
+}
+
+function pruefeStil(text: string): Stil {
+  const s = liesStil(text);
+  if (!s) throw new Error(`Unbekannter Stil „${text}“`);
+  return s;
 }
 
 /** „besetzung: streichquartett“ oder „besetzung: oboe, klarinette, fagott“ und Stimmen „v1:“ bis „v8:“ */
@@ -83,7 +92,7 @@ function parseSatzBlock(inhalt: string): { score: Score; analyse: boolean } {
 
 export type Baustein =
   | { art: 'text'; markdown: string }
-  | { art: 'noten'; score: Score; analyse?: boolean; kontrapunkt?: { gattung: Gattung; cf: 0 | 1 }; motive?: boolean; form?: boolean; harmonien?: boolean }
+  | { art: 'noten'; score: Score; analyse?: boolean; kontrapunkt?: { gattung: Gattung; cf: 0 | 1 }; motive?: boolean; form?: boolean; harmonien?: boolean; merkmale?: boolean }
   | { art: 'akkorde'; gruppen: Pitch[][]; klang: 'nacheinander' | 'zusammen'; schluessel: Clef; tonart?: KeySignature }
   | { art: 'uebungen'; typen: UebungTyp[] }
   | { art: 'aufgabe'; aufgabe: Schreibaufgabe };
@@ -172,6 +181,7 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
               takt: f.takt ? parseTakt(f.takt) : undefined,
               schluessel: f.schluessel ? parseSchluessel(f.schluessel) : undefined,
               pruefung: liste(f.pruefung),
+              ...(f.stil ? { stil: pruefeStil(f.stil) } : {}),
               ...(f.kontrapunkt
                 ? { kontrapunkt: kontrapunktFelder(f) }
                 : {}),
@@ -186,6 +196,13 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
           });
           break;
         }
+      }
+      // Beispiele mit Stilprofil („stil: romantik“) und Stilmerkmal-Anzeige („merkmale: ja“)
+      const letzter = out[out.length - 1];
+      if (m[1] !== 'aufgabe' && letzter?.art === 'noten') {
+        const stil = /^\s*stil\s*:\s*(\S+)/m.exec(inhalt);
+        if (stil) letzter.score.stil = pruefeStil(stil[1]);
+        if (/^\s*merkmale\s*:\s*ja/m.test(inhalt)) letzter.merkmale = true;
       }
     } catch (e) {
       throw new Error(`${ort}: ${(e as Error).message}`);

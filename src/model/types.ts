@@ -89,4 +89,6 @@ export interface Score {
   time: TimeSignature;
   key: KeySignature;
   voices: Voice[];
+  /** Stilprofil der Satzprüfung (streng, barock, klassik, romantik, impressionismus, moderne) */
+  stil?: string;
 }

@@ -15,6 +15,8 @@ import { ensembleName, stimmenVon, synchron } from '../editor/satzdoc';
 import { klavierHarmonien, pruefeKlaviersatz } from '../satz/klavier';
 import { analysiereForm, kadenzAm, kadenzText, menuettTrioFehlt, type KadenzArt } from '../satz/form';
 import type { Akkord } from '../satz/akkorde';
+import { stilProfil } from '../satz/stil';
+import { MERKMALE, stilmerkmale, type MerkmalId } from '../satz/stilmerkmale';
 import { parseNotenfolge, parseTonart } from './kompakt';
 import { grundton } from '../model/tonart';
 import { dreiklangArt, intervall, INTERVALL_NAMEN } from '../uebungen/theorie';
@@ -169,6 +171,27 @@ export function pruefe(gesamt: EditorDoc, kriterien: string[]): Pruefpunkt[] {
       case 'halbschluss':
       case 'ganzschluss-takt':
         return formKriterium(name, args, satz() ?? rebar(doc).score);
+      case 'stil': {
+        const soll = stilProfil(arg);
+        return {
+          text: `Geprüft im Stil: ${soll.name}`,
+          ok: stilProfil(gesamt.stil).id === soll.id,
+          hinweis: 'Wähle unter „Stück einstellen“ den passenden „Stil der Prüfung“ oder beginne die Aufgabe neu.',
+        };
+      }
+      case 'stilmerkmal': {
+        const id = arg as MerkmalId;
+        const def = MERKMALE[id];
+        if (!def) return { text: `Unbekanntes Stilmerkmal „${arg}“`, ok: false };
+        const mindestens = Number.isFinite(Number(args[1])) && args[1] ? Number(args[1]) : 1;
+        const m = stilmerkmale(satz() ?? rebar(doc).score).find((x) => x.id === id);
+        const anzahl = m?.takte.length ?? 0;
+        return {
+          text: mindestens > 1 ? `${def.name} an mindestens ${mindestens} Stellen` : `Enthält: ${def.name}`,
+          ok: anzahl >= mindestens,
+          hinweis: anzahl ? `Bisher in ${anzahl === 1 ? 'einem Takt' : `${anzahl} Takten`}.` : `Noch nicht gefunden. Schau im Lexikon unter „${def.name}“ nach, wie es gebaut ist.`,
+        };
+      }
       case 'ensemble':
       case 'im-umfang':
       case 'begleitung-noten':
@@ -340,6 +363,7 @@ function satzKriterium(name: string, args: string[], doc: EditorDoc, score: Scor
             : doc.satz.ensemble
               ? 'Keine Satzfehler (Parallelen, Umfang der Instrumente, Auflösung …)'
               : 'Keine Satzfehler (Parallelen, Umfang, Auflösung …)',
+        ...(score.stil && score.stil !== 'streng' ? { text: `Keine Satzfehler im Stil: ${stilProfil(score.stil).name}` } : {}),
         ok: fehler.length === 0,
         hinweis: erster ? `${fehler.length} Fehler, z. B. Takt ${erster.takt}: ${erster.text}` : undefined,
       };
