@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { menuettMitTrio } from '../data/formbeispiele';
+import { FORTSPINNUNG } from '../data/stilbeispiele';
 import { FEEDBACK_SCHEMA, feedbackAnfrage, feedbackLesen } from './feedback';
 
 describe('KI-Feedback zu eigenen Stücken', () => {
@@ -15,6 +16,15 @@ describe('KI-Feedback zu eigenen Stücken', () => {
     expect(text).toContain('Lösung dieser Aufgabe');
     expect(text).toContain('Konzentriere dich auf die Form');
     expect(text).not.toMatch(/sk-ant/);
+  });
+
+  it('nennt im Stil-Schwerpunkt den gewählten Stil und die Stilmerkmale', () => {
+    const score = { ...FORTSPINNUNG(), stil: 'barock' };
+    const text = feedbackAnfrage(score, { besetzung: 'Klaviersatz', befunde: [], fokus: 'stil' });
+    expect(text).toContain('Ich schreibe im Stil: Barock');
+    expect(text).toContain('Stilmerkmale: Sequenzen');
+    expect(text).toContain('passt am ehesten zu: Barock');
+    expect(text).toContain('Konzentriere dich auf den Stil');
   });
 
   it('liest die Antwort robust', () => {

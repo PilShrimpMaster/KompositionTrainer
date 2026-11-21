@@ -4,7 +4,7 @@ titel: Barock
 kategorie: Geschichte
 kurz: Etwa 1600 bis 1750: Generalbass, Dur und Moll, Oper, Konzert und Fuge. Wichtige Komponisten: Monteverdi, Vivaldi, Händel, Bach, Telemann.
 synonyme: Barockmusik, barock, Telemann, Purcell, Affekt, Affektenlehre, Basso-continuo-Zeitalter
-siehe: generalbass, fuge, bach, konzert, oper, monteverdi, vivaldi, haendel
+siehe: generalbass, fuge, bach, konzert, oper, monteverdi, vivaldi, haendel, fortspinnung, tanz
 ---
 
 Um 1600 entstand ein neuer Stil: eine Melodie über einem bezifferten Bass (**Generalbass**). Mit ihm kamen die **Oper**, das **Oratorium** und später das **Konzert**.

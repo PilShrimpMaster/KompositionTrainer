@@ -3,8 +3,8 @@ id: satz-form
 titel: Satz (Formmodell)
 kategorie: Form
 kurz: Ein achttaktiges Modell der Klassik: zwei Takte Motiv, Wiederholung, dann vier Takte Entwicklung mit Kadenz (2 + 2 + 4).
-synonyme: Satzform, Satzmodell, Sentence, Fortspinnung, Entwicklungsteil
-siehe: periode, motiv, phrase
+synonyme: Satzform, Satzmodell, Sentence, Entwicklungsteil
+siehe: periode, motiv, phrase, fortspinnung
 ---
 
 Neben der **Periode** ist der **Satz** das wichtigste Bauprinzip klassischer Themen (Begriff nach Arnold Schönberg):

@@ -3,6 +3,8 @@ import type { Score } from '../model/types';
 import { analysiereForm, kadenzText } from '../satz/form';
 import { klavierHarmonien } from '../satz/klavier';
 import { funktionsfolge } from '../satz/analyse';
+import { stilProfil } from '../satz/stil';
+import { stilmerkmale, stilTendenz } from '../satz/stilmerkmale';
 import type { Befund } from '../satz/regeln';
 import { stimmeKurz } from './erklaeren';
 import { rebar } from '../editor/rebar';
@@ -51,6 +53,7 @@ export const FOKUS = {
   melodie: 'Melodie und Motiv',
   harmonie: 'Harmonik und Begleitung',
   form: 'Form und Proportionen',
+  stil: 'Stil und Epoche',
 } as const;
 export type Fokus = keyof typeof FOKUS;
 
@@ -59,6 +62,7 @@ const FOKUS_TEXT: Record<Fokus, string> = {
   melodie: 'Konzentriere dich auf die Melodie: Bogen, Höhepunkt, Motiv und seine Verarbeitung, Phrasierung, Rhythmus.',
   harmonie: 'Konzentriere dich auf Harmonik und Begleitung: Akkordwahl, Kadenzen, Bassführung, Begleitmuster, harmonischer Rhythmus.',
   form: 'Konzentriere dich auf die Form: Gliederung, Proportionen, Wiederholung und Kontrast, Kadenzplan, Höhepunkt im Ganzen.',
+  stil: 'Konzentriere dich auf den Stil: Miss das Stück an der gewählten Epoche (oder, wenn keine gewählt ist, an der, zu der es am meisten passt). Was ist stiltypisch, was klingt stilfremd (etwa eine romantische Wendung in einem barocken Satz), und welche typischen Mittel der Epoche könnte das Stück noch nutzen? Nenne zum Vergleich ein bis zwei passende Werke bekannter Komponisten.',
 };
 
 export interface FeedbackKontext {
@@ -82,10 +86,16 @@ export function feedbackAnfrage(score: Score, k: FeedbackKontext): string {
       : score.voices.length === 4
         ? funktionsfolge(score).join(' – ')
         : '';
+  const merkmale = stilmerkmale(score);
+  const tendenz = stilTendenz(merkmale)
+    .slice(0, 2)
+    .map((t) => stilProfil(t.stil).name);
+  const stil = score.stil && score.stil !== 'streng' ? stilProfil(score.stil) : undefined;
   const befunde = k.befunde.slice(0, 8).map((b) => `- Takt ${b.takt}${b.bisTakt && b.bisTakt !== b.takt ? `–${b.bisTakt}` : ''} (${b.art}): ${b.text}`);
   return [
     `Mein Stück „${score.title}“: ${k.besetzung}, ${germanKeyName(score.key)}, ${score.time.beats}/${score.time.beatType}-Takt, Tempo ${score.tempo}, ${takte} Takte.`,
     k.aufgabe ? `Es ist meine Lösung dieser Aufgabe: ${k.aufgabe}` : '',
+    stil ? `Ich schreibe im Stil: ${stil.name} (${stil.epoche})` : '',
     '',
     'Noten:',
     ...score.voices.map((v, i) => `${v.name ?? `Stimme ${i + 1}`}: ${stimmeKurz(score, i)}`),
@@ -94,6 +104,7 @@ export function feedbackAnfrage(score: Score, k: FeedbackKontext): string {
     `- Form: ${form.form ?? 'keine bekannte Form erkannt'}; Zweitakter ${form.glieder.map((g) => g.name).join(' ') || '–'}`,
     form.kadenzen.length ? `- Kadenzen: ${form.kadenzen.map(kadenzText).join('; ')}` : '',
     harmonien ? `- Harmonien: ${harmonien}` : '',
+    merkmale.length ? `- Stilmerkmale: ${merkmale.map((m) => m.text).join('; ')}${tendenz.length ? ` (passt am ehesten zu: ${tendenz.join(', ')})` : ''}` : '',
     befunde.length ? `- Befunde der Regelprüfung:\n${befunde.join('\n')}` : '- Die Regelprüfung findet keine Fehler.',
     '',
     FOKUS_TEXT[k.fokus],

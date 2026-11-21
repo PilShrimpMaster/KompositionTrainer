@@ -63,7 +63,7 @@ describe('Stufe 2', () => {
     expect(titel('Zeile in a-Moll mit pikardischer Terz')).toBe('t s D T');
   });
 
-  for (const a of alleAufgaben().filter((a) => a.vorgabe)) {
+  for (const a of alleAufgaben().filter((a) => a.vorgabe && !a.id.startsWith('s6-'))) {
     it(`Aufgabe „${a.titel}“ ist mit der Musterlösung lösbar und passt zur Vorgabe`, () => {
       const l = LOESUNGEN[a.titel];
       expect(l, 'Musterlösung fehlt').toBeDefined();

@@ -14,6 +14,16 @@ export interface Stueck {
   portfolio?: boolean;
 }
 
+/** Mehrsätziges Werk: eine geordnete Folge von Stücken (Sätzen) */
+export interface Werk {
+  id: string;
+  titel: string;
+  /** Stück-Ids in der Reihenfolge der Sätze */
+  saetze: string[];
+  erstellt: number;
+  geaendert: number;
+}
+
 export interface StueckVersion {
   id: string;
   name: string;
@@ -44,6 +54,8 @@ export interface Sicherung {
   stuecke: Stueck[];
   fortschritt: Fortschritt[];
   ergebnisse: Ergebnis[];
+  /** Ältere Sicherungen haben noch keine Werke */
+  werke?: Werk[];
 }
 
 export function neueId(): string {
@@ -83,5 +95,21 @@ export function zusammenfuehren(
     stuecke: neuer(lokal.stuecke, fremd.stuecke, 'id', (s) => s.geaendert),
     fortschritt: neuer(lokal.fortschritt, fremd.fortschritt, 'modul', (f) => f.geaendert),
     ergebnisse: neuer(lokal.ergebnisse, fremd.ergebnisse, 'id', (e) => e.zeit),
+    werke: neuer(lokal.werke ?? [], fremd.werke ?? [], 'id', (w) => w.geaendert),
   };
+}
+
+/** Sätze eines Werks als Stücke, in Reihenfolge; gelöschte Stücke fallen heraus */
+export function werkSaetze(werk: Werk, stuecke: Stueck[]): Stueck[] {
+  const map = new Map(stuecke.map((s) => [s.id, s]));
+  return werk.saetze.flatMap((id) => map.get(id) ?? []);
+}
+
+/** Verschiebt den Satz an Position i um d Plätze (−1 nach oben, +1 nach unten) */
+export function satzVerschieben(saetze: string[], i: number, d: number): string[] {
+  const j = i + d;
+  if (i < 0 || i >= saetze.length || j < 0 || j >= saetze.length) return saetze;
+  const a = saetze.slice();
+  [a[i], a[j]] = [a[j], a[i]];
+  return a;
 }

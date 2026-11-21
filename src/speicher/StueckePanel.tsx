@@ -3,6 +3,7 @@ import type { EditorDoc } from '../editor/rebar';
 import { besetzungsName, scoreAusDoc } from '../editor/satzdoc';
 import { speichereMusicXml } from '../musicxml/datei';
 import type { Stueck } from './backup';
+import { WerkePanel } from './WerkePanel';
 import { alleStuecke, portfolioSetzen, stueckLoeschen, stueckSpeichern, versionLoeschen, versionSichern, versionZurueckholen } from './db';
 
 interface Props {
@@ -208,6 +209,15 @@ export function StueckePanel({ doc, stueckId, setStueckId, onOpen, onNew, versio
             </li>
           ))}
         </ul>
+      )}
+      {nurPortfolio && (
+        <WerkePanel
+          stuecke={liste}
+          onOpen={(id, d) => {
+            setStueckId(id);
+            onOpen(d);
+          }}
+        />
       )}
     </section>
   );

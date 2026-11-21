@@ -1,8 +1,8 @@
 import 'fake-indexeddb/auto';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { emptyDoc } from '../editor/state';
-import { pruefeSicherung, zusammenfuehren, type Sicherung } from './backup';
-import { alleStuecke, db, sicherungEinlesen, sicherungErstellen, stueckSpeichern } from './db';
+import { pruefeSicherung, satzVerschieben, werkSaetze, zusammenfuehren, type Sicherung } from './backup';
+import { alleStuecke, alleWerke, db, sicherungEinlesen, sicherungErstellen, stueckSpeichern, werkAendern, werkAnlegen } from './db';
 
 const leer = { stuecke: [], fortschritt: [], ergebnisse: [] };
 
@@ -88,5 +88,32 @@ describe('Fassungen und Portfolio', () => {
     expect(p.portfolio).toBe(true);
     expect(p.versionen?.[0].name).toBe('Aufgabe gelöst');
     expect(await alleStuecke()).toHaveLength(2);
+  });
+});
+
+describe('Mehrsätzige Werke', () => {
+  beforeEach(async () => {
+    await db.stuecke.clear();
+    await db.werke.clear();
+  });
+
+  it('ordnet Sätze, lässt gelöschte Stücke weg und übersteht die Sicherung', async () => {
+    const a = await stueckSpeichern({ ...emptyDoc(), title: 'Allegro' });
+    const b = await stueckSpeichern({ ...emptyDoc(), title: 'Andante' });
+    const w = await werkAnlegen('Sonatine', [a.id, b.id]);
+    expect(satzVerschieben(w.saetze, 1, -1)).toEqual([b.id, a.id]);
+    expect(satzVerschieben(w.saetze, 0, -1)).toEqual(w.saetze);
+    await werkAendern(w.id, { saetze: satzVerschieben(w.saetze, 1, -1) });
+    const [gespeichert] = await alleWerke();
+    expect(werkSaetze(gespeichert, await alleStuecke()).map((s) => s.titel)).toEqual(['Andante', 'Allegro']);
+    expect(werkSaetze(gespeichert, [a]).map((s) => s.titel)).toEqual(['Allegro']);
+
+    const sicherung = JSON.parse(JSON.stringify(await sicherungErstellen()));
+    await db.werke.clear();
+    await sicherungEinlesen(sicherung);
+    expect((await alleWerke()).map((x) => x.titel)).toEqual(['Sonatine']);
+    // Ältere Sicherungen ohne Werke lassen sich weiter einlesen
+    await sicherungEinlesen({ ...sicherung, werke: undefined });
+    expect(await alleWerke()).toHaveLength(1);
   });
 });

@@ -1424,3 +1424,39 @@ a.lexikon-link:hover {
 .meta-panel .ensemble-stimme {
   color: inherit;
 }
+
+/* Mehrsätzige Werke */
+.werke {
+  margin-top: 16px;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+.werk {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 8px 0;
+}
+.werk-kopf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.werk-saetze {
+  margin: 8px 0;
+  padding-left: 22px;
+}
+.werk-saetze li {
+  margin: 4px 0;
+}
+.werk-saetze li.is-current > .link {
+  font-weight: 600;
+}
+.werk select {
+  font: inherit;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  max-width: 100%;
+}

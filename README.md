@@ -4,7 +4,19 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **App öffnen:** https://pilshrimpmaster.github.io/KompositionTrainer/
 
-## Stand: M5 Instrumentation
+## Stand: M6 Stilepochen (Lernpfad komplett)
+
+**Stilprofile (M6):** Unter „Stück einstellen“ wählt man den Stil der Prüfung: Strenger Satz, Barock, Klassik, Romantik, Impressionismus oder Moderne. Regeln, die in der Epoche bewusst gebrochen werden (etwa Parallelen im Impressionismus oder frei geführte Leittöne in der Romantik), meldet die Prüfung dann als „Stilmittel“ mit Begründung statt als Fehler.
+
+**Erweiterte Harmonik und Stilmerkmale (M6):** Die Akkordanalyse erkennt Neapolitaner (sN), übermäßige Sextakkorde (italienisch, deutsch, französisch), Zwischendominanten, Medianten und Dominantnonakkorde. „Stilmerkmale zeigen“ markiert im Notenbild Sequenzen, Orgelpunkte, Chromatik, alterierte Akkorde, Parallelverschiebung, Ganzton, Pentatonik, Quarten, Cluster und Zwölftonreihen und schätzt, zu welcher Epoche sie passen.
+
+**Stufe 6 (M6):** Lektionen Barock, Klassik, Romantik, Impressionismus, Moderne, Werkanalyse und der Seitenblick „Epochenstile im Film“, jeweils mit Schreibaufgabe im passenden Stil, sowie das Abschlussprojekt „ein mehrsätziges Werk“. Neue Übungen „Epoche erkennen“ (Ausschnitte von Bach bis Schönberg) und „Alterierte Akkorde bestimmen“; Prüfkriterien `stil` und `stilmerkmal`.
+
+**Werke im Portfolio (M6):** In der Portfolio-Ansicht bündelt man Stücke als Sätze zu einem Werk, ordnet sie, hört alle Sätze nacheinander und exportiert jeden Satz nach MuseScore. Werke sind Teil der Sicherung.
+
+**KI-Feedback „Stil“ (M6):** Neuer Schwerpunkt „Stil und Epoche“: Claude misst das Stück am gewählten Stil, mit den gefundenen Stilmerkmalen. Neue Lexikoneinträge zu Fortspinnung, Bitonalität, Stilkopie, Parallelverschiebung, Quartenharmonik und Cluster.
+
+## M5 Instrumentation
 
 **Instrumentenklänge (M5):** Echte Samples (VSCO 2 Community Edition, gemeinfrei) für Violine, Viola, Violoncello, Kontrabass, Flöte, Oboe, Klarinette, Fagott, Horn, Trompete, Posaune und Tuba. Sie werden beim ersten Abspielen geladen und danach offline zwischengespeichert. Die Saxophone klingen vorerst mit dem Klarinetten- bzw. Fagottklang.
 

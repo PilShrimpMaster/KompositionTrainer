@@ -9,6 +9,7 @@ import {
   type Sicherung,
   type Stueck,
   type StueckVersion,
+  type Werk,
 } from './backup';
 
 /**
@@ -19,6 +20,7 @@ class TrainerDB extends Dexie {
   stuecke!: Table<Stueck, string>;
   fortschritt!: Table<Fortschritt, string>;
   ergebnisse!: Table<Ergebnis, string>;
+  werke!: Table<Werk, string>;
 
   constructor(name = 'kompositionstrainer') {
     super(name);
@@ -27,6 +29,8 @@ class TrainerDB extends Dexie {
       fortschritt: 'modul',
       ergebnisse: 'id, modul, zeit',
     });
+    // Version 2: mehrsätzige Werke aus Stücken des Portfolios
+    this.version(2).stores({ werke: 'id, geaendert' });
   }
 }
 
@@ -107,12 +111,13 @@ export function stueckLoeschen(id: string) {
 }
 
 export async function sicherungErstellen(): Promise<Sicherung> {
-  const [stuecke, fortschritt, ergebnisse] = await Promise.all([
+  const [stuecke, fortschritt, ergebnisse, werke] = await Promise.all([
     db.stuecke.toArray(),
     db.fortschritt.toArray(),
     db.ergebnisse.toArray(),
+    db.werke.toArray(),
   ]);
-  return { format: 'kt-sicherung', version: 1, erstellt: Date.now(), stuecke, fortschritt, ergebnisse };
+  return { format: 'kt-sicherung', version: 1, erstellt: Date.now(), stuecke, fortschritt, ergebnisse, werke };
 }
 
 /** Liest eine Sicherung ein und führt sie mit dem vorhandenen Stand zusammen. */
@@ -120,7 +125,8 @@ export async function sicherungEinlesen(data: unknown): Promise<{ stuecke: numbe
   const fremd = pruefeSicherung(data);
   const lokal = await sicherungErstellen();
   const merged = zusammenfuehren(lokal, fremd);
-  await db.transaction('rw', db.stuecke, db.fortschritt, db.ergebnisse, async () => {
+  await db.transaction('rw', [db.stuecke, db.fortschritt, db.ergebnisse, db.werke], async () => {
+    await db.werke.bulkPut(merged.werke);
     await db.stuecke.bulkPut(merged.stuecke);
     await db.fortschritt.bulkPut(merged.fortschritt);
     await db.ergebnisse.bulkPut(merged.ergebnisse);
@@ -134,4 +140,28 @@ export function alleErgebnisse() {
 
 export function alleFortschritte(): Promise<Fortschritt[]> {
   return db.fortschritt.toArray();
+}
+
+export function alleWerke(): Promise<Werk[]> {
+  return db.werke.orderBy('geaendert').reverse().toArray();
+}
+
+export async function werkAnlegen(titel: string, saetze: string[] = []): Promise<Werk> {
+  const jetzt = Date.now();
+  const werk: Werk = { id: neueId(), titel: titel.trim() || 'Mein Werk', saetze, erstellt: jetzt, geaendert: jetzt };
+  await db.werke.put(werk);
+  return werk;
+}
+
+/** Ändert Titel oder Satzfolge eines Werks */
+export async function werkAendern(id: string, aenderung: Partial<Pick<Werk, 'titel' | 'saetze'>>): Promise<Werk | undefined> {
+  const w = await db.werke.get(id);
+  if (!w) return undefined;
+  const neu = { ...w, ...aenderung, geaendert: Date.now() };
+  await db.werke.put(neu);
+  return neu;
+}
+
+export function werkLoeschen(id: string) {
+  return db.werke.delete(id);
 }
