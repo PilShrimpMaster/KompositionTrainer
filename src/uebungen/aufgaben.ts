@@ -6,6 +6,7 @@ import { begleitmusterAufgabe, formAufgabe } from './form';
 import { transpositionAufgabe } from './instrumente';
 import { altschluesselAufgabe, instrumentHoerenAufgabe, lageAufgabe } from './orchester';
 import { alteriertAufgabe, epocheAufgabe } from './stile';
+import { akkordsymbolAufgabe, optionstonAufgabe, pcsetAufgabe, reihenformAufgabe, tritonusAufgabe, zweiFuenfEinsAufgabe } from './jazz';
 import { fromDiatonic, germanKeyName, germanName, germanNameWithOctave, toMidi, diatonicIndex } from '../model/pitch';
 import type { Clef, Duration, KeySignature, Pitch, Score, Step } from '../model/types';
 import { funktionAufgabe, kadenzAufgabe, satzfehlerAufgabe, umkehrungAufgabe } from './satzuebungen';
@@ -71,7 +72,13 @@ export type UebungTyp =
   | 'instrument-hoeren'
   | 'lage-einschaetzen'
   | 'alteriert-bestimmen'
-  | 'epoche-erkennen';
+  | 'epoche-erkennen'
+  | 'akkordsymbol-lesen'
+  | 'zwei-fuenf-eins'
+  | 'optionston-bestimmen'
+  | 'tritonus-substitution'
+  | 'pcset-bestimmen'
+  | 'reihenform-bestimmen';
 
 export interface UebungInfo {
   typ: UebungTyp;
@@ -107,6 +114,12 @@ export const UEBUNGEN: UebungInfo[] = [
   { typ: 'lage-einschaetzen', titel: 'Umfang und Lage einschätzen', modul: 's5-blech', hoeren: false },
   { typ: 'alteriert-bestimmen', titel: 'Alterierte Akkorde bestimmen', modul: 's6-romantik', hoeren: false },
   { typ: 'epoche-erkennen', titel: 'Epoche erkennen', modul: 's6-werkanalyse', hoeren: false },
+  { typ: 'akkordsymbol-lesen', titel: 'Akkordsymbole lesen', modul: 's7-akkordsymbole', hoeren: false },
+  { typ: 'zwei-fuenf-eins', titel: 'II–V–I erkennen', modul: 's7-zwei-fuenf-eins', hoeren: false },
+  { typ: 'optionston-bestimmen', titel: 'Optionstöne bestimmen', modul: 's7-voicings', hoeren: false },
+  { typ: 'tritonus-substitution', titel: 'Tritonus-Substitution', modul: 's7-reharmonisation', hoeren: false },
+  { typ: 'pcset-bestimmen', titel: 'Tonmengen bestimmen (Primform)', modul: 's7-neue-musik', hoeren: false },
+  { typ: 'reihenform-bestimmen', titel: 'Reihenformen erkennen', modul: 's7-neue-musik', hoeren: false },
 ];
 
 /** Schwierigkeit 1–3, abhängig von der Sicherheit im Modul */
@@ -444,6 +457,18 @@ export function erzeugeAufgabe(typ: UebungTyp, stufe: Stufe, rng: Rng = Math.ran
       return alteriertAufgabe(rng, stufe);
     case 'epoche-erkennen':
       return epocheAufgabe(rng, stufe);
+    case 'akkordsymbol-lesen':
+      return akkordsymbolAufgabe(rng, stufe);
+    case 'zwei-fuenf-eins':
+      return zweiFuenfEinsAufgabe(rng, stufe);
+    case 'optionston-bestimmen':
+      return optionstonAufgabe(rng, stufe);
+    case 'tritonus-substitution':
+      return tritonusAufgabe(rng, stufe);
+    case 'pcset-bestimmen':
+      return pcsetAufgabe(rng, stufe);
+    case 'reihenform-bestimmen':
+      return reihenformAufgabe(rng, stufe);
   }
 }
 

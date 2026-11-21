@@ -19,6 +19,7 @@ export const STUFEN: Stufe[] = [
   { nummer: 4, titel: 'Melodik und Formenlehre', abschluss: 'Menuett mit Trio für Klavier' },
   { nummer: 5, titel: 'Instrumentation', abschluss: 'Satz für Streichquartett' },
   { nummer: 6, titel: 'Stil und eigene Werke', abschluss: 'Eigenes mehrsätziges Stück' },
+  { nummer: 7, titel: 'Jenseits der Klassik: Jazz, Pop, Film, Neue Musik', abschluss: 'Reharmonisiertes Leadsheet und ein Film-Cue mit Leitmotiv' },
 ];
 
 export const MODULE: Modul[] = [
@@ -68,4 +69,12 @@ export const MODULE: Modul[] = [
   { id: 's6-moderne', stufe: 6, titel: 'Moderne: freie Tonalität', ziel: 'Quarten, Cluster, Bitonalität und ein Einblick in die Zwölftontechnik' },
   { id: 's6-werkanalyse', stufe: 6, titel: 'Werkanalyse und Stilbestimmung', ziel: 'Ein unbekanntes Stück analysieren und seine Epoche begründen' },
   { id: 's6-film', stufe: 6, titel: 'Seitenblick: Epochenstile im Film', ziel: 'Wie Filmmusik Barock, Romantik und Moderne als Farben einsetzt' },
+  { id: 's7-akkordsymbole', stufe: 7, titel: 'Akkordsymbole und Leadsheet', ziel: 'Akkordsymbole lesen und schreiben, ein Leadsheet anlegen und hören' },
+  { id: 's7-zwei-fuenf-eins', stufe: 7, titel: 'II–V–I und Jazzkadenzen', ziel: 'Die wichtigste Akkordfolge des Jazz in Dur und Moll, Turnarounds' },
+  { id: 's7-voicings', stufe: 7, titel: 'Optionstöne und Voicings', ziel: 'Tensions und Avoid Notes, Shell- und Drop-2-Voicings' },
+  { id: 's7-reharmonisation', stufe: 7, titel: 'Reharmonisierung', ziel: 'Zwischendominanten, Tritonus-Substitution und eingeschobene II–V' },
+  { id: 's7-blues', stufe: 7, titel: 'Blues und Songformen im Jazz', ziel: 'Jazz-Blues mit II–V, AABA und Rhythm Changes' },
+  { id: 's7-pop', stufe: 7, titel: 'Popharmonik und Songwriting', ziel: 'Loops, modale Mischung, Hook und Songaufbau' },
+  { id: 's7-film', stufe: 7, titel: 'Filmmusik: Leitmotiv und Underscore', ziel: 'Leitmotiv, Ostinato, Pedal, chromatische Mediantik und Spannung unter dem Bild' },
+  { id: 's7-neue-musik', stufe: 7, titel: 'Neue Musik: Reihen, Mengen, Minimal Music', ziel: 'Zwölftontechnik, Pitch-Class-Sets und die Prozesse der Minimal Music' },
 ];

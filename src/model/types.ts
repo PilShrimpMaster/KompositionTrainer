@@ -38,6 +38,8 @@ export interface NoteEvent {
   lyric?: string;
   /** Fermate über der Note (Ende einer Choralzeile) */
   fermata?: boolean;
+  /** Akkordsymbol über dieser Note oder Pause (Leadsheet), z. B. „Dm7“ */
+  akkord?: string;
 }
 
 export interface Measure {

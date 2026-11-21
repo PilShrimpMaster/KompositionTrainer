@@ -1,3 +1,4 @@
+import { harmonyXml } from '../jazz/harmonyXml';
 import { measureLength, quarterLength } from '../model/duration';
 import type { Clef, Duration, NoteEvent, Score, Voice } from '../model/types';
 import { instrument, MIDI_PROGRAMM, musicXmlTransposition, notierteTonart, verschiebe } from '../model/instrumente';
@@ -138,6 +139,7 @@ export function exportMusicXml(score: Score): string {
           tieOffen[vi] = false;
         }
         for (const ev of noten) {
+          if (ev.akkord) out.push(harmonyXml(ev.akkord));
           out.push(noteXml(ev, vi + 1, stem, tieOffen[vi]));
           tieOffen[vi] = !!(ev.pitch && ev.tie);
           laenge += Math.round(quarterLength(ev.duration) * DIVISIONS);

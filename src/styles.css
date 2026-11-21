@@ -1460,3 +1460,46 @@ a.lexikon-link:hover {
   border-radius: 8px;
   max-width: 100%;
 }
+
+/* Akkordsymbole (Leadsheet) */
+.akkord-feld {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: end;
+  margin: 4px 0 8px;
+}
+.akkord-feld input[type='text'] {
+  font: inherit;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 14em;
+  max-width: 100%;
+}
+.akkord-feld input[aria-invalid='true'] {
+  border-color: #b3261e;
+}
+.leadsheet-panel {
+  margin-top: 8px;
+}
+.leadsheet-muster {
+  margin: 8px 0;
+  padding-left: 1.4em;
+}
+.leadsheet-tabelle {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+.leadsheet-tabelle th,
+.leadsheet-tabelle td {
+  text-align: left;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.voicing-knoepfe {
+  white-space: nowrap;
+}

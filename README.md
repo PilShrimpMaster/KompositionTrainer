@@ -4,7 +4,17 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **App öffnen:** https://pilshrimpmaster.github.io/KompositionTrainer/
 
-## Stand: M6 Stilepochen (Lernpfad komplett)
+## Stand: M7 Jenseits der Klassik (Lernpfad komplett)
+
+**Akkordsymbole und Leadsheets (M7):** Über jede Note kann man ein Akkordsymbol setzen (Cmaj7, Dm7, G7b9, F/A, Bø …, mit englischen Tonbuchstaben: Bb7 = B⁷, B7 = H⁷). Die Symbole stehen fett über dem System, klingen beim Abspielen als leise Klavierbegleitung und gehen als `<harmony>` nach MuseScore und zurück. In der Kurzform der Lektionen schreibt man `C5:4[Dm7]`.
+
+**Jazzharmonik (M7):** Die Leadsheet-Tafel unter dem Editor zeigt je Akkord Stufe und Rolle (IIm7, V7, Zwischendominante, Tritonus-Substitution, modale Mischung), findet II–V–I-Verbindungen, spielt Shell- und Drop-2-Voicings vor und meldet unlesbare Symbole, Avoid Notes und Melodietöne, die zu keinem Akkord passen. Neuer Stil „Jazz und Pop“.
+
+**Stufe 7 (M7):** Lektionen Akkordsymbole, II–V–I, Voicings, Reharmonisation, Jazz-Blues, Pop-Songwriting, Filmmusik und Neue Musik (Pitch-Class-Sets, Reihen) sowie das Abschlussprojekt „reharmonisiertes Leadsheet und Film-Cue mit Leitmotiv“. Neue Übungen „Akkordsymbole lesen“, „II–V–I finden“, „Optionstöne bestimmen“, „Tritonus-Substitution“, „Pitch-Class-Set bestimmen“ und „Reihenform bestimmen“; Prüfkriterien `akkordsymbole`, `leadsheet-fehlerfrei`, `jazzmuster`, `reharmonisiert`, `reihenform` und das Stilmerkmal `ostinato`.
+
+**Lexikon und KI-Feedback (M7):** Neue Einträge zu Tritonus-Substitution, modaler Mischung, Reharmonisierung, Avoid Note, Pitch-Class-Set und Rhythm Changes; die Lexikonsuche zeigt genaue Treffer zuerst. Das KI-Feedback bekommt bei Leadsheets die Akkordsymbole, Stufen und gefundenen Jazzmuster mit und darf in Beispielen auch reharmonisieren.
+
+## M6 Stilepochen
 
 **Stilprofile (M6):** Unter „Stück einstellen“ wählt man den Stil der Prüfung: Strenger Satz, Barock, Klassik, Romantik, Impressionismus oder Moderne. Regeln, die in der Epoche bewusst gebrochen werden (etwa Parallelen im Impressionismus oder frei geführte Leittöne in der Romantik), meldet die Prüfung dann als „Stilmittel“ mit Begründung statt als Fehler.
 

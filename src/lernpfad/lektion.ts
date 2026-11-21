@@ -31,6 +31,8 @@ export interface Schreibaufgabe {
   ensemble?: { instrumente: string[]; vorgabe: NoteEvent[][] };
   /** Stilprofil der Prüfung, z. B. „romantik“ */
   stil?: Stil;
+  /** Einstimmiges Leadsheet als Vorgabe: Melodie mit Akkordsymbolen */
+  leadsheet?: NoteEvent[];
 }
 
 function pruefeStil(text: string): Stil {
@@ -189,6 +191,7 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
                 ? { klavier: { melodie: f.melodie ? parseNotenfolge(f.melodie) : [], begleitung: f.begleitung ? parseNotenfolge(f.begleitung) : [] } }
                 : {}),
               ...(f.besetzung ? { ensemble: ensembleFelder(f) } : {}),
+              ...(f.leadsheet ? { leadsheet: parseNotenfolge(f.leadsheet) } : {}),
               ...(f.satz === 'ja'
                 ? { vorgabe: STIMM_FELDER.map((k) => (f[k] ? parseNotenfolge(f[k]) : [])), liedtext: f.liedtext || undefined }
                 : {}),

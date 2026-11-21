@@ -17,7 +17,7 @@ export function tonKurz(p: Pitch): string {
 
 export function noteKurz(ev: NoteEvent): string {
   const d = `${WERT[ev.duration.type]}${'.'.repeat(ev.duration.dots ?? 0)}`;
-  return `${ev.pitch ? tonKurz(ev.pitch) : 'r'}:${d}${ev.tie ? '~' : ''}${ev.fermata ? '^' : ''}`;
+  return `${ev.pitch ? tonKurz(ev.pitch) : 'r'}:${d}${ev.tie ? '~' : ''}${ev.fermata ? '^' : ''}${ev.akkord ? `[${ev.akkord}]` : ''}`;
 }
 
 /** Eine Stimme als „G4:4 A4:4 | B4:2 …“, optional nur die Takte von–bis (ab 1) */

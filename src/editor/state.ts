@@ -38,7 +38,9 @@ export type EditorAction =
   | { type: 'insertChord'; pitches: Pitch[] }
   /** Zwischen Melodie und vierstimmigem Satz umschalten */
   | { type: 'setSatz'; an: boolean }
-  | { type: 'setText'; text: string };
+  | { type: 'setText'; text: string }
+  /** Akkordsymbol über einer Note setzen oder (leer) entfernen */
+  | { type: 'setAkkord'; index: number; akkord: string };
 
 const HISTORY_LIMIT = 200;
 
@@ -157,6 +159,13 @@ function einstimmig(state: EditorState, action: EditorAction): EditorState {
       return updateEvent(state, selected, (ev) =>
         ev.pitch ? { ...ev, pitch: moveDiatonic(ev.pitch, action.steps, doc.key.fifths) } : null,
       );
+    case 'setAkkord':
+      return updateEvent(state, action.index, (ev) => {
+        const akkord = action.akkord.trim();
+        if ((ev.akkord ?? '') === akkord) return null;
+        const { akkord: _alt, ...rest } = ev;
+        return akkord ? { ...rest, akkord } : rest;
+      });
     case 'toRest':
       if (selected === null) return state;
       return updateEvent(state, selected, (ev) => (ev.pitch ? { duration: ev.duration } : null));

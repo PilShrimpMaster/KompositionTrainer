@@ -79,6 +79,7 @@ export function validateScore(data: unknown): ValidationResult {
           }
           sum += quarterLength({ type: n.duration.type as never, dots });
           if (n.lyric !== undefined && typeof n.lyric !== 'string') errors.push(`${at}: „lyric“ muss Text sein.`);
+          if (n.akkord !== undefined && typeof n.akkord !== 'string') errors.push(`${at}: „akkord“ muss Text sein.`);
           if (n.velocity !== undefined && (typeof n.velocity !== 'number' || n.velocity < 1 || n.velocity > 127)) {
             errors.push(`${at}: „velocity“ muss zwischen 1 und 127 liegen.`);
           }

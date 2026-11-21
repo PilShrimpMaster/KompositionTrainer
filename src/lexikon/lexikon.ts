@@ -46,5 +46,13 @@ suche.addAll(EINTRAEGE.map((e) => ({ ...e, synonymText: e.synonyme.join(' '), kl
 export function sucheEintraege(anfrage: string): Eintrag[] {
   const q = anfrage.trim();
   if (!q) return EINTRAEGE;
-  return suche.search(q).map((r) => NACH_ID.get(r.id as string)!);
+  // Genaue Treffer im Titel oder in den Synonymen zuerst („Tritonus“ vor „Tritonus-Substitution“)
+  const n = normalisiere(q);
+  const genau = (e: Eintrag) => (normalisiere(e.titel) === n || e.synonyme.some((x) => normalisiere(x) === n) ? 0 : 1);
+  return suche
+    .search(q)
+    .map((r) => NACH_ID.get(r.id as string)!)
+    .map((e, i) => ({ e, i }))
+    .sort((a, b) => genau(a.e) - genau(b.e) || a.i - b.i)
+    .map((x) => x.e);
 }

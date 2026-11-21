@@ -18,7 +18,7 @@ interface Props {
 export function AufgabePanel({ aufgabe, doc, onBeginnen, onSchliessen, onPortfolio }: Props) {
   const [geprueft, setGeprueft] = useState(false);
   const [imPortfolio, setImPortfolio] = useState(false);
-  const ergebnis = useMemo(() => pruefe(doc, aufgabe.pruefung), [doc, aufgabe]);
+  const ergebnis = useMemo(() => pruefe(doc, aufgabe.pruefung, { leadsheet: aufgabe.leadsheet }), [doc, aufgabe]);
   const alleOk = ergebnis.length > 0 && ergebnis.every((p) => p.ok);
   const begonnen = doc.title === aufgabe.titel;
 
