@@ -43,3 +43,29 @@ pruefung: mindestens-takte 8, motiv-anzahl 4, motiv-imitation, motiv-verarbeitun
 ## Freie Aufgabe
 
 Schreib eine zweite Invention in Moll. In Moll führt der Mittelteil meist in die Paralleltonart (in a-Moll nach C-Dur). Achte auf den Leitton gis vor dem Schluss und darauf, dass er keine übermäßige Sekunde zum f bildet.
+
+## Quiz
+
+? Wie lang sollte das Motiv einer Invention etwa sein?
++ Etwa ein halber Takt
+- Acht Takte
+- Ein einzelner Ton
+- Vier Takte
+
+? Was passiert in den ersten beiden Takten der Invention?
++ Motiv oben, dann Imitation unten
+- Schlusskadenz
+- Modulation zur Subdominante
+- Beide Stimmen spielen unisono
+
+? Wie endet die Invention am besten?
++ Schlusskadenz in der Grundtonart, Leitton oben und Quintfall im Bass
+- Mit einem Halbschluss
+- In der Dominanttonart
+- Mit einem Vorhalt ohne Auflösung
+
+? Welche Werkzeuge gehören in den Mittelteil der Invention?
++ Sequenzen, Umkehrung, Stimmtausch
+- Nur Wiederholungen des Motivs
+- Ein ganz neues Thema
+- Akkordbegleitung

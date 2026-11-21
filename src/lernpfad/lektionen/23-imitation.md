@@ -61,3 +61,41 @@ pruefung: mindestens-takte 4, motiv-imitation, fehlerfrei, vollstaendig
 ## Freie Aufgabe
 
 Schreib einen Kanon an der **Oberquinte**: Die zweite Stimme setzt eine Quinte höher ein. Dann musst du gut aufpassen: Was in der ersten Stimme eine Terz über der Unterstimme ist, wird in der Quinte zu etwas anderem. Probiere aus, welche Intervalle sich in beiden Lagen gut verhalten.
+
+## Quiz
+
+? Was unterscheidet einen Kanon von freier Imitation?
++ Beim Kanon folgt die zweite Stimme die ganze Zeit Ton für Ton
+- Beim Kanon setzt die zweite Stimme auf demselben Ton ein
+- Ein Kanon hat keine Pausen
+- Bei freier Imitation imitiert die Stimme nichts
+
+? Wie heißen die beiden Stimmen eines Kanons?
++ Dux und Comes
+- Cantus und Firmus
+- Subjekt und Kontrasubjekt
+- Sopran und Bass
+
+? Welche zwei Dinge bestimmen eine Imitation?
++ Einsatzabstand und Intervall
+- Tempo und Lautstärke
+- Tonart und Taktart
+- Rhythmus und Instrument
+
+? Was muss jeder neue Takt eines Kanons gleichzeitig sein?
++ Gute Fortsetzung und guter Kontrapunkt zum Vorigen
+- Eine Wiederholung und eine Umkehrung
+- Konsonant und gleich lang
+- Lauter als der vorige
+
+? Wo steckt in Bachs Goldberg-Variationen ein Kanon?
++ In jeder dritten Variation
+- Nur in der Aria
+- In der letzten Variation
+- In keiner
+
+? Wie heißt es, wenn eine Stimme das Motiv gespiegelt bringt?
++ Umkehrung
+- Krebs
+- Vergrößerung
+- Sequenz

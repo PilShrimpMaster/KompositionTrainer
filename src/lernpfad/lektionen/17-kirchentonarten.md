@@ -62,3 +62,47 @@ pruefung: noten 8, beginnt-grundton, endet-grundton, schritt-zum-schluss, hoechs
 ## Freie Aufgabe
 
 Schreib den gleichen Cantus firmus noch einmal im Dorischen (auf d) und im Mixolydischen (auf g), ohne Vorzeichen. Spiel beide vor: Wie verändert der Modus die Stimmung, obwohl die Linie ähnlich bleibt? Unter **Schreiben** → „Stück einstellen“ → Besetzung „Kontrapunkt“ erzeugt dir die App außerdem jederzeit neue Cantus firmi in allen Modi.
+
+## Quiz
+
+? Wie heißt der Grundton eines Modus?
++ Finalis
+- Tonika
+- Dominante
+- Repercussa
+
+? Welcher Modus ist Moll mit großer Sexte?
++ Dorisch
+- Phrygisch
+- Äolisch
+- Lydisch
+
+? Welcher Modus ist Dur mit übermäßiger Quarte?
++ Lydisch
+- Mixolydisch
+- Ionisch
+- Dorisch
+
+? Auf welchem Ton beginnt Phrygisch auf den weißen Tasten?
++ e
+- d
+- g
+- a
+
+? Wie schließt ein typischer Cantus firmus?
++ Schrittweise von oben auf der Finalis
+- Mit einem Quintsprung abwärts
+- Mit einer Tonwiederholung
+- Auf der Quinte des Modus
+
+? Was gehört nicht zu einem guten Cantus firmus?
++ Viele Tonwiederholungen
+- Ein einziger Höhepunkt
+- Überwiegend Schritte
+- Ausgeglichene Sprünge
+
+? Wer schrieb das Lehrbuch des Gattungskontrapunkts?
++ Johann Joseph Fux
+- Johann Sebastian Bach
+- Jean-Philippe Rameau
+- Arnold Schönberg

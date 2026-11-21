@@ -66,3 +66,42 @@ pruefung: vollstaendig, fehlerfrei
 ## Freie Aufgabe
 
 Unter **Schreiben** → „Stück einstellen“ → Besetzung „Kontrapunkt“ bekommst du mit „Neuer Cantus firmus“ beliebig viele Übungen in allen Modi. Schreib zu jedem Cantus firmus zwei Lösungen, eine oben und eine unten, und vergleiche, welche du schöner findest.
+
+## Quiz
+
+? Welche Intervalle sind vollkommene Konsonanzen?
++ Einklang, Quinte, Oktave
+- Terz und Sexte
+- Quarte und Quinte
+- Sekunde und Septime
+
+? Wie gilt die Quarte im zweistimmigen Satz?
++ Als Dissonanz
+- Als vollkommene Konsonanz
+- Als unvollkommene Konsonanz
+- Je nach Lage beides
+
+? Womit darf eine Gegenstimme unter dem Cantus firmus beginnen?
++ Nur mit Einklang oder Oktave
+- Mit jeder Konsonanz
+- Mit Quinte oder Oktave
+- Mit einer Terz
+= Eine Quinte darunter würde eine andere Tonart andeuten.
+
+? Wie endet ein Satz der 1. Gattung im Dorischen?
++ Im Einklang oder in der Oktave, mit Leitton cis zur Finalis
+- Auf einer Terz
+- Mit einer Quinte und Pause
+- Mit Parallelbewegung in die Oktave
+
+? Was ist eine verdeckte Parallele?
++ Zwei Stimmen gehen in gleicher Richtung in eine Quinte oder Oktave
+- Zwei Quinten nacheinander in Gegenbewegung
+- Eine Parallele, die man nicht hört
+- Zwei Terzen nacheinander
+
+? Welche Intervalle dürfen parallel laufen?
++ Terzen und Sexten, aber nicht zu lange
+- Quinten und Oktaven
+- Nur Oktaven
+- Gar keine

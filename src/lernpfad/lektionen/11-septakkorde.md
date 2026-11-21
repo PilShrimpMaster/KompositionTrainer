@@ -58,3 +58,41 @@ pruefung: vierstimmig, fehlerfrei, funktionen T S D7 T, ganzschluss
 ## Freie Aufgabe
 
 Spiel den D⁷ und seine Auflösung in allen Tonarten des Quintenzirkels, die du schon kennst. Merke dir das Muster: Leitton hoch, Septime runter.
+
+## Quiz
+
+? Aus welchen Tönen besteht der Dominantseptakkord in C-Dur?
++ G – H – D – F
+- G – H – D – E
+- C – E – G – B
+- D – F – A – C
+
+? Wohin geht der Leitton bei der Auflösung des D⁷?
++ Einen Halbton aufwärts zum Grundton
+- Einen Schritt abwärts
+- Er bleibt liegen
+- Eine Quinte abwärts
+
+? Wohin geht die Septime des D⁷?
++ Einen Schritt abwärts zur Terz der Tonika
+- Einen Halbton aufwärts
+- Sie springt zum Grundton
+- Sie bleibt liegen
+
+? Welches Intervall im D⁷ sorgt für die besondere Spannung?
++ Der Tritonus zwischen Leitton und Septime
+- Die Quinte zwischen Grundton und Quinte
+- Die große Terz
+- Die Oktave
+
+? Was heißt „vorbereitete Septime“?
++ Der Septimton klingt schon im Akkord davor und bleibt liegen
+- Die Septime wird vorher angekündigt
+- Die Septime erscheint zweimal
+- Die Septime steht im Bass
+
+? Welcher Ton wird im D⁷ oft weggelassen?
++ Die Quinte
+- Der Leitton
+- Die Septime
+- Der Grundton

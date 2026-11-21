@@ -67,3 +67,47 @@ pruefung: takte 8, instrument klarinette, gute-lage klarinette, endet-grundton, 
 ## Freie Aufgabe
 
 Nimm eine Melodie aus deinem Portfolio und exportiere sie nach MuseScore. Füge dort eine Stimme für Altsaxophon hinzu, kopiere die Melodie hinein und schalte „Klingende Notation“ an und aus. Spiel die transponierte Stimme auf deinem Saxophon: Sie muss genauso klingen wie das Klavier. Prüfe dabei, ob die Melodie in der guten Lage liegt oder ob eine Oktave höher oder tiefer besser klingt.
+
+## Quiz
+
+? Was ist die „gute Lage“ eines Instruments?
++ Der Bereich, in dem es sicher, schön und mühelos klingt
+- Sein gesamter Tonumfang
+- Die tiefste Oktave
+- Die Lage, in der es am lautesten ist
+
+? Wie klingt ein notiertes c auf dem Altsaxophon in Es?
++ Als es, eine große Sexte tiefer
+- Als c, wie notiert
+- Als b, eine große Sekunde tiefer
+- Als f, eine Quinte tiefer
+
+? Wie viele Kreuze mehr hat die Stimme für Klarinette in B?
++ Zwei
+- Drei
+- Eins
+- Keins
+
+? Wie klingt das Horn in F?
++ Eine Quinte tiefer als notiert
+- Eine Oktave tiefer
+- Wie notiert
+- Eine große Sexte tiefer
+
+? Welches dieser Instrumente transponiert nicht?
++ Flöte
+- Altsaxophon
+- Trompete in B
+- Horn in F
+
+? Wie heißt das tiefe, dunkle Register der Klarinette?
++ Chalumeau
+- Clarin
+- Kehltöne
+- Falsett
+
+? Wie sind die Einzelstimmen für die Spieler transponierender Instrumente notiert?
++ Immer transponiert
+- Immer klingend
+- Je nach Tonart
+- Im Altschlüssel

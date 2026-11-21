@@ -63,3 +63,42 @@ pruefung: vierstimmig, fehlerfrei, funktionen T S D T, ganzschluss
 ## Freie Aufgabe
 
 Spiel die Kadenz T – S – D – T am Klavier in drei verschiedenen Tonarten, zum Beispiel C-, G- und F-Dur. Achte darauf, die Hände so wenig wie möglich zu bewegen. Dann schreib im Editor eine Kadenz in F-Dur, ganz ohne Vorgaben.
+
+## Quiz
+
+? Welche Funktion hat in C-Dur der G-Dur-Akkord?
++ Dominante (D)
+- Subdominante (S)
+- Tonika (T)
+- Tonikaparallele (Tp)
+
+? Welche Funktion bringt den Leitton mit?
++ Die Dominante
+- Die Subdominante
+- Die Tonika
+- Keine, der Leitton gehört nur zur Tonleiter
+= In C-Dur steckt das H im G-Dur-Akkord und will zum C.
+
+? Welche Folge nennt man Kadenz?
++ T – S – D – T
+- T – D – S – T
+- S – T – D – S
+- D – T – S – D
+
+? Welcher Ton wird im vierstimmigen Satz bei einem Dreiklang am besten verdoppelt?
++ Der Grundton
+- Die Terz
+- Die Quinte
+- Der höchste Ton
+
+? Wie bewegen sich Alt und Tenor in einer guten Akkordverbindung?
++ Möglichst wenig: Gemeinsame Töne bleiben liegen, der Rest geht zum nächsten Ton
+- In großen Sprüngen, damit es lebendig klingt
+- Immer parallel zum Bass
+- Immer in Oktaven zum Sopran
+
+? Welche Rolle hat die Subdominante?
++ Sie entfernt sich von der Tonika und bereitet die Dominante vor
+- Sie ist der Ruhepunkt am Schluss
+- Sie enthält den Leitton
+- Sie ersetzt die Tonika am Anfang

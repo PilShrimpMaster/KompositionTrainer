@@ -57,3 +57,41 @@ pruefung: takte 8, dur, hoechster-ton-einmal, sprung-max 6, umfang 10, endet-gru
 ## Freie Aufgabe
 
 Sing oder spiel drei Melodien, die du liebst (gern auch aus Pop oder Film), und schreib sie auf. Wo ist der Höhepunkt? Wie oft wiederholt sich das Motiv? Schreib dann eine eigene Melodie, die dieselben Mittel nutzt.
+
+## Quiz
+
+? Wo liegt der Höhepunkt einer guten Melodie meist?
++ Eher spät, oft nach etwa zwei Dritteln
+- Gleich am Anfang
+- Genau auf dem letzten Ton
+- Mehrmals verteilt über die ganze Melodie
+
+? Was passiert nach einem Sprung in einer Melodie meist?
++ Die Melodie geht im Schritt in die Gegenrichtung zurück
+- Sie springt weiter in dieselbe Richtung
+- Sie wiederholt den Zielton mehrmals
+- Sie endet
+
+? Wohin strebt die 4. Stufe?
++ Zur 3. Stufe
+- Zur 5. Stufe
+- Zum Grundton
+- Zur 7. Stufe
+
+? Wie lang sind Phrasen meistens?
++ Zwei oder vier Takte
+- Ein Ton
+- Sechs oder sieben Takte
+- So lang wie das ganze Stück
+
+? Wodurch erkennt man Melodien oft schon?
++ Am Rhythmus
+- An der Tonart
+- Am Tempo
+- An der Lautstärke
+
+? Wie oft sollte man ein Motiv unverändert wiederholen, bevor das Ohr etwas Neues braucht?
++ Etwa zweimal
+- Fünf- bis sechsmal
+- Gar nicht
+- So oft wie möglich

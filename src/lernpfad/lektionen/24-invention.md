@@ -69,3 +69,41 @@ pruefung: mindestens-takte 4, motiv-imitation, motiv-verarbeitung, fehlerfrei, v
 ## Freie Aufgabe
 
 Nimm dir Bachs Invention in d-Moll (BWV 775) oder F-Dur (BWV 779) vor, hör sie an und such in den Noten das Motiv, seine Umkehrung und die Sequenzen. Du kannst die Noten als MusicXML (zum Beispiel aus MuseScore) unter „Hören“ öffnen. Dann schreib eine eigene Invention mit dem Motiv aus diesen Stücken.
+
+## Quiz
+
+? Was ist eine Sequenz?
++ Ein Motiv wird auf einer anderen Stufe wiederholt
+- Ein Motiv wird rückwärts gespielt
+- Ein Motiv wird gespiegelt
+- Zwei Stimmen tauschen die Lage
+
+? Was ist ein Krebs?
++ Das Motiv rückwärts gespielt
+- Das Motiv gespiegelt
+- Das Motiv in längeren Notenwerten
+- Das Motiv eine Oktave tiefer
+
+? Was braucht man für einen Stimmtausch?
++ Doppelten Kontrapunkt: Die Stimmen müssen auch vertauscht gut klingen
+- Zwei gleiche Stimmen
+- Eine Modulation
+- Ganze Noten
+
+? Warum sind Quinten beim Stimmtausch heikel?
++ Vertauscht werden sie zu Quarten, die als Dissonanz gelten
+- Sie werden zu Oktaven
+- Sie klingen dann zu laut
+- Sie verschwinden
+
+? Wohin führen die Sequenzen einer Invention in Dur meist zuerst?
++ Zur Dominante
+- Zur Subdominante
+- Zur Varianttonart in Moll
+- In eine weit entfernte Tonart
+
+? Wofür schrieb Bach seine 15 Inventionen?
++ Für den Unterricht
+- Für den Gottesdienst
+- Für das Orchester
+- Für Wettbewerbe

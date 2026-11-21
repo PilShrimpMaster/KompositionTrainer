@@ -51,3 +51,41 @@ pruefung: takte 8, akkordsymbole 8, leadsheet-fehlerfrei, jazzmuster modale-misc
 ## Freie Aufgabe
 
 Hör „Let It Be“ von den Beatles und „Someone Like You“ von Adele. Finde den Loop in beiden Songs und die Stelle, an der er unterbrochen wird. Schreib dann eine Strophe zu deinem Refrain, die tiefer liegt und rhythmisch dichter ist.
+
+## Quiz
+
+? Welche Akkordfolge ist die „Axis Progression“?
++ I – V – VIm – IV (C – G – Am – F)
+- I – IV – V – I
+- II – V – I
+- I – bVII – IV – I
+
+? Was klingt beim Loop VIm – IV – I – V anders als bei I – V – VIm – IV?
++ Er beginnt in Moll und klingt melancholischer
+- Er hat andere Akkorde
+- Er steht in einer anderen Tonart
+- Er hat keinen Dur-Akkord
+
+? Welche Folge ist rockig und mixolydisch?
++ I – bVII – IV – I (C – Bb – F – C)
+- I – VIm – IV – V
+- IIm – V – I
+- I – IV – V – IV
+
+? Wie wirkt IVm (Fm statt F in C-Dur)?
++ Wehmütig
+- Heroisch
+- Bedrohlich
+- Fröhlich
+
+? Wo liegt die Hook meist?
++ Im Refrain, oft auf dem Titel des Songs
+- In der Einleitung
+- In der Bridge
+- Im Gitarrensolo
+
+? Was bedeutet Prosodie im Songwriting?
++ Betonte Silben auf betonte Zählzeiten, wichtige Wörter auf lange oder hohe Töne
+- Möglichst viele Reime
+- Ein Text ohne Wiederholungen
+- Ein schnelles Tempo

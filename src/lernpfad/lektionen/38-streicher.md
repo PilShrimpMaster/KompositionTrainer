@@ -67,3 +67,47 @@ pruefung: takte 8, ensemble viola, im-umfang, gute-lage viola, endet-grundton, s
 ## Freie Aufgabe
 
 Hör dir den langsamen Satz aus Dvořáks „Amerikanischem“ Streichquartett (F-Dur, op. 96) an: Die Melodie beginnt in der Violine und wandert später ins Violoncello. Oder hör den Beginn von Schuberts Streichquintett C-Dur: zwei Violoncelli singen in der Tenorlage. Schreib dir auf, in welcher Lage die Melodie liegt und welches Instrument begleitet.
+
+## Quiz
+
+? Wie ist der Kontrabass gestimmt?
++ In Quarten: E – A – D – G
+- In Quinten: C – G – D – A
+- In Quinten: G – D – A – E
+- In Terzen
+
+? Welcher Ton ist der tiefste der Viola?
++ c
+- g
+- C
+- E
+
+? Welcher Ton liegt im Altschlüssel auf der Mittellinie?
++ c′
+- g′
+- f
+- a
+
+? Was bedeutet „pizzicato“?
++ Die Saite wird gezupft
+- Mit dem Bogen gestrichen
+- Mit Dämpfer
+- Schnelles Hin und Her des Bogens
+
+? Was bedeutet „con sordino“?
++ Mit Dämpfer
+- Ohne Bogen
+- Sehr laut
+- Geteilt auf zwei Stimmen
+
+? Was bedeutet „divisi“?
++ Eine Gruppe teilt sich auf zwei Stimmen auf
+- Alle spielen im Einklang
+- Gezupft
+- Ein Solo
+
+? Welche Saite des Violoncellos ist für Melodien besonders berühmt?
++ Die A-Saite
+- Die C-Saite
+- Die G-Saite
+- Die E-Saite

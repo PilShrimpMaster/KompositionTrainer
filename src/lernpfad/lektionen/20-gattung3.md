@@ -54,3 +54,35 @@ pruefung: vollstaendig, fehlerfrei
 ## Freie Aufgabe
 
 Schreib eine Lösung der 3. Gattung unter dem Cantus firmus (Besetzung „Kontrapunkt“, Cantus firmus oben). Versuche, mindestens eine Cambiata einzubauen.
+
+## Quiz
+
+? Was ist eine Wechselnote?
++ Ein Schritt weg vom Ton und sofort zurück
+- Ein Schritt weiter in dieselbe Richtung
+- Ein Sprung auf eine Dissonanz
+- Ein gebundener Ton
+
+? Wie verläuft die Cambiata?
++ Dissonanz springt eine Terz abwärts, dann geht es stufenweise hinauf
+- Dissonanz wird gehalten und löst sich abwärts auf
+- Zwei Sprünge in dieselbe Richtung
+- Durchgang mit Tonwiederholung
+
+? Welche Viertel muss in der 3. Gattung konsonant sein?
++ Die erste jedes Takts
+- Alle vier
+- Die letzte
+- Keine
+
+? Wie viele Noten stehen in der 3. Gattung gegen jede Ganze?
++ Vier Viertel
+- Zwei Halbe
+- Eine Ganze
+- Acht Achtel
+
+? Welche Figur ist typisch für Palestrina?
++ Die Cambiata
+- Der Vorhalt 2–3 im Bass
+- Der Tritonus
+- Die Quintparallele

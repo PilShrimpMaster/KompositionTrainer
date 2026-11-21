@@ -76,3 +76,41 @@ pruefung: ensemble saxsatz, vollstaendig, im-umfang
 ## Freie Aufgabe
 
 Hör „Moanin'“ von Charles Mingus oder einen Titel der Count Basie Band und achte auf den Saxophonsatz: Wann spielen die Saxophone als Block, wann antworten Trompeten und Posaunen mit kurzen Riffs? Dann hör das Hauptthema von „Star Wars“ (Hörner und Trompeten) und „Time“ aus „Inception“ (Streicherflächen und Ostinato). Schreib zu jedem Stück drei Instrumente auf, die du heraushörst, und was sie tun.
+
+## Quiz
+
+? Welche Saxophone hat eine typische Big Band?
++ Zwei Alt, zwei Tenor, ein Bariton
+- Vier Alt
+- Ein Sopran, ein Alt, ein Tenor, ein Bariton
+- Zwei Tenor und zwei Bariton
+
+? Was ist Drop-2?
++ Der zweithöchste Ton der engen Lage kommt eine Oktave tiefer
+- Zwei Stimmen spielen im Einklang
+- Die Melodie liegt zwei Oktaven tiefer
+- Zwei Akkorde werden weggelassen
+
+? Was ist im Saxophonsatz anders als im Choral?
++ Parallelen sind erwünscht, der Block bewegt sich als Ganzes
+- Es gibt keine Akkorde
+- Jede Stimme hat einen eigenen Rhythmus
+- Nur Oktaven sind erlaubt
+
+? Was ist der Shout Chorus?
++ Die ganze Band im Fortissimo am Schluss
+- Ein gesungener Refrain
+- Das Klaviersolo
+- Die leise Einleitung
+
+? Wofür setzt das Filmorchester Ostinati ein?
++ Um Spannung über lange Strecken zu halten
+- Für romantische Liebesthemen
+- Nur im Abspann
+- Für Fanfaren
+
+? Wie klingt ein heroisches Filmthema oft?
++ Hörner im Einklang
+- Solo-Celesta
+- Gezupfte Kontrabässe
+- Flöte in der Tiefe

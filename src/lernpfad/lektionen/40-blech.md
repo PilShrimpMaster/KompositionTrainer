@@ -59,3 +59,41 @@ pruefung: ensemble blechquartett, vollstaendig, im-umfang, fehlerfrei, ganzschlu
 ## Freie Aufgabe
 
 Hör den Beginn von Richard Strauss' „Also sprach Zarathustra“: Die Trompeten spielen nur Naturtöne (c – g – c′). Dann das Hornthema aus dem langsamen Satz von Tschaikowskys 5. Sinfonie: dieselbe Instrumentenfamilie, ganz andere Wirkung. Notiere, in welcher Lage und Lautstärke das Horn dort spielt.
+
+## Quiz
+
+? Warum klingen Fanfaren aus Dreiklangstönen auf Blechblasinstrumenten so natürlich?
++ Sie liegen auf der Naturtonreihe
+- Sie sind immer laut
+- Sie brauchen keine Ventile
+- Sie stehen in C-Dur
+
+? Welches Blechblasinstrument verbindet Holz und Blech?
++ Horn
+- Trompete
+- Tuba
+- Posaune
+
+? Wie klingt die Posaune?
++ Wie notiert, im Bassschlüssel
+- Eine große Sekunde tiefer
+- Eine Quinte tiefer
+- Eine Oktave höher
+
+? Was füllen Ventile oder der Zug?
++ Die Lücken zwischen den Naturtönen
+- Die Luft im Instrument
+- Den Dämpfer
+- Die Oktaven
+
+? Wie stellst du Blech und Streicher zusammen ins Gleichgewicht?
++ Dem Blech eine Dynamikstufe leiser schreiben
+- Dem Blech lauter schreiben
+- Die Streicher pausieren lassen
+- Nur im Unisono schreiben
+
+? Wofür setzt man die hohe Lage des Blechs am besten ein?
++ Sparsam für Höhepunkte
+- Durchgehend für Melodien
+- Für leise Begleitflächen
+- Gar nicht

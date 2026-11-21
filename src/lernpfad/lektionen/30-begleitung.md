@@ -89,3 +89,41 @@ pruefung: vollstaendig, begleitung-noten 18, funktionen T D T S T D T, ganzschlu
 ## Freie Aufgabe
 
 Nimm eine Melodie aus Stufe 1 und begleite sie dreimal: mit langen Bässen, mit Alberti-Bass und mit gebrochenen Akkorden. Exportiere die beste Fassung nach MuseScore und gib ihr dort Dynamik und Pedal.
+
+## Quiz
+
+? Wie geht ein Alberti-Bass?
++ Unten, oben, Mitte, oben, z. B. c–g–e–g
+- Unten, Mitte, oben, Mitte
+- Nur der Grundton in Achteln
+- Grundton auf der Eins, zwei Akkordtöne darüber
+
+? Was ist ein Walzerbass?
++ Im 3/4-Takt der Grundton auf der Eins, dann zwei Akkordtöne darüber
+- Ein lang ausgehaltener Grundton
+- Ein gebrochener Akkord in Sechzehnteln
+- Ein Bass in Oktaven
+
+? Zwischen welchen Stimmen sind im Klaviersatz Parallelen am deutlichsten hörbar?
++ Zwischen Melodie und Bass
+- Zwischen zwei Begleittönen
+- Zwischen Alberti-Tönen
+- Zwischen Melodie und Mittelstimme
+
+? Was bestimmt im Klaviersatz die Umkehrung des Akkords?
++ Der tiefste Ton auf dem Schwerpunkt
+- Der höchste Melodieton
+- Der letzte Ton im Takt
+- Die Anzahl der Töne
+
+? Was soll auf dem Schwerpunkt in der Melodie stehen?
++ Ein Akkordton oder ein Vorhalt, der sich im Schritt auflöst
+- Ein beliebiger Durchgang
+- Eine Pause
+- Immer der Grundton
+
+? Wo soll die Begleitung liegen?
++ Unter der Melodie
+- Über der Melodie
+- In derselben Lage wie die Melodie
+- Das ist egal

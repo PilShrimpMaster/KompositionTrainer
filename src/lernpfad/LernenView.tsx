@@ -5,7 +5,8 @@ import { MODULE, STUFEN } from './module';
 import { UEBUNGEN, type UebungTyp } from '../uebungen/aufgaben';
 import { UebungView } from '../uebungen/UebungView';
 import { istErledigt } from './erledigt';
-import { lektionFuer } from './lektionen';
+import { LEKTIONEN, lektionFuer } from './lektionen';
+import { bestanden, quizErgebnisse } from './quiz';
 import { LektionView } from './LektionView';
 import { EinstufungView, letzteEinstufung } from './EinstufungView';
 import { allePlaene, faellige, schwaeche, tagesrunde, tagVon, type Plan } from '../uebungen/wiederholung';
@@ -70,7 +71,8 @@ export function LernenView() {
     return (
       <UebungView
         folge={runde}
-        titel="Wiederholung"
+        titel={lektion ? 'Praxisteil' : 'Wiederholung'}
+        zurueck={lektion ? 'Lektion' : 'Lernpfad'}
         onEnde={() => {
           setRunde(null);
           laden().catch(() => {});
@@ -105,11 +107,31 @@ export function LernenView() {
 
   const offeneLektion = lektion ? lektionFuer(lektion) : undefined;
   if (offeneLektion) {
-    return <LektionView lektion={offeneLektion} onUebung={setAktiv} onZurueck={() => setLektion(null)} />;
+    return <LektionView lektion={offeneLektion} onUebung={setAktiv} onPraxis={setRunde} onZurueck={() => setLektion(null)} />;
   }
+
+  const quiz = quizErgebnisse();
+  const stand = (lektionen: typeof LEKTIONEN) => {
+    const gelesen = lektionen.filter((l) => istErledigt(`lektion:${l.modul}`)).length;
+    const geschafft = lektionen.filter((l) => bestanden(quiz[l.modul])).length;
+    return { gelesen, geschafft, anteil: lektionen.length ? (gelesen + geschafft) / (2 * lektionen.length) : 0, von: lektionen.length };
+  };
+  const gesamt = stand(LEKTIONEN);
 
   return (
     <div className="lernen">
+      <section className="gesamtfortschritt">
+        <div className="gesamtfortschritt-kopf">
+          <strong>Dein Fortschritt im Lernpfad</strong>
+          <span className="gesamtfortschritt-zahl">{Math.round(gesamt.anteil * 100)} %</span>
+        </div>
+        <div className="balken gross" role="progressbar" aria-label="Fortschritt im Lernpfad" aria-valuenow={Math.round(gesamt.anteil * 100)} aria-valuemin={0} aria-valuemax={100}>
+          <div style={{ width: `${gesamt.anteil * 100}%` }} />
+        </div>
+        <p className="meta">
+          {gesamt.gelesen} von {gesamt.von} Lektionen durchgearbeitet · {gesamt.geschafft} Quiz bestanden
+        </p>
+      </section>
       <Wiederholung plaene={plaene} onStart={setRunde} />
       <div className="einstufung-hinweis">
         <div>
@@ -125,11 +147,22 @@ export function LernenView() {
       </div>
       {STUFEN.map((stufe) => {
         const module = MODULE.filter((m) => m.stufe === stufe.nummer);
+        const st = stand(LEKTIONEN.filter((l) => l.modul.startsWith(`s${stufe.nummer}-`) || module.some((m) => m.id === l.modul)));
         return (
           <section key={stufe.nummer} className={`stufe ${module.length ? '' : 'is-later'}`}>
             <h2>
               Stufe {stufe.nummer}: {stufe.titel}
             </h2>
+            {st.von > 0 && (
+              <div className="stufe-fortschritt">
+                <div className="balken" role="progressbar" aria-label={`Fortschritt in Stufe ${stufe.nummer}`} aria-valuenow={Math.round(st.anteil * 100)} aria-valuemin={0} aria-valuemax={100}>
+                  <div style={{ width: `${st.anteil * 100}%` }} />
+                </div>
+                <span className="meta">
+                  {st.gelesen}/{st.von} Lektionen · {st.geschafft}/{st.von} Quiz
+                </span>
+              </div>
+            )}
             <p className="meta">
               Abschlussprojekt: {stufe.abschluss}
               {lektionFuer(`s${stufe.nummer}-abschluss`) && (
@@ -157,6 +190,11 @@ export function LernenView() {
                             <button className="small" onClick={() => setLektion(m.id)}>
                               📖 Lektion{istErledigt(`lektion:${m.id}`) ? ' ✓' : ''}
                             </button>
+                          )}
+                          {quiz[m.id] && (
+                            <span className={`quiz-marke ${bestanden(quiz[m.id]) ? 'ok' : ''}`} title="Bestes Quiz-Ergebnis">
+                              Quiz {quiz[m.id].beste}/{quiz[m.id].von}
+                            </span>
                           )}
                           {UEBUNGEN.filter((u) => u.modul === m.id).map((u) => (
                             <button key={u.typ} className="secondary small" onClick={() => setAktiv(u.typ)}>

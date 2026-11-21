@@ -53,3 +53,41 @@ pruefung: takte 16, halbschluss 8, ganzschluss-takt 16, vollstaendig, fehlerfrei
 ## Freie Aufgabe
 
 Hör dir Menuette aus Haydns Sinfonien an (etwa aus Nr. 94 „Mit dem Paukenschlag“) und Mozarts „Eine kleine Nachtmusik“, dritter Satz. Wie unterscheidet sich das Trio vom Menuett: Tonart, Lautstärke, Besetzung, Bewegung?
+
+## Quiz
+
+? In welcher Taktart steht ein Menuett?
++ 3/4
+- 4/4
+- 6/8
+- 2/2
+
+? Woher kommt der Name „Trio“?
++ Es war ursprünglich für drei Instrumente gesetzt
+- Es hat drei Teile
+- Es steht im Dreiertakt
+- Es wird dreimal gespielt
+
+? In welcher Tonart steht das Trio oft?
++ In der Subdominante, Dominante oder gleichnamigen Molltonart
+- Immer in derselben Tonart wie das Menuett
+- Einen Tritonus entfernt
+- In einer Kirchentonart
+
+? Welche große Form ergibt Menuett – Trio – Menuett?
++ A B A
+- A A B
+- A B A C A
+- A B C
+
+? Wodurch ersetzte Beethoven das Menuett oft?
++ Durch das Scherzo
+- Durch das Rondo
+- Durch die Fuge
+- Durch den Walzer
+
+? Wie endet der erste Teil des Menuetts?
++ Offen, mit Halbschluss oder in der Dominante
+- Mit einem Ganzschluss in der Grundtonart
+- Mit dem Trio
+- Mit einem Trugschluss

@@ -56,3 +56,41 @@ pruefung: mindestens-takte 5, motiv-imitation, fehlerfrei, vollstaendig
 ## Freie Aufgabe
 
 Erfinde ein eigenes Fugenthema von zwei Takten. Gute Themen haben einen markanten Kopf (ein Sprung oder ein auffälliger Rhythmus) und einen fließenden Schwanz in Achteln. Prüfe, ob es sich **engführen** lässt: Setz es einen Takt versetzt gegen sich selbst und schau, wo Fehler entstehen.
+
+## Quiz
+
+? Wie heißt die Antwort auf das Fugenthema?
++ Comes
+- Dux
+- Kontrasubjekt
+- Engführung
+
+? Auf welcher Stufe antwortet die zweite Stimme in der Exposition?
++ Auf der Dominante
+- Auf der Subdominante
+- Auf der Tonika
+- Auf der Paralleltonart
+
+? Wann antwortet man tonal statt real?
++ Wenn das Thema mit der Dominante beginnt oder früh dorthin springt
+- Wenn das Thema in Moll steht
+- Wenn das Thema sehr lang ist
+- Immer in dreistimmigen Fugen
+
+? Was ist eine Engführung?
++ Themeneinsätze überlappen sich
+- Das Thema in kleineren Notenwerten
+- Ein Zwischenspiel mit Sequenzen
+- Eine Fuge mit nur zwei Stimmen
+
+? Was ist das Kontrasubjekt?
++ Die Gegenstimme, die zum Comes erklingt
+- Das zweite Thema einer Doppelfuge
+- Das Thema in Umkehrung
+- Der Orgelpunkt am Schluss
+
+? Was passiert in den Zwischenspielen einer Fuge?
++ Freieres Spiel, meist Sequenzen aus Themenmotiven
+- Das Thema erklingt in allen Stimmen gleichzeitig
+- Alle Stimmen pausieren
+- Ein neues Thema wird vorgestellt

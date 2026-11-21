@@ -54,3 +54,42 @@ pruefung: dreiklaenge 4
 ## Freie Aufgabe
 
 Nimm eine kurze Melodie, die du kennst, etwa „Alle meine Entchen“, und überlege für jeden Takt, ob die Tonika, die Subdominante oder die Dominante am besten passt. Spiel die Akkorde dazu auf dem Klavier oder sing die Grundtöne zur Melodie.
+
+## Quiz
+
+? Woraus besteht ein Dur-Dreiklang?
++ Unten eine große Terz, darüber eine kleine Terz
+- Unten eine kleine Terz, darüber eine große Terz
+- Zwei große Terzen
+- Zwei kleine Terzen
+
+? Welcher Dreiklang ist H–D–F?
++ vermindert
+- Moll
+- Dur
+- übermäßig
+= Zwei kleine Terzen übereinander ergeben einen verminderten Dreiklang.
+
+? Welcher Dreiklang steht in C-Dur auf der II. Stufe?
++ d-Moll
+- D-Dur
+- d vermindert
+- G-Dur
+
+? Wie heißen die Dur-Dreiklänge auf der I., IV. und V. Stufe?
++ Tonika, Subdominante, Dominante
+- Tonika, Dominante, Subdominante
+- Grundakkord, Gegenklang, Leitklang
+- Tonika, Parallele, Gegenklang
+
+? Welcher Dreiklang besteht aus zwei großen Terzen?
++ übermäßig
+- vermindert
+- Dur
+- Moll
+
+? Was ist eine Kadenz?
++ Eine Akkordfolge, die zur Tonika zurückführt, z. B. T–S–D–T
+- Ein besonders langer Akkord am Schluss
+- Ein Dreiklang mit Septime
+- Eine Tonleiter in Akkorden

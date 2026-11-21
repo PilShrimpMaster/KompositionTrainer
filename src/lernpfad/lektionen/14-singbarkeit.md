@@ -61,3 +61,41 @@ pruefung: liedtext, fehlerfrei
 ## Freie Aufgabe
 
 Wähle einen kurzen Text, zum Beispiel einen Zweizeiler aus einem Gedicht, das du magst. Sprich ihn rhythmisch, notiere die Betonungen und schreib dann eine Melodie dazu. Trag den Text unter „Stück einstellen“ ein.
+
+## Quiz
+
+? Welche Melodieschritte sind im Chorsatz besonders gut singbar?
++ Schritte und kleine Sprünge wie Terz, Quarte, Quinte
+- Übermäßige Sekunden
+- Septimsprünge
+- Sprünge über die Oktave
+
+? Wohin gehören betonte Silben?
++ Auf schwere Zählzeiten
+- Auf leichte Zählzeiten
+- Auf kurze Noten
+- Auf Pausen
+
+? Womit beginnt ein Text mit unbetonter erster Silbe?
++ Mit einem Auftakt
+- Mit einer Fermate
+- Mit einer Pause auf der Eins
+- Mit einem Sprung
+
+? Was steht am Ende einer Textzeile, damit der Chor atmen kann?
++ Eine längere Note oder eine Fermate
+- Ein schneller Lauf
+- Ein Sprung nach oben
+- Eine Quintparallele
+
+? Welche Linien sind für Alt und Tenor ideal?
++ Liegende Töne und kleine Schritte
+- Große Sprünge und viele Höhepunkte
+- Die Melodie eine Oktave tiefer
+- Lange Läufe in Sechzehnteln
+
+? Auf welchen Vokalen singen sich lange, hohe Noten leichter?
++ Auf offenen Vokalen wie a und o
+- Auf i und ü
+- Auf Konsonanten
+- Das macht keinen Unterschied

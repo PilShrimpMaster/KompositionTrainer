@@ -70,3 +70,47 @@ pruefung: stil romantik, vierstimmig, fehlerfrei, enthaelt sN, stilmerkmal vermi
 ## Freie Aufgabe
 
 Hör Chopins Prélude e-Moll op. 28 Nr. 4: Über einer fast unbewegten Melodie rutschen die Akkorde der linken Hand chromatisch abwärts. Hör dann Schumanns „Träumerei“ aus den Kinderszenen. Schreib ein kurzes Klavierstück in Moll, in dem ein verminderter Septakkord den Höhepunkt bildet.
+
+## Quiz
+
+? Was ist der Neapolitaner?
++ Der Dur-Akkord auf der tiefalterierten II. Stufe, meist mit Terz im Bass
+- Der Dur-Akkord auf der VI. Stufe
+- Ein verminderter Septakkord
+- Die Dominante mit Septime und None
+
+? Welche Töne hat der Neapolitaner in a-Moll?
++ d – f – b
+- d – f – a
+- b – d – f
+- h – d – f
+
+? Warum ist der verminderte Septakkord so beliebt für Modulationen?
++ Alle Abstände sind gleich, er kann in vier Tonarten weiterführen
+- Er hat keinen Leitton
+- Er klingt immer in Dur
+- Er besteht aus Quarten
+
+? Welche Töne hat der deutsche übermäßige Sextakkord in a-Moll?
++ f – a – c – dis
+- f – a – dis
+- f – a – h – dis
+- e – gis – h – d
+
+? Was sind Medianten?
++ Akkorde im Terzabstand, z. B. As-Dur oder E-Dur in C-Dur
+- Akkorde im Quintabstand
+- Die Akkorde auf der IV. und V. Stufe
+- Akkorde ohne Terz
+
+? Was bleibt auch im Stilprofil Romantik ein Fehler?
++ Offene Quint- und Oktavparallelen
+- Weite Lagen
+- Freie Verdopplungen
+- Große Sprünge
+
+? Wohin streben die Töne einer übermäßigen Sexte f–dis?
++ Auseinander zur Oktave e
+- Zusammen zum Einklang
+- Beide abwärts
+- Sie bleiben liegen

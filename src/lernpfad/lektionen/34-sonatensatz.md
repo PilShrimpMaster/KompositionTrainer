@@ -54,3 +54,41 @@ pruefung: mindestens-takte 4, begleitung-noten 24, ganzschluss, fehlerfrei
 ## Freie Aufgabe
 
 Hör den ersten Satz von Mozarts KV 545 ganz an (gut 4 Minuten) und notiere die Zeiten: Wann beginnt das Seitenthema? Wann die Durchführung, wann die Reprise? Tipp: Die Reprise von KV 545 beginnt überraschend in F-Dur, nicht in C-Dur. Warum könnte Mozart das gemacht haben?
+
+## Quiz
+
+? Wie heißen die drei Hauptteile des Sonatensatzes?
++ Exposition, Durchführung, Reprise
+- Thema, Variation, Coda
+- Menuett, Trio, Menuett
+- Vordersatz, Nachsatz, Coda
+
+? In welcher Tonart steht das Seitenthema in der Exposition eines Dursatzes?
++ In der Dominante
+- In der Grundtonart
+- In der Subdominante
+- In der gleichnamigen Molltonart
+
+? In welcher Tonart steht das Seitenthema in der Reprise?
++ In der Grundtonart
+- In der Dominante
+- In der Paralleltonart
+- In einer entfernten Tonart
+
+? Was passiert in der Durchführung?
++ Themen werden zerlegt und verarbeitet, die Musik moduliert
+- Alle Themen werden unverändert wiederholt
+- Ein neues Tanzthema erscheint
+- Das Stück endet
+
+? Was bereitet am Ende der Durchführung oft die Rückkehr vor?
++ Ein Orgelpunkt auf der Dominante
+- Eine Generalpause
+- Ein Trugschluss
+- Eine Fuge
+
+? Was ist die Aufgabe der Überleitung?
++ Sie moduliert zur Tonart des Seitenthemas
+- Sie wiederholt das Hauptthema
+- Sie beendet die Exposition
+- Sie führt in die Coda

@@ -54,3 +54,41 @@ pruefung: ensemble holztrio, vollstaendig, im-umfang, fehlerfrei, ganzschluss
 ## Freie Aufgabe
 
 Hör den Beginn von Prokofjews „Peter und der Wolf“: Der Vogel ist die Flöte, die Ente die Oboe, die Katze die Klarinette im tiefen Register, der Großvater das Fagott. Versuch bei jedem Thema zu beschreiben, welches Register das Instrument benutzt und warum es zur Figur passt.
+
+## Quiz
+
+? Welches Holzblasinstrument ist auch im vollen Orchester gut hörbar und näselnd?
++ Oboe
+- Flöte
+- Klarinette
+- Fagott
+
+? Welches Instrument kann leiser beginnen als jedes andere Blasinstrument?
++ Klarinette
+- Oboe
+- Trompete
+- Fagott
+
+? Was ist das Fagott im Holzbläsersatz?
++ Der Bass
+- Die Melodiestimme
+- Ein transponierendes Instrument in Es
+- Ein Blechblasinstrument
+
+? Welche Lagen sind leise und brauchen eine zurückhaltende Begleitung?
++ Die Tiefe der Flöte und die Höhe des Fagotts
+- Die Höhe der Oboe
+- Die Mitte der Klarinette
+- Die Tiefe des Fagotts
+
+? Welche Instrumente bilden das Holzbläsertrio?
++ Oboe, Klarinette, Fagott
+- Flöte, Oboe, Klarinette
+- Flöte, Klarinette, Horn
+- Oboe, Fagott, Horn
+
+? Was muss man für Bläser immer einplanen?
++ Atempausen
+- Doppelgriffe
+- Pizzicato
+- Dämpfer

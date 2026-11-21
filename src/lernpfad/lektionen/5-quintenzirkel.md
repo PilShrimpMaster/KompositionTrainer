@@ -58,3 +58,49 @@ pruefung: takte 4, leitereigen, endet-grundton
 ## Freie Aufgabe
 
 Zeichne den Quintenzirkel einmal selbst auf Papier, aus dem Kopf. Prüfe ihn dann mit der Tabelle oben. Wenn er stimmt, wähle eine Tonart mit drei Vorzeichen und schreibe ihre Tonleiter im Editor.
+
+## Quiz
+
+? Welche Tonart hat drei Kreuze?
++ A-Dur
+- E-Dur
+- D-Dur
+- Es-Dur
+
+? Welche Dur-Tonart hat vier Bs?
++ As-Dur
+- Es-Dur
+- Des-Dur
+- B-Dur
+= Die Bs kommen als B, Es, As, Des dazu. Das vorletzte b nennt den Grundton: As.
+
+? In welcher Reihenfolge kommen die Kreuze dazu?
++ F, C, G, D, A, E, H
+- C, G, D, A, E, H, F
+- H, E, A, D, G, C, F
+- F, G, A, H, C, D, E
+
+? Wie findest du bei einer Kreuztonart schnell den Grundton?
++ Er liegt einen Halbton über dem letzten Kreuz
+- Er ist das letzte Kreuz selbst
+- Er liegt eine Quinte über dem ersten Kreuz
+- Er liegt eine kleine Terz unter dem letzten Kreuz
+
+? Welches ist die Paralleltonart von F-Dur?
++ d-Moll
+- f-Moll
+- a-Moll
+- g-Moll
+= Die Moll-Parallele liegt eine kleine Terz tiefer und hat dieselben Vorzeichen.
+
+? Welche Paralleltonart hat zwei Kreuze?
++ h-Moll
+- e-Moll
+- fis-Moll
+- g-Moll
+
+? Warum klingen Nachbarn im Quintenzirkel verwandt?
++ Sie teilen alle Töne bis auf einen
+- Sie haben denselben Grundton
+- Sie liegen eine Terz auseinander
+- Sie haben dieselbe Paralleltonart

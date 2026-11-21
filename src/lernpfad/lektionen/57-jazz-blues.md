@@ -52,3 +52,41 @@ pruefung: akkordsymbole 15, leadsheet-fehlerfrei, jazzmuster ii-v-i 2
 ## Freie Aufgabe
 
 Hör Charlie Parkers „Billie's Bounce“ und „Now's the Time“: beide Blues in F, mit genau diesen Akkorden. Schreib dann eine eigene Blues-Melodie über das Schema, die eine kurze Phrase dreimal leicht verändert wiederholt (A A B wie im gesungenen Blues).
+
+## Quiz
+
+? Was steht im Jazz-Blues in F in Takt 4?
++ Cm7 – F7, eine II–V nach Bb7
+- F7
+- Gm7 – C7
+- Bdim7
+
+? Was macht Bdim7 in Takt 6?
++ Er führt chromatisch von Bb zurück nach F
+- Er ist die Tonika
+- Er moduliert nach h-Moll
+- Er ist eine Tritonus-Substitution
+
+? Welche Funktion hat D7 in Takt 8?
++ Zwischendominante zu Gm7
+- Tonika
+- Tritonus-Substitution von C7
+- Modale Mischung
+
+? Was ist das Vorbild der Rhythm Changes?
++ Gershwins „I Got Rhythm“
+- Miles Davis’ „So What“
+- Der 12-Takt-Blues
+- Bachs Choräle
+
+? Wie ist die Bridge der Rhythm Changes gebaut?
++ Als Dominantkette III7 – VI7 – II7 – V7
+- Als II–V–I in der Tonika
+- Aus einem einzigen Akkord
+- Als Blues
+
+? Wie lang ist die AABA-Form?
++ 32 Takte
+- 12 Takte
+- 16 Takte
+- 24 Takte

@@ -47,3 +47,41 @@ pruefung: vierstimmig, fehlerfrei, endet-in 1
 ## Freie Aufgabe
 
 Moduliere von C-Dur nach a-Moll. Welcher Akkord eignet sich als Drehakkord? Tipp: Die Dominante von a-Moll ist E-Dur mit dem Leitton Gis.
+
+## Quiz
+
+? Was ist ein Drehakkord?
++ Ein Akkord, der in beiden Tonarten vorkommt und umgedeutet wird
+- Ein Akkord, der sich um seinen Grundton dreht
+- Ein Akkord in Umkehrung
+- Der letzte Akkord einer Modulation
+
+? Welche Funktion hat a-Moll in G-Dur?
++ Subdominantparallele (Sp)
+- Tonikaparallele (Tp)
+- Dominantparallele (Dp)
+- Doppeldominante
+
+? Welche Tonarten sind mit C-Dur eng verwandt?
++ G-Dur, F-Dur und ihre Paralleltonarten a-, e- und d-Moll
+- Fis-Dur und Ges-Dur
+- c-Moll und Es-Dur
+- E-Dur und As-Dur
+
+? Wodurch wird eine Modulation hörbar?
++ Durch eine Kadenz in der neuen Tonart
+- Durch einen Taktwechsel
+- Durch einen lauten Akkord
+- Durch eine Pause
+
+? Was ist der Unterschied zwischen Modulation und Ausweichung?
++ Eine Ausweichung streift die neue Tonart nur kurz, ohne Kadenz dort
+- Eine Ausweichung geht immer nach Moll
+- Eine Modulation braucht keinen Drehakkord
+- Es gibt keinen Unterschied
+
+? Welcher neue Ton zeigt beim Weg von C-Dur nach G-Dur die neue Tonart an?
++ Fis
+- B
+- Cis
+- Gis

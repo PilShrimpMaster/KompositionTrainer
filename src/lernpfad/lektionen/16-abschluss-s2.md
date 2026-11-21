@@ -44,3 +44,29 @@ pruefung: vierstimmig, fehlerfrei, ganzschluss
 ## Freie Aufgabe
 
 Erfinde einen eigenen Text für die Melodie (zwei Zeilen zu je sieben Silben) und trag ihn unter „Stück einstellen“ ein. Oder setze dieselbe Melodie ein zweites Mal mit anderen Akkorden, zum Beispiel mit einem Trugschluss am Ende der ersten Zeile.
+
+## Quiz
+
+? Welche Stimme schreibst du nach dem Sopran beim Choralsatz zuerst?
++ Den Bass
+- Den Alt
+- Den Tenor
+- Alle gleichzeitig
+
+? Wie sollen sich Sopran und Bass oft zueinander bewegen?
++ In Gegenbewegung
+- In Oktaven
+- In Quinten
+- Immer parallel
+
+? Zu welchen Akkorden passt in F-Dur der Melodieton F?
++ Tonika, Subdominante und Subdominantparallele
+- Nur zur Tonika
+- Dominante und Doppeldominante
+- Nur zur Subdominante
+
+? Wie endet die letzte Zeile eines Chorals?
++ Mit einem Ganzschluss
+- Mit einem Halbschluss
+- Mit einem Trugschluss
+- Auf der Subdominante

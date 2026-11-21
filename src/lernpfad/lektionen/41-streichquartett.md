@@ -66,3 +66,41 @@ pruefung: ensemble streichquartett, vollstaendig, im-umfang, fehlerfrei, ganzsch
 ## Freie Aufgabe
 
 Hör den langsamen Satz aus Haydns „Kaiserquartett“ (op. 76 Nr. 3): Das Thema erklingt viermal, jedes Mal in einem anderen Instrument, während die anderen drei es begleiten. Achte darauf, wie sich die Begleitung ändert, wenn die Melodie im Violoncello liegt. Schreib danach deinen Choral aus der Aufgabe in MuseScore ab und lass die Melodie in der zweiten Strophe vom Violoncello spielen.
+
+## Quiz
+
+? Welche Instrumente bilden das Streichquartett?
++ Zwei Violinen, Viola und Violoncello
+- Violine, Viola, Violoncello, Kontrabass
+- Drei Violinen und Violoncello
+- Violine, Viola und zwei Violoncelli
+
+? Welche Instrumente sind im Quartett die Mittelstimmen?
++ 2. Violine und Viola
+- 1. Violine und Violoncello
+- Viola und Violoncello
+- Beide Violinen
+
+? Wie nannte Goethe das Streichquartett?
++ Ein Gespräch unter vier vernünftigen Leuten
+- Die Krone der Musik
+- Ein Orchester im Kleinen
+- Ein Chor ohne Worte
+
+? Was ist der empfohlene Arbeitsweg für ein Quartett?
++ Melodie und Bass, dann Mittelstimmen, dann Begleitfiguren
+- Erst die Begleitfiguren, dann die Melodie
+- Alle vier Stimmen Note für Note gleichzeitig
+- Erst die Viola
+
+? Welche Stimmführungsregeln aus dem Chorsatz gelten im Quartett weiter?
++ Keine Parallelen, Leittöne auflösen, Septimen abwärts
+- Keine, Instrumente sind frei
+- Nur der Stimmumfang des Chors
+- Nur die Regel gegen Stimmkreuzung
+
+? Wie groß darf der Abstand zwischen Viola und Violoncello sein?
++ Auch mehr als eine Oktave, eine Duodezime ist normal
+- Höchstens eine Quinte
+- Höchstens eine Oktave
+- Sie müssen im Einklang spielen

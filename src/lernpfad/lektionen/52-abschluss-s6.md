@@ -51,3 +51,29 @@ pruefung: vollstaendig, fehlerfrei, mindestens-takte 8, ganzschluss
 ## Freie Aufgabe
 
 Wenn du magst, schreib einen dritten Satz: ein schnelles Finale, etwa ein Rondo (A B A C A) oder eine Gigue. Dann hast du eine vollständige Sonatine oder Suite. Exportiere alle Sätze nach MuseScore und arbeite dort an Dynamik, Artikulation und Pedal weiter.
+
+## Quiz
+
+? Wie sollten die beiden Sätze eines mehrsätzigen Werks zueinander stehen?
++ Zusammengehören und doch kontrastieren
+- Völlig gleich klingen
+- Keine Verbindung haben
+- In derselben Taktart und demselben Tempo stehen
+
+? In welcher Tonart steht der zweite Satz?
++ In einer verwandten Tonart: Dominante, Subdominante oder Parallele
+- Immer einen Tritonus entfernt
+- Immer in derselben Tonart
+- In einer Kirchentonart
+
+? Wie verbindest du die Sätze?
++ Gemeinsames Motiv, Tonart oder wiederkehrender Rhythmus
+- Durch eine Pause
+- Durch denselben Titel
+- Gar nicht
+
+? Wo bündelst du die Sätze zu einem Werk?
++ Im Portfolio unter „Werke“
+- Im Lexikon
+- In den Übungen
+- Nur in MuseScore

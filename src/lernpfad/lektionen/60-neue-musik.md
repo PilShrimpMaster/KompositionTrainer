@@ -61,3 +61,54 @@ pruefung: stilmerkmal zwoelfton, reihenform I, takte 6
 ## Freie Aufgabe
 
 Hör Weberns „Variationen für Klavier“ op. 27 und danach Steve Reichs „Music for 18 Musicians“. Beide Stücke sind streng gebaut, klingen aber völlig verschieden. Schreib ein eigenes Pattern von einem Takt und lass es acht Takte lang laufen; ändere in jedem zweiten Takt genau einen Ton.
+
+## Quiz
+
+? Wie viele Formen gewinnt man aus einer Zwölftonreihe?
++ 48
+- 12
+- 4
+- 24
+= Grundgestalt, Umkehrung, Krebs und Krebsumkehrung, jeweils auf zwölf Tönen.
+
+? Was ist der Krebs (R) einer Reihe?
++ Die Reihe rückwärts
+- Die Reihe gespiegelt
+- Die Reihe transponiert
+- Die Reihe in längeren Notenwerten
+
+? Welche Primform haben alle Dur- und Molldreiklänge?
++ (037)
+- (016)
+- (048)
+- (025)
+
+? Welches Set heißt Wiener Trichord?
++ (016), mit kleiner Sekunde und Tritonus
+- (037)
+- (012)
+- (048)
+
+? Was überträgt der Serialismus auf die Reihe?
++ Auch Dauern, Lautstärken und Klangfarben
+- Nur die Tonhöhen
+- Nur Akkorde
+- Nur den Rhythmus
+
+? Was ist Phasenverschiebung bei Steve Reich?
++ Zwei Spieler spielen dasselbe Muster, einer wird langsam schneller
+- Das Muster wird rückwärts gespielt
+- Das Muster wächst Ton für Ton
+- Die Tonart wechselt
+
+? Wer arbeitet mit additiven Prozessen, in denen ein Muster Ton für Ton wächst?
++ Philip Glass
+- Arnold Schönberg
+- Pierre Boulez
+- Anton Webern
+
+? Wie zählt man Tonklassen in der Mengenlehre?
++ Von c = 0 bis h = 11
+- Von a = 1 bis g = 7
+- Von c = 1 bis c = 12
+- Nach Halbtönen über dem Bass

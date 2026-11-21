@@ -97,3 +97,47 @@ pruefung: takte 8, modus dorisch D, charakterton dorisch D, finalis D, schluss-l
 ## Freie Aufgabe
 
 Schreib eine kurze Filmszene in **Lydisch**: ein liegender Bass auf c, darüber wechseln C-Dur und D-Dur. Lass eine Melodie darüber schweben, die das fis immer wieder berührt. Hör dir zum Vergleich die Flugszenen in John Williams’ „E.T.“ oder den Anfang von „Zurück in die Zukunft“ an. Exportiere die Skizze nach MuseScore und instrumentiere sie für Streicher und Holzbläser.
+
+## Quiz
+
+? Welches ist der Farbton von Mixolydisch?
++ Die kleine Septime
+- Die große Sexte
+- Die übermäßige Quarte
+- Die kleine Sekunde
+
+? Welche Akkordfolge ist typisch mixolydisch im Rock?
++ I – ♭VII – IV, z. B. G – F – C
+- I – IV – V – I
+- ii – V – I
+- i – ♭II
+
+? Welcher Modus klingt in „So What“ von Miles Davis?
++ Dorisch
+- Lydisch
+- Phrygisch
+- Mixolydisch
+
+? Welcher Klang ist ein Lieblingsklang der Filmmusik für Staunen und Magie?
++ Lydisch, z. B. D-Dur über liegendem C
+- Phrygisch
+- Äolisch
+- Lokrisch
+
+? Was zerstört den modalen Klang am schnellsten?
++ Eine Dominante mit Leitton (V⁷–I)
+- Ein liegender Bass
+- Ein wiederholter Akkord
+- Der Farbton auf betonter Zeit
+
+? Welche Skala spielt man im Jazz über Dm7 als II. Stufe?
++ Dorisch
+- Mixolydisch
+- Ionisch
+- Phrygisch
+
+? Welcher Modus hat einen Halbton zwischen 1. und 2. Stufe?
++ Phrygisch
+- Dorisch
+- Mixolydisch
+- Lydisch

@@ -61,3 +61,42 @@ pruefung: tonleiter
 ## Freie Aufgabe
 
 Schreibe eine kurze Melodie in D-Dur (zwei Kreuze), die nur Töne der Tonleiter benutzt und auf d endet. Stell dann die Tonart auf h-Moll um und probiere eine zweite Melodie, die auf h endet. Beide Tonarten haben dieselben Vorzeichen. Was verändert sich im Klang?
+
+## Quiz
+
+? Wo liegen in der Dur-Tonleiter die Halbtöne?
++ Zwischen 3. und 4. sowie 7. und 8. Stufe
+- Zwischen 2. und 3. sowie 5. und 6. Stufe
+- Zwischen 4. und 5. sowie 7. und 8. Stufe
+- Zwischen 1. und 2. sowie 4. und 5. Stufe
+
+? Wo liegen in der natürlichen Molltonleiter die Halbtöne?
++ Zwischen 2. und 3. sowie 5. und 6. Stufe
+- Zwischen 3. und 4. sowie 7. und 8. Stufe
+- Zwischen 1. und 2. sowie 4. und 5. Stufe
+- Zwischen 6. und 7. sowie 7. und 8. Stufe
+
+? Welcher Ton wird in G-Dur verändert, damit die Halbtöne stimmen?
++ F wird Fis
+- C wird Cis
+- H wird B
+- G wird Gis
+
+? Was ist die harmonische Molltonleiter?
++ Moll mit erhöhter 7. Stufe, damit es einen Leitton gibt
+- Moll mit erhöhter 6. und 7. Stufe aufwärts
+- Moll ohne Vorzeichen
+- Moll mit erniedrigter 2. Stufe
+= In a-Moll wird G zu Gis. Die melodische Molltonleiter erhöht aufwärts zusätzlich die 6. Stufe.
+
+? Was ist ein Leitton?
++ Die 7. Stufe einen Halbton unter dem Grundton, die zum Grundton strebt
+- Der höchste Ton einer Melodie
+- Die 5. Stufe einer Tonleiter
+- Jeder Ton mit Vorzeichen
+
+? Welche Stufe entscheidet am stärksten über Dur oder Moll?
++ Die 3. Stufe
+- Die 5. Stufe
+- Die 2. Stufe
+- Die 4. Stufe

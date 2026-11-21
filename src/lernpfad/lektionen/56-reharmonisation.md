@@ -55,3 +55,47 @@ pruefung: reharmonisiert 3, leadsheet-fehlerfrei, jazzmuster zwischendominante, 
 ## Freie Aufgabe
 
 Hör „Body and Soul“ in der Aufnahme von Coleman Hawkins (1939) und danach eine moderne Fassung, etwa von Brad Mehldau. Notiere dir drei Stellen, an denen die Akkorde anders sind als im Original, und überleg, welches Werkzeug dahintersteckt.
+
+## Quiz
+
+? Was bleibt beim Reharmonisieren gleich?
++ Die Melodie
+- Die Akkorde
+- Der Bass
+- Nichts
+
+? Was ist eine Tritonus-Substitution?
++ Eine Dominante wird durch die Dominante einen Tritonus entfernt ersetzt
+- Ein Akkord wird einen Tritonus höher wiederholt
+- Die Melodie wird um einen Tritonus versetzt
+- Eine II–V wird weggelassen
+
+? Welcher Akkord ersetzt G7 als Tritonus-Substitution?
++ Db7
+- D7
+- C#m7
+- Ab7
+
+? Welche Töne teilen G7 und Db7?
++ Terz und Septime (h und f)
+- Grundton und Quinte
+- Alle vier Töne
+- Keinen Ton
+
+? Was ist eine eingeschobene II–V?
++ Vor die Zwischendominante kommt ihre II, z. B. Em7 – A7 – Dm7
+- Zwei Dominanten nacheinander
+- Eine II–V am Stückanfang
+- Eine II–V ohne Auflösung
+
+? Welche Akkorde sind modale Mischung in C-Dur?
++ Fm6 oder Abmaj7
+- Dm7 oder Em7
+- G7 oder A7
+- Cmaj7 oder C6
+
+? Woran muss sich jeder neue Akkord messen?
++ An den langen und betonten Melodietönen
+- An der Lautstärke
+- Am Tempo
+- An der Anzahl der Takte

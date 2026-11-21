@@ -62,3 +62,47 @@ pruefung: vierstimmig, fehlerfrei, enthaelt Sextakkord, ganzschluss
 ## Freie Aufgabe
 
 Spiel am Klavier die Kadenz T – S – K⁶₄ – D – T aus dem zweiten Beispiel in G-Dur. Dann erfinde eine Basslinie, die schrittweise von C hinauf zu G läuft, und überlege, welche Akkorde (auch Sextakkorde) darüber passen.
+
+## Quiz
+
+? Was liegt beim Sextakkord im Bass?
++ Die Terz
+- Der Grundton
+- Die Quinte
+- Die Septime
+
+? Was liegt beim Quartsextakkord im Bass?
++ Die Quinte
+- Die Terz
+- Der Grundton
+- Die Septime
+
+? Was bedeutet D₃ in der Funktionsschrift?
++ Dominante mit der Terz im Bass
+- Dominante mit drei Stimmen
+- Dritte Umkehrung der Dominante
+- Dominante auf der III. Stufe
+
+? Welcher Ton darf in der Dominante mit Terz im Bass nicht verdoppelt werden?
++ Der Leitton
+- Der Grundton
+- Die Quinte
+- Keiner, alles darf verdoppelt werden
+
+? Was ist ein kadenzierender Quartsextakkord?
++ Tonika-Töne über dem Basston der Dominante, die sich in die Dominante auflösen
+- Ein Quartsextakkord am Anfang eines Stücks
+- Die Subdominante mit der Quinte im Bass
+- Ein Akkord aus lauter Quarten
+
+? Was bedeutet die Generalbass-Ziffer 6 über einem Basston?
++ Sextakkord
+- Grundstellung
+- Quartsextakkord
+- Septakkord
+
+? Wozu sind Sextakkorde besonders nützlich?
++ Der Bass kann schrittweise statt in Sprüngen laufen
+- Sie machen jeden Schluss stärker
+- Sie ersetzen die Dominante
+- Sie vermeiden jede Dissonanz

@@ -66,3 +66,53 @@ pruefung: akkordsymbole 4, leadsheet-fehlerfrei
 ## Freie Aufgabe
 
 Nimm ein Volkslied, das du kennst, etwa „Kein schöner Land“, und schreib es als Leadsheet: erst mit Dreiklängen, dann mit Septakkorden. Exportiere es nach MuseScore und schau, wie die Symbole dort aussehen.
+
+## Quiz
+
+? Was ist ein Leadsheet?
++ Eine Melodie mit Akkordsymbolen darüber
+- Eine ausgeschriebene Klavierbegleitung
+- Eine Partitur für Big Band
+- Ein Liedtext ohne Noten
+
+? Welcher Akkord ist in einem amerikanischen Leadsheet „B7“?
++ H-Dur mit kleiner Septime (H⁷)
+- B-Dur mit kleiner Septime (B⁷)
+- b-Moll mit Septime
+- H-Dur mit großer Septime
+
+? Welche Töne hat Cmaj7?
++ c e g h
+- c e g b
+- c es g b
+- c e g a
+
+? Welche Töne hat C7?
++ c e g b
+- c e g h
+- c es g b
+- c f g b
+
+? Wie heißt Cm7b5 noch?
++ Cø, halbvermindert
+- C°7, vermindert
+- C-maj7
+- Csus4
+
+? Was bedeutet C/E?
++ C-Dur mit E im Bass
+- C-Dur oder E-Dur
+- C-Dur mit hinzugefügter Terz
+- Ein C-Dur-Akkord über einer E-Dur-Tonleiter
+
+? Wie lange gilt ein Akkordsymbol?
++ Bis das nächste Symbol kommt
+- Nur für die Note darunter
+- Immer genau einen Takt
+- Bis zur nächsten Pause
+
+? Was gilt im Jazz für die Septime eines Akkords?
++ Sie gehört zum Grundklang und muss sich nicht auflösen
+- Sie muss immer abwärts aufgelöst werden
+- Sie ist verboten
+- Sie steht immer im Bass

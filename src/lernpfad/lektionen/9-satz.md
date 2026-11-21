@@ -62,3 +62,42 @@ pruefung: vierstimmig, fehlerfrei, ganzschluss
 ## Freie Aufgabe
 
 Nimm deinen Satz aus der Aufgabe und schreib ihn noch einmal in weiter Lage: zwischen Sopran und Alt und zwischen Alt und Tenor ist jeweils Platz für einen Akkordton. Wie verändert sich der Klang?
+
+## Quiz
+
+? Wie groß darf der Abstand zwischen Sopran und Alt höchstens sein?
++ Eine Oktave
+- Eine Quinte
+- Eine Dezime
+- Beliebig groß
+
+? Was ist eine Quintparallele?
++ Zwei Stimmen gehen im Quintabstand gemeinsam in die nächste Quinte
+- Zwei Stimmen springen beide eine Quinte
+- Der Bass springt eine Quinte abwärts
+- Eine Quinte wird über zwei Akkorde gehalten
+
+? Was ist eine Stimmkreuzung?
++ Eine tiefere Stimme liegt über einer höheren, z. B. der Alt über dem Sopran
+- Zwei Stimmen singen denselben Ton
+- Eine Stimme springt über eine Oktave
+- Zwei Stimmen bewegen sich in Gegenbewegung
+
+? Was bedeutet „harmonisches Band“?
++ Gemeinsame Töne zweier Akkorde bleiben in derselben Stimme liegen
+- Alle Stimmen bewegen sich in dieselbe Richtung
+- Der Bass spielt immer den Grundton
+- Sopran und Bass laufen in Terzen
+
+? Wie verbindest du S und D (F-Dur nach G-Dur) ohne gemeinsamen Ton?
++ Die drei Oberstimmen gehen in Gegenbewegung zum Bass
+- Alle Stimmen gehen mit dem Bass aufwärts
+- Der Sopran bleibt liegen
+- Man lässt einen Akkord dazwischen weg
+= Steigt der Bass von F nach G, fallen die Oberstimmen. So vermeidest du Parallelen.
+
+? Warum vermeidet man Quint- und Oktavparallelen?
++ Die Stimmen verlieren ihre Selbstständigkeit und der Klang wird leer
+- Sie sind schwer zu singen
+- Sie klingen zu dissonant
+- Sie passen nicht in den Stimmumfang

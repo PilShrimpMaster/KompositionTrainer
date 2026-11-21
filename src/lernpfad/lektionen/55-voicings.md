@@ -70,3 +70,47 @@ pruefung: stil jazz, vierstimmig, fehlerfrei
 ## Freie Aufgabe
 
 Spiel die Drop-2-Voicings aus dem Beispiel am Klavier und verschiebe sie dann in andere Tonarten. Hör Bill Evans' Aufnahme von „Waltz for Debby“: Achte darauf, wie wenig sich die Töne der linken Hand von Akkord zu Akkord bewegen.
+
+## Quiz
+
+? Welche Optionstöne gibt es?
++ 9, 11 und 13
+- 2, 4 und 6
+- 3, 5 und 7
+- 8, 10 und 12
+
+? Was ist eine Avoid Note?
++ Ein Ton einen Halbton über einem Akkordton, der lang klingend reibt
+- Ein Ton außerhalb der Tonart
+- Der Grundton im Voicing
+- Ein Ton, den der Bass spielt
+
+? Welcher Ton ist über Cmaj7 die Avoid Note?
++ f (die 11)
+- d (die 9)
+- a (die 13)
+- fis (die #11)
+
+? Woraus besteht ein Shell Voicing?
++ Grundton, Terz und Septime
+- Grundton, Quinte und Oktave
+- Terz, Septime und 9
+- Allen sieben Tönen der Skala
+
+? Wie entsteht ein Drop-2-Voicing?
++ Der zweithöchste Ton eines engen Vierklangs kommt eine Oktave tiefer
+- Zwei Töne werden weggelassen
+- Der Akkord wird zwei Halbtöne tiefer gespielt
+- Der Bass spielt zwei Töne
+
+? Was fehlt im Rootless Voicing?
++ Der Grundton, den spielt der Bass
+- Die Terz
+- Die Septime
+- Die Optionstöne
+
+? Wessen Klavierklang ist für Rootless Voicings berühmt?
++ Bill Evans
+- Scott Joplin
+- Thelonious Monk
+- Count Basie

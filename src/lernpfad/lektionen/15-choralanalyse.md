@@ -66,3 +66,35 @@ pruefung: vierstimmig, fehlerfrei
 ## Freie Aufgabe
 
 Öffne unter **Hören** den Choralsatz und lass ihn mit „Satz prüfen“ laufen. Schreib dir zu jedem Akkord die Funktion auf und vergleiche sie mit der Analyse in dieser Lektion.
+
+## Quiz
+
+? Was markieren die Fermaten in einem Choral?
++ Das Ende einer Textzeile und einer harmonischen Einheit
+- Besonders laute Stellen
+- Den Beginn eines neuen Verses
+- Stellen, an denen die Tonart wechselt
+
+? Was ist die pikardische Terz?
++ Ein Mollstück endet mit einem Durakkord
+- Die Terz wird im Schlussakkord weggelassen
+- Eine Terz im Bass
+- Ein Durstück endet in Moll
+
+? In welche Tonarten weichen mittlere Choralzeilen oft aus?
++ In die Dominanttonart oder die Paralleltonart
+- In weit entfernte Tonarten
+- In die Tonart einen Halbton höher
+- Sie bleiben immer in der Haupttonart
+
+? Was ist der erste Schritt einer Choralanalyse?
++ Tonart und Zeilen bestimmen: Wo stehen die Fermaten?
+- Jeden Akkord sofort benennen
+- Die Altstimme singen
+- Nach Parallelen suchen
+
+? Mit welchem Schluss endet eine Zeile, die auf der Dominante stehen bleibt?
++ Halbschluss
+- Ganzschluss
+- Trugschluss
+- Plagalschluss

@@ -52,3 +52,41 @@ pruefung: stil klassik, vollstaendig, fehlerfrei, periode, begleitung-noten 48, 
 ## Freie Aufgabe
 
 Spiel oder hör den ersten Satz von Clementis Sonatine C-Dur op. 36 Nr. 1. Markiere in den Noten (zum Beispiel aus IMSLP) Hauptthema, Seitenthema in G-Dur, Durchführung und Reprise. Schreib dann ein Seitenthema in G-Dur, das zu deinem Sonatinen-Thema passt: ruhiger, gesanglicher, mit einer anderen Begleitung.
+
+## Quiz
+
+? Was sucht die Klassik vor allem?
++ Klarheit und Gleichgewicht
+- Ausdruck um jeden Preis
+- Klangfarbe statt Funktion
+- Durchgehende Motorik
+
+? Was steht in der Klassik anstelle eines durchgehenden Affekts?
++ Kontraste: kräftiges und gesangliches Thema, laut und leise
+- Ein einziges Thema ohne Kontrast
+- Freie Atonalität
+- Lange Klangflächen
+
+? Welcher Akkord ist ein Markenzeichen klassischer Kadenzen?
++ Der kadenzierende Quartsextakkord vor der Dominante
+- Der Neapolitaner
+- Der übermäßige Sextakkord
+- Der Quartenakkord
+
+? Wie oft wechselt die Harmonie in klassischer Musik meist?
++ Einmal oder zweimal pro Takt
+- Auf jeder Achtel
+- Nur alle acht Takte
+- Gar nicht
+
+? Was ist eine Sonatine?
++ Eine kleine Sonate, z. B. für Klavierschüler
+- Ein barocker Tanz
+- Ein Lied ohne Worte
+- Ein Stück für Orchester
+
+? Wer gehört zu den Meistern der Sonatine?
++ Clementi, Kuhlau, Diabelli
+- Debussy, Ravel, Satie
+- Bach, Händel, Vivaldi
+- Schönberg, Berg, Webern

@@ -51,3 +51,41 @@ pruefung: stil romantik, vierstimmig, fehlerfrei, ganzschluss, stilmerkmal zwisc
 ## Freie Aufgabe
 
 Wähle ein Stück aus jeder Epoche, das du gerne hörst, und bestimme es mit den vier Fragen oben: Satzbild, Rhythmus, Harmonik, Form. Schreib zu jedem Stück drei Sätze. Wenn du die Noten hast (etwa von IMSLP), gib die ersten acht Takte in MuseScore ein, exportiere sie als MusicXML und importiere sie hier: Dann siehst du die Stilmerkmale direkt in den Noten.
+
+## Quiz
+
+? Ein Stück hat durchlaufende Sechzehntel und Sequenzen. Welche Epoche liegt nahe?
++ Barock
+- Klassik
+- Impressionismus
+- Moderne
+
+? Ein Stück hat eine Melodie mit Alberti-Bass und klare Viertaktgruppen. Welche Epoche?
++ Klassik
+- Barock
+- Moderne
+- Renaissance
+
+? Woran erkennst du eher romantische Musik?
++ Alterierte Akkorde, Medianten, Chromatik, weite Bögen
+- Generalbass und Motorik
+- Quarten und Cluster
+- Gleichberechtigte imitierende Stimmen
+
+? Welche Formen gehören typisch zur Klassik?
++ Sonatensatz und Menuett
+- Suite und Fuge
+- Charakterstück und Lied
+- Freie Formen nach Bildern
+
+? Was ist die richtige Haltung gegenüber der Stilschätzung der App?
++ Eine Hilfe, kein Urteil
+- Sie ist immer richtig
+- Sie ersetzt das eigene Hören
+- Sie gilt nur für Barock
+
+? Was ist eine Stilkopie?
++ Ein eigenes Stück im Stil eines Vorbilds, eine alte Lernmethode
+- Ein Plagiat
+- Eine Aufnahme eines Werks
+- Ein Notendruck
