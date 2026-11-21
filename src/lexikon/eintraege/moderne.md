@@ -4,7 +4,7 @@ titel: Musik des 20. und 21. Jahrhunderts
 kategorie: Geschichte
 kurz: Eine Vielfalt von Richtungen: Atonalität und Zwölftonmusik, Neoklassizismus, Minimal Music, elektronische Musik, dazu Jazz, Film- und Popmusik.
 synonyme: Moderne, Neue Musik
-siehe: tonalitaet, impressionismus, romantik, zwoelftonmusik, neoklassizismus, minimal-music, jazz, filmmusik
+siehe: tonalitaet, impressionismus, romantik, zwoelftonmusik, neoklassizismus, minimal-music, jazz, filmmusik, bitonalitaet, quartenharmonik, cluster
 ---
 
 Im 20. Jahrhundert zerfiel der gemeinsame Stil. Wichtige Richtungen:

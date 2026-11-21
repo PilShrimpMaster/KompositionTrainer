@@ -5,6 +5,7 @@ import { analyseAufgabe } from './analyse';
 import { begleitmusterAufgabe, formAufgabe } from './form';
 import { transpositionAufgabe } from './instrumente';
 import { altschluesselAufgabe, instrumentHoerenAufgabe, lageAufgabe } from './orchester';
+import { alteriertAufgabe, epocheAufgabe } from './stile';
 import { fromDiatonic, germanKeyName, germanName, germanNameWithOctave, toMidi, diatonicIndex } from '../model/pitch';
 import type { Clef, Duration, KeySignature, Pitch, Score, Step } from '../model/types';
 import { funktionAufgabe, kadenzAufgabe, satzfehlerAufgabe, umkehrungAufgabe } from './satzuebungen';
@@ -68,7 +69,9 @@ export type UebungTyp =
   | 'transponieren'
   | 'altschluessel-lesen'
   | 'instrument-hoeren'
-  | 'lage-einschaetzen';
+  | 'lage-einschaetzen'
+  | 'alteriert-bestimmen'
+  | 'epoche-erkennen';
 
 export interface UebungInfo {
   typ: UebungTyp;
@@ -102,6 +105,8 @@ export const UEBUNGEN: UebungInfo[] = [
   { typ: 'altschluessel-lesen', titel: 'Altschlüssel lesen', modul: 's5-streicher', hoeren: false },
   { typ: 'instrument-hoeren', titel: 'Instrumente am Klang erkennen', modul: 's5-holz', hoeren: true },
   { typ: 'lage-einschaetzen', titel: 'Umfang und Lage einschätzen', modul: 's5-blech', hoeren: false },
+  { typ: 'alteriert-bestimmen', titel: 'Alterierte Akkorde bestimmen', modul: 's6-romantik', hoeren: false },
+  { typ: 'epoche-erkennen', titel: 'Epoche erkennen', modul: 's6-werkanalyse', hoeren: false },
 ];
 
 /** Schwierigkeit 1–3, abhängig von der Sicherheit im Modul */
@@ -435,6 +440,10 @@ export function erzeugeAufgabe(typ: UebungTyp, stufe: Stufe, rng: Rng = Math.ran
       return instrumentHoerenAufgabe(rng, stufe);
     case 'lage-einschaetzen':
       return lageAufgabe(rng, stufe);
+    case 'alteriert-bestimmen':
+      return alteriertAufgabe(rng, stufe);
+    case 'epoche-erkennen':
+      return epocheAufgabe(rng, stufe);
   }
 }
 

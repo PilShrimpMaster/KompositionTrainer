@@ -61,4 +61,11 @@ export const MODULE: Modul[] = [
   { id: 's5-streichquartett', stufe: 5, titel: 'Streichquartett', ziel: 'Vom Chorsatz zum Quartett: Lage, Stimmführung und Begleitfiguren' },
   { id: 's5-orchestrieren', stufe: 5, titel: 'Orchestrieren', ziel: 'Einen Satz auf Instrumente verteilen: verdoppeln, Farben mischen, Tutti und Solo' },
   { id: 's5-bigband-film', stufe: 5, titel: 'Seitenblick: Big Band und Filmorchester', ziel: 'Saxophonsatz in Drop-2, Bläserriffs und die Klangfarben der Filmmusik' },
+  { id: 's6-barock', stufe: 6, titel: 'Barock: Fortspinnung und Suite', ziel: 'Sequenz, Fortspinnung, Generalbass und die Tänze der Suite' },
+  { id: 's6-klassik', stufe: 6, titel: 'Klassik: die Sonatine', ziel: 'Klare Perioden, Alberti-Bass und der kleine Sonatensatz im Stil Mozarts und Clementis' },
+  { id: 's6-romantik', stufe: 6, titel: 'Romantik: Chromatik und alterierte Akkorde', ziel: 'Neapolitaner, verminderter Septakkord, übermäßiger Sextakkord und Medianten' },
+  { id: 's6-impressionismus', stufe: 6, titel: 'Impressionismus: Klangfarbe', ziel: 'Ganzton, Pentatonik, Parallelverschiebung und Nonakkorde wie bei Debussy' },
+  { id: 's6-moderne', stufe: 6, titel: 'Moderne: freie Tonalität', ziel: 'Quarten, Cluster, Bitonalität und ein Einblick in die Zwölftontechnik' },
+  { id: 's6-werkanalyse', stufe: 6, titel: 'Werkanalyse und Stilbestimmung', ziel: 'Ein unbekanntes Stück analysieren und seine Epoche begründen' },
+  { id: 's6-film', stufe: 6, titel: 'Seitenblick: Epochenstile im Film', ziel: 'Wie Filmmusik Barock, Romantik und Moderne als Farben einsetzt' },
 ];

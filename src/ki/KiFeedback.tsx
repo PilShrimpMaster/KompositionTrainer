@@ -19,7 +19,7 @@ type Zustand = { art: 'zu' } | { art: 'einstellungen' } | { art: 'laedt' } | { a
 /** „Feedback zu meinem Stück“: Claude als Kompositionslehrer */
 export function KiFeedback({ score, besetzung, befunde, aufgabe }: Props) {
   const [zustand, setZustand] = useState<Zustand>({ art: 'zu' });
-  const [fokus, setFokus] = useState<Fokus>('allgemein');
+  const [fokus, setFokus] = useState<Fokus>(score.stil && score.stil !== 'streng' ? 'stil' : 'allgemein');
 
   async function fragen() {
     if (!kiSchluessel()) {

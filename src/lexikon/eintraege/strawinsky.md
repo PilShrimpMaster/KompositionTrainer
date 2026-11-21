@@ -4,7 +4,7 @@ titel: Igor Strawinsky
 kategorie: Geschichte
 kurz: 1882–1971. Russischer Komponist, berühmt durch „Le Sacre du printemps“ (1913). Er erneuerte vor allem den Rhythmus und wechselte mehrmals radikal den Stil.
 synonyme: Strawinsky, Stravinsky, Igor Strawinsky, Le Sacre du printemps, Sacre, Feuervogel, Petruschka
-siehe: moderne, neoklassizismus, ostinato, synkope
+siehe: moderne, neoklassizismus, ostinato, synkope, bitonalitaet
 ---
 
 **Strawinsky** schrieb seine ersten Erfolge für das Pariser Ballett: „Der Feuervogel“, „Petruschka“ und „Le Sacre du printemps“, dessen Uraufführung 1913 einen Skandal auslöste.
