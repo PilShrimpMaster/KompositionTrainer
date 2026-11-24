@@ -33,6 +33,16 @@ tempo: 104
 E5:4[C] E5 D5 C5 | D5:2[G] B4:2 | C5:4[Am] C5 B4 A4 | A4:1[F] | E5:4[C] E5 D5 C5 | D5:2[G] G5:2 | Ab4:2[Fm] C5:2 | C5:1[C]
 ```
 
+## Vertiefen
+
+**Warum Loops funktionieren.** Ein Loop ohne Kadenz hat keinen festen Schluss: I – V – VIm – IV kann ewig weiterlaufen, und das Ohr hört sowohl C-Dur als auch a-Moll. Diese **Doppeldeutigkeit** nutzt Pop gezielt: Dieselben vier Akkorde wirken in der Strophe melancholisch und im Refrain hymnisch, je nachdem, welchen Ton die Melodie betont.
+
+**Der Pre-Chorus baut Spannung auf.** Er verlässt den Loop der Strophe, oft mit der IV oder der II, steigt in der Melodie auf und endet auf der V. So wird der Refrain zum Ziel. Eine kurze Pause oder ein Break direkt vor dem Refrain verstärkt den Effekt.
+
+**Sus-Akkorde und Add-Akkorde.** Pop liebt offene Klänge ohne Septime: **Csus2** (c – d – g) und **Csus4** (c – f – g) klingen schwebend, **Cadd9** (c – e – g – d) klingt hell und modern. Gitarristen spielen sie gern, weil leere Saiten mitklingen.
+
+**Der Mixolydische Rock.** Die Folge I – bVII – IV – I kommt aus dem mixolydischen Modus: Das b statt h in C-Dur nimmt den Leitton weg. Das klingt erdig und rockig, wie in „Sweet Child o' Mine“ oder „Hey Jude“ (im Schluss-Teil).
+
 ## Üben
 
 ```uebungen
@@ -46,6 +56,14 @@ titel: Ein Refrain mit Loop und modaler Mischung
 text: Schreib einen Refrain von acht Takten in C-Dur als Leadsheet: Melodie und Akkordsymbole, mindestens ein Akkord pro Takt. Nutze einen Loop (etwa C – G – Am – F) und an einer Stelle einen Akkord aus Moll, zum Beispiel Fm, Ab oder Bb. Die Melodie endet auf c.
 tonart: 0
 pruefung: takte 8, akkordsymbole 8, leadsheet-fehlerfrei, jazzmuster modale-mischung, endet-grundton
+```
+
+```aufgabe
+titel: Eine Rock-Strophe mit bVII
+text: Schreib über die Melodie die mixolydische Rockfolge C – Bb – F – C, ein Akkord pro Takt. Das Bb ist ein Akkord aus der Moll-Variante, die App erkennt ihn als modale Mischung.
+tonart: 0
+leadsheet: E5:2 G5:2 | D5:2 F5:2 | C5:2 A4:2 | C5:1
+pruefung: akkordsymbole 4, leadsheet-fehlerfrei, jazzmuster modale-mischung
 ```
 
 ## Freie Aufgabe
@@ -89,3 +107,21 @@ Hör „Let It Be“ von den Beatles und „Someone Like You“ von Adele. Finde
 - Möglichst viele Reime
 - Ein Text ohne Wiederholungen
 - Ein schnelles Tempo
+
+? Was ist die Aufgabe des Pre-Chorus?
++ Er baut Spannung auf und führt zum Refrain
+- Er beendet den Song
+- Er wiederholt die Strophe wörtlich
+- Er ist immer instrumental
+
+? Welche Töne hat Csus4?
++ c – f – g
+- c – e – g
+- c – d – g
+- c – e – g – d
+
+? Woher kommt die Rockfolge I – bVII – IV – I?
++ Aus dem mixolydischen Modus
+- Aus der Zwölftontechnik
+- Aus der Ganztonleiter
+- Aus dem phrygischen Modus

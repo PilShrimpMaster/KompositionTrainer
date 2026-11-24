@@ -40,6 +40,16 @@ tempo: 96
 D5:2[Bm7b5] F5:2 | D5:2[E7] G#4:2 | A4:1[Am6]
 ```
 
+## Vertiefen
+
+**Die II–V–I in allen Tonarten finden.** Geh vom Ziel aus: Die V liegt eine Quinte über der I, die II eine Quinte über der V. Für F-Dur also: I = Fmaj7, V = C7, II = Gm7. Für Bb-Dur: Cm7 – F7 – Bbmaj7. Für Eb-Dur: Fm7 – Bb7 – Ebmaj7.
+
+**Ketten von II–V.** In vielen Standards folgt eine II–V auf die nächste, ohne dass die I erklingt. Am bekanntesten ist der Anfang von „Autumn Leaves“ mit einer II–V–I in Dur und gleich danach einer in der parallelen Moll-Tonart. In „Giant Steps“ von John Coltrane springen die Tonarten sogar im Abstand großer Terzen.
+
+**Die II–V allein.** Oft steht eine II–V nur kurz für eine **Ausweichung**: Em7 – A7 vor Dm7 ist die II–V zur II. Der Jazzmusiker hört dann für einen Moment D-Moll als Ziel. Das ist dieselbe Idee wie die Zwischendominante in der Harmonielehre, nur mit vorgeschalteter II.
+
+**Guide-Tone-Linien üben.** Spiel über eine II–V–I nur Terzen und Septimen, jeden Ton so nah wie möglich am vorigen: c – h – h (Septime von Dm7, Terz von G7, Septime von Cmaj7) oder f – f – e (Terz, Septime, Terz). Diese beiden Linien sind das Gerüst jeder Jazzmelodie und jeder guten Begleitung.
+
 ## Üben
 
 ```uebungen
@@ -54,6 +64,14 @@ text: Harmonisiere die Melodie mit zwei II–V–I: Takt 1–3 nach C-Dur (Dm7 �
 tonart: 0
 leadsheet: F5:2 A5:2 | G5:2 F5:2 | E5:1 | D5:2 E5:2 | Bb4:2 D5:2 | C5:2 E5:2 | A4:2 C5:2 | C5:1
 pruefung: akkordsymbole 7, leadsheet-fehlerfrei, jazzmuster ii-v-i 2
+```
+
+```aufgabe
+titel: Eine II–V–I in d-Moll
+text: Harmonisiere die Melodie mit einer Moll-II–V–I in d-Moll: Takt 1 Em7b5, Takt 2 A7, Takt 3 und 4 Dm6. Jede Note ist ein Akkordton. Achte auf das cis über A7: Es ist der Leitton, der nach d führt.
+tonart: -1 moll
+leadsheet: G4:2 Bb4:2 | A4:2 C#5:2 | D5:1 | F5:1
+pruefung: akkordsymbole 3, leadsheet-fehlerfrei, jazzmuster ii-v-i 1
 ```
 
 ## Freie Aufgabe
@@ -103,3 +121,21 @@ Spiel die II–V–I auf dem Klavier oder dem Saxophon in allen zwölf Tonarten,
 - II – V – I mit Tritonus-Substitution
 - V – IV – I
 - I – VI – II – V
+
+? Wie lautet die II–V–I in F-Dur?
++ Gm7 – C7 – Fmaj7
+- Dm7 – G7 – Cmaj7
+- Cm7 – F7 – Bbmaj7
+- Am7 – D7 – Gmaj7
+
+? Wie lautet die II–V–I in d-Moll?
++ Em7b5 – A7 – Dm6
+- Dm7 – G7 – Cmaj7
+- Em7 – A7 – Dmaj7
+- Am7 – D7 – Gm7
+
+? Was ist eine Guide-Tone-Linie?
++ Eine Linie aus Terzen und Septimen, die sich möglichst wenig bewegt
+- Eine Linie nur aus Grundtönen
+- Eine chromatische Bassline
+- Die Melodie des Saxophons
