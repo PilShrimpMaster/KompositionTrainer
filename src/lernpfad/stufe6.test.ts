@@ -17,6 +17,14 @@ const SONATINE_BASS =
 
 /** Musterlösungen: Melodie; Klaviersatz „Melodie || Begleitung“; vierstimmig „S || A || T || B“ */
 const LOESUNGEN: Record<string, string> = {
+  'Eine Sarabande begleiten':
+    'G4:4 Bb4:4. A4:8 | G4:4 F#4:4. G4:8 | Eb4:4 C4:4. D4:8 | D4:2. | Bb4:4 D5:4. C5:8 | G4:4 Bb4:4. A4:8 | A4:4 F#4:4. A4:8 | G4:2. || G3:2. | D3:2. | C3:2. | D3:2. | G3:2. | Eb3:2. | D3:2. | G2:2.',
+  'Eine Kadenz mit Quartsextakkord': 'C5:4 D5 C5 Bb4 | A4:1 || A4:4 Bb4 A4 G4 | F4:1 || F4:4 F4 F4 E4 | F4:1 || F3:4 Bb2 C3 C3 | F3:1',
+  'Ein übermäßiger Sextakkord vor der Dominante': 'C5:4 D5 D#5:2 | E5:2 E5:2 || A4:4 A4 A4:2 | G#4:2 A4:2 || E4:4 A3 A3:2 | B3:2 C4:2 || A2:4 F2 F2:2 | E2:2 A2:2',
+  'Eine Ganztonmelodie': 'D5:4 E5 F#5 G#5 | A#5:2 G#5:2 | F#5:4 E5 D5 C5 | D5:1',
+  'Eine Reihe und ihr Krebs': 'E4:4 F4 C5 B4 | Bb4 Eb5 D4 C#4 | G4 F#4 A4 Ab4 | Ab4 A4 F#4 G4 | C#4 D4 Eb5 Bb4 | B4 C5 F4 E4',
+  'Dieselbe Melodie klassisch': 'E5:4 E5 C5 A4 | B4 B4 C5:2 || G4:4 G4 A4 F4 | D4 F4 E4:2 || C4:4 B3 A3 C4 | G3 G3 G3:2 || C3:4 E3 F3 F3 | G2 G2 C3:2',
+  'Eine Szene über dem Orgelpunkt': 'C5:2 D5:2 | E5:2 D5:2 | C5:2 B4:2 | C5:1 || A4:2 A4:2 | B4:2 A4:2 | G4:2 G4:2 | A4:1 || E4:2 F4:2 | G4:2 F4:2 | E4:2 D4:2 | E4:1 || A2:2 A2:2 | A2:2 A2:2 | A2:2 A2:2 | A2:1',
   'Eine Fortspinnung':
     'E4:8 G4 C5 G4 B4 D5 G5 D5 | A4:8 C5 F5 C5 D4 F4 B4 F4 | G4:8 B4 E5 B4 C4 E4 A4 E4 | F4:8 A4 D5 A4 D5 B4 G4 B4 | C5:1 || C3:2 G2:2 | F2:2 B2:2 | E2:2 A2:2 | D2:2 G2:2 | C2:1',
   'Ein Sonatinen-Thema begleiten': `${SONATINE} || ${SONATINE_BASS}`,

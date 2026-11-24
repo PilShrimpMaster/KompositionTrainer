@@ -51,6 +51,16 @@ tempo: 80
 G4:8 A4 C5 D5 E5:4 D5:4 | C5:8 A4 G4 A4 C5:2 | D5:8 E5 G5 E5 D5:4 C5:8 A4 | G4:1
 ```
 
+## Vertiefen
+
+**Reale und diatonische Mixtur hören.** Bei der **realen Mixtur** bleibt der Akkord genau gleich, auch wenn dafür Vorzeichen außerhalb der Tonart nötig sind: Ein Dur-Dreiklang wird als Dur-Dreiklang verschoben. Das klingt fremd und schillernd. Bei der **diatonischen Mixtur** bleiben die Töne in der Tonleiter; Dur, Moll und vermindert wechseln sich ab. Das klingt weicher und vertrauter. Debussy mischt beide in „La cathédrale engloutie“.
+
+**Septakkorde und Nonenakkorde als Farbe.** Ein großer Septakkord (c – e – g – h) oder ein Nonenakkord (c – e – g – b – d) muss im Impressionismus nicht weitergehen. Oft werden genau diese Klänge parallel verschoben, etwa am Anfang von Debussys „Sarabande“ aus „Pour le piano“. Lass die Septime dabei ruhig liegen oder nach oben gehen.
+
+**Die Klangfarbe des Klaviers.** Debussy und Ravel schreiben fürs Klavier wie für ein Orchester: Das **Pedal** verschmilzt Klänge zu Flächen, weite Lagen über drei oder vier Oktaven klingen wie Glocken, und sehr leise Dynamik (pp, ppp) gehört zum Stil. Ravel instrumentierte später viele seiner Klavierstücke, etwa „Le Tombeau de Couperin“ und Mussorgskys „Bilder einer Ausstellung“.
+
+**Modale Farben.** Statt Dur und Moll stehen Kirchentonarten: **Lydisch** mit der übermäßigen Quarte klingt schwebend und hell, **Dorisch** mit der großen Sexte ernst und offen, **Phrygisch** mit der kleinen Sekunde spanisch und dunkel. Ein Orgelpunkt auf dem Grundton macht den Modus hörbar, weil keine Kadenz ihn erklären muss.
+
 ## Üben
 
 ```uebungen
@@ -67,6 +77,13 @@ satz: ja
 stil: impressionismus
 sopran: A4:4 B4 D5 B4 | A4:2 G4:2 | E4:1
 pruefung: stil impressionismus, vierstimmig, fehlerfrei, stilmerkmal parallelverschiebung
+```
+
+```aufgabe
+titel: Eine Ganztonmelodie
+text: Schreib eine Melodie von vier Takten im 4/4-Takt, nur aus der Ganztonleiter auf d (d – e – fis – gis – ais – c). Steig zum höchsten Ton auf, sink wieder ab und ende mit einem langen Ton. Hör darauf, wie die Melodie schwebt, weil kein Leitton sie irgendwohin zieht.
+tonart: 0
+pruefung: takte 4, stilmerkmal ganzton, schluss-lang
 ```
 
 ## Freie Aufgabe
@@ -110,3 +127,21 @@ Hör Debussys „La cathédrale engloutie“ (Préludes I): Ganze Akkordblöcke 
 - Pagodes
 - Clair de lune
 - Golliwogg’s Cakewalk
+
+? Was ist eine reale Mixtur?
++ Ein Akkord wird genau gleich verschoben, auch mit Vorzeichen außerhalb der Tonart
+- Die Töne bleiben in der Tonleiter
+- Zwei Tonarten erklingen gleichzeitig
+- Ein Akkord ohne Terz
+
+? Welche Kirchentonart klingt durch die übermäßige Quarte besonders schwebend und hell?
++ Lydisch
+- Phrygisch
+- Dorisch
+- Äolisch
+
+? Welches Mittel verschmilzt Klänge auf dem Klavier zu Flächen?
++ Das Pedal
+- Das Staccato
+- Der Alberti-Bass
+- Die Fermate

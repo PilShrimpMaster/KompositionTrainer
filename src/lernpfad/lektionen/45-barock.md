@@ -46,6 +46,26 @@ oben: D5:4 F5:4. E5:8 | D5:4 C#5:4. D5:8 | Bb4:4 G4:4. A4:8 | A4:2. | F5:4 A5:4.
 unten: D3:2. | A2:2. | G2:2. | A2:2. | D3:2. | Bb2:2. | A2:2. | D2:2.
 ```
 
+## Vertiefen
+
+**Den Generalbass lesen.** Im Barock schrieb der Komponist oft nur die Melodie und den Bass auf. Über oder unter den Basstönen stehen Ziffern, die **Generalbass-Bezifferung**. Der Cembalist oder Organist spielte danach die Akkorde aus dem Stegreif:
+
+| Ziffer | Akkord über dem Bass | Heute |
+| --- | --- | --- |
+| keine | Terz und Quinte | Grundstellung |
+| 6 | Terz und Sexte | Sextakkord |
+| 6/4 | Quarte und Sexte | Quartsextakkord |
+| 7 | Terz, Quinte, Septime | Septakkord |
+| 6/5 | Terz, Quinte, Sexte | Quintsextakkord |
+| 4 – 3 | Quarte, die zur Terz aufgelöst wird | Vorhalt |
+| ♯ allein | erhöhte Terz | Dur-Terz, oft der Leitton |
+
+**Der Vorhalt im Barock.** Ein Ton aus dem vorigen Akkord bleibt auf der schweren Zählzeit liegen und löst sich danach stufenweise abwärts auf: 4 – 3, 7 – 6 oder 9 – 8. Ketten von 7 – 6-Vorhalten über einem stufenweise fallenden Bass sind ein Markenzeichen von Corelli und Händel.
+
+**Weitere Sequenzmodelle.** Neben der Quintfallsequenz kennt der Barock die **steigende 5 – 6-Sequenz** (über einem stufenweise steigenden Bass wechseln Quinte und Sexte) und die **fallende Terzsequenz** wie in Pachelbels Kanon (D – A – h – fis – G – D – G – A). Eine Sequenz wiederholt ein Modell meist zwei- oder dreimal; beim vierten Mal wird sie langweilig, darum bricht man vorher zur Kadenz ab.
+
+**Die Gigue und der Kontrapunkt.** Viele Giguen beginnen wie eine Fuge: Eine Stimme stellt das Thema vor, die zweite antwortet in der Dominante. Im zweiten Teil erscheint das Thema oft in der Umkehrung. So verbinden sich Tanz und Kontrapunkt.
+
 ## Üben
 
 ```uebungen
@@ -62,6 +82,17 @@ klavier: ja
 stil: barock
 begleitung: C3:2 G2:2 | F2:2 B2:2 | E2:2 A2:2 | D2:2 G2:2 | C2:1
 pruefung: stil barock, vollstaendig, fehlerfrei, ganzschluss, stilmerkmal sequenz
+```
+
+```aufgabe
+titel: Eine Sarabande begleiten
+text: Die Melodie ist eine Sarabande in g-Moll mit der langen Note auf der Zählzeit 2. Schreib einen ruhigen Bass dazu, einen Ton pro Takt als punktierte Halbe: Takt 1 Tonika, Takt 2 Dominante, Takt 3 Subdominante c-Moll, Takt 4 ein Halbschluss auf der Dominante. Der Nachsatz endet mit einem Ganzschluss. Geprüft wird im Stil des Barock.
+tonart: -2 moll
+takt: 3/4
+klavier: ja
+stil: barock
+melodie: G4:4 Bb4:4. A4:8 | G4:4 F#4:4. G4:8 | Eb4:4 C4:4. D4:8 | D4:2. | Bb4:4 D5:4. C5:8 | G4:4 Bb4:4. A4:8 | A4:4 F#4:4. A4:8 | G4:2.
+pruefung: stil barock, vollstaendig, fehlerfrei, halbschluss 4, ganzschluss
 ```
 
 ## Freie Aufgabe
@@ -111,3 +142,21 @@ Hör die Sarabande aus Bachs Französischer Suite Nr. 1 d-Moll (BWV 812) und Hä
 - 1750 bis 1820
 - 1820 bis 1900
 - 1450 bis 1600
+
+? Was bedeutet die Generalbass-Ziffer 6 über einem Basston?
++ Terz und Sexte über dem Bass: ein Sextakkord
+- Ein Septakkord
+- Sechs Akkorde hintereinander
+- Ein Quartsextakkord
+
+? Wie löst sich ein barocker Vorhalt meistens auf?
++ Stufenweise abwärts, etwa 4 – 3 oder 7 – 6
+- Mit einem Sprung nach oben
+- Gar nicht
+- Durch einen Wechsel der Tonart
+
+? Welche Sequenz liegt Pachelbels Kanon zugrunde?
++ Eine fallende Terzsequenz: D – A – h – fis – G – D – G – A
+- Eine Quintfallsequenz
+- Eine Ganztonleiter
+- Ein Orgelpunkt

@@ -30,6 +30,16 @@ oben: r:16 C4 D4 E4 F4 D4 E4 C4 G4:8 C5 B4 C5 | D5:16 G4 A4 B4 C5 A4 B4 G4 D5:8 
 unten: r:2 r:16 C3 D3 E3 F3 D3 E3 C3 | G3:8 G2 r:4 r:16 G3 A3 B3 C4 A3 B3 G3
 ```
 
+## Vertiefen
+
+**Eine Analyse in drei Durchgängen.** Erst **hören** ohne Noten: Welche Stimmung, welche Besetzung, welches Tempo? Dann **überblicken**: Wo sind die Kadenzen, wo kehrt etwas wieder, wie viele Teile hat das Stück? Erst zum Schluss **ins Detail**: Akkorde bestimmen, Motive markieren, Besonderheiten der Stimmführung suchen. Wer gleich mit den Akkorden beginnt, verliert leicht den Überblick.
+
+**Stilmerkmale gegeneinander abwägen.** Ein Merkmal allein entscheidet nichts. Eine Sequenz gibt es bei Bach wie bei Mozart und Chopin. Entscheidend ist die **Kombination**: Sequenz plus durchlaufende Sechzehntel plus Generalbass ergibt Barock; Sequenz plus Periodik plus Alberti-Bass ergibt Klassik; Sequenz plus Chromatik plus weite Klavierlage ergibt Romantik.
+
+**Übergangszeiten.** Die Epochen grenzen nicht scharf aneinander. Die Söhne Bachs (etwa Carl Philipp Emanuel) schreiben zwischen Barock und Klassik im **empfindsamen Stil**. Beethovens späte Werke weisen in die Romantik, Liszts späte Klavierstücke schon in die Moderne. Wenn ein Stück Merkmale zweier Epochen zeigt, ist das oft genau die richtige Antwort.
+
+**Stilkopie als Übung.** Nimm eine Melodie und harmonisiere sie zweimal: einmal klassisch mit wenigen Funktionen und klaren Kadenzen, einmal romantisch mit Zwischendominanten und Chromatik. Der Vergleich zeigt dir, wie sehr die Harmonik den Charakter einer Melodie bestimmt.
+
 ## Üben
 
 ```uebungen
@@ -46,6 +56,16 @@ satz: ja
 stil: romantik
 sopran: E5:4 E5 C5 A4 | B4 B4 C5:2
 pruefung: stil romantik, vierstimmig, fehlerfrei, ganzschluss, stilmerkmal zwischendominante
+```
+
+```aufgabe
+titel: Dieselbe Melodie klassisch
+text: Setz die Melodie aus der vorigen Aufgabe noch einmal vierstimmig, diesmal im Stil der Klassik: nur leitereigene Akkorde, keine Chromatik. Ein Vorschlag: T – Dp – S – S | D – D⁷ – T. Vergleiche danach beide Fassungen.
+tonart: 0
+satz: ja
+stil: klassik
+sopran: E5:4 E5 C5 A4 | B4 B4 C5:2
+pruefung: stil klassik, vierstimmig, fehlerfrei, leitereigen, ganzschluss
 ```
 
 ## Freie Aufgabe
@@ -89,3 +109,21 @@ Wähle ein Stück aus jeder Epoche, das du gerne hörst, und bestimme es mit den
 - Ein Plagiat
 - Eine Aufnahme eines Werks
 - Ein Notendruck
+
+? In welcher Reihenfolge geht man bei einer Werkanalyse am besten vor?
++ Erst hören, dann den Überblick gewinnen, zum Schluss die Details
+- Erst jeden Akkord bestimmen
+- Nur die Noten lesen, nicht hören
+- Mit dem letzten Takt beginnen
+
+? Was spricht zusammen mit einer Sequenz für die Klassik?
++ Periodik und Alberti-Bass
+- Generalbass und durchlaufende Sechzehntel
+- Chromatik und weite Lage
+- Cluster und Quarten
+
+? Wer schrieb im „empfindsamen Stil“ zwischen Barock und Klassik?
++ Carl Philipp Emanuel Bach
+- Claude Debussy
+- Arnold Schönberg
+- Richard Wagner

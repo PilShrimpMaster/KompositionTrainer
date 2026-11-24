@@ -49,6 +49,18 @@ T: A3:2 A3:2 | B3:1 | C4:1
 B: A2:2 F2:2 | E2:1 | A2:1
 ```
 
+## Vertiefen
+
+**Den übermäßigen Sextakkord bauen.** Am leichtesten findest du ihn von seinem Ziel aus: Er steht vor der Dominante. In a-Moll ist die Dominante E-Dur. Der Bass liegt einen Halbton **über** dem Ziel (f), der übermäßige Ton einen Halbton **unter** dem Ziel (dis). Dazu kommt immer die Terz a, der Grundton der Tonart. Die italienische Form verdoppelt das a, die deutsche fügt c hinzu, die französische h. Der deutsche klingt wie ein Dominantseptakkord (F⁷), löst sich aber ganz anders auf: Das ist eine Tür für enharmonische Modulationen.
+
+**Quintparallelen beim deutschen Sextakkord.** Löst man f – a – c – dis direkt nach E-Dur auf, gehen f und c parallel zu e und h: Quintparallelen. Sie heißen **Mozartquinten** und sind in der Romantik geduldet. Wer sie vermeiden will, schiebt einen kadenzierenden Quartsextakkord dazwischen.
+
+**Chromatische Linien.** Viele romantische Sätze bewegen eine Stimme in Halbtönen, während die anderen liegen. Eine absteigende chromatische Bassline (der **Lamento-Bass**, schon im Barock bekannt) klingt klagend; eine steigende chromatische Mittelstimme erzeugt Sehnsucht. So entstehen ganz neue Klänge, die nur durch die Stimmführung erklärbar sind.
+
+**Der Tristan-Akkord.** Am Beginn von Wagners „Tristan und Isolde“ (1865 uraufgeführt) steht der Klang f – h – dis′ – gis′. Er löst sich nicht in eine Tonika, sondern in einen Dominantseptakkord auf, und auch der bleibt offen. Diese **unendliche Sehnsucht** gilt als Wendepunkt: Von hier führt der Weg zur Auflösung der Tonalität um 1900.
+
+**Die Formen der Romantik.** Neben Sonate und Sinfonie stehen das **Charakterstück** (Nocturne, Impromptu, Intermezzo), das **Lied** mit Klavier (Schubert, Schumann) und die **sinfonische Dichtung** (Liszt, Strauss), die eine Geschichte oder ein Bild erzählt.
+
 ## Üben
 
 ```uebungen
@@ -65,6 +77,16 @@ satz: ja
 stil: romantik
 sopran: D5:4 Eb5 C#5 D5 | D5 C#5 D5:2
 pruefung: stil romantik, vierstimmig, fehlerfrei, enthaelt sN, stilmerkmal verminderter-septakkord
+```
+
+```aufgabe
+titel: Ein übermäßiger Sextakkord vor der Dominante
+text: Setz die Melodie vierstimmig in a-Moll: Tonika, dann die Subdominante d-Moll mit f im Bass, dann über demselben Bass f der italienische übermäßige Sextakkord (f – a – dis, a verdoppelt). Im zweiten Takt folgen die Dominante E-Dur und die Tonika. Das dis im Sopran und das f im Bass streben auseinander zur Oktave e. Geprüft wird im Stil der Romantik.
+tonart: 0 moll
+satz: ja
+stil: romantik
+sopran: C5:4 D5 D#5:2 | E5:2 E5:2
+pruefung: stil romantik, vierstimmig, fehlerfrei, ganzschluss, stilmerkmal uebermaessig
 ```
 
 ## Freie Aufgabe
@@ -114,3 +136,21 @@ Hör Chopins Prélude e-Moll op. 28 Nr. 4: Über einer fast unbewegten Melodie r
 - Zusammen zum Einklang
 - Beide abwärts
 - Sie bleiben liegen
+
+? Wo liegen Bass und übermäßiger Ton eines übermäßigen Sextakkords, bezogen auf die Dominante?
++ Der Bass einen Halbton darüber, der übermäßige Ton einen Halbton darunter
+- Beide auf dem Grundton der Dominante
+- Der Bass eine Quinte tiefer
+- Beide einen Ganzton darüber
+
+? Was sind „Mozartquinten“?
++ Quintparallelen bei der Auflösung des deutschen Sextakkords in die Dominante
+- Quinten in der Begleitung einer Mozart-Sonate
+- Eine Quintfallsequenz
+- Leere Quinten am Satzende
+
+? Mit welchem Klang beginnt Wagners „Tristan und Isolde“?
++ f – h – dis′ – gis′, dem Tristan-Akkord
+- Einem C-Dur-Akkord
+- Einem Quartenakkord
+- Einer Zwölftonreihe

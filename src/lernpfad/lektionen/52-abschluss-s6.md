@@ -6,7 +6,7 @@ dauer: 180 Minuten
 
 ## Erklären
 
-Zum Abschluss des Lernpfads schreibst du ein **mehrsätziges Werk**: mindestens zwei Sätze, die zusammengehören und doch kontrastieren. Das ist die Form der Sonate, der Suite und der Sinfonie.
+Zum Abschluss von Stufe 6 schreibst du ein **mehrsätziges Werk**: mindestens zwei Sätze, die zusammengehören und doch kontrastieren. Das ist die Form der Sonate, der Suite und der Sinfonie.
 
 **So gehst du vor:**
 
@@ -15,6 +15,16 @@ Zum Abschluss des Lernpfads schreibst du ein **mehrsätziges Werk**: mindestens 
 3. **Verbinde die Sätze.** Ein gemeinsames Motiv, eine Tonart, die im ersten Satz schon anklingt, oder ein Rhythmus, der wiederkehrt.
 4. **Schreib jeden Satz als eigenes Stück** und nimm ihn ins Portfolio auf.
 5. **Bündle die Sätze zu einem Werk.** Im Portfolio legst du unter „Werke“ ein neues Werk an, fügst die Sätze in der richtigen Reihenfolge hinzu und hörst sie nacheinander an. Jeder Satz lässt sich nach MuseScore exportieren.
+
+## Vertiefen
+
+**Ein Werkplan vor dem ersten Ton.** Schreib dir vor dem Komponieren eine kleine Tabelle: Satz, Tonart, Takt, Tempo, Form, Charakter, Länge. Zum Beispiel: 1. Satz, C-Dur, 4/4, Allegro, Periode plus Seitenthema, energisch, 16 Takte; 2. Satz, F-Dur, 3/4, Andante, Liedform A B A, gesanglich, 16 Takte. Ein Plan verhindert, dass beide Sätze am Ende gleich klingen.
+
+**Kontrast auf mehreren Ebenen.** Ein guter zweiter Satz unterscheidet sich nicht nur im Tempo. Ändere auch die **Taktart** (4/4 und 3/4), das **Begleitmuster** (Alberti-Bass und liegende Akkorde), das **Register** (eine Melodie hoch, die andere in der Mittellage) und das **Tongeschlecht** (Dur und die Molltonart der Parallele).
+
+**Einheit stiften.** Damit die Sätze zusammengehören, verbinde sie mit einem **gemeinsamen Kern**: Ein Motiv aus dem ersten Satz erscheint im zweiten langsamer oder in Moll, oder beide Themen beginnen mit demselben Intervall. Beethoven baut ganze Sinfonien aus einem einzigen Motiv.
+
+**Überarbeiten.** Hör jeden Satz nach einem Tag Pause noch einmal an. Frag dich: Wo wird es langweilig? Wo ist ein Höhepunkt, und kommt er an der richtigen Stelle (meist etwa nach zwei Dritteln)? Ist der Schluss überzeugend vorbereitet? Kleine Änderungen nach einer Pause verbessern ein Stück oft mehr als stundenlanges Weiterschreiben.
 
 ## Hören
 
@@ -77,3 +87,15 @@ Wenn du magst, schreib einen dritten Satz: ein schnelles Finale, etwa ein Rondo 
 - Im Lexikon
 - In den Übungen
 - Nur in MuseScore
+
+? Wo liegt in einem Satz oft der Höhepunkt?
++ Etwa nach zwei Dritteln
+- Im ersten Takt
+- Genau in der Mitte des ersten Taktes
+- Im letzten Ton
+
+? Auf welchen Ebenen kann ein zweiter Satz mit dem ersten kontrastieren?
++ Tempo, Taktart, Begleitmuster, Register und Tongeschlecht
+- Nur im Tempo
+- Nur in der Lautstärke
+- Gar nicht, beide Sätze sollen gleich klingen
