@@ -40,9 +40,38 @@ T: E4:4 F4 D4 E4
 B: C3:4 F3 G3 C3
 ```
 
+## Vertiefen
+
+**Schlussformen.** Wie ein Satzzeichen beendet jede Kadenz einen Gedanken auf eigene Weise:
+
+| Schluss | Akkorde | Wirkung |
+| --- | --- | --- |
+| Ganzschluss (authentisch) | D – T | Punkt, endgültig |
+| Halbschluss | … – D | Komma oder Fragezeichen, offen |
+| Plagalschluss | S – T | weich, „Amen“-Schluss |
+| Trugschluss | D – Tp | überraschend, verlängert (Lektion Nebenfunktionen) |
+
+**Funktionen in Moll.** In Moll schreibt man die Mollakkorde klein: **t** (Mollonika), **s** (Mollsubdominante). Die Dominante bleibt fast immer groß, **D**, weil sie mit dem erhöhten Leitton (in a-Moll Gis) zum Durakkord wird. Ohne Leitton wäre der Schluss schwach.
+
+```satz
+titel: Kadenz in a-Moll
+tonart: 0 moll
+analyse: ja
+S: E5:4 F5 E5 E5
+A: A4:4 A4 G#4 A4
+T: C4:4 D4 B3 C4
+B: A2:4 D3 E3 A2
+```
+
+Der Alt hält das A aus t und s und singt dann den Leitton Gis, der wie immer aufwärts zum A geht. Der Tenor steigt zum D und fällt zur Quinte H der Dominante.
+
+**Funktionstheorie und Stufentheorie.** Die Buchstaben T, S und D stammen aus der Funktionstheorie (Hugo Riemann, um 1890). Sie fragt: Welche Rolle spielt ein Akkord? Die **Stufentheorie** benennt Akkorde mit römischen Zahlen nach ihrem Grundton: I, IV, V. Im deutschsprachigen Raum sind beide üblich, im englischsprachigen Raum und im Jazz fast nur die Stufen. Der KompositionsTrainer zeigt Funktionen, im Lexikon findest du beide.
+
+**Stimmumfänge** im Chorsatz, so wie sie die Prüfung erwartet: Sopran c′–a″, Alt g–d″, Tenor c–g′, Bass E–d′. Im bequemen Bereich liegen die Stimmen meist eine Terz innerhalb dieser Grenzen.
+
 ## Üben
 
-Bestimme die Funktion von Akkorden in verschiedenen Dur-Tonarten. Auf Stufe 1 sind es nur T, S und D, später kommen die Parallelklänge dazu.
+Bestimme die Funktion von Akkorden in verschiedenen Dur-Tonarten. Auf der ersten Schwierigkeitsstufe der Übung sind es nur T, S und D, später kommen die Parallelklänge dazu.
 
 ```uebungen
 funktion-bestimmen
@@ -58,6 +87,16 @@ satz: ja
 sopran: B4:4 C5 A4 B4
 bass: G3:4 C3 D3 G3
 pruefung: vierstimmig, fehlerfrei, funktionen T S D T, ganzschluss
+```
+
+```aufgabe
+titel: Kadenz in e-Moll
+text: Sopran und Bass bilden in e-Moll die Kadenz t – s – D – t. Schreib Alt und Tenor dazu. Denk an den Leitton Dis in der Dominante: Er steht nicht in der Tonart vorne und muss als Versetzungszeichen geschrieben werden.
+tonart: 1 moll
+satz: ja
+sopran: B4:4 C5 B4 B4
+bass: E2:4 A2 B2 E2
+pruefung: vierstimmig, fehlerfrei, funktionen t s D t, ganzschluss
 ```
 
 ## Freie Aufgabe
@@ -102,3 +141,28 @@ Spiel die Kadenz T – S – D – T am Klavier in drei verschiedenen Tonarten, 
 - Sie ist der Ruhepunkt am Schluss
 - Sie enthält den Leitton
 - Sie ersetzt die Tonika am Anfang
+
+? Welche Akkordfolge ist ein Plagalschluss?
++ S – T
+- D – T
+- T – D
+- D – Tp
+
+? Warum ist die Dominante in Moll meist ein Durakkord?
++ Der erhöhte Leitton wird ihre Terz
+- Weil Moll keine eigenen Dreiklänge hat
+- Weil die Subdominante schon Moll ist
+- Weil die Tonika sonst zu hell klingt
+= In a-Moll wird aus e–g–h mit dem Leitton e–gis–h, ein E-Dur-Akkord.
+
+? Wie heißt die V. Stufe in der Funktionstheorie?
++ Dominante (D)
+- Subdominante (S)
+- Tonikaparallele (Tp)
+- Leitklang
+
+? Welcher Umfang gilt für den Tenor im Chorsatz?
++ c bis g′
+- g bis d″
+- E bis d′
+- c′ bis a″

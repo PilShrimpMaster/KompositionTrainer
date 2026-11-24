@@ -52,6 +52,28 @@ B: C3:4 D3 G2 C3
 
 Hör dir die drei Beispiele an und achte jeweils auf den vorletzten Akkord. Der Trugschluss überrascht: Man erwartet C-Dur und hört a-Moll. Die Doppeldominante hellt den Klang mit dem Fis auf.
 
+## Vertiefen
+
+**Gegenklänge.** Jeder Hauptakkord hat zwei Mollverwandte mit zwei gemeinsamen Tönen: die Parallele eine kleine Terz tiefer und den **Gegenklang** eine große Terz höher. In C-Dur ist e-Moll die Dominantparallele (Dp), zugleich aber der Tonikagegenklang (Tg), weil er zwei Töne mit C-Dur teilt. Welche Deutung stimmt, entscheidet der Zusammenhang: Zwischen C-Dur und F-Dur wirkt e-Moll eher als Tg, vor a-Moll eher als Dp.
+
+**Zwischendominanten genauer.** Jeder Dur- oder Mollakkord außer dem verminderten kann eine eigene Dominante bekommen. Man schreibt sie in Klammern vor den Zielakkord: (D) Tp heißt „die Dominante der Tonikaparallele“, in C-Dur E-Dur vor a-Moll. Der neue Leitton (Gis) geht aufwärts zum Grundton des Ziels. Eine Zwischendominante färbt kurz in eine Nachbartonart, ohne dass man moduliert.
+
+```satz
+titel: Zwischendominante zur Tonikaparallele
+tonart: 0
+analyse: ja
+S: C5:4 A4 G#4 A4 | A4 G4 G4:2
+A: G4:4 F4 E4 E4 | F4 D4 E4:2
+T: E4:4 D4 B3 C4 | C4 B3 C4:2
+B: C3:4 D3 E3 A2 | F2 G2 C3:2
+```
+
+Nach T und Sp kommt E-Dur. Hör auf das Gis im Sopran: Es macht a-Moll kurz zu einem Ziel, so als stünde man in a-Moll. Das Gis kommt schrittweise vom A, nicht chromatisch vom G, so bleibt die Linie gut singbar. Danach führt die Kadenz S – D – T sicher nach C-Dur zurück.
+
+**Häufige Zwischendominanten in C-Dur:** D-Dur → G-Dur (die Doppeldominante), A-Dur → d-Moll, E-Dur → a-Moll, C-Dur mit B (C⁷) → F-Dur. In Volksliedern, Chorälen, im Barock und bis in den Pop gehören sie zum Grundwortschatz.
+
+**Sixte ajoutée:** Die Subdominante mit hinzugefügter Sexte (F–A–C–D) verbindet S und Sp in einem Klang. Rameau nannte sie die charakteristische Dissonanz der Subdominante. Sie steht oft vor dem kadenzierenden Quartsextakkord.
+
 ## Üben
 
 Bestimme Funktionen (jetzt mit Parallelklängen) und erkenne Schlüsse nach dem Gehör: Ganzschluss, Halbschluss, Trugschluss, Plagalschluss.
@@ -68,6 +90,15 @@ text: Der Sopran ist vorgegeben (C-Dur). Schreib Alt, Tenor und Bass dazu. Am En
 tonart: 0
 satz: ja
 sopran: G4:4 A4 G4 E4 | F4 D4 C4:2
+pruefung: vierstimmig, fehlerfrei, enthaelt Tp, ganzschluss
+```
+
+```aufgabe
+titel: Zwischendominante in D-Dur
+text: Der Bass ist vorgegeben: D – E – Fis – H | G – A – D in D-Dur. Über dem Fis steht die Zwischendominante Fis-Dur (mit Ais), die sich in die Tonikaparallele h-Moll auflöst. Führe das Ais aufwärts zum H und erreiche es schrittweise, nicht chromatisch vom A aus. Danach folgt die Kadenz S – D – T.
+tonart: 2
+satz: ja
+bass: D3:4 E3 F#3 B2 | G2 A2 D3:2
 pruefung: vierstimmig, fehlerfrei, enthaelt Tp, ganzschluss
 ```
 
@@ -119,3 +150,28 @@ Schreib eine Folge von acht Akkorden in G-Dur, die alle drei Parallelklänge und
 - Halbschluss
 - Trugschluss
 - Ganzschluss
+
+? Wie schreibt man die Dominante der Tonikaparallele in der Funktionstheorie?
++ (D) Tp
+- DD
+- Tp⁷
+- D Tp
+= Die Zwischendominante steht in Klammern vor ihrem Zielakkord.
+
+? Welcher Akkord ist in C-Dur die Zwischendominante zu d-Moll?
++ A-Dur
+- E-Dur
+- D-Dur
+- G-Dur
+
+? Was ist die Sixte ajoutée?
++ Die Subdominante mit hinzugefügter Sexte, in C-Dur F–A–C–D
+- Die Dominante mit Septime
+- Die Tonika mit Sexte im Bass
+- Ein Sextakkord der Dominante
+
+? Welcher Akkord ist in C-Dur der Tonikagegenklang?
++ e-Moll
+- a-Moll
+- d-Moll
+- G-Dur

@@ -40,6 +40,30 @@ B: C3:4 F3 G3 G3 | C3:1
 
 Vergleiche die beiden Beispiele oben. Im ersten bewegt sich der Bass in Halbtonschritten um den Grundton herum, im zweiten hörst du, wie der Quartsextakkord auf der betonten Zählzeit Spannung aufbaut, bevor die Dominante kommt.
 
+## Vertiefen
+
+**Typische Wendungen mit Umkehrungen:**
+- **Durchgangsquartsextakkord:** Der Bass läuft schrittweise, z. B. C – D – E unter T – D₅ – T₃. Der Akkord in der Mitte ist nur ein Durchgang, die Oberstimmen bewegen sich kaum.
+- **Wechselquartsextakkord:** Über liegendem Bass wechselt die Tonika kurz zur Subdominante und zurück (C-Dur – F-Dur mit C im Bass – C-Dur). So klingt der Schluss vieler Kirchenlieder, auch das „Amen“.
+- **Kadenzierender Quartsextakkord:** wie oben, immer auf betonter Zählzeit, immer direkt vor der Dominante.
+
+Alle drei Quartsextakkorde haben gemeinsam, dass der Basston verdoppelt wird und der Bass entweder liegt oder schrittweise geht. Ein Quartsextakkord, in den der Bass springt, ist fast immer ein Fehler, außer beim kadenzierenden.
+
+**Sextakkorde der Nebenstufen.** Sehr häufig ist die **Subdominante mit Terz im Bass** (S₃, in C-Dur F-Dur mit A im Bass) und die **Sp mit Terz im Bass**, die du in der nächsten Lektion als Vorbereitung der Dominante kennenlernst. Der verminderte Dreiklang auf der VII. Stufe steht fast nur als Sextakkord (H–D–F mit D im Bass). Er wirkt dann wie ein D⁷ ohne Grundton.
+
+**Generalbassziffern genauer:**
+
+| Ziffer | Bedeutung | Beispiel über E in C-Dur |
+| --- | --- | --- |
+| keine | Terz und Quinte | e-Moll |
+| 6 | Terz und Sexte | C-Dur mit E im Bass |
+| 6/4 | Quarte und Sexte | A-Moll mit E im Bass |
+| ♯ oder ♭ allein | erhöhte oder erniedrigte Terz | E-Dur |
+| 7 | Septakkord | e-Moll mit Septime |
+| 4–3 | Quartvorhalt, der zur Terz aufgelöst wird | über G: c′ löst sich zu h |
+
+Eine Ziffer bezeichnet immer das Intervall über dem Bass, nicht die Stufe. Darum ist der Generalbass so praktisch: Er zeigt sofort, welche Töne über einem Basston erklingen.
+
 ## Üben
 
 Bestimme, ob ein Akkord in Grundstellung, als Sextakkord oder als Quartsextakkord steht. Entscheidend ist nur der tiefste Ton.
@@ -56,6 +80,15 @@ text: Setze den Bass in C-Dur aus. Bezifferung: C (ohne Ziffer), E (6), F (ohne 
 tonart: 0
 satz: ja
 bass: C3:4 E3 F3 G3 | C3:1
+pruefung: vierstimmig, fehlerfrei, enthaelt Sextakkord, ganzschluss
+```
+
+```aufgabe
+titel: Stufenbass mit Sextakkord
+text: Der Bass steigt schrittweise C – D – E – F – G und springt dann zurück zum C. Bezifferung: C (–), D (–), E (6), F (–), G (–), C (–). Über dem D steht also d-Moll (Sp), über dem E ein C-Dur-Sextakkord. Schreib Sopran, Alt und Tenor dazu und führe die Oberstimmen gegen den steigenden Bass, wo es geht.
+tonart: 0
+satz: ja
+bass: C3:4 D3 E3 F3 | G3:2 C3:2
 pruefung: vierstimmig, fehlerfrei, enthaelt Sextakkord, ganzschluss
 ```
 
@@ -106,3 +139,21 @@ Spiel am Klavier die Kadenz T – S – K⁶₄ – D – T aus dem zweiten Beis
 - Sie machen jeden Schluss stärker
 - Sie ersetzen die Dominante
 - Sie vermeiden jede Dissonanz
+
+? Was ist ein Wechselquartsextakkord?
++ Über liegendem Bass erklingt kurz ein anderer Akkord in Quartsextlage, dann wieder der erste
+- Ein Quartsextakkord, in den der Bass springt
+- Der Quartsextakkord vor der Dominante
+- Ein Akkord, der zwischen Dur und Moll wechselt
+
+? Was bedeutet die Generalbassziffer 6 über einem Basston?
++ Darüber erklingen Terz und Sexte, es ist ein Sextakkord
+- Der Akkord steht auf der VI. Stufe
+- Sechs Stimmen spielen
+- Die Sexte wird verdoppelt
+
+? In welcher Stellung steht der verminderte Dreiklang auf der VII. Stufe meistens?
++ Als Sextakkord
+- In Grundstellung
+- Als Quartsextakkord
+- Er kommt im Satz nicht vor
