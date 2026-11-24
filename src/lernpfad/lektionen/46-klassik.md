@@ -31,6 +31,16 @@ oben: C5:4 E5:8 C5:8 G4:4 G4:4 | A4:8 B4 C5 D5 E5:2 | F5:4 D5:4 B4:4 G4:4 | C5:4
 unten: C3:8 G3 E3 G3 C3 G3 E3 G3 | F2:8 C3 A2 C3 C3 G3 E3 G3 | G2:8 D3 B2 D3 G2 D3 B2 D3 | A2:8 E3 C3 E3 G2 D3 B2 D3 | C3:8 G3 E3 G3 C3 G3 E3 G3 | F2:8 C3 A2 C3 C3 G3 E3 G3 | F2:8 C3 A2 C3 G2 D3 B2 D3 | C3:8 G3 E3 G3 C3:2
 ```
 
+## Vertiefen
+
+**Der kadenzierende Quartsextakkord.** Er sieht aus wie die zweite Umkehrung der Tonika (in C-Dur g – c – e mit g im Bass), wirkt aber wie eine **Dominante mit zwei Vorhalten**: Die Sexte e geht zur Quinte d, die Quarte c zur Terz h. Darum steht er auf schwerer Zeit, der Bass bleibt auf der Dominante liegen, und die Oberstimmen lösen sich abwärts auf. In der Analyse schreibt man ihn oft als D⁶₄ – ⁵₃.
+
+**Die Begleitmuster der Klassik.** Neben dem Alberti-Bass gibt es den **Walzer- oder Menuettbass** (Bass auf 1, Akkord auf 2 und 3), **Trommelbässe** (repetierte Achtel auf einem Ton, sehr energisch, oft bei Beethoven) und **liegende Akkorde** in langsamen Sätzen. Eine Faustregel: Die Begleitung soll die Harmonie klar zeigen und der Melodie nie im Weg stehen. Sie bleibt deshalb meist unter c′ und kreuzt die Melodie nicht.
+
+**Phrasen enden mit Kadenzen.** Der Halbschluss öffnet, der Ganzschluss schließt. Dazwischen gibt es den **Trugschluss** (D – Tp), der eine Phrase verlängert: Wo man die Tonika erwartet, kommt die Parallele, und die Musik muss noch einmal zur Kadenz anlaufen. Mozart und Haydn benutzen ihn gern kurz vor dem Ende eines Satzes.
+
+**Die Durchführung.** Im Sonatensatz zerlegt die Durchführung die Themen in ihre Motive, sequenziert sie durch entfernte Tonarten und endet meist auf einem langen Orgelpunkt der Dominante. Dieser **Rückführungs-Orgelpunkt** baut die Spannung auf, bis die Reprise in der Tonika beginnt.
+
 ## Üben
 
 ```uebungen
@@ -47,6 +57,16 @@ klavier: ja
 stil: klassik
 melodie: C5:4 E5:8 C5:8 G4:4 G4:4 | A4:8 B4 C5 D5 E5:2 | F5:4 D5:4 B4:4 G4:4 | C5:4 A4:4 B4:2 | C5:4 E5:8 C5:8 G4:4 G4:4 | A4:8 B4 C5 D5 E5:2 | F5:8 E5 D5 C5 B4:4 D5:4 | C5:1
 pruefung: stil klassik, vollstaendig, fehlerfrei, periode, begleitung-noten 48, ganzschluss
+```
+
+```aufgabe
+titel: Eine Kadenz mit Quartsextakkord
+text: Setz die Melodie vierstimmig in F-Dur als klassische Kadenz: T – S – D⁶₄ – D⁷ | T. Auf der dritten Zählzeit steht der kadenzierende Quartsextakkord: Bass c, darüber f und a als Vorhalte, die sich danach zu e und g auflösen. Die Septime b der Dominante geht abwärts nach a. Geprüft wird im Stil der Klassik.
+tonart: -1
+satz: ja
+stil: klassik
+sopran: C5:4 D5 C5 Bb4 | A4:1
+pruefung: stil klassik, vierstimmig, fehlerfrei, enthaelt Quartsextakkord, ganzschluss
 ```
 
 ## Freie Aufgabe
@@ -90,3 +110,21 @@ Spiel oder hör den ersten Satz von Clementis Sonatine C-Dur op. 36 Nr. 1. Marki
 - Debussy, Ravel, Satie
 - Bach, Händel, Vivaldi
 - Schönberg, Berg, Webern
+
+? Wie wirkt der kadenzierende Quartsextakkord?
++ Wie eine Dominante mit zwei Vorhalten, die sich abwärts auflösen
+- Wie eine Tonika
+- Wie eine Subdominante
+- Wie ein Trugschluss
+
+? Was ist ein Trugschluss?
++ Nach der Dominante folgt die Tonikaparallele statt der Tonika
+- Ein Schluss auf der Dominante
+- Ein Schluss ohne Bass
+- Ein Plagalschluss
+
+? Was baut am Ende einer Durchführung oft die Spannung zur Reprise auf?
++ Ein langer Orgelpunkt auf der Dominante
+- Ein Trugschluss in der Tonika
+- Eine Generalpause
+- Ein neues Thema
