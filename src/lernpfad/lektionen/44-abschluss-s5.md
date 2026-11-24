@@ -18,6 +18,16 @@ Zum Abschluss der Stufe 5 schreibst du einen **Satz für Streichquartett**: mind
 
 Die Prüfung achtet auf die Instrumentenumfänge statt auf die Chorumfänge. Du kannst die Partitur unter „Stück einstellen“ jederzeit nach MuseScore exportieren: Die Instrumente kommen mit Namen und Klang an.
 
+## Vertiefen: typische Fehler im ersten Quartett
+
+- **Die Viola liegt zu hoch** und kreuzt die 2. Violine. Ihre schönste Lage ist die untere Hälfte, die C- und G-Saite.
+- **Das Violoncello verlässt den Bass**, ohne dass jemand anders ihn übernimmt. Wenn das Cello singt, muss eine andere Stimme oder eine Pause den Bass klären.
+- **Immer alle vier.** Gönn dir mindestens einen Takt, in dem eine Stimme schweigt.
+- **Zu viele Doppelgriffe.** Sie sind möglich, aber im Quartett selten nötig: Vier Stimmen reichen für vollständige Akkorde.
+- **Chorsatz ohne Streicherleben.** Der Satz stimmt, klingt aber wie ein Choral. Erst Begleitfiguren, Artikulation (staccato, legato) und Dynamik machen daraus Streichermusik.
+
+**Die Arbeit in MuseScore fortsetzen:** Lege dort Bögen, Striche (Abstrich, Aufstrich), Dynamik und Tempoangaben fest. Exportiere ab und zu wieder als MusicXML zurück in den KompositionsTrainer, um die Stimmführung prüfen zu lassen.
+
 ## Hören
 
 Zur Erinnerung der Choral aus der Lektion „Streichquartett“, mit gelöster Aufgabe: Achte darauf, wie die Mittelstimmen fast nur in Schritten gehen.
@@ -41,6 +51,15 @@ text: Schreib einen Satz für Streichquartett, mindestens acht Takte, in einer T
 tonart: 2
 besetzung: streichquartett
 pruefung: ensemble streichquartett, mindestens-takte 8, vollstaendig, im-umfang, fehlerfrei, ganzschluss
+```
+
+```aufgabe
+titel: Quartettsatz zu einer Choralmelodie
+text: Die Melodie des G-Dur-Chorals aus Stufe 2 liegt in der 1. Violine. Setze 2. Violine, Viola und Violoncello dazu, Note gegen Note. Erste Zeile mit Halbschluss, zweite mit Ganzschluss. Nutze den großen Umfang des Violoncellos für einen tiefen Bass.
+tonart: 1
+besetzung: streichquartett
+v1: B4:4 A4 G4 A4 | B4 B4 A4:2 | D5:4 C5 B4 A4 | B4 A4 G4:2
+pruefung: ensemble streichquartett, mindestens-takte 4, vollstaendig, im-umfang, fehlerfrei, ganzschluss
 ```
 
 ## Freie Aufgabe
@@ -72,3 +91,15 @@ Spiel die 1. Violine deines Quartetts auf dem Saxophon: Für das Altsaxophon mus
 - Mehr Pausen in allen Stimmen
 - Alles eine Oktave höher
 - Alle Stimmen im Einklang
+
+? Wo liegt die schönste Lage der Viola?
++ In der unteren Hälfte, auf der C- und G-Saite
+- Ganz oben auf der A-Saite
+- Über dem a″
+- Unterhalb des großen C
+
+? Was macht aus einem korrekten Chorsatz echte Streichermusik?
++ Begleitfiguren, Artikulation und Dynamik
+- Mehr Doppelgriffe
+- Alle Stimmen eine Oktave höher
+- Ein schnelleres Tempo

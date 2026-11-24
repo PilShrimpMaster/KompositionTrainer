@@ -34,6 +34,22 @@ v2: G4:2 G4:2 | A4:2 A4:2 | G4:2 F4:2 | E4:1
 v3: C3:2 B2:2 | A2:2 F2:2 | G2:2 G2:2 | C3:1
 ```
 
+## Vertiefen
+
+**Die Nebeninstrumente** erweitern jede Familie nach oben und unten:
+- **Piccoloflöte**: eine Oktave über der Flöte, glitzernd und durchdringend, in Märschen und für Höhepunkte.
+- **Englischhorn** (in F): die Alt-Oboe, dunkler und melancholischer. Berühmt ist das Solo im langsamen Satz von Dvořáks 9. Sinfonie „Aus der Neuen Welt“.
+- **Bassklarinette** (in B): tief, samtig und geheimnisvoll.
+- **Kontrafagott**: eine Oktave unter dem Fagott, das tiefste Instrument des Orchesters.
+
+**Holz in der Klassik.** Haydn und Mozart besetzen die Holzbläser meist **paarweise** (zwei Flöten, zwei Oboen, zwei Fagotte, später zwei Klarinetten). Die Paare spielen oft in Terzen oder Sexten, oder ein Instrument verdoppelt die Violinen eine Oktave höher.
+
+**Spieltechniken:** **Legato** (gebunden) und **Staccato** wie bei den Streichern. Die **Doppelzunge** macht schnelle Wiederholungen möglich, die **Flatterzunge** (Zunge rollt wie beim R) gibt einen rauen Effekt, besonders auf der Flöte. Triller sind leicht, große Sprünge im Legato auf Oboe und Fagott schwer.
+
+**Holz und Streicher mischen.** Eine Holzbläsermelodie über einer Streicherfläche ist eine der klarsten Texturen überhaupt: Die verschiedenen Familien bleiben getrennt hörbar. Spielen Flöte und 1. Violine dieselbe Melodie im Einklang, wird der Streicherklang heller; die Oboe färbt ihn kerniger.
+
+**Für Saxophonisten:** Das Saxophon gehört zwar zu den Holzblasinstrumenten (es hat ein Rohrblatt), steht im klassischen Orchester aber nur als Gast, etwa bei Ravel („Boléro“) oder Mussorgsky/Ravel („Das alte Schloss“). Seine Heimat sind Big Band und Kammermusik.
+
 ## Üben
 
 ```uebungen
@@ -49,6 +65,14 @@ tonart: 0
 besetzung: holztrio
 v1: E5:2 F5:2 | G5:2 E5:2 | F5:2 D5:2 | C5:1
 pruefung: ensemble holztrio, vollstaendig, im-umfang, fehlerfrei, ganzschluss
+```
+
+```aufgabe
+titel: Eine Melodie für Oboe
+text: Schreib eine achttaktige klagende Melodie in d-Moll für Oboe. Bleib in der guten Lage (etwa d′ bis d‴), nutze ruhig Halbtonschritte wie cis–d und ende lang auf d. Plane wie ein Bläser: Nach vier Takten darf eine kurze Atempause stehen.
+tonart: -1 moll
+besetzung: oboe
+pruefung: takte 8, ensemble oboe, im-umfang, gute-lage oboe, endet-grundton, schluss-lang
 ```
 
 ## Freie Aufgabe
@@ -92,3 +116,21 @@ Hör den Beginn von Prokofjews „Peter und der Wolf“: Der Vogel ist die Flöt
 - Doppelgriffe
 - Pizzicato
 - Dämpfer
+
+? Welches Instrument ist die Alt-Oboe?
++ Das Englischhorn
+- Die Bassklarinette
+- Das Fagott
+- Die Piccoloflöte
+
+? Wie setzen Haydn und Mozart die Holzbläser meist ein?
++ Paarweise, oft in Terzen oder Sexten
+- Immer nur einzeln
+- Nur als Bass
+- Ausschließlich im Unisono mit dem Blech
+
+? Was ist die Flatterzunge?
++ Ein rauer Effekt, bei dem die Zunge wie beim R rollt
+- Ein schneller Triller
+- Spielen ohne Atem
+- Ein Glissando

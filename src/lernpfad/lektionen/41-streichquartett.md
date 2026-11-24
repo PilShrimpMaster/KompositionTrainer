@@ -45,6 +45,25 @@ v3: E4:8 E4 E4 E4 E4 E4 E4 E4 | C4:8 C4 C4 C4 C4 C4 C4 C4 | D4:8 D4 D4 D4 D4 D4 
 v4: C3:4 G2 C3 G2 | F2:4 C3 F2 C3 | G2:4 D3 G2 G2 | C3:1
 ```
 
+## Vertiefen
+
+**Vier Arten von Quartettsatz:**
+
+| Satzart | Was passiert | Beispiel |
+| --- | --- | --- |
+| homophon | alle Stimmen im gleichen Rhythmus, wie ein Choral | langsame Einleitungen, Choralsätze |
+| Melodie und Begleitung | 1. Violine singt, die anderen begleiten mit Figuren | viele Haydn- und Mozart-Sätze |
+| polyphon | alle Stimmen gleichberechtigt mit eigenen Linien | Fugen bei Haydn op. 20 und im späten Beethoven |
+| Unisono / Oktaven | alle spielen dieselbe Linie | kraftvolle Anfänge, Höhepunkte |
+
+Gute Quartette wechseln zwischen diesen Arten, oft innerhalb weniger Takte.
+
+**Pausen sind Instrumentation.** Ein Quartett, in dem immer alle vier spielen, klingt dick und ermüdend. Lass eine Stimme schweigen, ein Duo der Violinen antworten oder das Violoncello allein einen Gedanken beginnen. Haydn nannte die Quartette op. 33 „auf eine gantz neue besondere art“ geschrieben: Die Motive wandern durch alle Stimmen, auch die Begleitung wird thematisch.
+
+**Mittelstimmen lebendig machen:** wiederholte Achtel (Puls), Synkopen gegen die Melodie, Liegetöne mit leichtem Wechsel, gebrochene Akkorde, kurze Antworten in den Pausen der Melodie. Die 2. Violine und die Viola sind dabei oft im Terzabstand gekoppelt.
+
+**Weite und Lage.** Das Violoncello darf tief liegen, aber zwischen Viola und Cello sollte bei einer engen Lage oben kein riesiges Loch klaffen. Wenn die Melodie ins Violoncello wandert, liegen die anderen Stimmen darüber oder darunter, aber nie so laut, dass sie die Tenorlage verdecken.
+
 ## Üben
 
 ```uebungen
@@ -63,9 +82,19 @@ v4: D3:2 A2:2 | B2:2 E2:2 | A2:2 A2:2 | D2:1
 pruefung: ensemble streichquartett, vollstaendig, im-umfang, fehlerfrei, ganzschluss
 ```
 
+```aufgabe
+titel: Begleitfiguren in G-Dur
+text: 1. Violine und Violoncello sind vorgegeben. Schreib die 2. Violine und die Viola als Begleitfiguren in wiederholten Achteln, so wie im zweiten Hörbeispiel. Akkorde: G | C | D | G. Die 2. Violine liegt über der Viola, beide bleiben unter der Melodie.
+tonart: 1
+besetzung: streichquartett
+v1: D5:2. B4:4 | C5:2. E5:4 | D5:4 C5 B4 A4 | G4:1
+v4: G2:4 D2 G2 D2 | C2:4 G2 C2 G2 | D2:4 A2 D2 D2 | G2:1
+pruefung: ensemble streichquartett, vollstaendig, im-umfang, fehlerfrei, ganzschluss
+```
+
 ## Freie Aufgabe
 
-Hör den langsamen Satz aus Haydns „Kaiserquartett“ (op. 76 Nr. 3): Das Thema erklingt viermal, jedes Mal in einem anderen Instrument, während die anderen drei es begleiten. Achte darauf, wie sich die Begleitung ändert, wenn die Melodie im Violoncello liegt. Schreib danach deinen Choral aus der Aufgabe in MuseScore ab und lass die Melodie in der zweiten Strophe vom Violoncello spielen.
+Hör den langsamen Satz aus Haydns „Kaiserquartett“ (op. 76 Nr. 3): Auf das Thema folgen vier Variationen, und in jeder wandert die Melodie unverändert in ein anderes Instrument: 2. Violine, Violoncello, Viola und zum Schluss wieder 1. Violine. Die anderen drei Stimmen begleiten jedes Mal neu. Achte darauf, wie sich die Begleitung ändert, wenn die Melodie im Violoncello liegt. Schreib danach deinen Choral aus der Aufgabe in MuseScore ab und lass die Melodie in der zweiten Strophe vom Violoncello spielen.
 
 ## Quiz
 
@@ -104,3 +133,21 @@ Hör den langsamen Satz aus Haydns „Kaiserquartett“ (op. 76 Nr. 3): Das Them
 - Höchstens eine Quinte
 - Höchstens eine Oktave
 - Sie müssen im Einklang spielen
+
+? Was ist ein homophoner Quartettsatz?
++ Alle Stimmen bewegen sich im gleichen Rhythmus, wie ein Choral
+- Alle Stimmen haben eigene, gleichberechtigte Linien
+- Nur die 1. Violine spielt
+- Alle spielen dieselbe Linie im Unisono
+
+? Wie beschrieb Haydn seine Quartette op. 33?
++ „Auf eine gantz neue besondere art“
+- Als Gespräch unter vier vernünftigen Leuten
+- Als Sinfonien für vier Spieler
+- Als Übungsstücke
+
+? Was hilft, ein Quartett nicht dick klingen zu lassen?
++ Pausen: Stimmen schweigen lassen und Duos bilden
+- Alle vier Stimmen immer forte spielen lassen
+- Die Viola eine Oktave höher setzen
+- Nur Doppelgriffe schreiben
