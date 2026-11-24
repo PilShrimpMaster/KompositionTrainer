@@ -47,6 +47,25 @@ tempo: 66
 E5:16 A5 G5 F5 E5 G5 F5 A5 G5 F5 E5 D5 C5 E5 D5 F5 | E5 D5 C5 B4 A4 C5 B4 D5 C5 B4 A4 G4 F#4 A4 G4 B4
 ```
 
+## Vertiefen
+
+**Der Bauplan von BWV 772 im Überblick:**
+
+| Takte | Was passiert | Tonart |
+| --- | --- | --- |
+| 1–2 | Motiv oben, unten imitiert, dann beides auf der Dominante | C-Dur |
+| 3–6 | Umkehrung in einer Sequenz abwärts, Kadenz | nach G-Dur |
+| 7–14 | Stimmtausch, das Motiv jetzt unten, Sequenzen | über G-Dur nach a-Moll |
+| 15–22 | Sequenzen mit Original und Umkehrung, Rückkehr, Schlusskadenz | über d-Moll und F-Dur nach C-Dur |
+
+Bach bringt also in 22 Takten das Motiv in vier Tonarten, in zwei Formen und in beiden Stimmen. Fast keine Note ist frei erfunden, alles leitet sich aus den sieben Sechzehnteln vom Anfang ab.
+
+**Fortspinnung.** Barocke Melodien wachsen nicht in Perioden wie bei Mozart, sondern durch **Fortspinnung**: Ein Kopfmotiv wird gefolgt von Sequenzen und endet mit einer Kadenz. Dieses Modell (Vordersatz – Fortspinnung – Epilog) heißt nach dem Musikwissenschaftler Wilhelm Fischer auch Fortspinnungstypus.
+
+**Sequenzen planen.** Eine Sequenz braucht ein **Modell** (meist ein bis zwei Takte) und mindestens zwei Wiederholungen auf anderen Stufen. Mehr als drei Glieder ermüden. Die häufigste Sequenz ist der **Quintfall**: Jedes Glied liegt eine Quinte tiefer (oder eine Quarte höher), die Harmonien folgen dem Quintenzirkel.
+
+**Kadenzen in der Invention** stehen an den Grenzen der Abschnitte. Du erkennst sie am Quintfall im Bass (G – C), am Leitton und an einer kurzen Pause der Motivarbeit.
+
 ## Üben
 
 Erkenne Motivformen, und markiere in Werkausschnitten Kadenzen, Sequenzen, Imitationen und Modulationen direkt im Notenbild.
@@ -63,6 +82,15 @@ text: Das Motiv besteht aus vier Achteln: c–e–d–f. Führe es durch: Lass e
 tonart: 0
 kontrapunkt: frei
 cantus: C4:8 E4 D4 F4
+pruefung: mindestens-takte 4, motiv-imitation, motiv-verarbeitung, fehlerfrei, vollstaendig
+```
+
+```aufgabe
+titel: Inventionsanfang in G-Dur
+text: Das Motiv in G-Dur besteht aus vier Achteln: g–h–a–c. Lass es in der Unterstimme imitieren und führe es als Sequenz aufwärts weiter. Schreib mindestens vier Takte und schließe in G-Dur mit fis–g oben.
+tonart: 1
+kontrapunkt: frei
+cantus: G4:8 B4 A4 C5
 pruefung: mindestens-takte 4, motiv-imitation, motiv-verarbeitung, fehlerfrei, vollstaendig
 ```
 
@@ -107,3 +135,21 @@ Nimm dir Bachs Invention in d-Moll (BWV 775) oder F-Dur (BWV 779) vor, hör sie 
 - Für den Gottesdienst
 - Für das Orchester
 - Für Wettbewerbe
+
+? Was ist Fortspinnung?
++ Ein Kopfmotiv, gefolgt von Sequenzen und einer Kadenz
+- Eine achttaktige Periode
+- Eine Fuge mit drei Stimmen
+- Ein langer Orgelpunkt
+
+? In wie vielen Tonarten erscheint das Motiv in Bachs Invention C-Dur ungefähr?
++ In vier oder mehr
+- Nur in C-Dur
+- In zwei
+- In allen zwölf
+
+? Woraus besteht eine Sequenz?
++ Aus einem Modell und Wiederholungen auf anderen Stufen
+- Aus einer Tonleiter in Vierteln
+- Aus einem einzelnen langen Ton
+- Aus zwei verschiedenen Motiven gleichzeitig

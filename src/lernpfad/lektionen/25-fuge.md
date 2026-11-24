@@ -34,7 +34,29 @@ oben: C5:4 D5:8 E5:8 F5:4 E5:8 D5:8 | C5:8 B4:8 A4:8 B4:8 C5:2 | D5:2 E5:4 D5:4 
 unten: r:1 | r:1 | G3:4 A3:8 B3:8 C4:4 B3:8 A3:8 | G3:8 F#3:8 E3:8 F#3:8 G3:2 | A3:4 G3:4 C3:2
 ```
 
-Zum Weiterhören: Bachs „Wohltemperiertes Klavier“ enthält 48 Fugen in allen Tonarten, die Fuge in c-Moll aus dem ersten Teil (BWV 847) ist dreistimmig und gut zu verfolgen. Fugen gibt es auch bei Mozart (Finale der „Jupiter-Sinfonie“), Beethoven (Große Fuge op. 133), Schostakowitsch (24 Präludien und Fugen) und sogar im Jazz (Dave Brubeck, „The Modern Jazz Quartet“).
+Zum Weiterhören: Bachs „Wohltemperiertes Klavier“ enthält 48 Fugen in allen Tonarten, die Fuge in c-Moll aus dem ersten Teil (BWV 847) ist dreistimmig und gut zu verfolgen. Fugen gibt es auch bei Mozart (Finale der „Jupiter-Sinfonie“), Beethoven (Große Fuge op. 133), Schostakowitsch (24 Präludien und Fugen) und sogar im Jazz (Dave Brubeck, John Lewis mit dem Modern Jazz Quartet).
+
+## Vertiefen
+
+**Was ein gutes Fugenthema ausmacht:**
+- Es steht klar in einer Tonart, oft mit Grundton und Dominante am Anfang.
+- Es hat einen **Kopf** (markant, leicht zu erkennen, auch in Engführung) und einen **Schwanz** (fließend, oft in kleineren Notenwerten, der zur Antwort überleitet).
+- Es ist **nicht zu lang**: ein bis vier Takte.
+- Es endet auf einer Stufe, von der aus die Antwort gut einsetzen kann, meist Grundton oder Terz.
+
+**Tonale Antwort in der Praxis.** Ein Thema in C-Dur beginnt mit g–c. Eine reale Antwort hieße d–g und würde sofort nach G-Dur ziehen, noch bevor das Ohr C-Dur verstanden hat. Die tonale Antwort beginnt deshalb c–g: Der Kopf wird angepasst, der Rest läuft real in G-Dur weiter. Die Faustregel: Wo im Thema die Dominante steht, steht in der Antwort die Tonika, im Kopf.
+
+**Formteile einer Fuge:**
+
+| Teil | Inhalt |
+| --- | --- |
+| Exposition | jede Stimme bringt das Thema einmal, Dux und Comes im Wechsel |
+| Zwischenspiel | Sequenzen aus Motiven des Themas oder Kontrasubjekts, Modulation |
+| Durchführung | das Thema in anderen Tonarten, oft in der Paralleltonart |
+| Engführung | Einsätze überlappen sich, die Spannung steigt |
+| Orgelpunkt und Schluss | liegender Bass auf Dominante oder Tonika, letzte Einsätze |
+
+**Fuge und Fugato.** Eine ganze Fuge ist ein Höhepunkt der Satzkunst. Häufiger in Sinfonien, Oratorien und Filmmusik ist das **Fugato**: ein fugierter Abschnitt, der Spannung erzeugt und dann in freiere Musik übergeht. Mozarts „Requiem“ (Kyrie, eine Doppelfuge) und das Finale der „Jupiter-Sinfonie“ zeigen, wie Fugentechnik in der Klassik weiterlebt.
 
 ## Üben
 
@@ -51,6 +73,15 @@ tonart: 0
 kontrapunkt: frei
 cantus: C5:4 E5:8 D5:8 C5:4 G4:4 | A4:8 B4 C5:4 B4:4 C5:4
 pruefung: mindestens-takte 5, motiv-imitation, fehlerfrei, vollstaendig
+```
+
+```aufgabe
+titel: Tonale Antwort
+text: Das Thema beginnt auf der Dominante: g′–c″–h′–a′ | g′–f′–e′–f′–g′. Schreib in Takt 3 und 4 die tonale Antwort in der Unterstimme: Sie beginnt nicht mit d, sondern mit c (c–g–fis–e | d–c–h–c–d). Oben läuft dazu ein Kontrasubjekt in Vierteln. In Takt 5 schließen beide Stimmen in C-Dur.
+tonart: 0
+kontrapunkt: frei
+cantus: G4:4 C5 B4 A4 | G4:8 F4 E4 F4 G4:2
+pruefung: mindestens-takte 5, fehlerfrei, vollstaendig
 ```
 
 ## Freie Aufgabe
@@ -94,3 +125,22 @@ Erfinde ein eigenes Fugenthema von zwei Takten. Gute Themen haben einen markante
 - Das Thema erklingt in allen Stimmen gleichzeitig
 - Alle Stimmen pausieren
 - Ein neues Thema wird vorgestellt
+
+? Was ist ein Fugato?
++ Ein fugierter Abschnitt innerhalb eines größeren Stücks
+- Eine sehr kurze Fuge für Klavier
+- Der Schluss einer Fuge
+- Eine Fuge ohne Thema
+
+? Ein Thema in C-Dur beginnt mit g–c. Wie beginnt die tonale Antwort?
++ c–g
+- d–g
+- g–d
+- c–f
+= Wo im Thema die Dominante steht, steht in der Antwort die Tonika.
+
+? Was ist der Kopf eines Fugenthemas?
++ Sein markanter Anfang, an dem man es wiedererkennt
+- Die letzte Note
+- Die erste Stimme der Fuge
+- Das Zwischenspiel

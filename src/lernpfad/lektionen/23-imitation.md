@@ -39,6 +39,20 @@ unten: r:1 | C3:4 E3:4 D3:2 | E3:2 F3:2 | G3:4 A3:4 G3:2 | C3:1
 
 Imitation ist viel älter als Bach. Schon Josquin baute um 1500 ganze Messen aus Motiven, die durch alle Stimmen wandern. Kanons findest du in der Volksmusik („Bruder Jakob“), in Bachs Goldberg-Variationen (jede dritte Variation ist ein Kanon, auf immer größerem Intervall) und bis in Pop-Arrangements, in denen eine Stimme die Hookline versetzt nachsingt.
 
+## Vertiefen
+
+**Kanonformen:**
+- **Kanon im Einklang oder in der Oktave**: die einfachste Form, z. B. „Bruder Jakob“.
+- **Kanon in der Quinte oder Quarte**: Die zweite Stimme liegt in einer anderen Tonstufe. Da Intervalle diatonisch versetzt werden, ändert sich ihre Größe (aus einer großen Terz wird manchmal eine kleine).
+- **Spiegelkanon**: Die zweite Stimme spielt die Umkehrung.
+- **Krebskanon**: Die zweite Stimme spielt die erste rückwärts, Bach hat das im „Musikalischen Opfer“ getan.
+- **Proportionskanon**: Die zweite Stimme spielt in doppelten Notenwerten (Vergrößerung).
+- **Zirkelkanon**: Er kehrt zum Anfang zurück und kann endlos weiterlaufen.
+
+**Doppelter Kontrapunkt.** Zwei Stimmen stehen im doppelten Kontrapunkt der Oktave, wenn man sie vertauschen kann (die obere eine Oktave tiefer legt) und der Satz trotzdem stimmt. Dabei werden Intervalle umgekehrt: Terzen werden Sexten (gut), Sexten Terzen (gut), Oktaven Einklänge (gut) und Quinten **Quarten**. Quarten sind über dem Bass dissonant. Deshalb verwendet man in vertauschbaren Sätzen Quinten nur wie Dissonanzen: auf leichter Zeit oder im Durchgang.
+
+**Imitation im Alltag der Komposition.** Ein Motiv, das durch die Stimmen wandert, ist die einfachste Art, ein Stück zusammenzuhalten. In einem Streichquartett kann die Bratsche aufnehmen, was die erste Geige vorher gespielt hat. In Filmmusik verdichtet eine Imitation in immer kürzeren Abständen die Spannung. Pachelbels „Kanon“ ist übrigens ein echter Kanon dreier Violinen über einer ständig wiederholten Basslinie.
+
 ## Üben
 
 Eine Stimme antwortet auf ein Motiv: genau gleich, gespiegelt, rückwärts oder in längeren Notenwerten. Erkennst du, welche Form es ist?
@@ -56,6 +70,15 @@ tonart: 0
 kontrapunkt: frei
 cantus: C4:2 E4:2
 pruefung: mindestens-takte 4, motiv-imitation, fehlerfrei, vollstaendig
+```
+
+```aufgabe
+titel: Imitation in der Unterquinte
+text: Die Oberstimme beginnt mit e′–g′. Die Unterstimme setzt einen Takt später eine Quinte tiefer ein (a–c′) und imitiert Takt für Takt, was oben vorher stand. Schreib mindestens fünf Takte, verlasse zum Schluss den Kanon und schließe mit h–c′ oben und g–c unten.
+tonart: 0
+kontrapunkt: frei
+cantus: E4:2 G4:2
+pruefung: mindestens-takte 5, motiv-imitation, fehlerfrei, vollstaendig
 ```
 
 ## Freie Aufgabe
@@ -99,3 +122,21 @@ Schreib einen Kanon an der **Oberquinte**: Die zweite Stimme setzt eine Quinte h
 - Krebs
 - Vergrößerung
 - Sequenz
+
+? Was ist ein Krebskanon?
++ Die zweite Stimme spielt die erste rückwärts
+- Die zweite Stimme spielt die Umkehrung
+- Die zweite Stimme spielt doppelt so langsam
+- Ein Kanon, der nie endet
+
+? Was wird aus einer Quinte, wenn man zwei Stimmen im doppelten Kontrapunkt der Oktave vertauscht?
++ Eine Quarte
+- Eine Sexte
+- Eine Oktave
+- Eine Terz
+
+? Was ist Pachelbels „Kanon“?
++ Ein Kanon dreier Violinen über einer wiederholten Basslinie
+- Eine Fuge für Orgel
+- Ein Choral
+- Ein Krebskanon

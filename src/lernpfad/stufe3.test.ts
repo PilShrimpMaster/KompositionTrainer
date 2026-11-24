@@ -8,6 +8,21 @@ import { pruefe } from './pruefung';
 
 /** Musterlösungen zu den Schreibaufgaben der Stufe 3: Gegenstimme (bzw. Melodie) in Kurzform */
 const LOESUNGEN: Record<string, string> = {
+  'Cantus firmus im Dorischen': 'D4:1 F4 E4 G4 A4 F4 G4 E4 D4',
+  'Gegenstimme über einem äolischen Cantus firmus': 'A4:1 G4 D4 F4 A4 G4 B4 A4 G#4 A4',
+  'Zwei gegen eine unter dem Cantus firmus': 'r:2 C3 | B2 C3 | D3 A2 | C3 G2 | A2 B2 | C3 E3 | F3 D3 | E3 B2 | C3 A2 | B2:1 | C3:1',
+  'Vier gegen eine im Äolischen': 'A4:4 B4 C5 B4 | A4 B4 C5 E5 | D5 C5 B4 G4 | F4 G4 A4 F4 | E4 G4 A4 B4 | C5 B4 A4 G4 | F4 A4 G4 F4 | A4 G4 F4 E4 | G#4:1 | A4:1',
+  'Synkopen im Dorischen': 'r:2 A4~ | A4 D5~ | D5 C5~ | C5 B4~ | B4 D5~ | D5 C5~ | C5 F5~ | F5 E5~ | E5 D5~ | D5 C#5 | D5:1',
+  'Floride Gegenstimme im Äolischen': 'r:2 A4 | G4:2 E4~ | E4:2 D4:4 G4 | F4:4 G4 A4 B4 | A4:2 C5~ | C5:4 B4 A4 G4 | F4:2 A4~ | A4:2 G4:4 E4 | G#4:1 | A4:1',
+  'Imitation in der Unterquinte': 'E4:2 G4:2 | F4:2 E4:2 | D4:2 E4:2 | B3:2 C4:2 | D4:2 B3:2 | C4:1 || r:1 | A3:2 C4:2 | B3:2 A3:2 | G3:2 A3:2 | G3:1 | C3:1',
+  'Inventionsanfang in G-Dur':
+    'G4:8 B4 A4 C5 B4:4 C5:4 | A4:8 C5 B4 D5 C5:4 B4:4 | B4:8 D5 C5 E5 D5:4 C5:4 | A4:4 F#4:4 G4:2 || r:2 G3:8 B3 A3 C4 | C4:8 A3 B3 G3 A3:4 G3:4 | D4:8 B3 C4 A3 B3:4 A3:4 | D4:4 D3:4 G3:2',
+  'Tonale Antwort':
+    'G4:4 C5 B4 A4 | G4:8 F4 E4 F4 G4:2 | E4:4 E4 A4 C5 | B4:4 E4 F#4 G4 | E4:2 C4:2 || r:1 | r:1 | C3:4 G3 F#3 E3 | D3:8 C3 B2 C3 D3:2 | C3:2 C3:2',
+  'Invention in a-Moll':
+    'A4:8 C5 B4 D5 C5:4 D5:4 | B4:8 D5 C5 E5 D5:4 C5:4 | C5:8 E5 D5 F5 E5:4 D5:4 | E5:8 C5 D5 B4 C5:4 D5:4 | D5:8 B4 C5 A4 B4:4 C5:4 | G5:8 E5 F5 D5 E5:4 F5:4 | E5:4 D5:4 C5:4 B4:4 | B4:4 G#4:4 A4:2 || r:2 A3:8 C4 B3 D4 | D4:8 B3 C4 A3 B3:4 A3:4 | E4:8 C4 D4 B3 C4:4 B3:4 | A3:8 C4 B3 D4 C4:4 B3:4 | B3:8 D4 C4 E4 D4:4 C4:4 | C4:8 E4 D4 F4 E4:4 D4:4 | A3:4 B3:4 C4:4 D4:4 | E4:4 E3:4 A3:2',
+  'Melodie in G-Mixolydisch': 'G4:4 A4 B4 D5 | C5:2 B4:4 A4 | G4:4 F4 G4 A4 | B4:2. r:4 | D5:4 C5 B4 A4 | F4:2 G4:4 A4 | B4:4 A4 F4 A4 | G4:1',
+  'Melodie in F-Lydisch': 'F4:4 G4 A4 B4 | C5:2 B4:4 A4 | G4:4 A4 B4 C5 | D5:2. r:4 | C5:4 B4 A4 G4 | A4:2 B4:4 G4 | A4:4 G4 E4 G4 | F4:1',
   'Eigener Cantus firmus': 'C4:1 D4 F4 E4 G4 F4 E4 D4 C4',
   'Gegenstimme über dem Cantus firmus': 'C4:1 B3 A3 C4 D4 B3 C4 E4 C4 B3 C4',
   'Gegenstimme unter dem Cantus firmus': 'C3:1 B2 D3 C3 D3 C3 F3 E3 C3 B2 C3',

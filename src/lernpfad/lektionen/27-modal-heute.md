@@ -77,6 +77,24 @@ tempo: 84
 D4:4 F4 A4 B4 | A4:2 G4:4 F4 | E4:4 G4 F4 D4 | A4:2. r:4 | D5:4 C5 B4 A4 | B4:2 G4:4 E4 | F4:4 E4 C4 E4 | D4:1
 ```
 
+## Vertiefen
+
+**Zwei Wege, Modi zu denken.** Du kannst einen Modus als **Ausschnitt einer Durtonleiter** denken (D-Dorisch = C-Dur von d aus) oder als **veränderte Dur- oder Molltonleiter** (D-Dorisch = d-Moll mit h). Der erste Weg hilft beim schnellen Finden der Töne, der zweite beim Hören, denn er zeigt den Farbton direkt.
+
+**Bekannte modale Stücke zum Hören:**
+
+| Modus | Beispiel |
+| --- | --- |
+| Dorisch | „Scarborough Fair“, „Eleanor Rigby“ (Beatles), „So What“ (Miles Davis) |
+| Mixolydisch | „Norwegian Wood“ (Beatles), viele irische Folk-Tunes |
+| Lydisch | Titelmusik der „Simpsons“ (Danny Elfman), Flugszenen in „E.T.“ |
+| Phrygisch | Flamenco, viele Metal-Riffs |
+| Äolisch | „Zombie“ (The Cranberries), viele Balladen |
+
+**Modale Akkordfolgen.** Jeder Modus hat seine typischen Akkorde, die seinen Farbton enthalten: Dorisch i–IV (Dm–G), Mixolydisch I–♭VII (G–F), Lydisch I–II (C–D), Phrygisch i–♭II (Em–F), Äolisch i–♭VI–♭VII (Am–F–G). Eine solche Zweierfolge, endlos wiederholt, reicht für einen ganzen Song oder eine Filmszene.
+
+**Modale Mischung.** In Dur kann man sich Akkorde aus der Varianttonart leihen, etwa in C-Dur das ♭VI (As-Dur) oder das iv (f-Moll). Das nennt man **Modal Interchange**. Du kennst es aus vielen Filmmusiken: Ein Durakkord auf der erniedrigten sechsten Stufe klingt heroisch und zugleich traurig. In Stufe 7 lernst du das genauer.
+
 ## Üben
 
 Erst erklingt der Grundakkord, dann die Leiter. Welcher Modus ist es? Hör auf den Farbton.
@@ -94,9 +112,23 @@ tonart: 0
 pruefung: takte 8, modus dorisch D, charakterton dorisch D, finalis D, schluss-lang
 ```
 
+```aufgabe
+titel: Melodie in G-Mixolydisch
+text: Schreib acht Takte in G-Mixolydisch: nur weiße Tasten, Grundton g. Der Farbton f (die kleine Septime) soll mindestens zweimal vorkommen, und es gibt kein fis. Ende mit einem langen g.
+tonart: 0
+pruefung: takte 8, modus mixolydisch G, charakterton mixolydisch G, finalis G, schluss-lang
+```
+
+```aufgabe
+titel: Melodie in F-Lydisch
+text: Schreib acht Takte in F-Lydisch: nur weiße Tasten, Grundton f. Der Farbton h (die übermäßige Quarte) soll oft vorkommen, auch auf betonter Zeit. Ende mit einem langen f.
+tonart: 0
+pruefung: takte 8, modus lydisch F, charakterton lydisch F, finalis F, schluss-lang
+```
+
 ## Freie Aufgabe
 
-Schreib eine kurze Filmszene in **Lydisch**: ein liegender Bass auf c, darüber wechseln C-Dur und D-Dur. Lass eine Melodie darüber schweben, die das fis immer wieder berührt. Hör dir zum Vergleich die Flugszenen in John Williams’ „E.T.“ oder den Anfang von „Zurück in die Zukunft“ an. Exportiere die Skizze nach MuseScore und instrumentiere sie für Streicher und Holzbläser.
+Schreib eine kurze Filmszene in **Lydisch**: ein liegender Bass auf c, darüber wechseln C-Dur und D-Dur. Lass eine Melodie darüber schweben, die das fis immer wieder berührt. Hör dir zum Vergleich die Flugszenen in John Williams’ „E.T.“ oder die Titelmusik der „Simpsons“ an. Exportiere die Skizze nach MuseScore und instrumentiere sie für Streicher und Holzbläser.
 
 ## Quiz
 
@@ -141,3 +173,21 @@ Schreib eine kurze Filmszene in **Lydisch**: ein liegender Bass auf c, darüber 
 - Dorisch
 - Mixolydisch
 - Lydisch
+
+? Wie kann man D-Dorisch schnell finden?
++ Als C-Dur-Tonleiter von d aus
+- Als D-Dur mit zwei Bs
+- Als d-Moll mit erhöhter 7. Stufe
+- Als G-Dur von d aus
+
+? Welche Akkordfolge ist typisch lydisch?
++ C – D über liegendem C
+- G – F
+- Em – F
+- Am – F – G
+
+? Was bedeutet Modal Interchange?
++ Akkorde aus der Varianttonart leihen, etwa As-Dur in C-Dur
+- Zwischen zwei Instrumenten wechseln
+- Eine Melodie in allen Modi spielen
+- Ein Modulationsweg über den Quintenzirkel
