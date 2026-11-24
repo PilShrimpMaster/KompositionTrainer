@@ -42,6 +42,34 @@ tonart: 3
 A4:4 B4 C#5 D5 | E5:2 C#5:2 | D5:4 B4 G#4 B4 | A4:1
 ```
 
+## Vertiefen
+
+**Transponieren in drei Schritten:**
+1. **Intervall bestimmen**: Das Instrument in X klingt von c aus auf X. B-Klarinette: c klingt b, also eine große Sekunde tiefer.
+2. **Gegenrichtung notieren**: Die Stimme wird um dasselbe Intervall **höher** geschrieben, also große Sekunde höher.
+3. **Vorzeichen anpassen**: Auch die Tonart verschiebt sich. Klingend Es-Dur wird für B-Klarinette F-Dur, für Es-Altsaxophon C-Dur.
+
+**Die wichtigsten transponierenden Instrumente:**
+
+| Instrument | Stimmung | notiert gegenüber klingend |
+| --- | --- | --- |
+| Piccoloflöte | C | eine Oktave tiefer notiert |
+| Englischhorn | F | Quinte höher |
+| Klarinette | B (auch A) | große Sekunde (A: kleine Terz) höher |
+| Bassklarinette | B | große None höher (im Violinschlüssel) |
+| Sopransaxophon | B | große Sekunde höher |
+| Altsaxophon | Es | große Sexte höher |
+| Tenorsaxophon | B | große None höher |
+| Baritonsaxophon | Es | Oktave plus große Sexte höher |
+| Horn | F | Quinte höher |
+| Trompete | B (auch C) | große Sekunde höher |
+| Kontrafagott, Kontrabass, Gitarre | C | Oktave höher |
+| Glockenspiel | C | zwei Oktaven tiefer notiert |
+
+**Warum es die A-Klarinette gibt.** In Kreuztonarten wie A-Dur oder E-Dur müsste die B-Klarinette viele Kreuze lesen. Mit der A-Klarinette werden es weniger. Mozart und Brahms schrieben ihre Klarinettenquintette deshalb für A-Klarinette.
+
+**Notiert oder klingend denken?** Beim Komponieren denkst du klingend und schreibst in MuseScore klingend, die Software transponiert die Stimmen. Trotzdem musst du Transposition beherrschen, weil du Stimmen lesen, Fehler finden und mit Musikern sprechen willst. Ein Hornist sagt „mein c“ und meint klingend f.
+
 ## Üben
 
 ```uebungen
@@ -62,6 +90,13 @@ titel: Eine Melodie für Klarinette
 text: Schreib eine achttaktige Melodie für Klarinette, klingend notiert (also wie für Klavier). Sie soll ganz im Umfang liegen und überwiegend in der guten Lage (klingend etwa g bis c‴). Nutze ruhig den Wechsel zwischen dem dunklen tiefen Register und dem hellen oberen.
 tonart: 0
 pruefung: takte 8, instrument klarinette, gute-lage klarinette, endet-grundton, schluss-lang
+```
+
+```aufgabe
+titel: Eine Stimme für Horn in F
+text: Die Melodie klingt in C-Dur: g c′ e′ g′ | f′ (halbe) d′ (halbe) | e′ c′ d′ h | c′ (ganze). Schreib die Stimme für Horn in F. Das Horn klingt eine Quinte tiefer, also notierst du jeden Ton eine Quinte höher, in G-Dur mit einem Kreuz.
+tonart: 1
+pruefung: takte 4, transponiert horn G3:4 C4 E4 G4 | F4:2 D4:2 | E4:4 C4 D4 B3 | C4:1
 ```
 
 ## Freie Aufgabe
@@ -111,3 +146,27 @@ Nimm eine Melodie aus deinem Portfolio und exportiere sie nach MuseScore. Füge 
 - Immer klingend
 - Je nach Tonart
 - Im Altschlüssel
+
+? Wie notiert man eine Stimme für B-Klarinette, die klingend in Es-Dur steht?
++ Eine große Sekunde höher, in F-Dur
+- Eine große Sekunde tiefer, in Des-Dur
+- Eine Quinte höher, in B-Dur
+- Genau wie klingend
+
+? Für welche Klarinette schrieben Mozart und Brahms ihre Klarinettenquintette?
++ Für die A-Klarinette
+- Für die B-Klarinette
+- Für die Bassklarinette
+- Für die Es-Klarinette
+
+? Ein Hornist spielt sein notiertes c. Welcher Ton klingt?
++ f
+- c
+- g
+- b
+
+? Wie wird die Piccoloflöte notiert?
++ Eine Oktave tiefer, als sie klingt
+- Eine Oktave höher, als sie klingt
+- Eine Quinte höher
+- Genau wie klingend

@@ -66,6 +66,22 @@ oben: E5:4 C5 G4 | F5:4 D5 B4 | B4:4 D5 G5 | C5:2.
 unten: C3:8 E3 G3 C4 G3 E3 | G2:8 B2 D3 F3 D3 B2 | G2:8 B2 D3 F3 D3 B2 | C3:2.
 ```
 
+## Vertiefen
+
+**Lage der linken Hand.** Enge Akkorde klingen in tiefer Lage mulmig. Unterhalb von etwa c sollten zwischen den Tönen mindestens Quinten oder Oktaven liegen, Terzen erst darüber. Das ist der Grund, warum der Alberti-Bass nicht ganz unten spielt und der Walzerbass den Grundton tief und die Akkordtöne höher setzt.
+
+**Harmonierhythmus.** Wie oft wechselt der Akkord? In einem ruhigen Menuett meist einmal pro Takt, in einem schnellen Allegro manchmal nur alle zwei Takte, vor Kadenzen oft schneller (z. B. S und D in einem Takt). Ein beschleunigter Harmonierhythmus vor dem Schluss treibt zur Kadenz.
+
+**Stimmführung in der Begleitung.** Auch gebrochene Akkorde folgen dem harmonischen Band: Gemeinsame Töne bleiben in derselben Lage, die anderen gehen zum nächsten Ton. Springt die Begleitung bei jedem Wechsel in eine neue Lage, klingt der Satz unruhig.
+
+**Muster der Romantik und des Pop.**
+- **Arpeggien über beide Hände** (Chopin, Liszt): Die linke Hand spielt den Bass und läuft über mehrere Oktaven nach oben.
+- **Nachschlag** (Polka, Marsch): Bass auf 1 und 3, Akkord auf 2 und 4.
+- **Pop-Pattern 1–5–8**: Grundton, Quinte, Oktave in Achteln, darüber die rechte Hand mit Akkorden im Rhythmus des Songs.
+- **Ostinato**: eine kurze Figur, die immer wieder erklingt, während sich die Harmonie langsam ändert.
+
+**Melodie und Begleitung zusammen hören.** Die Begleitung sollte der Melodie Platz lassen: Wenn die Melodie lange Töne hat, darf die Begleitung bewegter sein, und umgekehrt. Das ist dasselbe Prinzip wie der Komplementärrhythmus in der Invention.
+
 ## Üben
 
 Erkenne die Begleitmuster am Notenbild und am Klang.
@@ -84,6 +100,15 @@ takt: 3/4
 klavier: ja
 melodie: E5:4 C5 G4 | F5:4 D5 B4 | C5:4 E5 G5 | A5:2 F5:4 | G5:4 E5 C5 | F5:4 D5 B4 | B4:4 D5 G5 | C5:2.
 pruefung: vollstaendig, begleitung-noten 18, funktionen T D T S T D T, ganzschluss, fehlerfrei
+```
+
+```aufgabe
+titel: Alberti-Bass zu einer Melodie
+text: Die Melodie in C-Dur ist vorgegeben. Schreib eine Begleitung im Alberti-Bass (unten, oben, Mitte, oben) in Achteln. Takt 1 Tonika, Takt 2 Dominante mit Septime, Takt 3 Subdominante, Takt 4 zuerst Dominante, dann Tonika. Lege die Grundtöne möglichst nah zusammen.
+tonart: 0
+klavier: ja
+melodie: E5:2 G5:2 | F5:4 D5 B4:2 | A4:4 C5 F5:2 | D5:2 C5:2
+pruefung: vollstaendig, begleitung-noten 28, funktionen T D S D T, ganzschluss, fehlerfrei
 ```
 
 ## Freie Aufgabe
@@ -127,3 +152,21 @@ Nimm eine Melodie aus Stufe 1 und begleite sie dreimal: mit langen Bässen, mit 
 - Über der Melodie
 - In derselben Lage wie die Melodie
 - Das ist egal
+
+? Warum spielt man enge Akkorde nicht in sehr tiefer Lage?
++ Terzen klingen in der Tiefe mulmig und undeutlich
+- Weil das Klavier dort keine Tasten hat
+- Weil tiefe Töne immer zu leise sind
+- Weil der Bass dort nur Oktaven spielen darf
+
+? Was ist der Harmonierhythmus?
++ Wie oft der Akkord wechselt
+- Der Rhythmus der Melodie
+- Das Tempo
+- Die Taktart
+
+? Was ist ein Nachschlag?
++ Bass auf den schweren Zählzeiten, Akkord auf den leichten
+- Ein Akkord nach dem Schlusston
+- Eine Pause nach jedem Takt
+- Ein langer Basston

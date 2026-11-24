@@ -43,6 +43,22 @@ tempo: 100
 C4:8 D4 C4 B3 G4 A4 G4 F4 | A4 B4 A4 G4 G4:2 | F4:8 G4 F4 E4 E4 F4 E4 D4 | D4 E4 D4 B3 C4:2
 ```
 
+## Vertiefen
+
+**Bekannte Rondos:** Beethovens „Für Elise“ ist ein kleines Rondo (A B A C A), Mozarts „Rondo alla turca“ aus der Sonate A-Dur KV 331 reiht Couplets und einen mitreißenden Refrain. Fast alle Schlusssätze von Mozarts Klavierkonzerten sind Rondos.
+
+**Variationen über einem Bass.** Neben Variationen über eine Melodie gibt es Variationen über eine **gleichbleibende Basslinie** oder Akkordfolge: **Passacaglia** und **Chaconne**. Über vier oder acht Takten Bass erfindet der Komponist immer neue Oberstimmen. Berühmt sind Bachs Chaconne d-Moll für Violine solo, Purcells „Dido’s Lament“ und Pachelbels Kanon. Im Pop leben Ostinato-Bässe genau so weiter.
+
+**Variationstechniken genauer:**
+- **Melodische Figuration**: Umspielung mit Durchgängen, Wechselnoten, Akkordbrechungen.
+- **Rhythmische Variation**: Punktierungen, Synkopen, Triolen.
+- **Harmonische Variation**: neue Akkorde unter derselben Melodie (Reharmonisation).
+- **Variation des Tongeschlechts**: die Mollvariation, oft langsamer und ausdrucksvoller.
+- **Kontrapunktische Variation**: das Thema als Kanon oder Fugato.
+- **Charakterwechsel**: Marsch, Walzer, Choral aus demselben Thema.
+
+**Jazz als Variationskunst.** Ein Jazzsolo ist eine Folge von **Choruses**: Variationen über die Harmonien eines Standards. Das Prinzip ist dasselbe wie bei Mozart, nur improvisiert.
+
 ## Üben
 
 ```uebungen
@@ -56,6 +72,13 @@ titel: Eine Variation
 text: Variiere das Thema „Ah, vous dirai-je“ (c c g g | a a g | f f e e | d d c). Die Hauptnoten bleiben auf den Zählzeiten, dazwischen umspielst du sie mit Achteln: Nachbartöne, Durchgänge, Akkordtöne. Schreib vier Takte und schließe auf c.
 tonart: 0
 pruefung: takte 4, noten 24, endet-grundton, sprung-max 6
+```
+
+```aufgabe
+titel: Mollvariation
+text: Schreib eine Variation des Themas in c-Moll (drei Bs): c c g g | as as g | f f es es | d d c. Die Hauptnoten bleiben auf den Zählzeiten, umspiel sie mit Achteln. Den Leitton h darfst du vor dem Schluss benutzen.
+tonart: -3 moll
+pruefung: takte 4, moll, leitereigen, endet-grundton, sprung-max 6
 ```
 
 ## Freie Aufgabe
@@ -99,3 +122,21 @@ Schreib zu deiner Variation eine zweite in c-Moll (mit es, as und h) und eine dr
 - Episoden
 - Trios
 - Refrains
+
+? Was ist eine Passacaglia?
++ Variationen über einer gleichbleibenden Basslinie
+- Ein schnelles Rondo
+- Eine Fuge mit zwei Themen
+- Ein Tanz im 2/4-Takt
+
+? Welche Form hat Beethovens „Für Elise“?
++ Kleines Rondo, A B A C A
+- Sonatensatz
+- Fuge
+- Barform
+
+? Was ist eine harmonische Variation?
++ Neue Akkorde unter derselben Melodie
+- Die Melodie in Achteln umspielt
+- Das Thema im Kanon
+- Das Thema in Moll
