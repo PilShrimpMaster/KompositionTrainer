@@ -56,6 +56,29 @@ v3: G3:2 A3:2 | G3:2 F3:2 | E3:1
 v4: C3:2 F2:2 | G2:2 G2:2 | C3:1
 ```
 
+## Vertiefen
+
+**Voicing-Techniken der Big Band:**
+
+| Technik | Aufbau | Wirkung |
+| --- | --- | --- |
+| Unisono / Oktaven | alle spielen dieselbe Linie | kraftvoll, klar |
+| 4-way close | vier Akkordtöne eng unter der Lead-Stimme | kompakt, typisch Swing |
+| Drop-2 | zweithöchster Ton eine Oktave tiefer | offener, voller |
+| Drop-2+4 | zweit- und vierthöchster Ton tiefer | sehr breit, für Brass-Tutti |
+| Spread | Grundton tief, darüber weit gefächert | für Balladen und Schlussakkorde |
+
+**Hintergründe.** Hinter einem Solisten spielen die Sections oft **Pads** (lange Akkorde) oder kurze **Riffs** im Wechsel mit dem Solisten. Wichtig ist, dass sie dem Solisten Raum lassen: Sie spielen in seinen Pausen oder deutlich tiefer.
+
+**Filmmusik-Handwerk:**
+- **Spotting**: Mit Regie festlegen, wo Musik kommt und was sie tun soll.
+- **Hit Points**: Momente im Bild, die die Musik genau treffen soll (ein Schnitt, ein Schlag, ein Blick).
+- **Mickey-Mousing**: Die Musik bildet jede Bewegung nach, wie im Zeichentrick. Wirkungsvoll, aber in ernsten Szenen oft zu viel.
+- **Underscore**: Musik unter Dialog, meist zurückhaltend, ohne Melodie im Sprachbereich.
+- **Leitmotiv**: ein Thema für eine Figur oder Idee, das sich mit der Geschichte verändert. Das lernst du in Stufe 7.
+
+**Klick und Tempo.** Filmmusik wird zum Bild synchronisiert, oft mit einem **Click-Track**. Das Tempo bestimmt, ob Hit Points auf Zählzeiten fallen. Komponisten wählen Tempi deshalb manchmal krumm (z. B. 93 statt 92 Schläge pro Minute).
+
 ## Üben
 
 ```uebungen
@@ -70,6 +93,15 @@ text: Die Melodie im Altsaxophon 1 ist vorgegeben, die Akkorde sind C6 – Dm7 |
 tonart: 0
 besetzung: saxsatz
 v1: E5:2 F5:2 | D5:2 E5:2
+pruefung: ensemble saxsatz, vollstaendig, im-umfang
+```
+
+```aufgabe
+titel: II–V–I im Saxophonsatz
+text: Ein zweiter Drop-2-Satz: Die Lead-Stimme spielt f″ – f″ | e″ über den Akkorden Dm7 – G7 | Cmaj7. Schreib Altsaxophon 2, Tenor und Bariton in Drop-2. Beispiel Dm7 mit f″ oben: eng f″ – d″ – c″ – a′, Drop-2 f″ – c″ – a′ – d′.
+tonart: 0
+besetzung: saxsatz
+v1: F5:2 F5:2 | E5:1
 pruefung: ensemble saxsatz, vollstaendig, im-umfang
 ```
 
@@ -114,3 +146,21 @@ Hör „Moanin'“ von Charles Mingus oder einen Titel der Count Basie Band und 
 - Solo-Celesta
 - Gezupfte Kontrabässe
 - Flöte in der Tiefe
+
+? Was sind Hit Points in der Filmmusik?
++ Momente im Bild, die die Musik genau treffen soll
+- Die lautesten Stellen eines Soundtracks
+- Die Hits aus dem Abspann
+- Fehler im Click-Track
+
+? Was ist Mickey-Mousing?
++ Die Musik bildet jede Bewegung im Bild nach
+- Musik nur mit hohen Instrumenten
+- Ein Leitmotiv für eine Maus
+- Musik unter Dialog
+
+? Was ist ein Spread-Voicing?
++ Grundton tief, darüber weit gefächerte Akkordtöne
+- Alle Töne innerhalb einer Oktave
+- Alle Saxophone im Unisono
+- Nur zwei Töne pro Akkord

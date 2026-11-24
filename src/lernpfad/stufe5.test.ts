@@ -11,6 +11,16 @@ const QUARTETT = ['F#5:2 E5:2 | D5:2 G5:2 | F#5:2 E5:2 | D5:1', 'D5:2 C#5:2 | B4
 
 /** Musterlösungen: Stimmen von oben nach unten, getrennt durch „||“ */
 const LOESUNGEN: Record<string, string> = {
+  'Eine Melodie für Violoncello': 'C3:4 E3 G3 C4 | B3:2 A3:2 | G3:4 A3 B3 D4 | C4:1 | E4:4 D4 C4 A3 | G3:2 F3:4 E3 | D3:4 G3 B2 D3 | C3:1',
+  'Eine Melodie für Oboe': 'D5:4 E5 F5 A5 | G5:2 F5:4 E5 | D5:4 F5 E5 C#5 | D5:1 | A4:4 D5 C5 Bb4 | A4:2 G4:4 F4 | E4:4 G4 F4 E4 | D4:1',
+  'Ein Blechbläserchoral':
+    'E4:2 F4:2 | G4:2 A4:2 | G4:2 F4:2 | E4:1 || C4:2 C4:2 | E4:2 F4:2 | E4:2 B3:2 | C4:1 || G3:2 A3:2 | C4:2 C4:2 | C4:2 G3:2 | G3:1 || C3:2 F2:2 | C3:2 F3:2 | G3:2 G2:2 | C3:1',
+  'Begleitfiguren in G-Dur':
+    'D5:2. B4:4 | C5:2. E5:4 | D5:4 C5 B4 A4 | G4:1 || D4:8 D4 D4 D4 D4 D4 D4 D4 | E4:8 E4 E4 E4 E4 E4 E4 E4 | F#4:8 F#4 F#4 F#4 F#4 F#4 F#4 F#4 | G4:1 || B3:8 B3 B3 B3 B3 B3 B3 B3 | G3:8 G3 G3 G3 G3 G3 G3 G3 | A3:8 A3 A3 A3 A3 A3 A3 A3 | B3:1 || G2:4 D2 G2 D2 | C2:4 G2 C2 G2 | D2:4 A2 D2 D2 | G2:1',
+  'Ein Choral für Bläserquintett': 'A5:2 Bb5:2 | Bb5:2 A5:2 || F5:2 F5:2 | E5:2 F5:2 || C5:2 D5:2 | C5:2 C5:2 || F4:2 F4:2 | C4:2 C4:2 || F3:2 Bb2:2 | C3:2 F2:2',
+  'II–V–I im Saxophonsatz': 'F5:2 F5:2 | E5:1 || C5:2 B4:2 | B4:1 || A4:2 G4:2 | G4:1 || D4:2 D4:2 | C4:1',
+  'Quartettsatz zu einer Choralmelodie':
+    'B4:4 A4 G4 A4 | B4 B4 A4:2 | D5:4 C5 B4 A4 | B4 A4 G4:2 || G4:4 F#4 G4 F#4 | G4 F#4 F#4:2 | G4:4 G4 G4 F#4 | G4 F#4 G4:2 || D4:4 D4 B3 D4 | D4 D4 D4:2 | D4:4 E4 D4 D4 | D4 D4 B3:2 || G3:4 D3 E3 D3 | G3 B2 D3:2 | B2:4 C3 G2 D3 | G2 D3 G2:2',
   'Eine Melodie für Viola': 'C4:4 E4 G4 E4 | F4:4 A4 G4:2 | E4:4 G4 C5 B4 | A4:2 G4:2 | F4:4 A4 G4 E4 | D4:4 F4 E4 C4 | D4:4 G3 B3 D4 | C4:1',
   'Ein Choral für Holzbläsertrio': 'E5:2 F5:2 | G5:2 E5:2 | F5:2 D5:2 | C5:1 || G4:2 A4:2 | C5:2 C5:2 | A4:2 B4:2 | E4:1 || C3:2 F3:2 | E3:2 C3:2 | F3:2 G3:2 | C3:1',
   'Eine Fanfare in D-Dur':

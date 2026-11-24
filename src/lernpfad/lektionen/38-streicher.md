@@ -15,7 +15,7 @@ Die Streicher sind das Herz des Orchesters. Sie können fast alles: lange Töne 
 | Violine | g – d′ – a′ – e″ | Violinschlüssel | g bis etwa e‴ |
 | Viola (Bratsche) | c – g – d′ – a′ | Altschlüssel | c bis etwa g″ |
 | Violoncello | C – G – d – a | Bassschlüssel | C bis etwa a′ |
-| Kontrabass | E – A – D – G | Bassschlüssel, klingt eine Oktave tiefer | E bis etwa c′ |
+| Kontrabass | ₁E – ₁A – D – G (notiert E – A – d – g) | Bassschlüssel, klingt eine Oktave tiefer als notiert | ₁E bis etwa c′ |
 
 Die tiefste Saite bestimmt den tiefsten Ton: Unter dem g kann keine Violine spielen, unter dem c keine Viola. Nach oben ist der Umfang offen; je höher, desto dünner und angespannter wird der Klang.
 
@@ -48,6 +48,30 @@ v2: r:1 | r:1 | E4:4 D4 C4 D4 | E4:2 E4:2 | r:1 | r:1
 v3: r:1 | r:1 | r:1 | r:1 | E3:4 D3 C3 D3 | E3:2 E3:2
 ```
 
+## Vertiefen
+
+**Bogenstriche und Artikulation.** Die Art, wie der Bogen geführt wird, prägt den Charakter mehr als jede Dynamik:
+
+| Strich | Zeichen | Klang |
+| --- | --- | --- |
+| Legato | Bogen über mehreren Noten | gebunden, singend, auf einem Strich |
+| Détaché | ohne Zeichen | jede Note ein eigener Strich, kräftig und klar |
+| Staccato | Punkt | kurz, auf der Saite |
+| Spiccato | Punkt, schnelles Tempo | springender Bogen, leicht und federnd |
+| Portato | Bogen mit Strichen oder Punkten | leicht getrennt auf einem Strich |
+| Abstrich / Aufstrich | ⊓ / V | Abstrich ist schwerer, Aufstrich leichter |
+
+**Besondere Klangfarben:**
+- **sul ponticello**: nahe am Steg, gläsern und gespenstisch.
+- **sul tasto**: über dem Griffbrett, weich und flötenartig.
+- **col legno**: mit der Holzstange des Bogens, klappernd (Holst, „Mars“).
+- **Flageolett**: die Saite nur leicht berührt, ein pfeifender, hoher Ton.
+- **Glissando**: Gleiten zwischen zwei Tönen.
+
+**Lagen.** Die linke Hand greift in **Lagen**: In der 1. Lage liegen die Töne nahe am Wirbel, je höher die Lage, desto näher am Steg. Höhere Lagen klingen auf einer tiefen Saite besonders warm und intensiv. Darum schreibt man in Partituren manchmal vor, auf welcher Saite gespielt wird („sul G“).
+
+**Das Streichorchester.** Im Sinfonieorchester spielen viele Streicher jede Stimme gemeinsam, typisch etwa 16 erste Violinen, 14 zweite, 12 Bratschen, 10 Violoncelli, 8 Kontrabässe. Was im Quartett ein Solist spielt, wird im Orchester zum warmen Gruppenklang. Ein **Solo** innerhalb der Gruppe (z. B. „Solo-Violine“) hebt sich deutlich ab.
+
 ## Üben
 
 ```uebungen
@@ -64,9 +88,17 @@ besetzung: viola
 pruefung: takte 8, ensemble viola, im-umfang, gute-lage viola, endet-grundton, schluss-lang
 ```
 
+```aufgabe
+titel: Eine Melodie für Violoncello
+text: Schreib eine achttaktige Melodie in C-Dur für Violoncello im Bassschlüssel. Nutze vor allem die singende Tenorlage (etwa zwischen c und a′), beginne gern auf der C- oder G-Saite und steige zum Höhepunkt auf der A-Saite. Ende lang auf c.
+tonart: 0
+besetzung: violoncello
+pruefung: takte 8, ensemble violoncello, im-umfang, gute-lage violoncello, endet-grundton, schluss-lang
+```
+
 ## Freie Aufgabe
 
-Hör dir den langsamen Satz aus Dvořáks „Amerikanischem“ Streichquartett (F-Dur, op. 96) an: Die Melodie beginnt in der Violine und wandert später ins Violoncello. Oder hör den Beginn von Schuberts Streichquintett C-Dur: zwei Violoncelli singen in der Tenorlage. Schreib dir auf, in welcher Lage die Melodie liegt und welches Instrument begleitet.
+Hör dir den langsamen Satz aus Dvořáks „Amerikanischem“ Streichquartett (F-Dur, op. 96) an: Die Melodie beginnt in der Violine und wandert später ins Violoncello. Oder hör das Seitenthema aus dem ersten Satz von Schuberts Streichquintett C-Dur: Dort singen die beiden Violoncelli im Duett in der Tenorlage. Schreib dir auf, in welcher Lage die Melodie liegt und welches Instrument begleitet.
 
 ## Quiz
 
@@ -111,3 +143,21 @@ Hör dir den langsamen Satz aus Dvořáks „Amerikanischem“ Streichquartett (
 - Die C-Saite
 - Die G-Saite
 - Die E-Saite
+
+? Was bedeutet „sul ponticello“?
++ Nahe am Steg spielen, mit gläsernem Klang
+- Über dem Griffbrett spielen
+- Mit der Holzstange spielen
+- Die Saite zupfen
+
+? Welcher Strich ist springend und federnd?
++ Spiccato
+- Legato
+- Détaché
+- Portato
+
+? Wie viele erste Violinen hat ein großes Sinfonieorchester ungefähr?
++ Etwa 16
+- 2
+- 4
+- 40

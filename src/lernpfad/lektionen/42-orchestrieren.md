@@ -36,6 +36,26 @@ v2: C4:8 E4 G4 E4 C4 E4 G4 E4 | B3:8 D4 G4 D4 C4 E4 G4 E4 | F3:8 A3 C4 A3 G3 B3 
 v3: C3:2 C3:2 | B2:2 C3:2 | F2:2 G2:2 | C3:1
 ```
 
+## Vertiefen
+
+**Orchestergrößen:**
+
+| Besetzung | Holz | Blech | Pauken/Schlagwerk | Streicher |
+| --- | --- | --- | --- | --- |
+| frühe Klassik (Haydn) | 2 Oboen, 1–2 Fagotte, oft 1 Flöte | 2 Hörner, manchmal 2 Trompeten | Pauken | 4–5 Stimmen |
+| Beethoven, 5. Sinfonie | 2 (+ Piccolo, Kontrafagott) | 2 Hörner, 2 Trompeten, 3 Posaunen | Pauken | 5 Stimmen |
+| Spätromantik (Mahler, Strauss) | 3–4 je Instrument | 4–8 Hörner, 3–4 Trompeten, 3 Posaunen, Tuba | großes Schlagwerk, Harfen | stark besetzt |
+
+**Die Partituranordnung** ist von oben nach unten immer gleich: Holzbläser (Flöte, Oboe, Klarinette, Fagott), Blechbläser (Horn, Trompete, Posaune, Tuba), Pauken und Schlagwerk, Harfe und Tasten, Solisten und Chor, Streicher (Violine 1, Violine 2, Viola, Violoncello, Kontrabass).
+
+**Techniken, die immer funktionieren:**
+- **Oktavverdopplung** der Melodie in zwei Familien, z. B. Flöte und Violine 1 eine Oktave auseinander.
+- **Liegestimmen** (Pedal): Hörner oder Holz halten Akkordtöne, während die Streicher sich bewegen. Das bindet den Klang.
+- **Antiphonie**: Gruppen antworten einander, etwa Holz gegen Streicher.
+- **Crescendo durch Hinzufügen**: Statt nur lauter zu spielen, kommen nach und nach Instrumente dazu (Ravels „Boléro“ ist ein ganzes Stück aus diesem Prinzip).
+
+**Lehrbücher und Partituren.** Berlioz’ „Instrumentationslehre“ und Rimski-Korsakows „Grundlagen der Orchestration“ sind bis heute Klassiker. Am meisten lernst du aber, wenn du Partituren mitliest: Wähle ein Stück, das du gut kennst, und verfolge eine einzelne Stimme durch den ganzen Satz.
+
 ## Üben
 
 ```uebungen
@@ -52,6 +72,15 @@ besetzung: violine, violine, viola, violoncello, kontrabass
 v1: F#5:2 E5:2 | D5:2 G5:2 | F#5:2 E5:2 | D5:1
 v4: D3:2 A2:2 | B2:2 E2:2 | A2:2 A2:2 | D2:1
 pruefung: ensemble violine+violine+viola+violoncello+kontrabass, vollstaendig, im-umfang, fehlerfrei
+```
+
+```aufgabe
+titel: Ein Choral für Bläserquintett
+text: Die Flöte spielt die Melodie in F-Dur. Schreib Oboe, Klarinette, Horn und Fagott, Note gegen Note in Halben. Akkorde: F – B | C⁷ – F. Das Fagott spielt den Bass, das Horn liegt in der Mitte und bindet den Klang. Den C⁷ darfst du ohne Quinte setzen. Die Partitur zeigt klingende Töne.
+tonart: -1
+besetzung: blaeserquintett
+v1: A5:2 Bb5:2 | Bb5:2 A5:2
+pruefung: ensemble blaeserquintett, vollstaendig, im-umfang, fehlerfrei, ganzschluss
 ```
 
 ## Freie Aufgabe
@@ -95,3 +124,21 @@ Nimm ein Klavierstück aus deinem Portfolio, zum Beispiel dein Menuett, und orch
 - Flöte und Oboe
 - 2. Violine und Viola
 - Trompete und Horn
+
+? Wo stehen die Streicher in der Partitur?
++ Ganz unten
+- Ganz oben
+- Zwischen Holz und Blech
+- Neben dem Schlagwerk
+
+? Was sind Liegestimmen?
++ Gehaltene Akkordtöne, oft in Hörnern oder Holz, die den Klang binden
+- Stimmen, die pausieren
+- Besonders tiefe Bassstimmen
+- Stimmen, die nur im Liegen gespielt werden
+
+? Welches Stück besteht ganz aus einem Crescendo durch Hinzufügen von Instrumenten?
++ Ravels „Boléro“
+- Bachs Invention C-Dur
+- Haydns „Kaiserquartett“
+- Mozarts Sonate KV 545
