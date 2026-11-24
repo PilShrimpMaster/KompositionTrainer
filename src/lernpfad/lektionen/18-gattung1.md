@@ -17,7 +17,7 @@ In der **1. Gattung** steht gegen jede ganze Note des Cantus firmus genau eine g
 
 ## Hören
 
-Fux’ eigene Lösung über seinem dorischen Cantus firmus. Achte auf den Schluss: cis–d in der Oberstimme gegen e–d im Cantus firmus, eine große Sexte öffnet sich zur Oktave.
+Fux’ eigene Lösung über seinem dorischen Cantus firmus. Achte auf den Schluss: cis–d in der Oberstimme gegen e–d im Cantus firmus, eine große Sexte öffnet sich zur Oktave (hier zur Doppeloktave).
 
 ```zweistimmig
 titel: 1. Gattung über dem Cantus firmus (nach Fux)
@@ -34,6 +34,30 @@ titel: Mit Fehler: parallele Quinten
 oben: A4:1 C5 B4 A4
 unten: D3:1 F3 E3 D3
 ```
+
+## Vertiefen
+
+**Vier Bewegungsarten.** Zwischen zwei Stimmen gibt es nur vier Möglichkeiten:
+
+| Bewegung | Was passiert | Bewertung |
+| --- | --- | --- |
+| Gegenbewegung | eine Stimme steigt, die andere fällt | die beste, immer erlaubt |
+| Seitenbewegung | eine Stimme liegt, die andere bewegt sich | gut (in der 1. Gattung selten, weil keine Tonwiederholung) |
+| gerade Bewegung | beide in dieselbe Richtung, verschiedene Intervalle | gut in unvollkommene Konsonanzen |
+| Parallelbewegung | beide in dieselbe Richtung, gleiches Intervall | nur in Terzen und Sexten |
+
+Fux selbst fasst das in vier Regeln zusammen: Von einer vollkommenen in eine vollkommene Konsonanz nur in Gegen- oder Seitenbewegung. Von einer vollkommenen in eine unvollkommene, von einer unvollkommenen in eine vollkommene und von einer unvollkommenen in eine unvollkommene darf man jede Bewegung benutzen, aber in vollkommene Konsonanzen am besten nicht in gerader Bewegung.
+
+**Rückwärts planen.** Der Schluss steht fest: Im vorletzten Takt steht über dem Cantus firmus eine große Sexte, darunter eine kleine Terz (bzw. Dezime), die sich in die Oktave oder den Einklang öffnet oder schließt. Lege diese zwei Töne zuerst fest und arbeite dich dann von vorn zur Mitte vor.
+
+**Weitere Feinheiten, die Fux im Gespräch zwischen Lehrer Aloysius und Schüler Josephus erklärt:**
+- Der **Einklang** steht nur am Anfang und am Schluss, in der Mitte klingt er leer.
+- Nicht mehr als **drei Terzen oder Sexten** hintereinander, sonst verliert die Gegenstimme ihre Selbstständigkeit.
+- Die Stimmen sollen sich nicht **kreuzen** und nicht weiter als eine Dezime auseinanderliegen.
+- Ein Sprung in eine vollkommene Konsonanz ist heikler als ein Schritt.
+- Möglichst viele unvollkommene Konsonanzen: Sie halten den Satz in Bewegung.
+
+**Warum diese Übung für Komponisten zählt:** Jede gute Basslinie gegen eine Melodie ist im Kern ein Satz der 1. Gattung. Wer Note gegen Note sauber denken kann, schreibt später bessere Bässe im Pop, bessere Gegenstimmen im Orchester und bessere Voicings im Jazz.
 
 ## Üben
 
@@ -60,6 +84,16 @@ tonart: 0
 kontrapunkt: 1
 cf: oben
 cantus: C4:1 D4 F4 E4 F4 G4 A4 G4 E4 D4 C4
+pruefung: vollstaendig, fehlerfrei
+```
+
+```aufgabe
+titel: Gegenstimme über einem äolischen Cantus firmus
+text: Ein neuer Cantus firmus im Äolischen (auf a). Schreib die Gegenstimme darüber in ganzen Noten. Beginne mit der Oktave a′ oder der Quinte e′. Plane den Schluss rückwärts: Im vorletzten Takt steht gis′ über h als große Sexte, dann die Oktave a′ über a. Höchstens drei Terzen oder Sexten hintereinander.
+tonart: 0 moll
+kontrapunkt: 1
+cf: unten
+cantus: A3:1 C4 B3 D4 C4 E4 D4 C4 B3 A3
 pruefung: vollstaendig, fehlerfrei
 ```
 
@@ -105,3 +139,27 @@ Unter **Schreiben** → „Stück einstellen“ → Besetzung „Kontrapunkt“ 
 - Quinten und Oktaven
 - Nur Oktaven
 - Gar keine
+
+? Welche Bewegung ist zwischen zwei Stimmen immer erlaubt?
++ Gegenbewegung
+- Parallelbewegung
+- Gerade Bewegung
+- Keine, es kommt immer auf die Intervalle an
+
+? Wie viele Terzen oder Sexten sollten in der 1. Gattung höchstens hintereinander stehen?
++ Drei
+- Eine
+- Sechs
+- Beliebig viele
+
+? Wo darf in der 1. Gattung der Einklang stehen?
++ Nur am Anfang und am Schluss
+- Überall
+- Nur in der Mitte
+- Nie
+
+? Welches Intervall steht im vorletzten Takt, wenn die Gegenstimme über dem Cantus firmus liegt?
++ Die große Sexte, die sich zur Oktave öffnet
+- Die Quinte
+- Die kleine Terz
+- Die Oktave

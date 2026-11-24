@@ -41,6 +41,23 @@ schluessel: treble
 D4:1 F4 E4 D4 G4 F4 A4 G4 F4 E4 D4
 ```
 
+## Vertiefen
+
+**Woher die Modi kommen.** Die Kirchentonarten ordnen seit dem Mittelalter die Melodien des gregorianischen Chorals. Zu jedem Modus gehört nicht nur die Finalis, sondern auch ein **Tenor** (Rezitationston), auf dem lange Textpassagen gesungen werden: im Dorischen das a, im Phrygischen das c, im Mixolydischen das d. Heinrich Glarean ergänzte 1547 Äolisch und Ionisch, die später zu Moll und Dur wurden. **Lokrisch** (auf h) blieb außen vor, weil über seiner Finalis keine reine Quinte steht (h–f ist vermindert). Ohne reine Quinte gibt es keinen stabilen Schluss.
+
+**Authentisch und plagal.** Bewegt sich eine Melodie von der Finalis bis eine Oktave darüber, ist der Modus **authentisch**. Liegt die Finalis in der Mitte des Umfangs (eine Quarte darunter bis eine Quinte darüber), heißt er **plagal** und bekommt die Vorsilbe „Hypo-“: Hypodorisch reicht von A bis a mit Finalis d. Für deine Cantus firmi heißt das: Der Umfang bestimmt mit, wie ein Modus wirkt.
+
+**Transponierte Modi.** Mit einem b vorne liegt Dorisch auf g (g–a–b–c–d–e–f), Phrygisch auf a, Mixolydisch auf c. Die Intervallfolge bleibt gleich, nur der Ort verschiebt sich.
+
+**Musica ficta.** Sänger der Renaissance veränderten an Schlüssen und bei Tritonus-Gefahr einzelne Töne, auch wenn sie nicht notiert waren. Daraus stammen zwei Regeln, die du in den Gattungen anwendest: Vor der Finalis steht (außer in Phrygisch) ein **Leitton** (cis in Dorisch, fis in Mixolydisch, gis in Äolisch), und ein melodischer Tritonus f–h wird mit b entschärft.
+
+**Checkliste für einen guten Cantus firmus:**
+- 8 bis 16 ganze Noten, Anfang und Ende auf der Finalis, Schluss mit der 2. Stufe von oben.
+- Umfang höchstens eine Dezime, ein einziger Höhepunkt, am besten nicht in der Mitte.
+- Sprünge bis zur Quinte (die kleine Sexte aufwärts und die Oktave nur ausnahmsweise), danach Gegenbewegung.
+- Keine Tonwiederholung, kein Tritonus als Sprung oder als Rahmen einer Tongruppe (f … h).
+- Nicht zwei Sprünge hintereinander in dieselbe Richtung, außer sie bilden einen Dreiklang.
+
 ## Üben
 
 Bevor du Gegenstimmen schreibst, frisch die Intervalle auf, denn im Kontrapunkt zählt jedes einzelne.
@@ -57,6 +74,14 @@ text: Schreib einen Cantus firmus in ganzen Noten, 8 bis 12 Töne lang, in C (io
 tonart: 0
 schluessel: treble
 pruefung: noten 8, beginnt-grundton, endet-grundton, schritt-zum-schluss, hoechster-ton-einmal, sprung-max 5, leitereigen
+```
+
+```aufgabe
+titel: Cantus firmus im Dorischen
+text: Schreib einen zweiten Cantus firmus, diesmal im Dorischen auf d: 8 bis 12 ganze Noten, nur weiße Tasten, Schluss e–d, ein einziger Höhepunkt, keine Sprünge größer als eine Quinte. Spiel ihn dann gegen deinen ionischen Cantus firmus: Hörst du das hellere h im Dorischen?
+tonart: 0
+schluessel: treble
+pruefung: noten 8, finalis D, modus dorisch D, schritt-zum-schluss, hoechster-ton-einmal, sprung-max 5
 ```
 
 ## Freie Aufgabe
@@ -106,3 +131,28 @@ Schreib den gleichen Cantus firmus noch einmal im Dorischen (auf d) und im Mixol
 - Johann Sebastian Bach
 - Jean-Philippe Rameau
 - Arnold Schönberg
+
+? Warum gehörte Lokrisch nicht zu den Kirchentonarten?
++ Über seiner Finalis h steht keine reine Quinte
+- Weil es zu viele Vorzeichen hat
+- Weil es erst im Jazz erfunden wurde
+- Weil es wie Dur klingt
+
+? Was unterscheidet einen plagalen von einem authentischen Modus?
++ Beim plagalen liegt die Finalis in der Mitte des Umfangs
+- Plagale Modi haben Vorzeichen
+- Plagale Modi enden auf der Quinte
+- Plagale Modi gibt es nur in Moll
+
+? Welcher Ton wird im Dorischen an Schlüssen zum Leitton erhöht?
++ c zu cis
+- f zu fis
+- g zu gis
+- h zu his
+= Nach der Regel der Musica ficta. Im Phrygischen gibt es keinen solchen Leitton.
+
+? Wie viele Töne hat ein Cantus firmus nach Fux meist?
++ Etwa 8 bis 16
+- 4
+- Genau 12
+- Über 30
