@@ -16,6 +16,14 @@ const BLUES =
 
 /** Musterlösungen: Leadsheet oder Melodie; Klaviersatz „Melodie || Begleitung“; vierstimmig „S || A || T || B“ */
 const LOESUNGEN: Record<string, string> = {
+  'Septakkorde in a-Moll': 'E5:2[Am7] C5:2 | F5:2[Dm7] A5:2 | D5:2[Bm7b5] G#4:2[E7] | A4:1[Am6]',
+  'Eine II–V–I in d-Moll': 'G4:2[Em7b5] Bb4:2 | A4:2[A7] C#5:2 | D5:1[Dm6] | F5:1',
+  'Drop-2-Voicings in Bb-Dur': 'Bb4:1 | A4:1 | A4:1 || Eb4:1 | Eb4:1 | D4:1 || C4:1 | C4:1 | Bb3:1 || G3:1 | F3:1 | F3:1',
+  'Zwei Akkorde einschieben': 'E5:2[Cmaj7] G5:2[A7] | F5:2[Dm7] D5:2 | B4:2[G7] D5:2[Db7] | C5:1[Cmaj7]',
+  'Ein Turnaround in F-Dur': 'A4:2[Fmaj7] F#4:2[D7] | Bb4:2[Gm7] E4:2[C7] | A4:2[Fmaj7] C5:2[D7] | Bb4:2[Gm7] G4:2[C7] | F4:1[Fmaj7]',
+  'Eine Rock-Strophe mit bVII': 'E5:2[C] G5:2 | D5:2[Bb] F5:2 | C5:2[F] A4:2 | C5:1[C]',
+  'Ein Cue über einem Orgelpunkt': 'D5:4 F5 A5 F5 | D5:4 G5 Bb5 G5 | C#5:4 E5 A5 E5 | D5:1 || D3:1 | D3:1 | D3:1 | D3:1',
+  'Ein Pattern über wechselndem Bass': 'E5:8 A4 C5 A4 E5 A4 C5 A4 | E5:8 A4 C5 A4 E5 A4 C5 A4 | E5:8 A4 C5 A4 E5 A4 C5 A4 | E5:8 A4 C5 A4 E5 A4 C5 A4 || C3:1 | C3:1 | F2:1 | F2:1',
   'Akkorde über eine Melodie': 'C5:2[Cmaj7] E5:2 | D5:2[Dm7] F5:2 | B4:2[G7] D5:2 | C5:1[Cmaj7]',
   'Zwei II–V–I hintereinander': 'F5:2[Dm7] A5:2 | G5:2[G7] F5:2 | E5:1[Cmaj7] | D5:2[Cmaj7] E5:2 | Bb4:2[Gm7] D5:2 | C5:2[C7] E5:2 | A4:2[Fmaj7] C5:2 | C5:1[Cmaj7]',
   'Drop-2-Voicings zu einer II–V–I': 'C5:1 | B4:1 | B4:1 || F4:1 | F4:1 | E4:1 || D4:1 | D4:1 | C4:1 || A3:1 | G3:1 | G3:1',

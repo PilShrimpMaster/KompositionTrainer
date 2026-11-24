@@ -14,6 +14,16 @@ Zum Abschluss der Stufe 7 verbindest du Jazz und Filmmusik in zwei Aufgaben.
 
 Nimm beide Stücke ins Portfolio auf. Exportiere sie nach MuseScore: Das Leadsheet kommt dort mit Akkordsymbolen an, und du kannst daraus ein Arrangement für Band oder Big Band machen.
 
+## Vertiefen
+
+**Den Song erst verstehen.** Bevor du reharmonisierst, spiel die Melodie mit den einfachen Akkorden mehrmals durch. Markiere, wo die Phrasen enden (Takt 4, 8, 12, 16) und welche Töne dort liegen. An den Phrasenenden setzt du die stärksten Kadenzen, dazwischen ist Platz für Farben.
+
+**Die beiden A-Teile unterscheiden.** In einem AABA-Song klingt das zweite A oft anders als das erste: Das erste endet offen, etwa mit einem Turnaround oder einer Dominante, das zweite schließt mit einer echten II–V–I. Eine Reharmonisierung kann diesen Unterschied verstärken: im ersten A eher sanfte Vertreter, im zweiten die Tritonus-Substitution und die volle Kadenz.
+
+**Den Cue planen.** Schreib vor dem ersten Ton drei Zeilen auf: die Szene in einem Satz, die Stimmung am Anfang und am Ende, und den Moment, an dem sich etwas ändert. Dann entscheide: Welches Ostinato trägt die Szene? Wo kehrt das Leitmotiv wieder, und wie ist es verwandelt? Wie endet der Cue: offen auf einem Orgelpunkt oder geschlossen mit einer Kadenz?
+
+**Was du jetzt kannst.** Mit dem Ende von Stufe 7 hast du das Handwerk vom Choralsatz über Kontrapunkt, Form und Instrumentation bis zu Jazz, Pop, Film und Neuer Musik durchlaufen. Von hier an lernst du am meisten, indem du regelmäßig eigene Stücke schreibst, sie überarbeitest und mit Werken vergleichst, die du bewunderst.
+
 ## Schreiben
 
 ```aufgabe
@@ -34,7 +44,7 @@ pruefung: mindestens-takte 8, vollstaendig, motiv-anzahl 3, stilmerkmal ostinato
 
 ## Freie Aufgabe
 
-Arrangiere dein Leadsheet in MuseScore für eine kleine Besetzung: Melodie im Altsaxophon, Drop-2-Voicings im Klavier, ein Walking Bass. Oder vertone den Cue für Streicher und Horn mit dem, was du in Stufe 5 gelernt hast.
+Arrangiere dein Leadsheet in MuseScore für eine kleine Besetzung: Melodie in Trompete, Flöte oder Altsaxophon, Drop-2-Voicings im Klavier, ein Walking Bass. Oder vertone den Cue für Streicher und Horn mit dem, was du in Stufe 5 gelernt hast.
 
 ## Quiz
 
@@ -61,3 +71,15 @@ Arrangiere dein Leadsheet in MuseScore für eine kleine Besetzung: Melodie im Al
 - 12-Takt-Blues
 - Rondo
 - Sonatensatz
+
+? Wo setzt man beim Reharmonisieren die stärksten Kadenzen?
++ An den Phrasenenden, etwa in Takt 4, 8, 12 und 16
+- Auf jeder Zählzeit
+- Nur im ersten Takt
+- Nirgends, Jazz kennt keine Kadenzen
+
+? Wie unterscheiden sich die beiden A-Teile eines AABA-Songs oft?
++ Das erste A endet offen, das zweite schließt mit einer Kadenz
+- Sie haben verschiedene Melodien
+- Das zweite A steht immer in Moll
+- Sie unterscheiden sich gar nicht

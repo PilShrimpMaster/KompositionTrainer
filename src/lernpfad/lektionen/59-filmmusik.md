@@ -19,7 +19,7 @@ Ein **Cue** ist ein einzelnes Musikstück zu einer Szene, mit festem Anfang und 
 
 ## Hören
 
-Ein Leitmotiv über einem Ostinato in d-Moll. Das Motiv erklingt dreimal: zuerst auf d, dann einen Ton höher, zuletzt gesteigert. Die linke Hand wiederholt ihr Muster unverändert. Zeig die Stilmerkmale an.
+Ein Leitmotiv über einem Ostinato in d-Moll. Das Motiv erklingt zweimal: zuerst auf d, dann einen Ton höher und mit dem Spitzenton b″ gesteigert. Die linke Hand wiederholt ihr Muster unverändert. Zeig die Stilmerkmale an.
 
 ```zweistimmig
 titel: Übungscue: Leitmotiv über Ostinato
@@ -30,6 +30,21 @@ tempo: 84
 oben: D5:4. E5:8 F5:4 A5:4 | A5:2 G5:2 | E5:4. F5:8 G5:4 Bb5:4 | A5:1
 unten: D3:8 A3 D4 A3 D3 A3 D4 A3 | D3:8 A3 D4 A3 D3 A3 D4 A3 | D3:8 A3 D4 A3 D3 A3 D4 A3 | D3:8 A3 D4 A3 D3 A3 D4 A3
 ```
+
+## Vertiefen
+
+**Ein Leitmotiv verwandeln.** Ein gutes Leitmotiv ist kurz (zwei bis vier Takte) und hat ein unverwechselbares Merkmal: einen Sprung, einen Rhythmus oder einen besonderen Ton. Dann lässt es sich verändern und bleibt erkennbar:
+- **Moll statt Dur** oder umgekehrt: Die Figur ist in Gefahr, oder sie triumphiert.
+- **Augmentation:** doppelt so langsam, feierlich oder traurig.
+- **Diminution:** doppelt so schnell, gehetzt.
+- **Fragment:** nur die ersten drei Töne, als Erinnerung.
+- **Neue Instrumentation:** Ein Motiv im Solo-Horn klingt heroisch, in der Solo-Oboe verletzlich, im tiefen Blech bedrohlich.
+
+**Hit Points setzen.** Bei einem Cue legst du zuerst die Zeitpunkte fest: Wann beginnt die Szene, wann passiert etwas Wichtiges, wann endet sie? Dann wählst du ein Tempo, bei dem die wichtigen Momente auf eine schwere Zählzeit fallen. Bei 120 Schlägen pro Minute dauert ein Viertel eine halbe Sekunde, ein 4/4-Takt zwei Sekunden.
+
+**Underscore unter Dialog.** Stimmen liegen etwa zwischen 100 und 1000 Hertz, also grob von G bis c‴. Musik unter Dialog lässt diesen Bereich frei oder füllt ihn nur leise: tiefe Streicher, hohe Flageoletts, wenig Melodie. Wenn niemand spricht, darf die Musik in den Vordergrund.
+
+**Spannung ohne Melodie.** Ein tiefer Orgelpunkt, darüber ein leises Ostinato und ein einzelner dissonanter Ton, der langsam lauter wird: Mehr braucht ein Thriller-Cue oft nicht. Die Spannung entsteht aus der Erwartung, dass etwas passiert.
 
 ## Üben
 
@@ -46,6 +61,15 @@ tonart: -1 moll
 klavier: ja
 melodie: D5:4. E5:8 F5:4 A5:4 | A5:2 G5:2 | E5:4. F5:8 G5:4 Bb5:4 | A5:1
 pruefung: vollstaendig, stilmerkmal ostinato
+```
+
+```aufgabe
+titel: Ein Cue über einem Orgelpunkt
+text: Die rechte Hand ist vorgegeben: drei gebrochene Akkorde (d-Moll, g-Moll, A-Dur) und der Schluss auf d″. Schreib darunter in der linken Hand einen Orgelpunkt: Der Ton D liegt in allen vier Takten, während sich die Akkorde darüber verändern. Hör, wie die Spannung im dritten Takt wächst, wenn A-Dur über dem D reibt.
+tonart: -1 moll
+klavier: ja
+melodie: D5:4 F5 A5 F5 | D5:4 G5 Bb5 G5 | C#5:4 E5 A5 E5 | D5:1
+pruefung: vollstaendig, stilmerkmal orgelpunkt
 ```
 
 ## Freie Aufgabe
@@ -95,3 +119,21 @@ Schau eine Szene aus einem Film, den du magst, einmal mit und einmal ohne Ton. N
 - Immer genau gleich
 - Nur im Abspann
 - Gar nicht
+
+? Was ist eine Augmentation eines Motivs?
++ Das Motiv erklingt in doppelt so langen Notenwerten
+- Das Motiv erklingt doppelt so schnell
+- Nur die ersten drei Töne erklingen
+- Das Motiv wird gespiegelt
+
+? Wie lange dauert ein 4/4-Takt bei Tempo 120?
++ Zwei Sekunden
+- Eine Sekunde
+- Vier Sekunden
+- Eine halbe Sekunde
+
+? Was beachtet ein Underscore unter Dialog?
++ Er lässt den Bereich der Stimmen frei oder füllt ihn nur leise
+- Er ist immer lauter als die Stimmen
+- Er spielt die Melodie im Stimmbereich
+- Er besteht nur aus Schlagzeug

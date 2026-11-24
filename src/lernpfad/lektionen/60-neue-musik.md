@@ -43,6 +43,21 @@ oben: E5:8 G5 D5 G5 E5 G5 D5 G5 | E5:8 G5 D5 G5 E5 G5 D5 G5 | E5:8 G5 D5 G5 E5 G
 unten: C3:1 | C3:1 | A2:1 | A2:1
 ```
 
+## Vertiefen
+
+**Eine Primform bestimmen.** Schreib die Tonklassen eines Klangs als Zahlen auf (c = 0 … h = 11) und ordne sie im Kreis. Such die engste Anordnung, bei der der Abstand vom ersten zum letzten Ton am kleinsten ist, und transponiere so, dass sie mit 0 beginnt. Prüf dann auch die Umkehrung und nimm die Form, die links enger gepackt ist. Beispiel: c – e – g ergibt (047), die Umkehrung (037). Die Primform ist (037), dieselbe wie bei a – c – e.
+
+**Wichtige Klänge der Neuen Musik.**
+- **(012)**: ein chromatischer Cluster aus drei Tönen.
+- **(016)**: das Wiener Trichord, Halbton plus Tritonus, typisch für Webern.
+- **(027)**: zwei Quarten übereinander, offen und quartig.
+- **(0167)**: zwei Tritoni im Halbtonabstand, bei Bartók die sogenannte z-Zelle.
+- **(0258)**: der Dominantseptakkord und der halbverminderte Akkord haben dieselbe Primform.
+
+**Minimal Music im Detail.** In Glass' additiven Prozessen wächst ein Muster: 1 – 2, dann 1 – 2 – 3, dann 1 – 2 – 3 – 4 … Bei Reich verschieben sich zwei gleiche Muster gegeneinander, bis ganz neue Rhythmen entstehen. John Adams verbindet diese Technik mit großem Orchester und tonaler Harmonik, etwa in „Short Ride in a Fast Machine“. Für die eigene Arbeit gilt: Wenn sich wenig ändert, muss jede Änderung hörbar und bewusst sein.
+
+**Spektralmusik und Klangflächen.** Ab den 1970ern bauten Komponisten wie Gérard Grisey und Tristan Murail Harmonien aus den Obertönen eines tiefen Tons. Schon vorher hatte Ligeti in „Atmosphères“ (1961) dichte Klangflächen aus vielen eng liegenden Stimmen geschrieben. Diese Musik denkt nicht in Melodie und Akkord, sondern in Farbe und Raum.
+
 ## Üben
 
 ```uebungen
@@ -56,6 +71,15 @@ titel: Eine Reihe und ihre Umkehrung
 text: Schreib eine eigene Zwölftonreihe in Vierteln (drei Takte, jeder Ton genau einmal). Lass danach ihre Umkehrung folgen (wieder zwölf Töne, drei Takte): Jedes Intervall der Reihe geht jetzt in die Gegenrichtung. Beginne die Umkehrung auf einem Ton deiner Wahl.
 tonart: 0
 pruefung: stilmerkmal zwoelfton, reihenform I, takte 6
+```
+
+```aufgabe
+titel: Ein Pattern über wechselndem Bass
+text: Die linke Hand ist vorgegeben: zwei Takte c, zwei Takte f. Schreib darüber in der rechten Hand ein Pattern von einem Takt in Achteln, das sich in allen vier Takten unverändert wiederholt. Wähle Töne, die über beiden Basstönen klingen, zum Beispiel a, c″ und e″: Über c wirkt das Muster wie a-Moll über C, über f wie Fmaj7.
+tonart: 0
+klavier: ja
+begleitung: C3:1 | C3:1 | F2:1 | F2:1
+pruefung: vollstaendig, stilmerkmal ostinato
 ```
 
 ## Freie Aufgabe
@@ -112,3 +136,21 @@ Hör Weberns „Variationen für Klavier“ op. 27 und danach Steve Reichs „Mu
 - Von a = 1 bis g = 7
 - Von c = 1 bis c = 12
 - Nach Halbtönen über dem Bass
+
+? Was ist die Primform eines Dur-Dreiklangs?
++ (037), dieselbe wie beim Moll-Dreiklang
+- (047)
+- (012)
+- (016)
+
+? Was passiert in einem additiven Prozess der Minimal Music?
++ Ein Muster wächst Ton für Ton
+- Zwei Muster verschieben sich gegeneinander
+- Die Reihe wird rückwärts gespielt
+- Jeder Ton erklingt nur einmal
+
+? Woraus bauen Spektralkomponisten ihre Harmonien?
++ Aus den Obertönen eines tiefen Tons
+- Aus Zwölftonreihen
+- Aus Kirchentonarten
+- Aus Generalbass-Ziffern

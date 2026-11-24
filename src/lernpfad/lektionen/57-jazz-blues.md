@@ -33,6 +33,16 @@ tempo: 120
 A4:4[F7] C5 Eb5 C5 | D5:4[Bb7] F5 Ab5:2 | A4:4[F7] C5 F5:2 | Eb5:2[Cm7] Eb5:2[F7] | D5:4[Bb7] F5 Ab5 F5 | D5:2[Bdim7] F5:2 | C5:1[F7] | C5:2[D7] F#5:2 | Bb4:2[Gm7] D5:2 | E5:2[C7] G5:2 | F5:2[F7] F#5:2[D7] | F5:2[Gm7] E5:2[C7]
 ```
 
+## Vertiefen
+
+**Der Moll-Blues.** Neben dem Dur-Blues gibt es den Blues in Moll, etwa in c-Moll: Cm7 | Cm7 | Cm7 | Cm7 | Fm7 | Fm7 | Cm7 | Cm7 | Abmaj7 (oder Dm7b5) | G7 | Cm7 | G7. Er klingt dunkler und ernster, berühmte Beispiele sind John Coltranes „Mr. P.C.“ und „Equinox“.
+
+**Blue Notes.** Die kleine Terz über einem Dur-Akkord (as über F7), die verminderte Quinte (h über F7) und die kleine Septime (es) sind die **Blue Notes**. In der Melodie reibt sich die kleine Terz absichtlich mit der großen Terz in der Begleitung. Das ist kein Fehler, sondern der Kern des Blues-Klangs. Oft gleitet sie mit einem kleinen Vorschlag zur großen Terz.
+
+**Die AABA-Form genauer.** Ein 32-taktiger Standard hat vier Teile zu je acht Takten. A wird dreimal gespielt, oft mit leicht verändertem Schluss: Das erste A endet offen (Turnaround), das letzte schließt mit einer Kadenz. Die **Bridge** (B) wechselt meist die Tonart, etwa in die Subdominante, und bringt den Kontrast. Beispiele sind „I Got Rhythm“, „Satin Doll“ und „Honeysuckle Rose“.
+
+**Der Turnaround als Baustein.** I – VI7 – II – V führt immer zurück zum Anfang. In Bb-Dur heißt er Bbmaj7 – G7 – Cm7 – F7. In den Rhythm Changes erklingt er in den A-Teilen gleich zweimal hintereinander. Varianten ersetzen VI7 durch #Idim7 oder bIII7, aber der Weg zurück zur I bleibt.
+
 ## Üben
 
 ```uebungen
@@ -47,6 +57,14 @@ text: Schreib über die Melodie die Akkorde des Jazz-Blues in F, wie in der Tabe
 tonart: -1
 leadsheet: A4:4 C5 Eb5 C5 | D5:4 F5 Ab5:2 | A4:4 C5 F5:2 | Eb5:2 Eb5:2 | D5:4 F5 Ab5 F5 | D5:2 F5:2 | C5:1 | C5:2 F#5:2 | Bb4:2 D5:2 | E5:2 G5:2 | F5:2 F#5:2 | F5:2 E5:2
 pruefung: akkordsymbole 15, leadsheet-fehlerfrei, jazzmuster ii-v-i 2
+```
+
+```aufgabe
+titel: Ein Turnaround in F-Dur
+text: Schreib über die Melodie zweimal den Turnaround in F-Dur, je zwei Akkorde pro Takt: Fmaj7 D7 | Gm7 C7 | Fmaj7 D7 | Gm7 C7. Takt 5 schließt mit Fmaj7. Jeder Melodieton ist ein Akkordton; die App erkennt am Ende eine II–V–I.
+tonart: -1
+leadsheet: A4:2 F#4:2 | Bb4:2 E4:2 | A4:2 C5:2 | Bb4:2 G4:2 | F4:1
+pruefung: akkordsymbole 9, leadsheet-fehlerfrei, jazzmuster ii-v-i 1
 ```
 
 ## Freie Aufgabe
@@ -90,3 +108,21 @@ Hör Charlie Parkers „Billie's Bounce“ und „Now's the Time“: beide Blues
 - 12 Takte
 - 16 Takte
 - 24 Takte
+
+? Welcher Ton ist über F7 eine Blue Note?
++ As, die kleine Terz
+- A, die große Terz
+- C, die Quinte
+- F, der Grundton
+
+? Wie lang ist ein Standard in AABA-Form meist?
++ 32 Takte, vier Teile zu je acht Takten
+- 12 Takte
+- 16 Takte
+- 64 Takte
+
+? Wie heißt der Turnaround in Bb-Dur?
++ Bbmaj7 – G7 – Cm7 – F7
+- Cm7 – F7 – Bbmaj7
+- Bb7 – Eb7 – F7
+- Bbmaj7 – Ebmaj7 – Fmaj7
