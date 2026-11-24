@@ -40,6 +40,20 @@ T: C4:2 F4
 B: C3:2 D3
 ```
 
+## Vertiefen
+
+**Lagen.** Nach dem Ton im Sopran unterscheidet man **Oktavlage** (Grundton oben), **Terzlage** und **Quintlage**. Die Lage bestimmt, wohin sich die Melodie mit dem harmonischen Band bewegen kann. Willst du eine Melodie hoch führen, wähle zu Beginn die Terz- oder Oktavlage. Liegen die drei Oberstimmen dicht beieinander, ist es **enge Lage**, mit Platz für einen Akkordton dazwischen **weite Lage**.
+
+**Was verdoppeln?** In Grundstellung den Grundton. In Sextakkorden eher Grundton oder Quinte, nicht den Basston. Niemals den Leitton und niemals die Septime: Beide haben eine feste Auflösung, und zwei Stimmen, die denselben Weg gehen, ergeben Oktavparallelen.
+
+**Weitere Regeln, die gute Komponisten beachten:**
+- **Verdeckte Quinten und Oktaven** in den Außenstimmen: Sopran und Bass gehen in gleicher Richtung in eine Quinte oder Oktave. Erlaubt ist das, wenn der Sopran einen Schritt macht, besonders bei D – T. Springen beide Stimmen, klingt es fast wie eine echte Parallele.
+- **Gegenparallelen:** Quinte zu Quinte oder Oktave zu Oktave in Gegenbewegung (z. B. Bass c–G, Sopran g′–d″) gilt im strengen Satz ebenfalls als Fehler.
+- **Sprünge** in Oberstimmen: höchstens eine Sexte, keine übermäßigen Intervalle. Der Bass darf Oktaven springen.
+- **Außenstimmensatz zuerst:** Schreib vor Alt und Tenor die Linie von Sopran und Bass. Abwechslung zwischen Gegenbewegung, Seitenbewegung (eine Stimme liegt) und paralleler Bewegung in Terzen oder Sexten macht den Satz lebendig.
+
+**Warum keine Parallelen?** Quinten und Oktaven verschmelzen so stark, dass zwei Stimmen in Parallelen klingen wie eine einzige. Der Satz verliert dann eine Stimme. Das Verbot stammt aus der Vokalpolyphonie der Renaissance und gilt im klassischen Satz bis heute. In der Popmusik, im Impressionismus und in Powerchords sind Parallelen dagegen ein gewolltes Klangmittel.
+
 ## Üben
 
 Finde in Akkordverbindungen den Fehler: Quintparallele, Oktavparallele, ein falsch aufgelöster Leitton, oder alles richtig.
@@ -57,6 +71,15 @@ tonart: 0
 satz: ja
 bass: C3:4 F3 G3 C3 | A2 F2 G2 C3
 pruefung: vierstimmig, fehlerfrei, ganzschluss
+```
+
+```aufgabe
+titel: Akkordverbindungen in F-Dur
+text: Der Bass ist vorgegeben: zwei Takte in F-Dur mit T – S – D – T und Tp – S – D – T. Schreib Sopran, Alt und Tenor dazu. Beginne in Quintlage (Sopran c″, Alt a′, Tenor f′). Wo zwei Akkorde gemeinsame Töne haben, bleiben sie liegen. Bei S – D führst du die Oberstimmen abwärts gegen den steigenden Bass.
+tonart: -1
+satz: ja
+bass: F3:4 Bb2 C3 F3 | D3 Bb2 C3 F3
+pruefung: vierstimmig, fehlerfrei, funktionen T S D T Tp S D T, ganzschluss
 ```
 
 ## Freie Aufgabe
@@ -101,3 +124,28 @@ Nimm deinen Satz aus der Aufgabe und schreib ihn noch einmal in weiter Lage: zwi
 - Sie sind schwer zu singen
 - Sie klingen zu dissonant
 - Sie passen nicht in den Stimmumfang
+
+? Was ist die Oktavlage?
++ Der Grundton liegt im Sopran
+- Alle vier Stimmen singen in derselben Oktave
+- Sopran und Bass bilden eine Oktave mit dem Alt
+- Der Akkord umfasst genau eine Oktave
+
+? Welcher Ton darf im vierstimmigen Satz nie verdoppelt werden?
++ Der Leitton
+- Der Grundton
+- Die Quinte
+- Der Basston in Grundstellung
+
+? Wann sind verdeckte Oktaven in den Außenstimmen erlaubt?
++ Wenn der Sopran einen Schritt macht
+- Immer, sie sind kein Fehler
+- Nur, wenn beide Stimmen springen
+- Nie
+= Besonders bei D – T, wenn der Sopran vom Leitton zum Grundton steigt.
+
+? Warum vermeidet man Quint- und Oktavparallelen?
++ Die Stimmen verschmelzen und der Satz verliert eine Stimme
+- Weil sie zu laut klingen
+- Weil sie schwer zu singen sind
+- Weil sie nur in Moll klingen

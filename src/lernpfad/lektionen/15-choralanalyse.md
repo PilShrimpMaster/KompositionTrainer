@@ -13,7 +13,7 @@ Johann Sebastian Bach hat rund 400 vierstimmige Choralsätze hinterlassen. Sie s
 3. **Funktionen** Akkord für Akkord, mit Umkehrungen.
 4. **Stimmführung**: Wo bleiben Töne liegen, wo laufen Durchgangsnoten, wie bewegen sich Sopran und Bass zueinander?
 
-Die folgenden Beispiele sind Choralzeilen im Stil Bachs, die für den KompositionsTrainer geschrieben wurden. Echte Bach-Choräle kannst du analysieren, sobald der MusicXML-Import da ist.
+Die folgenden Beispiele sind Choralzeilen im Stil Bachs, die für den KompositionsTrainer geschrieben wurden. Wie du echte Bach-Choräle über den MusicXML-Import lädst, steht weiter unten unter „Vertiefen“.
 
 ```satz
 titel: Choralzeilen in G-Dur
@@ -27,11 +27,11 @@ T: D4:4 D4 B3 D4 | D4 D4 D4:2 | D4:4 E4 D4 E4 | D4 D4 B3:2
 B: G3:4 D3 E3 D3 | G3 B2 D3:2 | G3:4 C3 B2 A2 | D3 D3 G2:2
 ```
 
-Die erste Zeile endet mit einem **Halbschluss** auf D-Dur, die zweite mit einem **Ganzschluss**. Achte auf den Bass: Er läuft im zweiten Teil stufenweise abwärts (G – C – H – A) und bereitet so die Kadenz vor.
+Die erste Zeile endet mit einem **Halbschluss** auf D-Dur, die zweite mit einem **Ganzschluss**. Achte auf den Bass: Er springt in der zweiten Zeile zur Subdominante C und läuft dann stufenweise abwärts (C – H – A) zur Dominante D. So bereitet er die Kadenz vor.
 
 ## Hören
 
-Ein Choral in Moll. Bach beendet Mollchoräle fast immer mit einem Durakkord, der **pikardischen Terz**. Die Analyse zeigt den Schlussakkord deshalb als T statt t.
+Ein Choral in Moll. Bach beendet Mollchoräle sehr oft mit einem Durakkord, der **pikardischen Terz**. Die Analyse zeigt den Schlussakkord deshalb als T statt t.
 
 ```satz
 titel: Zeile in a-Moll mit pikardischer Terz
@@ -42,6 +42,19 @@ A: A4:4 A4 G#4 A4
 T: E4:4 F4 E4 E4
 B: A2:4 D3 E3 A2
 ```
+
+## Vertiefen
+
+**Was Bachs Choräle so lebendig macht:**
+- **Durchgangsnoten in Achteln** zwischen zwei Akkordtönen, besonders im Alt, Tenor und Bass. Sie füllen Terzsprünge aus und lassen die Mittelstimmen fließen.
+- **Vorhalte an den Kadenzen**, besonders der Quartvorhalt 4–3 über der Dominante: Der Grundton der Tonika wird in die Dominante hinübergehalten und löst sich dann abwärts zum Leitton auf.
+- **Zwischendominanten** fast in jeder Zeile, oft zur Dominante oder zur Tp.
+- **Ein melodischer Bass**, der oft eine eigene Gegenstimme zum Sopran bildet, mit Sextakkorden statt reiner Grundtöne.
+- **Kadenzen in vielen Tonarten:** In einem Choral mit sechs Zeilen kommen leicht vier verschiedene Zieltonarten vor.
+
+**Wie du echte Bach-Choräle analysierst:** Über den MusicXML-Import im Editor kannst du Choräle aus freien Notenausgaben oder aus MuseScore laden. Die Prüfung im Editor zeigt dir die Funktionen. Vergleiche dann, wo Bach selbst gegen die Lehrbuchregeln verstößt, und überlege, warum: Meist steckt eine Textausdeutung oder eine besonders gute Linie dahinter.
+
+**Ein Analyseprotokoll** hilft beim Lernen. Notiere pro Zeile: Zieltonart, Schlussart, auffällige Akkorde (Zwischendominanten, Septakkorde, Trugschlüsse) und eine Beobachtung zur Stimmführung. Nach zehn Chorälen kennst du Bachs Vokabular.
 
 ## Üben
 
@@ -61,6 +74,16 @@ satz: ja
 sopran: B4:4 A4 G4 A4 | B4 B4 A4:2^
 bass: G3:4 D3 E3 D3 | G3 B2 D3:2
 pruefung: vierstimmig, fehlerfrei
+```
+
+```aufgabe
+titel: Zweite Choralzeile ergänzen
+text: Eine weitere Zeile in G-Dur: Sopran und Bass sind vorgegeben. Analysiere zuerst: T₃ – S – T – D | T – D – T. Schreib dann Alt und Tenor. Achtung beim letzten Akkord: Der Leitton im Alt geht aufwärts zum G, darum fehlt dort die Quinte.
+tonart: 1
+satz: ja
+sopran: D5:4 C5 B4 A4 | B4 A4 G4:2^
+bass: B2:4 C3 G2 D3 | G2 D3 G2:2
+pruefung: vierstimmig, fehlerfrei, ganzschluss
 ```
 
 ## Freie Aufgabe
@@ -98,3 +121,21 @@ pruefung: vierstimmig, fehlerfrei
 - Ganzschluss
 - Trugschluss
 - Plagalschluss
+
+? Was ist ein Quartvorhalt 4–3?
++ Statt der Terz erklingt erst die Quarte über dem Bass und löst sich dann abwärts zur Terz auf
+- Ein Akkord aus Quarten
+- Ein Sprung von der Quarte zur Terz im Bass
+- Ein Quartsextakkord vor der Dominante
+
+? Wozu dienen Durchgangsnoten in Bachs Chorälen?
++ Sie füllen Sprünge zwischen Akkordtönen aus und lassen die Stimmen fließen
+- Sie ersetzen den Schlussakkord
+- Sie markieren das Zeilenende
+- Sie verdoppeln den Leitton
+
+? Was notierst du in einem Analyseprotokoll pro Choralzeile?
++ Zieltonart, Schlussart, auffällige Akkorde und eine Beobachtung zur Stimmführung
+- Nur die Anzahl der Noten
+- Die Tempoangabe
+- Nur den Text

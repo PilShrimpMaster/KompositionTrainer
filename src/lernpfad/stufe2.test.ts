@@ -23,6 +23,20 @@ const LOESUNGEN: Record<string, [string, string, string, string]> = {
     'C4:4 C4 A3 C4 | C4 D4 C4:2 | A3:4 Bb3 G3 G3 | A3 C4 A3:2',
     'F3:4 C3 F3 C3 | F3 Bb2 F3:2 | F3:4 Bb2 C3 C3 | F3 C3 F3:2',
   ],
+  'Kadenz in e-Moll': ['B4:4 C5 B4 B4', 'E4:4 E4 D#4 E4', 'G3:4 A3 F#3 G3', 'E2:4 A2 B2 E2'],
+  'Akkordverbindungen in F-Dur': ['C5:4 D5 C5 C5 | D5 D5 C5 C5', 'A4:4 Bb4 G4 A4 | A4 Bb4 G4 A4', 'F4:4 F4 E4 F4 | F4 F4 E4 F4', 'F3:4 Bb2 C3 F3 | D3 Bb2 C3 F3'],
+  'Stufenbass mit Sextakkord': ['C5:4 A4 C5 C5 | B4:2 C5:2', 'G4:4 F4 G4 A4 | G4:2 G4:2', 'E4:4 D4 C4 F4 | D4:2 E4:2', 'C3:4 D3 E3 F3 | G3:2 C3:2'],
+  'Sekundakkord auflösen': ['C5:4 B4 C5 A4 | G4:2 G4:2', 'G4:4 G4 G4 F4 | D4:2 E4:2', 'E4:4 D4 C4 C4 | B3:2 C4:2', 'C3:4 F3 E3 F3 | G3:2 C3:2'],
+  'Zwischendominante in D-Dur': ['D5:4 B4 A#4 B4 | B4 A4 A4:2', 'A4:4 G4 F#4 F#4 | G4 E4 F#4:2', 'F#4:4 E4 C#4 D4 | D4 C#4 D4:2', 'D3:4 E3 F#3 B2 | G2 A2 D3:2'],
+  'Von C-Dur nach a-Moll': ['C5:4 A4 G#4 A4', 'G4:4 F4 E4 E4', 'E4:4 D4 B3 C4', 'C3:4 D3 E3 A2'],
+  'Zweite Textzeile': ['r:2 F#5:4 | E5:2 D5:4 | C#5:2 D5:4 | B4:2 A4:4', '', '', ''],
+  'Zweite Choralzeile ergänzen': ['D5:4 C5 B4 A4 | B4 A4 G4:2', 'G4:4 G4 G4 F#4 | G4 F#4 G4:2', 'D4:4 E4 D4 D4 | D4 D4 B3:2', 'B2:4 C3 G2 D3 | G2 D3 G2:2'],
+  'Choralsatz zur Melodie in G-Dur': [
+    'B4:4 A4 G4 A4 | B4 B4 A4:2 | D5:4 C5 B4 A4 | B4 A4 G4:2',
+    'G4:4 F#4 G4 F#4 | G4 F#4 F#4:2 | G4:4 G4 G4 F#4 | G4 F#4 G4:2',
+    'D4:4 D4 B3 D4 | D4 D4 D4:2 | D4:4 E4 D4 D4 | D4 D4 B3:2',
+    'G3:4 D3 E3 D3 | G3 B2 D3:2 | B2:4 C3 G2 D3 | G2 D3 G2:2',
+  ],
 };
 
 describe('Stufe 2', () => {
@@ -61,6 +75,8 @@ describe('Stufe 2', () => {
     expect(titel('Trugschluss und richtiger Schluss')).toBe('T S D Tp S D T');
     expect(titel('Kadenz mit Doppeldominante')).toBe('T DD D T');
     expect(titel('Zeile in a-Moll mit pikardischer Terz')).toBe('t s D T');
+    expect(titel('Kadenz in a-Moll')).toBe('t s D t');
+    expect(titel('Zwischendominante zur Tonikaparallele')).toBe('T Sp (D)Tp Tp S D T');
   });
 
   for (const a of alleAufgaben().filter((a) => a.vorgabe && !a.id.startsWith('s6-') && !a.id.startsWith('s7-'))) {

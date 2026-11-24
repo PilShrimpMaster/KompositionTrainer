@@ -38,6 +38,18 @@ B: G3:4 D3 E3 D3 | G3 B2 D3:2
 
 Sing die Sopranstimme des Beispiels mit Text. Merkst du, wie „Hell“, „klingt“, „Chor“ und „Saal“ auf den schweren Zählzeiten liegen? Sing dann einmal die Altstimme: Sie hat fast nur Sekundschritte.
 
+## Vertiefen
+
+**Umfang und Tessitur.** Der Umfang nennt die äußersten Töne einer Stimme, die **Tessitur** den Bereich, in dem sie sich die meiste Zeit aufhält. Ein Sopran kann ein a″ singen, aber eine Melodie, die ständig um e″ kreist, ermüdet jeden Chor. Laienchöre brauchen eher eine Terz weniger nach oben als die Grenzen der Prüfung.
+
+**Melismen.** Statt einer Note pro Silbe kann eine Silbe auch mehrere Noten bekommen, mit Bogen verbunden. Melismen setzt man auf wichtige Wörter und offene Vokale: „Gloria“, „Halleluja“, „Freude“. Zu viele Melismen machen den Text unverständlich.
+
+**Wort und Ton.** Gute Vokalmusik übersetzt den Sinn des Textes: Bei „aufwärts“ steigt die Melodie, bei „Tod“ oder „Schmerz“ stehen oft Dissonanzen oder Halbtonschritte abwärts. Diese **Textausdeutung** (Madrigalismus) kennen schon die Renaissance-Komponisten, Bach treibt sie in seinen Kantaten auf die Spitze.
+
+**Atmen.** Plane Atempausen am Ende von Sinneinheiten, nie mitten im Wort. Lange Phrasen ohne Pause sind für Bläser und Sänger gleichermaßen anstrengend. Du als Saxophonist kennst das: Was man nicht in einem Atem spielen kann, sollte auch ein Chor nicht singen müssen.
+
+**Prosodie-Fehler** erkennst du beim lauten Sprechen: Eine unbetonte Silbe auf der Eins (etwa „der“ oder die Endsilbe „-gen“) oder ein langer Ton auf einer Nebensilbe klingt sofort ungelenk. Sprich „auf-ge-GAN-gen“ einmal mit Betonung auf „ge“, dann hörst du das Problem.
+
 ## Üben
 
 Wiederhole die Satzfehler. Viele Fehler im Satz machen Stimmen auch schwer singbar.
@@ -55,6 +67,16 @@ tonart: 2
 takt: 3/4
 satz: ja
 liedtext: Der Mond ist auf- ge- gan- gen
+pruefung: liedtext, fehlerfrei
+```
+
+```aufgabe
+titel: Zweite Textzeile
+text: Setze die zweite Zeile von „Der Mond ist aufgegangen“ als Sopranmelodie in D-Dur im 3/4-Takt: „Die goldnen Sternlein prangen“. Wieder beginnt die Zeile mit einem Auftakt, die betonten Silben gold-, Stern- und pran- stehen auf der Eins. Lass die Zeile offen enden, z. B. auf der Dominante a′, denn das Gedicht geht weiter.
+tonart: 2
+takt: 3/4
+satz: ja
+liedtext: Die gold- nen Stern- lein pran- gen
 pruefung: liedtext, fehlerfrei
 ```
 
@@ -99,3 +121,21 @@ Wähle einen kurzen Text, zum Beispiel einen Zweizeiler aus einem Gedicht, das d
 - Auf i und ü
 - Auf Konsonanten
 - Das macht keinen Unterschied
+
+? Was ist die Tessitur einer Stimme?
++ Der Bereich, in dem sie sich die meiste Zeit aufhält
+- Der tiefste Ton
+- Die Zahl der Silben
+- Die Lautstärke
+
+? Was ist ein Melisma?
++ Mehrere Noten auf einer Silbe
+- Eine Silbe ohne Note
+- Eine Pause zum Atmen
+- Ein Ton auf jeder Zählzeit
+
+? Wie nennt man es, wenn die Musik den Sinn eines Wortes abbildet, z. B. eine steigende Linie bei „aufwärts“?
++ Textausdeutung oder Madrigalismus
+- Prosodie
+- Melisma
+- Generalbass
