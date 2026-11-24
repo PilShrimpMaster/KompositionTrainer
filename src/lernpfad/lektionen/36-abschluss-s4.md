@@ -19,6 +19,16 @@ Zum Abschluss der Stufe 4 schreibst du ein **Menuett mit Trio für Klavier**. Es
 
 Wenn dir die Begleitung noch schwerfällt: Schreib zuerst die Melodie aller 32 Takte, dann pro Takt einen Basston, und erst zum Schluss die Begleitmuster.
 
+## Vertiefen: Woran ein gutes Menuett scheitert
+
+- **Kein Kontrast im Trio.** Das Trio klingt wie eine Fortsetzung des Menuetts. Ändere mindestens zwei Dinge: Tonart, Lage, Begleitmuster, Rhythmus.
+- **Halbschluss ohne Gewicht.** Der Halbschluss in Takt 8 braucht einen langen Ton und eine klare Dominante im Bass, sonst hört man keine Gliederung.
+- **Vier gleiche Achttakter.** Wenn jeder Achttakter gleich gebaut ist, ermüdet das Ohr. Verwende in einem Teil eine Periode, im anderen einen Satz, oder bring im zweiten Teil eine Sequenz.
+- **Begleitung ohne Richtung.** Der Bass springt zwischen den Grundtönen hin und her. Nutze Sextakkorde, damit er Linien bildet.
+- **Keine Hemiole am Schluss.** Sie ist kein Muss, aber ein schönes, stiltypisches Mittel vor dem Ganzschluss.
+
+**Ein Arbeitsplan für 3 Stunden:** In der ersten Stunde den Plan und die Melodie des Menuetts, in der zweiten das Trio, in der dritten die Begleitung und die Prüfung. Eine Woche später mit frischen Ohren noch einmal durchhören und überarbeiten.
+
 ## Hören
 
 Zur Orientierung noch einmal das Übungsmenuett mit Trio. So einfach darf dein erstes Menuett sein.
@@ -45,7 +55,7 @@ pruefung: mindestens-takte 32, menuett-trio, vollstaendig, fehlerfrei
 
 ## Freie Aufgabe
 
-Speichere dein Menuett unter „Meine Stücke“. Schreib danach ein zweites in Moll, mit einem Trio in der Durparallele, und vergleiche den Charakter. Spiel das Menuett auf dem Saxophon (Melodie) mit einer Klavierbegleitung aus MuseScore.
+Speichere dein Menuett unter „Meine Stücke“. Schreib danach ein zweites in Moll, mit einem Trio in der Durparallele, und vergleiche den Charakter. Spiel die Melodie auf dem Altsaxophon zu einer Klavierbegleitung aus MuseScore. Denk daran, sie dafür eine große Sexte höher zu notieren (oder in MuseScore eine Altsaxophon-Stimme anzulegen, die das automatisch macht).
 
 ## Quiz
 
@@ -72,3 +82,15 @@ Speichere dein Menuett unter „Meine Stücke“. Schreib danach ein zweites in 
 - Gar nicht, das braucht ein Menuett nicht
 - Im Lexikon
 - In der Übung „Formen“
+
+? Was macht ein Trio zum Kontrast?
++ Mindestens zwei Änderungen, etwa Tonart, Lage, Begleitmuster oder Rhythmus
+- Es muss genau gleich klingen wie das Menuett
+- Es muss schneller sein
+- Es muss in einer anderen Taktart stehen
+
+? Was braucht ein Halbschluss in Takt 8, damit man ihn hört?
++ Einen langen Ton und eine klare Dominante im Bass
+- Eine Pause im ganzen Takt
+- Einen Wechsel der Tonart
+- Eine Fermate auf der Tonika

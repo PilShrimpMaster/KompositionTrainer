@@ -47,6 +47,22 @@ form: ja
 D5:4 G4:8 A4 B4 C5 | D5:4 G4 G4 | E5:4 C5:8 D5 E5 F#5 | G5:4 G4 G4 | C5:4 D5:8 C5 B4 A4 | B4:4 C5:8 B4 A4 G4 | F#4:4 G4:8 A4 B4 G4 | A4:2.
 ```
 
+## Vertiefen
+
+**Kadenzen machen die Form.** Was eine Periode von zwei beliebigen Viertaktern unterscheidet, ist die Abstufung der Schlüsse: Der Halbschluss in Takt 4 ist schwächer als der Ganzschluss in Takt 8. Endete der Vordersatz schon mit einem Ganzschluss, hätte man zwei unabhängige Gedanken. Endete der Nachsatz mit einem Halbschluss, bliebe die Frage offen.
+
+**Varianten der Periode:**
+- **Parallele Periode**: Der Nachsatz beginnt wie der Vordersatz (der Normalfall).
+- **Kontrastierende Periode**: Der Nachsatz beginnt mit neuem Material, die Kadenzen machen trotzdem Frage und Antwort.
+- **Modulierende Periode**: Der Nachsatz endet in der Dominanttonart, typisch als erster Teil eines Menuetts.
+- **Erweiterte Periode**: Vor dem Schluss wird eingeschoben, z. B. ein Trugschluss, nach dem die Kadenz wiederholt wird. Aus acht werden zehn Takte.
+
+**Der Satz im Detail.** Typisch ist die Taktgruppierung **2 + 2 + 1 + 1 + 2**: Grundgedanke, Wiederholung, dann Abspaltung in Eintaktern und die Kadenz. Die Fortspinnung beschleunigt also die Bewegung, die Harmonien wechseln schneller. Beethoven liebt den Satz, etwa am Beginn der Klaviersonate f-Moll op. 2 Nr. 1.
+
+**Hybride.** Viele Themen mischen beide Prinzipien: ein Vordersatz wie bei der Periode, dann eine Fortspinnung wie beim Satz. Lass dich davon nicht verwirren. Entscheidend ist, wo die Kadenzen stehen und ob der Anfang wiederkehrt.
+
+**Barock und Klassik.** Barocke Themen sind eher **Fortspinnungstypen** (Kopf, Sequenzen, Kadenz, siehe Invention), klassische eher Perioden und Sätze. Wenn du im Stil einer Epoche schreibst, passt du die Themenbildung an.
+
 ## Üben
 
 Erkenne Periode und Satz, und markiere in Werkausschnitten, wo der Nachsatz beginnt.
@@ -70,6 +86,14 @@ titel: Ein Satz
 text: Schreib einen achttaktigen Satz. Takt 1–2 bringen den Grundgedanken, Takt 3–4 wiederholen ihn auf einer anderen Stufe (gleicher Rhythmus, gleiche Tonschritte). Takt 5–8 spinnen fort, mit kürzeren Notenwerten, und enden auf dem Grundton.
 tonart: 0
 pruefung: takte 8, satzform, ganzschluss-takt 8
+```
+
+```aufgabe
+titel: Periode in Moll
+text: Schreib eine achttaktige Periode in a-Moll im 4/4-Takt. Der Vordersatz endet mit einem Halbschluss (z. B. auf h über der Dominante E-Dur), der Nachsatz beginnt wie der Vordersatz und endet mit gis–a im Ganzschluss.
+tonart: 0 moll
+takt: 4/4
+pruefung: takte 8, periode, halbschluss 4, ganzschluss-takt 8, schluss-lang
 ```
 
 ## Freie Aufgabe
@@ -113,3 +137,21 @@ Such in Mozarts Klaviersonaten (zum Beispiel KV 331, erster Satz, oder KV 545) d
 - Bach und Händel
 - Fux und Rameau
 - Mozart und Haydn
+
+? Was ist eine kontrastierende Periode?
++ Der Nachsatz beginnt mit neuem Material, die Kadenzen bleiben Frage und Antwort
+- Vorder- und Nachsatz stehen in verschiedenen Taktarten
+- Eine Periode ohne Kadenzen
+- Eine Periode in Moll
+
+? Welche Taktgruppierung ist typisch für den Satz?
++ 2 + 2 + 1 + 1 + 2
+- 4 + 4
+- 3 + 3 + 2
+- 1 + 1 + 1 + 1 + 4
+
+? Woran entscheidest du bei einem Hybrid, wie er gebaut ist?
++ An den Kadenzen und daran, ob der Anfang wiederkehrt
+- Am Tempo
+- An der Tonart
+- An der Lautstärke

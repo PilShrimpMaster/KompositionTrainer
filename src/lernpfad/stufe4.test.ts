@@ -10,6 +10,15 @@ import { pruefe } from './pruefung';
 
 /** Musterlösungen: Melodie, oder im Klaviersatz „Melodie || Begleitung“ */
 const LOESUNGEN: Record<string, string> = {
+  'Melodie mit Bogen in Moll': 'A4:4 C5 B4 A4 | E5:2 D5:2 | C5:4 D5 E5 C5 | B4:1 | C5:4 E5 D5 F5 | G5:2 F5:4 E5 | D5:4 C5 B4 G#4 | A4:1',
+  'Periode in Moll': 'C5:4 A4 B4 C5 | D5:2 E5:2 | F5:4 E5 D5 C5 | B4:1 | C5:4 A4 B4 C5 | D5:2 E5:2 | D5:4 C5 B4 G#4 | A4:1',
+  'Alberti-Bass zu einer Melodie': 'E5:2 G5:2 | F5:4 D5 B4:2 | A4:4 C5 F5:2 | D5:2 C5:2 || C3:8 G3 E3 G3 C3 G3 E3 G3 | G2:8 D3 B2 D3 G2 D3 B2 D3 | F2:8 C3 A2 C3 F2 C3 A2 C3 | G2:8 D3 B2 D3 C3 G3 E3 G3',
+  'Liedform im Dreivierteltakt': 'G4:4 B4 D5 | C5:4 A4 F#4 | G4:4 B4 A4 | G4:2. | D5:4 D5 D5 | E5:4 D5 C5 | B4:4 C5 A4 | D5:2. | G4:4 B4 D5 | C5:4 A4 F#4 | G4:4 B4 A4 | G4:2.',
+  'Menuett mit Walzerbass in F-Dur': 'A4:4 F4 C4 | Bb4:4 G4 E4 | F4:4 A4 C5 | D5:2 Bb4:4 | C5:4 A4 F4 | Bb4:4 G4 E4 | A4:4 F4 D4 | C4:2. | C5:4 Bb4 A4 | Bb4:4 A4 G4 | A4:4 G4 F4 | G4:2. | A4:4 F4 C4 | Bb4:4 G4 E4 | E4:4 G4 C5 | F4:2. || F2:4 C3 A3 | C3:4 G3 Bb3 | F2:4 C3 A3 | Bb2:4 D3 F3 | F2:4 C3 A3 | C3:4 G3 Bb3 | D3:4 A3 F3 | C3:4 G3 E3 | F2:4 C3 A3 | G2:4 D3 Bb3 | F2:4 C3 A3 | C3:4 G3 E3 | F2:4 C3 A3 | C3:4 G3 Bb3 | C3:4 G3 E3 | F2:2.',
+  'Mollvariation': 'C4:8 Eb4 C4 D4 G4 F4 G4 Ab4 | Ab4:4 Ab4 G4:2 | F4:8 Ab4 F4 G4 Eb4 F4 Eb4 D4 | D4:8 F4 D4 B3 C4:2',
+  'Seitenthema in der Dominante': 'B4:2 D5:4 B4 | C5:2 A4:2 | A4:4 C5 A4 F#4 | G4:1 || G2:8 D3 B2 D3 G2 D3 B2 D3 | A2:8 E3 C3 E3 A2 E3 C3 E3 | D3:8 A3 F#3 A3 D3 A3 F#3 A3 | G2:8 D3 B2 D3 G2:2',
+  'Bluesmelodie mit Frage und Antwort': 'C5:4. Eb5:8 E5:4 C5:4 | G4:2 r:2 | r:1 | r:1 | C5:4. Eb5:8 F5:4 C5:4 | A4:2 r:2 | r:1 | r:1 | D5:4 F5:4 D5:4 B4:4 | A4:4 C5:4 A4:2 | G4:4 Bb4:8 G4:8 E4:4 C4:4 | C4:1 || C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | G2:8 B2 D3 E3 F3 E3 D3 B2 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:1',
+  'Eine Stimme für Horn in F': 'D4:4 G4 B4 D5 | C5:2 A4:2 | B4:4 G4 A4 F#4 | G4:1',
   'Ein Thema mit Alberti-Bass':
     'E5:2 G5:4 E5:4 | D5:4. E5:16 F5:16 E5:2 | A5:4 G5 F5 D5 | C5:1 || C3:8 G3 E3 G3 C3 G3 E3 G3 | B2:8 G3 D3 G3 C3 G3 E3 G3 | F2:8 C3 A2 C3 G2 D3 B2 D3 | C3:8 G3 E3 G3 C3:2',
   'Melodie mit Bogen':

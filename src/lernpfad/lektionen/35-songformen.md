@@ -42,6 +42,29 @@ oben: G4:8 Bb4 C5 Eb5 C5:4 Bb4:4 | G4:2 r:2 | G4:8 Bb4 C5 Eb5 C5:4 Bb4:4 | C5:2 
 unten: C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | G2:8 B2 D3 E3 F3 E3 D3 B2 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:1
 ```
 
+## Vertiefen
+
+**Ein typischer Popsong-Ablauf:**
+
+| Teil | Takte | Aufgabe |
+| --- | --- | --- |
+| Intro | 4–8 | Groove und Klangwelt vorstellen |
+| Strophe 1 | 8–16 | erzählen, eher tiefe Lage, sparsam |
+| Pre-Chorus | 4–8 | Spannung, oft auf der Subdominante oder Dominante |
+| Refrain | 8 | Hook, höchste Energie, höhere Lage |
+| Strophe 2, Pre-Chorus, Refrain | | wie oben, oft mit kleinen Änderungen |
+| Bridge | 8 | Kontrast: neue Akkorde, neue Melodie |
+| Refrain (×2) | 16 | Höhepunkt, oft eine Tonart höher („Truck Driver’s Modulation“) |
+| Outro | 4–8 | ausklingen |
+
+**Hook.** Ein kurzer, sofort wiedererkennbarer Gedanke, meist im Refrain, oft mit dem Titel des Songs. Hooks arbeiten mit Wiederholung, einem markanten Rhythmus und einer einfachen Kontur, genau wie ein klassisches Motiv.
+
+**Blues-Varianten.** Neben dem 12-Takt-Blues in Dur gibt es den **Mollblues** (i7 – iv7 – V7) und den **8-Takt-Blues**. Im Jazzblues werden die Takte 9 und 10 oft zu einer **II–V-Verbindung** (Dm7 – G7), und in Takt 4 steht eine Zwischendominante zur IV (C7 in C, Septime b).
+
+**Call and Response.** Eine Phrase und ihre Antwort, oft von verschiedenen Stimmen: Sänger und Band, Solist und Chor. Die Wurzeln liegen in afrikanischen Musiktraditionen und in den Worksongs und Spirituals der Afroamerikaner. Im Blues antwortet das Instrument in den Pausen der Gesangsstimme.
+
+**Rhythm Changes.** Neben dem Blues ist die Akkordfolge von „I Got Rhythm“ (AABA, 32 Takte) das zweite große Gerüst des Jazz. Hunderte Stücke stehen darauf.
+
 ## Üben
 
 ```uebungen
@@ -59,9 +82,18 @@ melodie: G4:8 Bb4 C5 Eb5 C5:4 Bb4:4 | G4:2 r:2 | G4:8 Bb4 C5 Eb5 C5:4 Bb4:4 | C5
 pruefung: vollstaendig, begleitung-noten 48, blues
 ```
 
+```aufgabe
+titel: Bluesmelodie mit Frage und Antwort
+text: Der Boogie-Bass in C ist vorgegeben. Schreib eine Melodie im Schema A A B: Takt 1–2 eine Phrase über C⁷, Takt 3–4 Pause (dort antwortet in Gedanken ein Instrument), Takt 5–6 dieselbe Phrase über F⁷, Takt 7–8 Pause, Takt 9–12 die Antwort über G⁷, F⁷ und C⁷. Benutze die Blue Notes es und b.
+tonart: 0
+klavier: ja
+begleitung: C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | G2:8 B2 D3 E3 F3 E3 D3 B2 | F2:8 A2 C3 D3 Eb3 D3 C3 A2 | C3:8 E3 G3 A3 Bb3 A3 G3 E3 | C3:1
+pruefung: vollstaendig, blues
+```
+
 ## Freie Aufgabe
 
-Nimm einen Song, den du gern hörst, und schreib seine Form auf: Intro, Strophe, Pre-Chorus, Refrain, Bridge, Outro, mit Taktzahlen. Vergleiche mit einem Jazzstandard in AABA (etwa „I Got Rhythm“ oder „Blue Moon“). Am Saxophon kannst du über das Bluesschema improvisieren: Die Blues-Tonleiter c–es–f–ges–g–b passt über alle drei Akkorde.
+Nimm einen Song, den du gern hörst, und schreib seine Form auf: Intro, Strophe, Pre-Chorus, Refrain, Bridge, Outro, mit Taktzahlen. Vergleiche mit einem Jazzstandard in AABA (etwa „I Got Rhythm“ oder „Blue Moon“). Am Saxophon kannst du über das Bluesschema improvisieren: Die Blues-Tonleiter c–es–f–ges–g–b (klingend) passt über alle drei Akkorde. Auf dem Altsaxophon greifst du dafür notiert a–c–d–es–e–g, eine große Sexte höher.
 
 ## Quiz
 
@@ -100,3 +132,21 @@ Nimm einen Song, den du gern hörst, und schreib seine Form auf: Intro, Strophe,
 - Der erste Takt
 - Die Hookline
 - Das Schlussfade-out
+
+? Was ist eine Hook?
++ Ein kurzer, sofort wiedererkennbarer Gedanke, meist im Refrain
+- Der letzte Akkord eines Songs
+- Die Bridge
+- Ein Schlagzeugfill
+
+? Was passiert im Jazzblues oft in Takt 9 und 10?
++ Eine II–V-Verbindung, z. B. Dm7 – G7
+- Ein Wechsel nach Moll
+- Eine Generalpause
+- Ein Taktwechsel nach 3/4
+
+? Was bedeutet Call and Response?
++ Eine Phrase und ihre Antwort, oft von verschiedenen Stimmen
+- Zwei Stimmen in parallelen Oktaven
+- Ein Wechsel zwischen Dur und Moll
+- Ein Refrain, der zweimal kommt
