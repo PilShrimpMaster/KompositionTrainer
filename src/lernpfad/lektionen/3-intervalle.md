@@ -40,6 +40,45 @@ klang: nacheinander
 C4 F4 | C4 G4 | C4 E4 | C4 B4
 ```
 
+## Vertiefen
+
+**Umkehrung von Intervallen.** Legt man den unteren Ton eine Oktave nach oben, entsteht das Komplementärintervall. Die Nummern ergeben zusammen immer 9 (Terz wird Sexte, Sekunde wird Septime, Quarte wird Quinte), und die Größe kippt: groß wird klein, klein wird groß, übermäßig wird vermindert, rein bleibt rein. Kennst du die kleine Terz A–C, weißt du sofort, dass C–A eine große Sexte ist.
+
+**Vermindert und übermäßig.** Ein reines Intervall wird um einen Halbton größer übermäßig, kleiner vermindert. Ein großes Intervall wird um einen Halbton größer übermäßig, ein kleines um einen Halbton kleiner vermindert. Wichtige Beispiele: Der Tritonus F–H ist eine übermäßige Quarte, H–F eine verminderte Quinte. Die übermäßige Sekunde F–Gis kommt in harmonischem Moll vor, die verminderte Septime Gis–F in seinem verminderten Septakkord.
+
+**Über die Oktave hinaus** zählt man weiter: None (9 = Oktave + Sekunde), Dezime (10 = Oktave + Terz), Undezime (11) und Duodezime (12). Im Satz verhalten sich diese weiten Intervalle meist wie ihr kleiner Verwandter, die Dezime z. B. wie eine Terz.
+
+**Konsonanz und Dissonanz** sind die Grundlage jeder Satzlehre:
+
+| Gruppe | Intervalle |
+| --- | --- |
+| vollkommene Konsonanzen | Prime, Oktave, Quinte |
+| unvollkommene Konsonanzen | große und kleine Terz, große und kleine Sexte |
+| Sonderfall | reine Quarte: konsonant zwischen Oberstimmen, dissonant über dem Bass |
+| Dissonanzen | Sekunden, Septimen, alle übermäßigen und verminderten Intervalle |
+
+**Liedanfänge als Gedächtnisstütze** (aufwärts, wenn nicht anders angegeben):
+
+| Intervall | Liedanfang |
+| --- | --- |
+| kleine Sekunde | „Für Elise“ (abwärts e–dis) |
+| große Sekunde | „Alle meine Entchen“ |
+| kleine Terz | „Kuckuck, Kuckuck“ (abwärts) |
+| große Terz | „Oh When the Saints“ |
+| reine Quarte | „O Tannenbaum“ |
+| Tritonus | „Maria“ aus der West Side Story |
+| reine Quinte | „Morgen kommt der Weihnachtsmann“ |
+| große Sexte | „My Bonnie Is Over the Ocean“ |
+| kleine Septime | „Somewhere“ aus der West Side Story |
+| Oktave | „Somewhere Over the Rainbow“ |
+
+```akkorde
+klang: nacheinander
+A3 C4 | C4 A4 | F4 B4 | B4 F5 | E4 C5 | C4 E5
+```
+
+Hier hörst du kleine Terz und große Sexte, übermäßige Quarte und verminderte Quinte (zwei Gesichter des Tritonus), kleine Sexte und Dezime.
+
 ## Üben
 
 Zuerst siehst du die Intervalle, dann hörst du sie. Bei den Hörübungen hilft dir nach jeder Antwort ein passender Liedanfang.
@@ -56,6 +95,14 @@ text: Schreibe eine Melodie aus mindestens 12 Noten in C-Dur, die nur Sekundschr
 tonart: 0
 takt: 4/4
 pruefung: noten 12, sprung-max 3, leitereigen
+```
+
+```aufgabe
+titel: Terzenkette
+text: Schreibe in C-Dur eine Kette aus mindestens acht Noten, in der jeder Ton eine Terz über oder unter dem vorigen liegt, z. B. c′–e′–g′–e′–c′–a–c′–e′. Bleib in der Tonart und höre, wie aus den Terzen Dreiklänge entstehen.
+tonart: 0
+takt: 4/4
+pruefung: noten 8, nur-terzen, leitereigen
 ```
 
 ## Freie Aufgabe
@@ -109,3 +156,30 @@ Schreibe über dem Ton c′ nacheinander alle Intervalle von der Prime bis zur O
 - a′
 - c″
 = F, G, A, B: Mit H wären es sechs Halbtöne, also ein Tritonus.
+
+? Welches Intervall entsteht, wenn man eine große Terz umkehrt?
++ kleine Sexte
+- große Sexte
+- kleine Terz
+- reine Quarte
+= Die Nummern ergeben zusammen 9, und groß wird klein.
+
+? Welches Intervall ist H–F?
++ verminderte Quinte
+- reine Quinte
+- übermäßige Quarte
+- kleine Sexte
+= H, C, D, E, F sind fünf Stammtöne, mit sechs Halbtönen ist die Quinte vermindert. F–H wäre die übermäßige Quarte.
+
+? Welche Intervalle sind vollkommene Konsonanzen?
++ Prime, Quinte und Oktave
+- Terz und Sexte
+- Quarte und Septime
+- Sekunde und None
+= Terzen und Sexten sind unvollkommene Konsonanzen, die Quarte ist ein Sonderfall.
+
+? Wie heißt das Intervall Oktave plus Terz?
++ Dezime
+- None
+- Undezime
+- Duodezime
