@@ -24,11 +24,11 @@ Jede Dur-Tonart hat eine **Paralleltonart** in Moll mit denselben Vorzeichen. Ih
 
 ## Hören
 
-Benachbarte Tonarten im Quintenzirkel klingen verwandt, weil sie fast alle Töne teilen. Hör dir die drei Tonleitern an: F-Dur, C-Dur und G-Dur unterscheiden sich jeweils nur in einem Ton.
+Benachbarte Tonarten im Quintenzirkel klingen verwandt, weil sie fast alle Töne teilen. Hör dir die drei Tonleitern an: F-Dur, C-Dur und G-Dur unterscheiden sich jeweils nur in einem Ton (B, H, Fis).
 
 ```noten
 titel: F-Dur, C-Dur, G-Dur
-C4:8 D4 E4 F4 G4 A4 Bb4 C5 | C4:8 D4 E4 F4 G4 A4 B4 C5 | C4:8 D4 E4 F#4 G4 A4 B4 C5
+F4:8 G4 A4 Bb4 C5 D5 E5 F5 | C4:8 D4 E4 F4 G4 A4 B4 C5 | G4:8 A4 B4 C5 D5 E5 F#5 G5
 ```
 
 Und hier eine Tonart und ihre Paralleltonart mit denselben Tönen, aber anderem Zentrum:
@@ -36,6 +36,24 @@ Und hier eine Tonart und ihre Paralleltonart mit denselben Tönen, aber anderem 
 ```akkorde
 C4 E4 G4 | A3 C4 E4
 ```
+
+## Vertiefen
+
+**Ganz unten im Zirkel** treffen sich Kreuz- und b-Tonarten. Fis-Dur (6 Kreuze) und Ges-Dur (6 Bs) klingen gleich, sie sind **enharmonisch** verwechselt. Genauso H-Dur und Ces-Dur, Cis-Dur und Des-Dur. Mit sieben Vorzeichen gibt es noch Cis-Dur (alle Töne erhöht) und Ces-Dur (alle erniedrigt). Man wählt in der Praxis meist die Schreibweise mit weniger Vorzeichen.
+
+**Verwandte Tonarten.** Von einer Tonart aus sind die nächsten Ziele für einen Wechsel:
+
+| Verwandtschaft | von C-Dur aus | von a-Moll aus |
+| --- | --- | --- |
+| Dominanttonart (eine Quinte höher) | G-Dur | e-Moll |
+| Subdominanttonart (eine Quinte tiefer) | F-Dur | d-Moll |
+| Paralleltonart (gleiche Vorzeichen) | a-Moll | C-Dur |
+| Parallelen der Nachbarn | e-Moll, d-Moll | G-Dur, F-Dur |
+| Varianttonart (gleicher Grundton) | c-Moll | A-Dur |
+
+Die ersten vier Zeilen teilen alle Töne oder alle bis auf einen mit der Ausgangstonart. Darum modulieren klassische Stücke meist dorthin, Sonaten in Dur fast immer zuerst in die Dominanttonart, Stücke in Moll in die Paralleltonart. Die Variante klingt viel ferner, weil sich drei Vorzeichen ändern.
+
+**Der Zirkel als Akkordkarte.** Gehst du im Zirkel gegen den Uhrzeigersinn (abwärts in Quinten), folgst du dem stärksten Akkordschritt: Jeder Akkord ist die Dominante des nächsten. E–A–D–G–C ist der Kern unzähliger Stücke von Vivaldi bis zum Jazzstandard. In Stufe 2 und 7 nutzt du diese **Quintfallsequenz** selbst.
 
 ## Üben
 
@@ -53,6 +71,22 @@ text: Schreibe vier Takte in a-Moll, der Paralleltonart von C-Dur. Benutze nur T
 tonart: 0 moll
 takt: 4/4
 pruefung: takte 4, leitereigen, endet-grundton
+```
+
+```aufgabe
+titel: Es-Dur-Tonleiter
+text: Schreibe die Es-Dur-Tonleiter von es′ aufwärts bis es″. Es-Dur hat drei Bs: B, Es und As. Die Halbtöne liegen zwischen G und As sowie zwischen D und Es.
+tonart: -3
+takt: 4/4
+pruefung: tonleiter
+```
+
+```aufgabe
+titel: Melodie in h-Moll
+text: Schreibe vier Takte in h-Moll, der Paralleltonart von D-Dur (zwei Kreuze). Der Leitton Ais darf vorkommen. Ende lang auf h.
+tonart: 2 moll
+takt: 4/4
+pruefung: takte 4, leitereigen, endet-grundton, schluss-lang
 ```
 
 ## Freie Aufgabe
@@ -104,3 +138,28 @@ Zeichne den Quintenzirkel einmal selbst auf Papier, aus dem Kopf. Prüfe ihn dan
 - Sie haben denselben Grundton
 - Sie liegen eine Terz auseinander
 - Sie haben dieselbe Paralleltonart
+
+? Welche Tonart ist enharmonisch gleich mit Fis-Dur?
++ Ges-Dur
+- Gis-Dur
+- Des-Dur
+- Fes-Dur
+
+? In welche Tonart moduliert ein klassischer Sonatensatz in Dur meistens zuerst?
++ In die Dominanttonart
+- In die Varianttonart
+- In die Subdominanttonart
+- In die Tonart einen Halbton höher
+
+? Was ist die Varianttonart von G-Dur?
++ g-Moll
+- e-Moll
+- D-Dur
+- h-Moll
+= Variante heißt: gleicher Grundton, anderes Tongeschlecht.
+
+? Was beschreibt die Folge E–A–D–G–C?
++ Einen Quintfall, bei dem jeder Akkord Dominante des nächsten ist
+- Eine Tonleiter in Ganztönen
+- Die Reihenfolge der Kreuze
+- Lauter Paralleltonarten

@@ -40,6 +40,33 @@ titel: C-Dur und c-Moll
 C4:8 D4 E4 F4 G4 A4 B4 C5 | C4:8 D4 Eb4 F4 G4 Ab4 Bb4 C5
 ```
 
+## Vertiefen
+
+**Zwei Tetrachorde:** Die Dur-Tonleiter besteht aus zwei gleich gebauten Vierergruppen (Ganz, Ganz, Halb), die ein Ganzton trennt: C–D–E–F und G–A–H–C. Das obere Tetrachord von C-Dur ist das untere von G-Dur. Daraus folgt der Quintenzirkel der nächsten Lektion.
+
+**Namen der Stufen:** 1. Stufe Tonika (Grundton), 2. Supertonika, 3. Mediante, 4. Subdominante, 5. Dominante, 6. Submediante, 7. Leitton (in natürlichem Moll Subtonika, weil sie einen Ganzton unter dem Grundton liegt). Komponisten denken ständig in diesen Stufen, weil sie in jeder Tonart gleich funktionieren.
+
+**Melodisch Moll** wird aufwärts mit erhöhter 6. und 7. Stufe gespielt, abwärts meist natürlich. So vermeidet es die übermäßige Sekunde der harmonischen Form (F–Gis in a-Moll), die sehr markant und „orientalisch“ klingt, und hat trotzdem einen Leitton.
+
+```noten
+titel: a-Moll melodisch auf- und abwärts
+tonart: 0 moll
+
+A4:8 B4 C5 D5 E5 F#5 G#5 A5 | G5:8 F5 E5 D5 C5 B4 A4:4
+```
+
+**Chromatische Tonleiter:** alle zwölf Halbtöne. Aufwärts schreibt man meist mit Kreuzen, abwärts mit Bs.
+
+**Pentatonik:** Die Dur-Pentatonik lässt aus Dur die 4. und 7. Stufe weg (C, D, E, G, A), also genau die Töne, die Halbtonschritte bilden. Ohne Halbtöne klingt sie offen und konfliktfrei. Sie steckt in Volksliedern aus aller Welt, im Blues, im Rock und in der Filmmusik. Die Moll-Pentatonik hat dieselben Töne von der 6. Stufe aus (A, C, D, E, G).
+
+```noten
+titel: C-Dur-Pentatonik und a-Moll-Pentatonik
+
+C4:8 D4 E4 G4 A4 C5 r:4 | A3:8 C4 D4 E4 G4 A4 r:4
+```
+
+**Dur und Moll mit demselben Grundton** heißen **Varianttonarten** (C-Dur und c-Moll). Der Wechsel dazwischen ist eines der wirkungsvollsten Mittel überhaupt: Schubert wechselt oft mitten im Lied von Dur nach Moll, ohne die Tonika zu verlassen.
+
 ## Üben
 
 Erkenne Tonarten an ihren Vorzeichen. Beim Melodiediktat hörst du eine kurze Melodie und spielst sie auf dem Bildschirmklavier nach, der erste Ton ist vorgegeben.
@@ -56,6 +83,22 @@ text: Schreibe die G-Dur-Tonleiter von g′ aufwärts bis g″. Die Tonart ist s
 tonart: 1
 takt: 4/4
 pruefung: tonleiter
+```
+
+```aufgabe
+titel: D-Dur-Tonleiter
+text: Schreibe die D-Dur-Tonleiter von d′ aufwärts bis d″. Die zwei Kreuze stehen schon vorne. Überprüfe die Halbtöne: Fis–G und Cis–D.
+tonart: 2
+takt: 4/4
+pruefung: tonleiter
+```
+
+```aufgabe
+titel: Melodie in e-Moll mit Leitton
+text: Schreibe vier Takte in e-Moll (ein Kreuz). Benutze am Schluss den Leitton Dis, der zum Grundton e führt, und ende lang auf e.
+tonart: 1 moll
+takt: 4/4
+pruefung: takte 4, leitereigen, endet-grundton, schluss-lang, schritt-zum-schluss
 ```
 
 ## Freie Aufgabe
@@ -100,3 +143,28 @@ Schreibe eine kurze Melodie in D-Dur (zwei Kreuze), die nur Töne der Tonleiter 
 - Die 5. Stufe
 - Die 2. Stufe
 - Die 4. Stufe
+
+? Welche Töne hat die C-Dur-Pentatonik?
++ C, D, E, G, A
+- C, D, F, G, A
+- C, E, F, G, H
+- C, D, E, F, G
+= Sie lässt die 4. und 7. Stufe weg, also die Töne, die in Dur Halbtöne bilden.
+
+? Wie klingt melodisch Moll abwärts meistens?
++ Wie natürliches Moll
+- Wie harmonisches Moll
+- Wie Dur
+- Mit erniedrigter 5. Stufe
+
+? Wie heißt die 6. Stufe einer Tonleiter?
++ Submediante
+- Mediante
+- Subdominante
+- Supertonika
+
+? Was sind Varianttonarten?
++ Dur und Moll mit demselben Grundton, z. B. C-Dur und c-Moll
+- Dur und Moll mit denselben Vorzeichen
+- Zwei Tonarten eine Quinte auseinander
+- Zwei Molltonarten mit gleichem Grundton

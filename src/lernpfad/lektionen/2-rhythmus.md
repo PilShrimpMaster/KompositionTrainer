@@ -46,6 +46,28 @@ titel: Haltebogen über den Taktstrich
 E4:4 G4 C5:2~ | C5:4 B4 A4 G4 | F4:2. E4:4 | C4:1
 ```
 
+## Vertiefen
+
+**Einfache und zusammengesetzte Taktarten.** In 2/4, 3/4 und 4/4 ist jeder Schlag eine Viertel, die sich in zwei Achtel teilt. In 6/8, 9/8 und 12/8 ist jeder Schlag eine punktierte Viertel, die sich in drei Achtel teilt. 6/8 hat also zwei Schläge, 9/8 drei und 12/8 vier. Deshalb fühlt sich 6/8 ganz anders an als 3/4, obwohl beide sechs Achtel enthalten: 3/4 hat drei Schläge zu je zwei Achteln, 6/8 zwei Schläge zu je drei Achteln.
+
+**Alla breve (2/2)** zählt in Halben statt in Vierteln. Märsche, schnelle Sätze der Klassik und viele Choräle stehen so. Das Zeichen ist ein durchgestrichenes C.
+
+**Balken** fassen Achtel und Sechzehntel nach Schlägen zusammen. In 4/4 bündelt man meist je zwei Viertel-Schläge (1–2 und 3–4), in 6/8 je drei Achtel. So sieht man beim Lesen sofort, wo die Schläge liegen.
+
+**Auftakt:** Viele Melodien beginnen vor der ersten betonten Zählzeit, z. B. mit einer Viertel vor dem ersten vollen Takt. Der Auftakt ist ein unvollständiger Takt, und der Schlusstakt wird dann um genau diese Länge kürzer, sodass beide zusammen einen vollen Takt ergeben.
+
+**Synkope:** Eine Betonung auf einer eigentlich leichten Zählzeit, oft durch einen Ton, der auf „und“ beginnt und über den nächsten Schlag gehalten wird. Synkopen geben Schwung und sind im Jazz und Pop allgegenwärtig, aber auch bei Bach und Beethoven ein Mittel der Spannung.
+
+```noten
+titel: Synkopen in 4/4
+
+C5:4 D5:8 E5:4 D5:8 C5:4 | G4:8 A4:4 B4:8~ B4:4 C5 | E5:8 D5:4 C5:8~ C5:4 A4 | G4:1
+```
+
+**Triolen** teilen einen Schlag in drei statt zwei gleiche Teile. Eine Achteltriole füllt eine Viertel. Damit kannst du im 4/4-Takt kurz das Gefühl eines 12/8-Takts erzeugen.
+
+**Tempo:** Italienische Wörter geben die Geschwindigkeit an, ungefähr: Largo (40–60 Schläge pro Minute), Adagio (60–75), Andante (75–100, „gehend“), Moderato (100–115), Allegro (115–150), Presto (über 160). Für Komponisten gilt: Dasselbe Motiv kann je nach Tempo feierlich oder ausgelassen wirken.
+
 ## Üben
 
 Rechne mit Notenwerten: Wie viele Achtel passen in eine punktierte Halbe? Welche Note fehlt noch, damit der Takt voll ist?
@@ -62,6 +84,22 @@ text: Schreibe vier Takte im 3/4-Takt. Benutze mindestens eine punktierte Note u
 takt: 3/4
 tonart: 0
 pruefung: takte 4, schluss-lang
+```
+
+```aufgabe
+titel: Vier Takte im Sechsachteltakt
+text: Schreibe vier Takte im 6/8-Takt. Denke in zwei Schlägen zu je drei Achteln: Benutze punktierte Viertel, Viertel mit Achtel und Achtelgruppen. Der letzte Ton soll mindestens eine punktierte Viertel lang sein.
+takt: 6/8
+tonart: 0
+pruefung: takte 4, schluss-lang
+```
+
+```aufgabe
+titel: Melodie mit Synkope
+text: Schreibe vier Takte im 4/4-Takt in C-Dur mit mindestens einer Synkope: eine Note, die auf „und“ beginnt und über den nächsten Schlag hinweg klingt (Achtel + Haltebogen oder Viertel zwischen zwei Achteln). Ende mit einem langen Grundton.
+takt: 4/4
+tonart: 0
+pruefung: takte 4, leitereigen, endet-grundton, schluss-lang
 ```
 
 ## Freie Aufgabe
@@ -114,3 +152,36 @@ Denk an ein Lied, das du gut kennst, und klopfe seinen Rhythmus. In welcher Takt
 - Eine Halbe
 - Eine Achtel
 - Nichts, der Takt ist voll
+
+? Wie viele Schläge hat ein 6/8-Takt?
++ Zwei, jeder eine punktierte Viertel
+- Sechs, jeder eine Achtel
+- Drei, jeder eine Viertel
+- Vier, jeder eine punktierte Achtel
+= 6/8 ist eine zusammengesetzte Taktart: zwei Schläge, die sich jeweils in drei Achtel teilen.
+
+? Ein Stück beginnt mit einem Viertel-Auftakt im 3/4-Takt. Wie lang ist der Schlusstakt?
++ Zwei Viertel
+- Drei Viertel
+- Eine Viertel
+- Vier Viertel
+= Auftakt und Schlusstakt ergeben zusammen einen vollen Takt.
+
+? Was ist eine Synkope?
++ Eine Betonung auf einer eigentlich leichten Zählzeit
+- Eine besonders lange Pause
+- Drei Noten auf einen Schlag
+- Ein Wechsel der Taktart
+= Oft beginnt ein Ton auf „und“ und wird über den nächsten Schlag gehalten.
+
+? Welche Tempobezeichnung ist am langsamsten?
++ Largo
+- Andante
+- Allegro
+- Moderato
+
+? Wie viele Achtel einer Achteltriole passen in eine Viertel?
++ Drei
+- Zwei
+- Vier
+- Sechs

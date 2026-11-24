@@ -22,6 +22,20 @@ Eine gute Melodie hat:
 - einen klaren **Schluss**: Der letzte Ton ist der Grundton, lang und auf einer betonten Zählzeit, erreicht durch einen Schritt (oft vom Leitton oder der 2. Stufe) oder von der Dominante aus.
 - einen singbaren **Umfang**, etwa eine Oktave bis Dezime.
 
+## Vertiefen: so gehst du vor
+
+Eine gute Melodie entsteht selten von Note 1 bis Note 32 in einem Zug. Komponisten arbeiten in Schichten:
+
+1. **Rhythmus und Motiv zuerst.** Erfinde ein Motiv von ein bis zwei Takten mit einem markanten Rhythmus. Der Rhythmus macht ein Motiv wiedererkennbar, oft mehr als die Tonhöhen.
+2. **Harmonieplan.** Lege für jeden Takt eine Funktion fest, z. B. T | S | D | D (Halbschluss) und T | S | D | T (Ganzschluss). Auf betonten Zählzeiten stehen dann meist Töne des jeweiligen Akkords.
+3. **Gerüsttöne.** Setze pro Takt einen Zielton, der zum Akkord passt, und plane die Kurve: Wo steigt die Melodie, wo liegt der Höhepunkt?
+4. **Ausfüllen.** Verbinde die Gerüsttöne mit Schritten, Durchgängen und kleinen Sprüngen.
+5. **Singen und prüfen.** Sing die Melodie. Was du nicht singen kannst, ist meist auch beim Hören unklar.
+
+**Wiederholen, verändern, kontrastieren.** Takt 5 und 6 wiederholen oft Takt 1 und 2, damit das Ohr die Periode erkennt. Dann verändert der Nachsatz das Ende, um zum Ganzschluss zu kommen. Kleine Mittel sind eine **Sequenz** (das Motiv eine Stufe höher oder tiefer wiederholt) und eine **Variante** (gleicher Rhythmus, andere Töne).
+
+**Typische Anfängerfehler:** Zu viele gleiche Töne hintereinander, ständig kleine Sprünge ohne Richtung, ein Höhepunkt, der mehrmals erreicht wird, und ein Schluss auf unbetonter Zeit. Die Prüfung der Aufgabe deckt einiges davon auf, das Singen den Rest.
+
 ## Hören
 
 Hör dir das Beispiel oben an und achte auf den Halbschluss in Takt 4 und den Ganzschluss in Takt 8. Wo liegt der Höhepunkt? Welche Rhythmen kehren wieder?
@@ -36,9 +50,17 @@ takt: 4/4
 pruefung: takte 8, dur, leitereigen, endet-grundton, schluss-lang, schritt-zum-schluss, umfang 10, sprung-max 6, hoechster-ton-einmal
 ```
 
+```aufgabe
+titel: Achttaktige Melodie im Dreivierteltakt
+text: Schreibe eine zweite Periode von acht Takten, diesmal im 3/4-Takt und in einer anderen Dur-Tonart, z. B. F-Dur oder G-Dur. Lass Takt 5 wie Takt 1 beginnen, damit man den Nachsatz erkennt.
+tonart: 1
+takt: 3/4
+pruefung: takte 8, dur, leitereigen, endet-grundton, schluss-lang, schritt-zum-schluss, umfang 10, sprung-max 6, hoechster-ton-einmal
+```
+
 ## Freie Aufgabe
 
-Speichere deine Melodie unter „Meine Stücke“. Schreibe danach eine zweite Fassung in einer anderen Taktart (z. B. 3/4) oder in Moll und vergleiche, wie sich der Charakter ändert. In Stufe 2 lernst du, eine Begleitung dazu zu schreiben, und ab Meilenstein 4 bekommst du eine ausführliche Rückmeldung zu deinen Kompositionen.
+Speichere deine Melodie unter „Meine Stücke“. Schreibe danach eine zweite Fassung in einer anderen Taktart (z. B. 3/4) oder in Moll und vergleiche, wie sich der Charakter ändert. In Stufe 2 lernst du, einen Satz dazu zu schreiben, und ab Stufe 4 kannst du dir zu deinen Kompositionen eine ausführliche KI-Rückmeldung holen.
 
 ## Quiz
 
@@ -65,3 +87,21 @@ Speichere deine Melodie unter „Meine Stücke“. Schreibe danach eine zweite F
 - Gleich noch einen Sprung in dieselbe Richtung
 - Den Ton wiederholen
 - Eine Pause setzen
+
+? Was legt man in einem Harmonieplan für eine Melodie fest?
++ Für jeden Takt eine Funktion, z. B. T, S oder D
+- Die Lautstärke jedes Tons
+- Die Reihenfolge der Vorzeichen
+- Die Instrumente der Begleitung
+
+? Was ist eine Sequenz?
++ Ein Motiv, das eine Stufe höher oder tiefer wiederholt wird
+- Eine genaue Wiederholung in derselben Höhe
+- Ein Wechsel der Taktart
+- Ein langer Schlusston
+
+? Was macht ein Motiv besonders gut wiedererkennbar?
++ Ein markanter Rhythmus
+- Möglichst viele verschiedene Töne
+- Ein großer Umfang
+- Viele Vorzeichen

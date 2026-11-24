@@ -41,6 +41,34 @@ C4 | C#4 | D4 | Eb4 | E4
 
 Hier hörst du dieselbe Strecke in Halbtönen: C, Cis, D, Es, E. Zwischen E und F sowie zwischen H und C gibt es keine schwarze Taste, dort liegt der Halbton schon zwischen zwei Stammtönen.
 
+## Vertiefen
+
+**Hilfslinien** verlängern das System nach oben und unten. Liest du viele Hilfslinien, hilft ein Ankerton: Zwei Hilfslinien über dem Violinschlüssel liegt das c‴, zwei unter dem Bassschlüssel das große C.
+
+```noten
+titel: Hilfslinien oben und unten
+
+A5:4 B5 C6 D6 | G3:4 F3 E3 D3
+```
+
+**Vorzeichen im Takt** gelten ab der Stelle, an der sie stehen, bis zum Taktende, und nur für diese Tonhöhe in dieser Oktave. Ein **Auflösungszeichen** (♮) hebt sie wieder auf. Ein **Doppelkreuz** erhöht um zwei Halbtöne (Fisis), ein **Doppel-b** erniedrigt um zwei (Eses). Vom H heißen die Formen His, B und Heses, vom E Eis, Es und Eses, vom A Ais, As und Asas.
+
+**Enharmonik:** Fis und Ges sind auf dem Klavier dieselbe Taste, aber nicht derselbe Ton im Notensatz. Welche Schreibweise richtig ist, entscheidet die Tonart und die Funktion des Tons. In D-Dur schreibst du Fis, in Des-Dur Ges. Diese Unterscheidung ist für Komponisten wichtig, weil sie zeigt, wohin ein Ton strebt: Fis will meist nach oben zum G, Ges nach unten zum F.
+
+**Halsrichtung:** Noten unterhalb der Mittellinie bekommen den Hals nach oben rechts, Noten oberhalb nach unten links. Auf der Mittellinie selbst richtet man sich nach den Nachbarnoten. Der Editor macht das automatisch, aber in eigenen Partituren auf Papier sieht man daran sofort sauberen Notensatz.
+
+**Ausblick auf weitere Schlüssel:** Im Chorsatz steht der Tenor im **oktavierten Violinschlüssel** (mit kleiner 8 darunter): Er klingt eine Oktave tiefer als notiert. Die Bratsche liest den **Altschlüssel**, bei dem das c′ auf der Mittellinie liegt. Beides lernst du in Stufe 2 und 5 genauer.
+
+## Hören und Mitlesen
+
+Hör das Beispiel und lies mit. Die Tonleiter geht in Halbtönen aufwärts und wechselt zwischen Stammtönen und Tönen mit Vorzeichen. Aufwärts schreibt man sie mit Kreuzen, abwärts mit Bs. Sprich die Namen mit: c′, cis′, d′, dis′, e′, f′, fis′, g′, gis′, a′, ais′, h′, c″.
+
+```noten
+titel: Chromatisch aufwärts
+
+C4:8 C#4 D4 D#4 E4 F4 F#4 G4 | G#4:8 A4 A#4 B4 C5:2
+```
+
 ## Üben
 
 Lies Noten in beiden Schlüsseln, bis du jede Note ohne Abzählen erkennst. Die Aufgaben werden schwerer, sobald du sicherer wirst: zuerst Stammtöne, dann Hilfslinien und Vorzeichen.
@@ -57,6 +85,15 @@ text: Schreibe die acht Stammtöne von c′ aufwärts bis c″ im Violinschlüss
 tonart: 0
 takt: 4/4
 schluessel: treble
+pruefung: tonleiter
+```
+
+```aufgabe
+titel: Stammtöne im Bassschlüssel
+text: Schreibe die acht Stammtöne vom kleinen c aufwärts bis zum c′ im Bassschlüssel. Das c′ steht dabei auf der ersten Hilfslinie über dem System.
+tonart: 0
+takt: 4/4
+schluessel: bass
 pruefung: tonleiter
 ```
 
@@ -113,3 +150,30 @@ Stell im Editor den Bassschlüssel ein und schreibe eine kurze Melodie, die zwis
 - großes C
 - dreigestrichenes c‴
 = Großes C, kleines c, eingestrichenes c′ (das mittlere), zweigestrichenes c″.
+
+? Wie heißt das um zwei Halbtöne erniedrigte H?
++ Heses
+- Bes
+- A
+- Hes
+= Doppel-b vor H ergibt Heses. Es klingt wie A, wird aber anders geschrieben.
+
+? Wie lange gilt ein Vorzeichen, das vor einer Note im Takt steht?
++ Bis zum Ende des Takts, nur für diese Tonhöhe in dieser Oktave
+- Bis zum Ende des Stücks
+- Nur für diese eine Note
+- Bis zum nächsten Doppelstrich
+= Ein Auflösungszeichen kann es schon vorher aufheben.
+
+? Warum schreibt man in Des-Dur Ges und nicht Fis?
++ Die Schreibweise folgt der Tonart: Jeder Stammton kommt in der Tonleiter genau einmal vor
+- Weil Ges höher klingt als Fis
+- Weil Kreuze in b-Tonarten verboten sind
+- Das ist reine Geschmackssache
+= Des, Es, F, Ges, As, B, C: Jeder Buchstabe einmal. Mit Fis gäbe es zwei F und kein G.
+
+? In welchem Schlüssel steht der Tenor im Chorsatz meist?
++ Im oktavierten Violinschlüssel, der eine Oktave tiefer klingt
+- Im Altschlüssel
+- Im normalen Violinschlüssel, so wie er klingt
+- Im Bassschlüssel eine Oktave höher
