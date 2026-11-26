@@ -3,8 +3,8 @@ id: minimal-music
 titel: Minimal Music
 kategorie: Geschichte
 kurz: Seit den 1960ern in den USA: kurze Muster, die lange wiederholt und nur allmählich verändert werden. Terry Riley, Steve Reich, Philip Glass, John Adams.
-synonyme: Minimal Music, Minimalismus, minimalistisch, Steve Reich, Philip Glass, Terry Riley, John Adams, Phasenverschiebung, Arvo Pärt, Tintinnabuli
-siehe: moderne, ostinato, filmmusik, pentatonik
+synonyme: Minimal Music, Minimalismus, minimalistisch, Steve Reich, Philip Glass, Terry Riley, John Adams, Phasenverschiebung
+siehe: moderne, ostinato, filmmusik, pentatonik, tintinnabuli
 ---
 
 **Minimal Music** entstand als Gegenbewegung zur komplizierten seriellen Musik. Ihre Grundidee: Ein kurzes Muster wird viele Male wiederholt, und kleine Veränderungen werden dadurch zum eigentlichen Ereignis.

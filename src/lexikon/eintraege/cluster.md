@@ -4,7 +4,7 @@ titel: Cluster
 kategorie: Harmonik
 kurz: Ein Klang aus dicht nebeneinander liegenden Tönen, meist Sekunden (c–d–e–f oder chromatisch). Er wirkt als Geräusch- oder Farbfläche statt als Akkord.
 synonyme: Tontraube, Tontrauben, Klangfläche, Sekundenklang
-siehe: moderne, quartenharmonik, konsonanz-dissonanz
+siehe: moderne, quartenharmonik, konsonanz-dissonanz, aleatorik, spektralmusik
 beispiel: C4 D4 E4 F4 G4
 klang: zusammen
 ---

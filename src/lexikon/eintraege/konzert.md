@@ -4,7 +4,7 @@ titel: Konzert
 kategorie: Form
 kurz: Ein Werk für ein Soloinstrument (oder mehrere) und Orchester, meist in drei Sätzen; im Barock auch das Concerto grosso.
 synonyme: Solokonzert, Instrumentalkonzert, Concerto, Concerto grosso, Kadenz des Solisten, Solokadenz, Tutti
-siehe: orchester, sonate, barock
+siehe: orchester, sonate, barock, ritornellform, terrassendynamik
 ---
 
 Im **Konzert** stehen sich ein **Solist** und das **Orchester** (Tutti) gegenüber, wetteifernd und im Dialog.

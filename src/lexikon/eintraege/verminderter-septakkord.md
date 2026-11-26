@@ -4,7 +4,7 @@ titel: Verminderter Septakkord
 kategorie: Harmonik
 kurz: Vier Töne im Abstand kleiner Terzen (z. B. H–D–F–As). Er ist symmetrisch, klingt sehr gespannt und lässt sich in viele Tonarten weiterführen.
 synonyme: verminderter Septakkord, Verminderter, D9 verkürzt, vii°7, kleiner Septnonakkord ohne Grundton
-siehe: dominantseptakkord, septakkord, enharmonik, modulation
+siehe: dominantseptakkord, septakkord, enharmonik, modulation, enharmonische-modulation
 beispiel: B3 D4 F4 Ab4 | C4 Eb4 G4 C5
 klang: zusammen
 schluessel: treble

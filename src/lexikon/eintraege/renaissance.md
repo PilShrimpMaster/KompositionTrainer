@@ -3,8 +3,8 @@ id: renaissance
 titel: Renaissance
 kategorie: Geschichte
 kurz: Etwa 1400 bis 1600: die Blütezeit der Vokalpolyphonie. Palestrina, Josquin und Lasso schrieben Messen und Motetten mit gleichberechtigten, fließenden Stimmen.
-synonyme: Renaissance, Vokalpolyphonie, Orlando di Lasso, Madrigal, Frankoflamen
-siehe: kontrapunkt, kirchentonarten, mittelalter, barock, palestrina, josquin
+synonyme: Renaissance, Vokalpolyphonie, Orlando di Lasso, Frankoflamen
+siehe: kontrapunkt, kirchentonarten, mittelalter, barock, palestrina, josquin, motette, madrigal, fauxbourdon
 ---
 
 In der **Renaissance** wurde die mehrstimmige Vokalmusik zur höchsten Kunst. Die Komponisten der franko-flämischen Schule (z. B. **Josquin des Prez**) und später **Giovanni Pierluigi da Palestrina** und **Orlando di Lasso** schrieben Messen und Motetten, in denen vier bis sechs (manchmal viel mehr) Stimmen gleichberechtigt und imitierend verwoben sind.

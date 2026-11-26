@@ -24,6 +24,8 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **Erweiterte Harmonik und Stilmerkmale (M6):** Die Akkordanalyse erkennt Neapolitaner (sN), übermäßige Sextakkorde (italienisch, deutsch, französisch), Zwischendominanten, Medianten und Dominantnonakkorde. „Stilmerkmale zeigen“ markiert im Notenbild Sequenzen, Orgelpunkte, Chromatik, alterierte Akkorde, Parallelverschiebung, Ganzton, Pentatonik, Quarten, Cluster und Zwölftonreihen und schätzt, zu welcher Epoche sie passen.
 
+**Weitere Epochen-Techniken (M8):** Fünf neue Lektionen in Stufe 6: Mittelalter und Renaissance (Organum, Fauxbourdon, Isorhythmie, Imitationsmotette, Madrigalismen), Barock (Passacaglia und Chaconne, Ritornellform, Terrassendynamik, Figurenlehre), Klassik (motivisch-thematische Arbeit, Abspaltung und Liquidation, Mannheimer Schule), Romantik (Kunstlied, Nocturne, Programmmusik, Leitmotiv, Modulation mit dem verminderten Septakkord) und Moderne (additive Rhythmen, Polyrhythmik, Aleatorik, Tintinnabuli), jeweils mit Hörbeispielen, Schreibaufgaben und Quiz. Dazu 20 neue Lexikon-Einträge.
+
 **Stufe 6 (M6):** Lektionen Barock, Klassik, Romantik, Impressionismus, Moderne, Werkanalyse und der Seitenblick „Epochenstile im Film“, jeweils mit Schreibaufgabe im passenden Stil, sowie das Abschlussprojekt „ein mehrsätziges Werk“. Neue Übungen „Epoche erkennen“ (Ausschnitte von Bach bis Schönberg) und „Alterierte Akkorde bestimmen“; Prüfkriterien `stil` und `stilmerkmal`.
 
 **Werke im Portfolio (M6):** In der Portfolio-Ansicht bündelt man Stücke als Sätze zu einem Werk, ordnet sie, hört alle Sätze nacheinander und exportiert jeden Satz nach MuseScore. Werke sind Teil der Sicherung.

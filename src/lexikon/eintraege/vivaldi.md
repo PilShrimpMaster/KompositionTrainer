@@ -3,8 +3,8 @@ id: vivaldi
 titel: Antonio Vivaldi
 kategorie: Geschichte
 kurz: 1678–1741. Venezianischer Geiger und Priester, Meister des Solokonzerts. „Die vier Jahreszeiten“ sind sein bekanntestes Werk.
-synonyme: Vivaldi, Die vier Jahreszeiten, Vier Jahreszeiten, Ritornellform
-siehe: barock, konzert, sequenz, quintfallsequenz
+synonyme: Vivaldi, Die vier Jahreszeiten, Vier Jahreszeiten
+siehe: barock, konzert, sequenz, quintfallsequenz, ritornellform
 ---
 
 **Vivaldi** unterrichtete am Ospedale della Pietà in Venedig, einem Waisenhaus mit berühmtem Mädchenorchester. Er schrieb über 500 Konzerte.

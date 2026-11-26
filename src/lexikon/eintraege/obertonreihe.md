@@ -4,7 +4,7 @@ titel: Obertonreihe
 kategorie: Grundbegriffe
 kurz: Jeder gesungene oder gespielte Ton enthält leise mitschwingende höhere Töne in festen Abständen: Oktave, Quinte, Quarte, große Terz … Sie bestimmen die Klangfarbe.
 synonyme: Obertöne, Naturtonreihe, Teiltöne, Partialtöne, Grundton, Naturtöne, Klangfarbe
-siehe: konsonanz-dissonanz, intervall, dreiklang
+siehe: konsonanz-dissonanz, intervall, dreiklang, spektralmusik
 beispiel: C2 C3 G3 C4 E4 G4
 klang: nacheinander
 schluessel: bass

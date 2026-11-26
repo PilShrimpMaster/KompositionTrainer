@@ -4,7 +4,7 @@ titel: Dynamik
 kategorie: Grundbegriffe
 kurz: Die Lautstärke und ihre Veränderung, angegeben mit italienischen Abkürzungen wie p (leise) und f (laut) und mit Gabeln für Crescendo und Decrescendo.
 synonyme: Lautstärke, piano, forte, mezzoforte, pianissimo, fortissimo, Crescendo, Decrescendo, Diminuendo, sforzato
-siehe: artikulation, tempo
+siehe: artikulation, tempo, terrassendynamik, mannheimer-schule
 ---
 
 | Zeichen | Name | Bedeutung |

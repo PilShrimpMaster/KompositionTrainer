@@ -4,7 +4,7 @@ titel: Ostinato
 kategorie: Satztechnik
 kurz: Ein Muster, das immer wieder wiederholt wird, während sich darüber anderes verändert. Im Bass heißt es Basso ostinato; in Pop und Jazz spricht man vom Riff.
 synonyme: Ostinato, Ostinati, Basso ostinato, ostinat, Lamento-Bass, Ground
-siehe: variation, riff, minimal-music, orgelpunkt, filmmusik
+siehe: variation, riff, minimal-music, orgelpunkt, filmmusik, passacaglia
 beispiel: D3 C3 Bb2 A2
 klang: nacheinander
 schluessel: bass
