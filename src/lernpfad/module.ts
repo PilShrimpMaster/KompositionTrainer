@@ -20,6 +20,7 @@ export const STUFEN: Stufe[] = [
   { nummer: 5, titel: 'Instrumentation', abschluss: 'Satz für Streichquartett' },
   { nummer: 6, titel: 'Stil und eigene Werke', abschluss: 'Eigenes mehrsätziges Stück' },
   { nummer: 7, titel: 'Jenseits der Klassik: Jazz, Pop, Film, Neue Musik', abschluss: 'Reharmonisiertes Leadsheet und ein Film-Cue mit Leitmotiv' },
+  { nummer: 8, titel: 'Musikproduktion mit der DAW', abschluss: 'Ein eigener Track in FL Studio: Beat, Harmonie, Hook, Arrangement und Mix' },
 ];
 
 export const MODULE: Modul[] = [
@@ -82,4 +83,11 @@ export const MODULE: Modul[] = [
   { id: 's7-pop', stufe: 7, titel: 'Popharmonik und Songwriting', ziel: 'Loops, modale Mischung, Hook und Songaufbau' },
   { id: 's7-film', stufe: 7, titel: 'Filmmusik: Leitmotiv und Underscore', ziel: 'Leitmotiv, Ostinato, Pedal, chromatische Mediantik und Spannung unter dem Bild' },
   { id: 's7-neue-musik', stufe: 7, titel: 'Neue Musik: Reihen, Mengen, Minimal Music', ziel: 'Zwölftontechnik, Pitch-Class-Sets und die Prozesse der Minimal Music' },
+  { id: 's8-daw', stufe: 8, titel: 'DAW-Grundlagen: So arbeitet FL Studio', ziel: 'Channel Rack, Pattern, Piano Roll, Playlist und Mixer kennen und ein erstes Projekt anlegen' },
+  { id: 's8-beats', stufe: 8, titel: 'Beats programmieren', ziel: 'Kick, Snare und Hi-Hat, Genre-Grooves, Swing, Velocity und Ghost Notes' },
+  { id: 's8-pianoroll', stufe: 8, titel: 'Piano Roll und MIDI', ziel: 'Akkorde, Bassline und Hook als MIDI: Velocity, Quantisierung und der Weg nach FL Studio' },
+  { id: 's8-sounddesign', stufe: 8, titel: 'Sounddesign: Synthesizer verstehen', ziel: 'Oszillator, Filter, Hüllkurve und LFO; Bass, Pad, Lead und Pluck selbst bauen' },
+  { id: 's8-arrangement', stufe: 8, titel: 'Arrangement: vom Loop zum Song', ziel: 'Formteile, Energiekurve, Build-up und Drop, Übergänge und Automation' },
+  { id: 's8-mixing', stufe: 8, titel: 'Mixing', ziel: 'Gain-Staging, EQ, Kompression, Hall und Delay, Panorama und Sidechain' },
+  { id: 's8-mastering', stufe: 8, titel: 'Mastering und Export', ziel: 'Limiter, Lautheit in LUFS, Referenztracks, Stems und der fertige Export' },
 ];

@@ -8,6 +8,8 @@ import { ENSEMBLES, instrument } from '../model/instrumente';
 import { ensembleDoc, rebarSatz } from '../editor/satzdoc';
 import type { UebungTyp } from '../uebungen/aufgaben';
 import { parseQuiz, type QuizFrage } from './quiz';
+import { parseBeat, type Beat } from '../produktion/beat';
+import { SYNTH_VORLAGEN } from '../produktion/synthVorlagen';
 import { parseNotenbeispiel, parseNotenfolge, parseSchluessel, parseTakt, parseTonart } from './kompakt';
 
 /** Eine Schreibaufgabe, die im Editor bearbeitet und geprüft wird */
@@ -34,6 +36,10 @@ export interface Schreibaufgabe {
   stil?: Stil;
   /** Einstimmiges Leadsheet als Vorgabe: Melodie mit Akkordsymbolen */
   leadsheet?: NoteEvent[];
+  /** Beat-Aufgabe im Beat-Baukasten: vorgegebenes Pattern (oft leer) */
+  beat?: { vorgabe: Beat };
+  /** Klang-Aufgabe im Synth-Labor (beginnt mit der Grundeinstellung) */
+  synth?: boolean;
 }
 
 function pruefeStil(text: string): Stil {
@@ -98,7 +104,11 @@ export type Baustein =
   | { art: 'noten'; score: Score; analyse?: boolean; kontrapunkt?: { gattung: Gattung; cf: 0 | 1 }; motive?: boolean; form?: boolean; harmonien?: boolean; merkmale?: boolean }
   | { art: 'akkorde'; gruppen: Pitch[][]; klang: 'nacheinander' | 'zusammen'; schluessel: Clef; tonart?: KeySignature }
   | { art: 'uebungen'; typen: UebungTyp[] }
-  | { art: 'aufgabe'; aufgabe: Schreibaufgabe };
+  | { art: 'aufgabe'; aufgabe: Schreibaufgabe }
+  /** Beat im Step-Sequencer zum Anhören, optional mit Erklärung des Genres */
+  | { art: 'beat'; titel: string; beat: Beat }
+  /** Klang aus dem Synth-Labor: Vorlage anhören und im Labor öffnen */
+  | { art: 'synth'; titel: string; vorlage: string; noten: string[] };
 
 export interface Schritt {
   titel: string;
@@ -114,7 +124,7 @@ export interface Lektion {
   quiz: QuizFrage[];
 }
 
-const FENCE = /```(noten|satz|akkorde|uebungen|aufgabe|zweistimmig|ensemble)[^\n]*\n([\s\S]*?)```/g;
+const FENCE = /```(noten|satz|akkorde|uebungen|aufgabe|zweistimmig|ensemble|beat|synth)[^\n]*\n([\s\S]*?)```/g;
 
 function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: string): Baustein[] {
   const out: Baustein[] = [];
@@ -170,6 +180,17 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
           });
           break;
         }
+        case 'beat': {
+          const f = leseFelder(inhalt);
+          out.push({ art: 'beat', titel: f.titel ?? 'Beat', beat: parseBeat(f) });
+          break;
+        }
+        case 'synth': {
+          const f = leseFelder(inhalt);
+          if (!f.vorlage || !SYNTH_VORLAGEN.some((v) => v.name === f.vorlage)) throw new Error(`Unbekannte Synth-Vorlage „${f.vorlage}“`);
+          out.push({ art: 'synth', titel: f.titel ?? f.vorlage, vorlage: f.vorlage, noten: (f.noten ?? 'C3 E3 G3 C4').split(/\s+/).filter(Boolean) });
+          break;
+        }
         case 'uebungen':
           out.push({ art: 'uebungen', typen: inhalt.split(/\s+/).filter(Boolean) as UebungTyp[] });
           break;
@@ -195,6 +216,8 @@ function bausteine(text: string, ort: string, aufgabeNr: { n: number }, modul: s
                 : {}),
               ...(f.besetzung ? { ensemble: ensembleFelder(f) } : {}),
               ...(f.leadsheet ? { leadsheet: parseNotenfolge(f.leadsheet) } : {}),
+              ...(f.beat === 'ja' ? { beat: { vorgabe: parseBeat({ ...f, name: f.titel }) } } : {}),
+              ...(f.synth === 'ja' ? { synth: true } : {}),
               ...(f.satz === 'ja'
                 ? { vorgabe: STIMM_FELDER.map((k) => (f[k] ? parseNotenfolge(f[k]) : [])), liedtext: f.liedtext || undefined }
                 : {}),

@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { pruefeBeat } from '../produktion/beat';
+import { pruefeSynth, SYNTH_VORLAGEN } from '../produktion/synthVorlagen';
 import { docFromScore } from '../editor/rebar';
 import { UEBUNGEN } from '../uebungen/aufgaben';
 import { parseNotenbeispiel, parseNotenfolge } from './kompakt';
@@ -29,7 +31,8 @@ describe('Lektionen', () => {
         for (const b of s.bausteine) if (b.art === 'uebungen') for (const t of b.typen) expect(typen.has(t), t).toBe(true);
     for (const a of alleAufgaben()) {
       const leer = { title: '', tempo: 90, time: a.takt ?? { beats: 4, beatType: 4 }, key: a.tonart ?? { fifths: 0, mode: 'major' as const }, clef: 'treble' as const, events: [] };
-      for (const p of pruefe(leer, a.pruefung)) expect(p.text, a.id).not.toMatch(/Unbekannt/);
+      const ergebnis = a.beat ? pruefeBeat(a.beat.vorgabe, a.pruefung) : a.synth ? pruefeSynth(SYNTH_VORLAGEN[0], a.pruefung) : pruefe(leer, a.pruefung);
+      for (const p of ergebnis) expect(p.text, a.id).not.toMatch(/Unbekannt/);
     }
   });
 

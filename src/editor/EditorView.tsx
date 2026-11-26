@@ -20,7 +20,7 @@ import { motivMarkierungen, MotivPanel, useMotive } from '../kontrapunkt/MotivPa
 import { markierungenFuer, PruefPanel, usePruefung } from '../satz/PruefPanel';
 import { STILE, stilProfil } from '../satz/stil';
 import { measureLength, quarterLength } from '../model/duration';
-import { ladeDatei, NOTENDATEIEN, speichereJson, speichereMusicXml } from '../musicxml/datei';
+import { ladeDatei, NOTENDATEIEN, speichereJson, speichereMidi, speichereMusicXml } from '../musicxml/datei';
 import { SHORTCUT_HELP, shortcutFor } from './shortcuts';
 import { editorReducer, emptyDoc, initialState, type EditorAction } from './state';
 import { spellMidi } from '../model/pitch';
@@ -840,6 +840,9 @@ export function EditorView({ aufgabe, onAufgabeSchliessen }: Props = {}) {
       <div className="json-actions file-actions">
         <button className="secondary" onClick={() => speichereMusicXml(bar.score)} disabled={doc.events.length === 0} title="MusicXML öffnet sich direkt in MuseScore Studio 4">
           Für MuseScore speichern
+        </button>
+        <button className="secondary" onClick={() => speichereMidi(bar.score)} disabled={doc.events.length === 0} title="Standard-MIDI-Datei für FL Studio, Ableton, Logic oder Cubase: eine Spur je Stimme, Akkordsymbole als eigene Spur">
+          Als MIDI speichern (für FL Studio)
         </button>
         <button className="secondary" onClick={() => speichereJson(bar.score)} disabled={doc.events.length === 0}>
           Als JSON speichern

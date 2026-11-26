@@ -4,7 +4,15 @@ Eine Web-App (PWA), mit der man auf dem iPad und am Desktop das Komponieren klas
 
 **App öffnen:** https://pilshrimpmaster.github.io/KompositionTrainer/
 
-## Stand: M7 Jenseits der Klassik (Lernpfad komplett)
+## Stand: M8 Musikproduktion mit der DAW
+
+**Produzieren-Tab:** Ein neuer Bereich zwischen „Schreiben“ und „Hören“ zeigt, wie eine DAW wie FL Studio arbeitet. Der **Beat-Baukasten** ist ein Step-Sequencer wie das Channel Rack: acht Drum-Spuren, 16 Schritte, drei Anschlagstärken (Ghost Notes), Swing, Mischpult mit Mute, Solo, Lautstärke, Panorama und Hall-Send, Genre-Vorlagen (House, Techno, Hip-Hop, Trap, Rock, Reggaeton, Drum and Bass, Funk) und Export als MIDI-Datei (Schlagzeug auf Kanal 10). Das **Synth-Labor** erklärt subtraktive Synthese: zwei Oszillatoren mit Verstimmung, Filter, ADSR-Hüllkurve, LFO und Hall, mit Oszilloskop, Spektrum, Bildschirmklaviatur, Computertastatur und MIDI-Keyboard.
+
+**MIDI-Export:** Jedes Stück im Editor lässt sich als Standard-MIDI-Datei speichern (eine Spur je Stimme, Akkordsymbole als eigene Spur) und in FL Studio in die Playlist oder Piano Roll ziehen.
+
+**Stufe 8 (M8):** Acht Lektionen: DAW-Grundlagen, Beats programmieren, Piano Roll und MIDI, Sounddesign, Arrangement, Mixing, Mastering und ein Abschlussprojekt „dein eigener Track“. Die Lektionen enthalten klingende Beats und Synth-Klänge, die sich mit einem Tipp im Baukasten oder Labor öffnen lassen. Neue Aufgabenarten prüfen Beats (`beat: ja`, Kriterien wie `spur kick 1 5 9 13`, `dynamik hihat`, `swing 20`, `panorama 2`) und Synth-Klänge (`synth: ja`, Kriterien wie `welle sine`, `cutoff-max 600`). Neue Höraufgaben „Wellenformen hören“, „EQ hören“, „Grooves erkennen“ und „Tempo schätzen“ sowie 15 Lexikon-Einträge in der neuen Kategorie „Produktion“.
+
+## M7 Jenseits der Klassik
 
 **Quiz nach jeder Lektion:** Jede Lektion endet mit einem Quiz: Wissensfragen zu allem, was die Lektion erklärt (rund 360 Fragen insgesamt, mit Erklärung nach jeder Antwort), danach ein Praxisteil mit den Übungen der Lektion. Das Quiz eines Abschlussprojekts fragt die ganze Stufe ab. Ab 80 % gilt ein Quiz als bestanden; falsche Fragen lassen sich gleich wiederholen. Die Fragen stehen im Abschnitt `## Quiz` der Lektionsdateien.
 
