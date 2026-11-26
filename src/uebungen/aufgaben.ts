@@ -6,6 +6,8 @@ import { begleitmusterAufgabe, formAufgabe } from './form';
 import { transpositionAufgabe } from './instrumente';
 import { altschluesselAufgabe, instrumentHoerenAufgabe, lageAufgabe } from './orchester';
 import { alteriertAufgabe, epocheAufgabe } from './stile';
+import { eqAufgabe, grooveAufgabe, tempoAufgabe, wellenformAufgabe } from './produktion';
+import type { Beat } from '../produktion/beat';
 import { akkordsymbolAufgabe, optionstonAufgabe, pcsetAufgabe, reihenformAufgabe, tritonusAufgabe, zweiFuenfEinsAufgabe } from './jazz';
 import { fromDiatonic, germanKeyName, germanName, germanNameWithOctave, toMidi, diatonicIndex } from '../model/pitch';
 import type { Clef, Duration, KeySignature, Pitch, Score, Step } from '../model/types';
@@ -44,6 +46,8 @@ export interface Aufgabe {
   diktat?: Pitch[];
   /** Analyse: Takte (ab 0), die man im Notenbild markieren soll */
   markieren?: number[];
+  /** Höraufgabe zur Produktion: Wellenform, EQ-Vergleich oder Beat */
+  produktion?: { art: 'welle'; welle: 'sine' | 'triangle' | 'sawtooth' | 'square' } | { art: 'eq'; band: number } | { art: 'beat'; beat: Beat };
 }
 
 export type UebungTyp =
@@ -78,7 +82,11 @@ export type UebungTyp =
   | 'optionston-bestimmen'
   | 'tritonus-substitution'
   | 'pcset-bestimmen'
-  | 'reihenform-bestimmen';
+  | 'reihenform-bestimmen'
+  | 'wellenform-hoeren'
+  | 'eq-hoeren'
+  | 'groove-erkennen'
+  | 'tempo-schaetzen';
 
 export interface UebungInfo {
   typ: UebungTyp;
@@ -120,6 +128,10 @@ export const UEBUNGEN: UebungInfo[] = [
   { typ: 'tritonus-substitution', titel: 'Tritonus-Substitution', modul: 's7-reharmonisation', hoeren: false },
   { typ: 'pcset-bestimmen', titel: 'Tonmengen bestimmen (Primform)', modul: 's7-neue-musik', hoeren: false },
   { typ: 'reihenform-bestimmen', titel: 'Reihenformen erkennen', modul: 's7-neue-musik', hoeren: false },
+  { typ: 'groove-erkennen', titel: 'Grooves erkennen', modul: 's8-beats', hoeren: true },
+  { typ: 'tempo-schaetzen', titel: 'Tempo schätzen', modul: 's8-beats', hoeren: true },
+  { typ: 'wellenform-hoeren', titel: 'Wellenformen hören', modul: 's8-sounddesign', hoeren: true },
+  { typ: 'eq-hoeren', titel: 'Frequenzbereiche hören', modul: 's8-mixing', hoeren: true },
 ];
 
 /** Schwierigkeit 1–3, abhängig von der Sicherheit im Modul */
@@ -469,6 +481,14 @@ export function erzeugeAufgabe(typ: UebungTyp, stufe: Stufe, rng: Rng = Math.ran
       return pcsetAufgabe(rng, stufe);
     case 'reihenform-bestimmen':
       return reihenformAufgabe(rng, stufe);
+    case 'wellenform-hoeren':
+      return wellenformAufgabe(rng, stufe);
+    case 'eq-hoeren':
+      return eqAufgabe(rng, stufe);
+    case 'groove-erkennen':
+      return grooveAufgabe(rng, stufe);
+    case 'tempo-schaetzen':
+      return tempoAufgabe(rng, stufe);
   }
 }
 

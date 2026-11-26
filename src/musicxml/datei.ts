@@ -3,6 +3,7 @@ import { validateScore } from '../model/validate';
 import { dateiname, exportMusicXml } from './export';
 import { importMusicXml, type ImportErgebnis } from './import';
 import { entpackeMxl, istZip } from './mxl';
+import { scoreAlsMidi } from '../midi/smf';
 
 export const NOTENDATEIEN = '.json,.musicxml,.xml,.mxl,application/json,application/vnd.recordare.musicxml+xml,application/vnd.recordare.musicxml';
 
@@ -23,7 +24,7 @@ export async function ladeDatei(f: File): Promise<ImportErgebnis> {
   return ladeNotendatei(f.name, new Uint8Array(await f.arrayBuffer()));
 }
 
-function herunterladen(inhalt: string, name: string, typ: string) {
+export function herunterladen(inhalt: BlobPart, name: string, typ: string) {
   const blob = new Blob([inhalt], { type: typ });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -42,4 +43,9 @@ export function speichereMusicXml(score: Score) {
 
 export function speichereJson(score: Score) {
   herunterladen(JSON.stringify(score, null, 2), dateiname(score.title, 'json'), 'application/json');
+}
+
+/** Speichert den Satz als Standard-MIDI-Datei (.mid), z. B. für FL Studio */
+export function speichereMidi(score: Score) {
+  herunterladen(scoreAlsMidi(score) as BlobPart, dateiname(score.title, 'mid'), 'audio/midi');
 }

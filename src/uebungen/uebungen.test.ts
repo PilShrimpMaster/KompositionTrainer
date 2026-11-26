@@ -63,7 +63,7 @@ describe('Aufgaben-Generatoren', () => {
           expect(a.optionen).toContain(a.loesung);
           expect(new Set(a.optionen).size).toBe(a.optionen.length);
           expect(a.optionen.length).toBeGreaterThanOrEqual(2);
-          if (u.hoeren) expect(a.klang).toBeDefined();
+          if (u.hoeren) expect(a.klang ?? a.produktion).toBeDefined();
         }
       });
     }

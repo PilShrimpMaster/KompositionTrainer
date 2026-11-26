@@ -1,7 +1,7 @@
 import type { Clef, KeySignature, Pitch, Step } from '../model/types';
 
-export type Kategorie = 'Grundbegriffe' | 'Rhythmus' | 'Tonarten' | 'Intervalle' | 'Harmonik' | 'Satztechnik' | 'Melodik' | 'Form' | 'Instrumente' | 'Geschichte' | 'Jazz, Pop & Film';
-export const KATEGORIEN: Kategorie[] = ['Grundbegriffe', 'Rhythmus', 'Tonarten', 'Intervalle', 'Harmonik', 'Satztechnik', 'Melodik', 'Form', 'Instrumente', 'Geschichte', 'Jazz, Pop & Film'];
+export type Kategorie = 'Grundbegriffe' | 'Rhythmus' | 'Tonarten' | 'Intervalle' | 'Harmonik' | 'Satztechnik' | 'Melodik' | 'Form' | 'Instrumente' | 'Geschichte' | 'Jazz, Pop & Film' | 'Produktion';
+export const KATEGORIEN: Kategorie[] = ['Grundbegriffe', 'Rhythmus', 'Tonarten', 'Intervalle', 'Harmonik', 'Satztechnik', 'Melodik', 'Form', 'Instrumente', 'Geschichte', 'Jazz, Pop & Film', 'Produktion'];
 
 export interface Eintrag {
   id: string;

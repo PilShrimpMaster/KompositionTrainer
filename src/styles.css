@@ -1571,3 +1571,349 @@ a.lexikon-link:hover {
     color: #6b6580;
   }
 }
+
+/* ---------- Produzieren: Beat-Baukasten und Synth-Labor ---------- */
+:root {
+  --step-aus: #ece6d8;
+  --step-aus2: #e0d8c6;
+  --step-an: var(--accent);
+  --taste-weiss: #ffffff;
+  --taste-schwarz: #1f1b2e;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --step-aus: #2b2638;
+    --step-aus2: #363047;
+    --taste-weiss: #e9e6f0;
+    --taste-schwarz: #0e0c14;
+  }
+}
+
+.produzieren {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 16px 32px;
+}
+.produzieren-kopf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.produzieren-kopf .meta {
+  margin: 0;
+  flex: 1 1 300px;
+}
+.segment {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.segment button {
+  padding: 8px 14px;
+}
+
+.beat-transport {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  margin: 8px 0 12px;
+}
+.beat-regler,
+.synth-regler {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.beat-regler input[type='number'] {
+  width: 76px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--paper);
+  color: #1f1b2e;
+  font: inherit;
+}
+.beat-raster {
+  overflow-x: auto;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+.beat-zeile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+  width: max-content;
+}
+.beat-zeile.is-stumm .beat-steps {
+  opacity: 0.35;
+}
+.beat-name {
+  width: 92px;
+  flex: none;
+  text-align: left;
+  min-height: 36px;
+  padding: 6px 10px;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.beat-zaehler .beat-name {
+  border: none;
+}
+.beat-steps {
+  display: grid;
+  grid-template-columns: repeat(16, 34px);
+  gap: 4px;
+}
+.beat-steps > :nth-child(4n + 1):not(:first-child) {
+  margin-left: 6px;
+}
+.beat-zahl {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.beat-zahl.is-zaehlzeit {
+  font-weight: 700;
+  color: var(--ink);
+}
+.beat-step {
+  width: 34px;
+  height: 40px;
+  min-height: 0;
+  padding: 0;
+  border-radius: 6px;
+  background: var(--step-aus);
+  border: 1px solid transparent;
+}
+.beat-step.is-dunkel {
+  background: var(--step-aus2);
+}
+.beat-step.is-an {
+  background: var(--step-an);
+}
+.beat-step.is-an.mittel {
+  opacity: 0.68;
+}
+.beat-step.is-an.leise {
+  opacity: 0.38;
+}
+.beat-step.is-jetzt {
+  outline: 3px solid var(--highlight);
+  outline-offset: -1px;
+}
+.beat-step:disabled {
+  cursor: default;
+  opacity: 1;
+}
+.beat-step.is-an:disabled.mittel {
+  opacity: 0.68;
+}
+.beat-step.is-an:disabled.leise {
+  opacity: 0.38;
+}
+.beat-mixer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 6px;
+}
+.beat-mixer label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.beat-mixer input[type='range'] {
+  width: 76px;
+}
+.beat-ms {
+  min-height: 36px;
+  width: 36px;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+.beat-ms.is-on {
+  background: var(--highlight);
+  color: #fff;
+  border-color: var(--highlight);
+}
+.beat-dateien {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: flex-end;
+  margin-top: 12px;
+}
+.beat-dateien input[type='text'] {
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--paper);
+  color: #1f1b2e;
+  font: inherit;
+}
+.beat-dateien select {
+  min-width: 200px;
+}
+.beat-meine,
+.beat-fl {
+  margin-top: 12px;
+}
+.beat-beispiel .beat-raster {
+  margin: 8px 0;
+}
+.beat-beispiel .beat-name {
+  color: #1f1b2e;
+}
+
+.synth-kopf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+.synth-module {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+.synth-module fieldset {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px 12px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.synth-module legend {
+  font-weight: 700;
+  padding: 0 6px;
+}
+.synth-regler {
+  display: grid;
+  grid-template-columns: 84px 1fr 76px;
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+.synth-regler input {
+  width: 100%;
+}
+.synth-anzeigen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+.synth-anzeigen figure {
+  margin: 0;
+}
+.synth-anzeigen canvas {
+  width: 100%;
+  height: 120px;
+  background: var(--step-aus);
+  border-radius: 10px;
+  display: block;
+}
+.synth-tastatur-kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.synth-tastatur {
+  display: flex;
+  position: relative;
+  height: 150px;
+  margin-top: 8px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.synth-taste {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0 0 6px 6px;
+}
+.synth-taste.weiss {
+  flex: 1 1 0;
+  height: 100%;
+  background: var(--taste-weiss);
+  border: 1px solid #8f8aa0;
+  z-index: 1;
+}
+.synth-taste.schwarz {
+  flex: 0 0 0;
+  width: 0;
+  position: relative;
+  z-index: 2;
+  height: 62%;
+  background: transparent;
+}
+.synth-taste.schwarz::after {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 0;
+  width: 28px;
+  height: 100%;
+  background: var(--taste-schwarz);
+  border-radius: 0 0 5px 5px;
+}
+.synth-taste.weiss.is-an {
+  background: var(--highlight);
+}
+.synth-taste.schwarz.is-an::after {
+  background: var(--highlight);
+}
+.synth-beispiel .json-actions {
+  margin-top: 6px;
+}
+@media (max-width: 700px) {
+  .beat-name {
+    width: 74px;
+    font-size: 0.8rem;
+    padding: 4px 6px;
+  }
+  .beat-steps {
+    grid-template-columns: repeat(16, 28px);
+    gap: 3px;
+  }
+  .beat-step {
+    width: 28px;
+    height: 36px;
+  }
+  .synth-regler {
+    grid-template-columns: 74px 1fr 64px;
+  }
+}
+/* In Lektionsbeispielen passt sich das Raster der Kartenbreite an, statt seitlich zu scrollen */
+.beat-beispiel .beat-zeile {
+  width: auto;
+}
+.beat-beispiel .beat-steps {
+  flex: 1;
+  min-width: 0;
+  grid-template-columns: repeat(16, minmax(12px, 34px));
+  gap: 3px;
+}
+.beat-beispiel .beat-step {
+  width: auto;
+}
+.beat-beispiel .beat-steps > :nth-child(4n + 1):not(:first-child) {
+  margin-left: 4px;
+}

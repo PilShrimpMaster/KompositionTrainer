@@ -6,6 +6,7 @@ import { UEBUNGEN, type UebungTyp } from '../uebungen/aufgaben';
 import { erledigt, istErledigt } from './erledigt';
 import type { Baustein, Lektion } from './lektion';
 import { QuizView } from './QuizView';
+import { BeatBeispiel, SynthBeispiel } from '../produktion/Beispiele';
 import { bestanden, quizErgebnis } from './quiz';
 
 interface Props {
@@ -128,6 +129,10 @@ function BausteinView({ b, schon, onUebung }: { b: Baustein; schon: Set<string>;
           })}
         </div>
       );
+    case 'beat':
+      return <BeatBeispiel titel={b.titel} beat={b.beat} />;
+    case 'synth':
+      return <SynthBeispiel titel={b.titel} vorlage={b.vorlage} noten={b.noten} />;
     case 'aufgabe': {
       const a = b.aufgabe;
       const fertig = istErledigt(`aufgabe:${a.id}`);
@@ -138,8 +143,24 @@ function BausteinView({ b, schon, onUebung }: { b: Baustein; schon: Set<string>;
             {a.titel}
           </strong>
           <p>{a.text}</p>
-          <button onClick={() => schreibeAufgabe(a)}>{fertig ? 'Noch einmal im Editor schreiben' : 'Im Editor schreiben'}</button>
-          {a.pruefung.length > 0 && <p className="meta">Der Editor prüft deine Lösung auf {a.pruefung.length} Punkte.</p>}
+          <button onClick={() => schreibeAufgabe(a)}>
+            {a.beat
+              ? fertig
+                ? 'Noch einmal im Beat-Baukasten bauen'
+                : 'Im Beat-Baukasten bauen'
+              : a.synth
+                ? fertig
+                  ? 'Noch einmal im Synth-Labor bauen'
+                  : 'Im Synth-Labor bauen'
+                : fertig
+                  ? 'Noch einmal im Editor schreiben'
+                  : 'Im Editor schreiben'}
+          </button>
+          {a.pruefung.length > 0 && (
+            <p className="meta">
+              {a.beat ? 'Der Beat-Baukasten' : a.synth ? 'Das Synth-Labor' : 'Der Editor'} prüft deine Lösung auf {a.pruefung.length} Punkte.
+            </p>
+          )}
         </div>
       );
     }

@@ -7,10 +7,11 @@ import { alleAufgaben } from './lernpfad/lektionen';
 import { NavigationContext, type Navigation } from './navigation';
 import { PlayerView } from './PlayerView';
 import { KiEinstellungen } from './ki/KiErklaerung';
+import { ProduzierenView, type Werkzeug } from './produktion/ProduzierenView';
 
-type Tab = 'lernen' | 'lexikon' | 'schreiben' | 'hoeren';
-const TABS: Tab[] = ['lernen', 'lexikon', 'schreiben', 'hoeren'];
-const TAB_NAMEN: Record<Tab, string> = { lernen: 'Lernen', lexikon: 'Lexikon', schreiben: 'Schreiben', hoeren: 'Hören' };
+type Tab = 'lernen' | 'lexikon' | 'schreiben' | 'produzieren' | 'hoeren';
+const TABS: Tab[] = ['lernen', 'lexikon', 'schreiben', 'produzieren', 'hoeren'];
+const TAB_NAMEN: Record<Tab, string> = { lernen: 'Lernen', lexikon: 'Lexikon', schreiben: 'Schreiben', produzieren: 'Produzieren', hoeren: 'Hören' };
 const TAB_KEY = 'kt-tab';
 const AUFGABE_KEY = 'kt-editor-aufgabe';
 
@@ -37,8 +38,12 @@ export function App() {
   const [tab, setTab] = useState<Tab>(initialTab);
   const [lexikonId, setLexikonId] = useState<string | null>(null);
   const [aufgabe, setAufgabeState] = useState<Schreibaufgabe | null>(gemerkteAufgabe);
+  const [beatAufgabe, setBeatAufgabe] = useState<Schreibaufgabe | null>(null);
+  const [werkzeug, setWerkzeug] = useState<Werkzeug>('beat');
+  const [synthVorlage, setSynthVorlage] = useState<string | undefined>();
 
   function setAufgabe(a: Schreibaufgabe | null) {
+    if (a?.beat || a?.synth) return;
     setAufgabeState(a);
     try {
       if (a) localStorage.setItem(AUFGABE_KEY, a.id);
@@ -73,9 +78,22 @@ export function App() {
         merken('lexikon');
       },
       schreibeAufgabe: (a) => {
+        if (a.beat || a.synth) {
+          setBeatAufgabe(a);
+          setWerkzeug(a.beat ? 'beat' : 'synth');
+          setTab('produzieren');
+          merken('produzieren');
+          return;
+        }
         setAufgabe(a);
         setTab('schreiben');
         merken('schreiben');
+      },
+      oeffneProduktion: (w, vorlage) => {
+        setWerkzeug(w);
+        if (vorlage) setSynthVorlage(vorlage);
+        setTab('produzieren');
+        merken('produzieren');
       },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -104,6 +122,9 @@ export function App() {
           )}
           {tab === 'lexikon' && <LexikonView id={lexikonId} onOeffne={setLexikonId} />}
           {tab === 'schreiben' && <EditorView aufgabe={aufgabe} onAufgabeSchliessen={() => setAufgabe(null)} />}
+          {tab === 'produzieren' && (
+            <ProduzierenView werkzeug={werkzeug} onWerkzeug={setWerkzeug} synthVorlage={synthVorlage} aufgabe={beatAufgabe} onAufgabeSchliessen={() => setBeatAufgabe(null)} />
+          )}
           {tab === 'hoeren' && <PlayerView />}
         </main>
       </NavigationContext.Provider>

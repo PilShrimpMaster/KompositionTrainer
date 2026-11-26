@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { instrument } from '../model/instrumente';
 import { initAudio, play, playChord, playSequence } from '../audio/player';
+import { spieleHoerprobe, stoppeProduktion } from '../produktion/klang';
 import { taktText } from './analyse';
 import { Klavier } from '../editor/Klavier';
 import { germanName, spellMidi, toMidi, toToneName } from '../model/pitch';
@@ -41,7 +42,13 @@ export function UebungView({ typ, folge, titel, onEnde, zurueck = 'Lernpfad' }: 
   const [klavierTief, setKlavierTief] = useState(60);
   const [markiert, setMarkiert] = useState<number[]>([]);
   const stopRef = useRef<(() => void) | null>(null);
-  useEffect(() => () => stopRef.current?.(), []);
+  useEffect(
+    () => () => {
+      stopRef.current?.();
+      stoppeProduktion();
+    },
+    [],
+  );
   const notenRef = useRef<HTMLDivElement>(null);
   const loesungRef = useRef<HTMLDivElement>(null);
 
@@ -91,6 +98,7 @@ export function UebungView({ typ, folge, titel, onEnde, zurueck = 'Lernpfad' }: 
     const u = UEBUNGEN.find((x) => x.typ === t)!;
     const a = erzeugeAufgabe(t, stufen?.get(u.modul) ?? 1);
     stopRef.current?.();
+    stoppeProduktion();
     setAufgabe(a);
     setAntwort(null);
     setMarkiert([]);
@@ -110,6 +118,11 @@ export function UebungView({ typ, folge, titel, onEnde, zurueck = 'Lernpfad' }: 
   }, [aufgabe, antwort]);
 
   async function abspielen(a: Aufgabe | null = aufgabe) {
+    if (a?.produktion) {
+      await spieleHoerprobe(a.produktion);
+      setAudioBereit(true);
+      return;
+    }
     if (!a?.klang) return;
     await initAudio();
     setAudioBereit(true);
