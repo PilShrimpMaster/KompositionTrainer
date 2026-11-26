@@ -4,7 +4,7 @@ titel: Leitmotiv
 kategorie: Jazz, Pop & Film
 kurz: Ein kurzes Motiv, das fest für eine Person, einen Gegenstand oder eine Idee steht und sich mit der Handlung verwandelt. Von Wagner entwickelt, in der Filmmusik allgegenwärtig.
 synonyme: Leitmotiv, Leitmotive, Leitmotivtechnik, Erinnerungsmotiv, Idée fixe
-siehe: motiv, wagner, filmmusik, variation, spiegelung
+siehe: motiv, wagner, filmmusik, variation, spiegelung, programmmusik
 ---
 
 Ein **Leitmotiv** ist mehr als eine Erkennungsmelodie: Es wird **verwandelt**, so wie sich die Figur oder die Situation verändert. Ein heroisches Motiv kann in Moll, langsamer und leiser erklingen, wenn der Held verliert, oder augmentiert und mit vollem Blech, wenn er siegt.

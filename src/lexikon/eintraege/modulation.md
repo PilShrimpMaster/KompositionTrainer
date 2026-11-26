@@ -3,8 +3,8 @@ id: modulation
 titel: Modulation
 kategorie: Harmonik
 kurz: Der dauerhafte Wechsel in eine neue Tonart, meist über einen Akkord, der in beiden Tonarten vorkommt (Drehakkord), und eine Kadenz in der Zieltonart.
-synonyme: modulieren, Modulationen, Drehakkord, Umdeutung, diatonische Modulation, chromatische Modulation, enharmonische Modulation, Tonartwechsel
-siehe: ausweichung, quintenzirkel, verminderter-septakkord, kadenz
+synonyme: modulieren, Modulationen, Drehakkord, Umdeutung, diatonische Modulation, chromatische Modulation, Tonartwechsel
+siehe: ausweichung, quintenzirkel, verminderter-septakkord, kadenz, enharmonische-modulation
 ---
 
 Bei einer **Modulation** verlässt die Musik ihre Tonart und etabliert eine neue. Am leichtesten geht das in **verwandte Tonarten**: die Nachbarn im Quintenzirkel und ihre Paralleltonarten.

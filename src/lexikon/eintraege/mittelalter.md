@@ -3,8 +3,8 @@ id: mittelalter
 titel: Musik des Mittelalters
 kategorie: Geschichte
 kurz: Etwa 500 bis 1400: gregorianischer Choral, Minnesang und die Anfänge der Mehrstimmigkeit in Notre-Dame. Hier entstand auch die Notenschrift.
-synonyme: Mittelalter, Gregorianik, gregorianischer Choral, Organum, Notre-Dame-Schule, Ars nova, Minnesang, Neumen, Hildegard von Bingen, Guido von Arezzo
-siehe: renaissance, kirchentonarten
+synonyme: Mittelalter, Gregorianik, gregorianischer Choral, Notre-Dame-Schule, Minnesang, Neumen, Hildegard von Bingen, Guido von Arezzo
+siehe: renaissance, kirchentonarten, organum, isorhythmie
 ---
 
 - **Gregorianischer Choral**: einstimmiger lateinischer Gesang der Kirche, frei im Rhythmus, in den Kirchentonarten.

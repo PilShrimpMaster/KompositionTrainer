@@ -3,8 +3,8 @@ id: rondo
 titel: Rondo
 kategorie: Form
 kurz: Eine Form, in der ein wiederkehrender Hauptteil (Refrain) mit wechselnden Zwischenteilen abwechselt: A–B–A–C–A.
-synonyme: Rondos, Rondeau, Ritornell, Couplet, Kettenrondo, Sonatenrondo
-siehe: liedform, sonatensatz, sonate
+synonyme: Rondos, Rondeau, Couplet, Kettenrondo, Sonatenrondo
+siehe: liedform, sonatensatz, sonate, ritornellform
 ---
 
 Im **Rondo** kehrt der Hauptteil **A** (der Refrain) immer wieder, dazwischen stehen kontrastierende **Couplets** oder Episoden: A–B–A–C–A oder A–B–A–C–A–B–A.

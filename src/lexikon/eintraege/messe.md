@@ -3,8 +3,8 @@ id: messe
 titel: Messe, Kantate, Oratorium
 kategorie: Form
 kurz: Große geistliche Vokalwerke: die Messe mit festem lateinischem Text, die Kantate für den Gottesdienst, das Oratorium als geistliche Handlung ohne Bühne.
-synonyme: Messe, Messen, Kantate, Kantaten, Oratorium, Oratorien, Passion, Requiem, Motette, Kyrie, Gloria, Credo
-siehe: choral, bach, renaissance
+synonyme: Messe, Messen, Kantate, Kantaten, Oratorium, Oratorien, Passion, Requiem, Kyrie, Gloria, Credo
+siehe: choral, bach, renaissance, motette
 ---
 
 - **Messe**: Vertonung der fünf feststehenden Teile des katholischen Gottesdienstes: **Kyrie, Gloria, Credo, Sanctus (mit Benedictus), Agnus Dei**. Von Palestrina über Bachs h-Moll-Messe bis Mozart und Beethoven. Die Totenmesse heißt **Requiem**.

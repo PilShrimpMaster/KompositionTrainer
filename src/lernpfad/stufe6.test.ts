@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { emptyDoc } from '../editor/state';
-import { klavierDoc } from '../editor/satzdoc';
+import { freiDoc, klavierDoc } from '../editor/satzdoc';
 import type { EditorDoc } from '../editor/rebar';
 import { pruefeKlaviersatz } from '../satz/klavier';
 import { pruefeSatz } from '../satz/regeln';
@@ -35,6 +35,18 @@ const LOESUNGEN: Record<string, string> = {
   'Ein Heldenmotiv mit Medianten': 'E5:2 E5:2 | Eb5:2 E5:2 || C5:2 G#4:2 | Ab4:2 G4:2 || C4:2 B3:2 | C4:2 C4:2 || C3:2 E3:2 | Ab2:2 C3:2',
   'Mein Werk, 1. Satz': `${SONATINE} | ${SONATINE} || ${SONATINE_BASS} | ${SONATINE_BASS}`,
   'Mein Werk, 2. Satz': `${SONATINE} || ${SONATINE_BASS}`,
+  'Ein Soggetto im Dorischen': 'D4:2 F4:4 E4:4 | G4:2 A4:2 | B4:4 C5:4 A4:4 B4:4 | G4:4 F4:4 E4:2 | D4:1',
+  'Ein Imitationspunkt': 'C4:2 E4:2 | G4:2 E4:2 | B4:2 G4:2 | F4:2 D4:2 | C4:1 || r:1 | C3:2 E3:2 | G3:2 E3:2 | D3:2 B2:2 | C3:1',
+  'Variationen über einem Lamento-Bass':
+    'F4:2 E4:2 | D4:2 C#4:2 | F4:4 A4:4 G4:4 E4:4 | Bb4:4 F4:4 C#5:4 E5:4 | F5:4 D5:4 E5:4 C5:4 | D5:4 F5:4 E5:4 C#5:4 | D5:4 A4:4 E5:4 G5:4 | D5:4 F5:4 E5:4 C#5:4 | D5:1 || D3:2 C3:2 | Bb2:2 A2:2 | D3:2 C3:2 | Bb2:2 A2:2 | D3:2 C3:2 | Bb2:2 A2:2 | D3:2 C3:2 | Bb2:2 A2:2 | D3:1',
+  'Ein Ritornell': 'F4:8 A4 C5 A4 G4 Bb4 D5 Bb4 | A4:8 C5 E5 C5 Bb4 D5 F5 D5 | C5:8 Bb4 A4 G4 A4 G4 F4 E4 | F4:8 A4 G4 E4 F4:2',
+  'Ein Satz mit Abspaltung': 'F4:4 A4 C5:2 | Bb4:4 G4 E4:2 | G4:4 Bb4 D5:2 | C5:4 A4 F4:2 | F4:8 A4 C5:4 G4:8 Bb4 D5:4 | A4:8 C5 E5:4 Bb4:8 D5 F5:4 | E5:4 C5 A4 G4 | F4:1',
+  'Das Kopfmotiv verarbeiten': 'C5:8 D5 E5 C5 D5 E5 F5 D5 | E5:8 F5 G5 E5 C5:2 | C5:4 D5 E5 C5 | B4:4 A4 G4:2 | E5:8 D5 C5 E5 D5 C5 B4 D5 | C5:8 B4 A4 C5 B4:2 | C5:8 D5 E5 C5 B4:4 D5 | C5:1',
+  'Modulation mit dem verminderten Septakkord': 'F5:2 F5:2 | E5:2 E5:2 | D5:1 || A4:2 Bb4:2 | G4:2 G4:2 | F4:1 || C4:2 D4:2 | C#4:2 C#4:2 | D4:1 || F3:2 Bb2:2 | Bb2:2 A2:2 | D3:1',
+  'Eine Liedbegleitung': 'B4:2. A4:8 G4:8 | G4:2 E4:2 | E4:4 G4:4 C5:4 B4:8 A4:8 | A4:2 F#4:2 | G4:1 || G2:8 D3 B3 D3 G2 D3 B3 D3 | E2:8 B2 G3 B2 E2 B2 G3 B2 | C2:8 G2 E3 G2 C2 G2 E3 G2 | D3:8 A3 C4 A3 D3 A3 F#3 A3 | G2:8 D3 B3 D3 G2:2',
+  'Ein Ostinato im 7/8-Takt': 'D4:4 F4:4 A4:4. | D4:4 F4:4 A4:4. | D4:4 F4:4 A4:4. | E4:4 G4:4 Bb4:4. | E4:4 G4:4 Bb4:4. | D4:4 F4:4 D4:4.',
+  'Tintinnabuli': 'A4:4 B4:4 C5:4 B4:4 | A4:4 G4:4 A4:2 | C5:4 D5:4 E5:4 D5:4 | C5:4 B4:4 A4:2 || E3:4 A3:4 A3:4 A3:4 | E3:4 E3:4 E3:2 | A3:4 C4:4 C4:4 C4:4 | A3:4 A3:4 E3:2',
+
 };
 
 const stufe6 = LEKTIONEN.filter((l) => l.modul.startsWith('s6-'));
@@ -85,6 +97,11 @@ describe('Stufe 6: Stilepochen', () => {
         if (a.klavier.begleitung.length) expect(beg.map((e) => [e.pitch, e.duration])).toEqual(a.klavier.begleitung.map((e) => [e.pitch, e.duration]));
         doc = klavierDoc(basis, mel, beg);
         nurVorgabe = klavierDoc(basis, a.klavier.melodie, a.klavier.begleitung);
+      } else if (a.kontrapunkt?.gattung === 'frei') {
+        const [oben, unten] = teile;
+        expect(oben.slice(0, a.kontrapunkt.cantus.length).map((e) => [e.pitch, e.duration])).toEqual(a.kontrapunkt.cantus.map((e) => [e.pitch, e.duration]));
+        doc = freiDoc(basis, oben, unten);
+        nurVorgabe = freiDoc(basis, a.kontrapunkt.cantus, []);
       } else if (a.vorgabe) {
         a.vorgabe.forEach((v, i) => {
           if (v.length) expect(teile[i].map((e) => [e.pitch, e.duration]), `Stimme ${i}`).toEqual(v.map((e) => [e.pitch, e.duration]));

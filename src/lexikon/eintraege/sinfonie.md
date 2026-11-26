@@ -3,8 +3,8 @@ id: sinfonie
 titel: Sinfonie
 kategorie: Form
 kurz: Ein großes Orchesterwerk in meist vier Sätzen, nach dem Bauplan der Sonate. Höhepunkte: Haydn, Mozart, Beethoven, Brahms, Mahler.
-synonyme: Sinfonien, Symphonie, Symphonien, sinfonisch, Sinfonische Dichtung
-siehe: orchester, sonate, sonatensatz, beethoven
+synonyme: Sinfonien, Symphonie, Symphonien, sinfonisch
+siehe: orchester, sonate, sonatensatz, beethoven, programmmusik, mannheimer-schule
 ---
 
 Die **Sinfonie** entwickelte sich im 18. Jahrhundert aus der italienischen Opernouvertüre. **Joseph Haydn** (104 Sinfonien) gab ihr die klassische viersätzige Form: schnell – langsam – Menuett – schnell.
